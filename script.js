@@ -1,35 +1,13 @@
 /* =========================================================
    WORDIE TALKIE
-   Universal Template Loader
-   =========================================================
-
-   Structure:
-
-   /
-   ├── A.html
-   ├── script.js
-   ├── index.html
-   ├── logo.png
-   ├── favicon.png
-   │
-   ├── english/
-   │   ├── 1.html
-   │   ├── 2.html
-   │   └── ...
-   │
-   └── indonesia/
-       ├── 1.html
-       ├── 2.html
-       └── ...
-
+   Universal Template Loader (a.html lowercase)
    ========================================================= */
-
 
 /* =========================================================
    SETTINGS
    ========================================================= */
 
-const TEMPLATE_FILE = "/A.html";
+const TEMPLATE_FILE = "a.html";
 
 
 /* =========================================================
@@ -37,29 +15,10 @@ const TEMPLATE_FILE = "/A.html";
    ========================================================= */
 
 function getCurrentPage() {
-
     let path = window.location.pathname;
-
-    /*
-     * Remove trailing slash
-     */
     path = path.replace(/\/+$/, "");
-
-
-    /*
-     * Get filename
-     *
-     * Example:
-     *
-     * /english/1.html
-     *          ↓
-     *        1.html
-     */
-
     const parts = path.split("/");
-
     return parts[parts.length - 1];
-
 }
 
 
@@ -68,85 +27,37 @@ function getCurrentPage() {
    ========================================================= */
 
 function getContentFile() {
+    const pathname = window.location.pathname.replace(/\/+$/, "");
+    const parts = pathname.split("/");
 
-    const path =
-        window.location.pathname
-            .replace(/\/+$/, "");
-
-
-    const parts = path.split("/");
-
+    const file = parts[parts.length - 1];
 
     /*
-     * Example:
-     *
-     * /english/1.html
-     *
-     * parts:
-     * ["", "english", "1.html"]
+     * Hanya load file .html
      */
-
-
-    if (parts.length < 3) {
-
+    if (!file.endsWith(".html")) {
         return null;
-
     }
 
-
-    const folder =
-        parts[parts.length - 2];
-
-
-    const file =
-        parts[parts.length - 1];
-
-
     /*
-     * Only load HTML content pages.
+     * Jangan load a.html atau index.html sebagai konten lesson
      */
-
-    if (
-        !file.endsWith(".html")
-    ) {
-
+    if (file.toLowerCase() === "a.html" || file.toLowerCase() === "index.html") {
         return null;
-
     }
 
-
     /*
-     * Don't try to load A.html itself.
+     * Cek apakah file berada di dalam subfolder
      */
-
-    if (
-        file.toLowerCase() === "a.html"
-    ) {
-
-        return null;
-
+    if (parts.length >= 3) {
+        const folder = parts[parts.length - 2];
+        
+        if (folder && folder !== "") {
+            return `${folder}/${file}`;
+        }
     }
 
-
-    /*
-     * Don't treat index.html as a lesson.
-     */
-
-    if (
-        file.toLowerCase() === "index.html"
-    ) {
-
-        return null;
-
-    }
-
-
-    /*
-     * Return the path of the content.
-     */
-
-    return `/${folder}/${file}`;
-
+    return null;
 }
 
 
@@ -155,88 +66,40 @@ function getContentFile() {
    ========================================================= */
 
 async function loadTemplate() {
-
     try {
-
-        const response =
-            await fetch(TEMPLATE_FILE);
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Could not load A.html"
-            );
-
+        // Hitung jalur relatif berdasarkan kedalaman folder (mendukung subfolder / GitHub Pages)
+        const depth = window.location.pathname.replace(/\/+$/, "").split("/").length - 2;
+        let pathToA = TEMPLATE_FILE;
+        
+        if (depth > 0) {
+            pathToA = "../".repeat(depth) + TEMPLATE_FILE;
         }
 
+        const response = await fetch(pathToA);
 
-        const templateHTML =
-            await response.text();
+        if (!response.ok) {
+            throw new Error("Could not load a.html");
+        }
 
-
-        /*
-         * Replace the current document
-         * with the template.
-         */
+        const templateHTML = await response.text();
 
         document.open();
-
         document.write(templateHTML);
-
         document.close();
 
-
-        /*
-         * Wait until the new document
-         * has finished loading.
-         */
-
         await waitForPage();
-
-
-        /*
-         * Load the actual page content.
-         */
-
         await loadContent();
 
-    }
-
-    catch (error) {
-
-        console.error(
-            "Wordie Talkie Template Error:",
-            error
-        );
-
-
+    } catch (error) {
+        console.error("Wordie Talkie Template Error:", error);
         document.body.innerHTML = `
-            <div style="
-                max-width:700px;
-                margin:80px auto;
-                padding:30px;
-                font-family:sans-serif;
-                text-align:center;
-            ">
-
-                <h2>
-                    🌱 Wordie Talkie
-                </h2>
-
-                <p>
-                    Sorry, this page could not be loaded.
-                </p>
-
-                <p style="font-size:13px;color:#888;">
-                    ${error.message}
-                </p>
-
+            <div style="max-width:700px;margin:80px auto;padding:30px;font-family:sans-serif;text-align:center;">
+                <h2>🌱 Wordie Talkie</h2>
+                <p>Sorry, this page could not be loaded.</p>
+                <p style="font-size:13px;color:#888;">${error.message}</p>
             </div>
         `;
-
     }
-
 }
 
 
@@ -245,125 +108,45 @@ async function loadTemplate() {
    ========================================================= */
 
 async function loadContent() {
-
-    const contentFile =
-        getContentFile();
-
-
-    /*
-     * No content file means
-     * this is probably the home page.
-     */
+    const contentFile = getContentFile();
 
     if (!contentFile) {
-
         return;
-
     }
-
 
     try {
-
-        const response =
-            await fetch(contentFile);
-
+        const response = await fetch(contentFile);
 
         if (!response.ok) {
-
-            throw new Error(
-                `Could not load ${contentFile}`
-            );
-
+            throw new Error(`Could not load ${contentFile}`);
         }
 
+        const contentHTML = await response.text();
 
-        const contentHTML =
-            await response.text();
-
-
-        /*
-         * Find the content container
-         * inside A.html.
-         */
-
-        const container =
-            document.getElementById(
-                "page-content"
-            );
-
+        const container = document.getElementById("page-content");
 
         if (!container) {
-
-            throw new Error(
-                "A.html is missing #page-content"
-            );
-
+            throw new Error("a.html is missing #page-content");
         }
 
-
-        /*
-         * Insert the lesson content.
-         */
-
-        container.innerHTML =
-            contentHTML;
-
-
-        /*
-         * Update active navigation.
-         */
+        container.innerHTML = contentHTML;
 
         setActiveNavigation();
-
-
-        /*
-         * Run scripts that exist inside
-         * the loaded content if necessary.
-         */
-
         executeLoadedScripts();
 
-    }
-
-    catch (error) {
-
-        console.error(
-            "Wordie Talkie Content Error:",
-            error
-        );
-
-
-        const container =
-            document.getElementById(
-                "page-content"
-            );
-
+    } catch (error) {
+        console.error("Wordie Talkie Content Error:", error);
+        const container = document.getElementById("page-content");
 
         if (container) {
-
             container.innerHTML = `
-
-                <div style="
-                    text-align:center;
-                    padding:40px 20px;
-                ">
-
-                    <h2>
-                        🌱 Oops!
-                    </h2>
-
-                    <p>
-                        This lesson could not be loaded.
-                    </p>
-
+                <div style="text-align:center;padding:40px 20px;">
+                    <h2>🌱 Oops!</h2>
+                    <p>This lesson could not be loaded.</p>
                 </div>
-
             `;
-
         }
-
     }
-
 }
 
 
@@ -372,27 +155,13 @@ async function loadContent() {
    ========================================================= */
 
 function waitForPage() {
-
     return new Promise(function (resolve) {
-
-        if (
-            document.readyState === "loading"
-        ) {
-
-            document.addEventListener(
-                "DOMContentLoaded",
-                resolve,
-                { once: true }
-            );
-
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", resolve, { once: true });
         } else {
-
             resolve();
-
         }
-
     });
-
 }
 
 
@@ -401,107 +170,31 @@ function waitForPage() {
    ========================================================= */
 
 function setActiveNavigation() {
+    const currentPath = window.location.pathname.toLowerCase();
 
-    const currentPath =
-        window.location.pathname
-            .replace(/\/+$/, "")
-            .toLowerCase();
+    document.querySelectorAll(".nav-link").forEach(function (link) {
+        link.classList.remove("active");
 
+        const href = link.getAttribute("href");
+        if (!href) return;
 
-    document
-        .querySelectorAll(".nav-link")
-        .forEach(function (link) {
+        const linkURL = new URL(href, window.location.origin);
+        const linkPath = linkURL.pathname.toLowerCase();
 
-            link.classList.remove(
-                "active"
-            );
+        if (currentPath === linkPath || currentPath.endsWith(linkPath)) {
+            link.classList.add("active");
+            return;
+        }
 
+        if (currentPath.includes("/english/") && linkPath.includes("english")) {
+            link.classList.add("active");
+            return;
+        }
 
-            const href =
-                link.getAttribute("href");
-
-
-            if (!href) return;
-
-
-            /*
-             * Convert relative URL
-             * into absolute URL.
-             */
-
-            const linkURL =
-                new URL(
-                    href,
-                    window.location.origin
-                );
-
-
-            const linkPath =
-                linkURL.pathname
-                    .replace(/\/+$/, "")
-                    .toLowerCase();
-
-
-            /*
-             * Home
-             */
-
-            if (
-                currentPath === linkPath
-            ) {
-
-                link.classList.add(
-                    "active"
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * English section
-             */
-
-            if (
-                currentPath.startsWith(
-                    "/english/"
-                ) &&
-                linkPath.includes(
-                    "/english"
-                )
-            ) {
-
-                link.classList.add(
-                    "active"
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * Indonesia section
-             */
-
-            if (
-                currentPath.startsWith(
-                    "/indonesia/"
-                ) &&
-                linkPath.includes(
-                    "/indonesia"
-                )
-            ) {
-
-                link.classList.add(
-                    "active"
-                );
-
-            }
-
-        });
-
+        if (currentPath.includes("/indonesia/") && linkPath.includes("indonesia")) {
+            link.classList.add("active");
+        }
+    });
 }
 
 
@@ -510,65 +203,21 @@ function setActiveNavigation() {
    ========================================================= */
 
 function executeLoadedScripts() {
-
-    const container =
-        document.getElementById(
-            "page-content"
-        );
-
-
+    const container = document.getElementById("page-content");
     if (!container) return;
 
-
-    const scripts =
-        container.querySelectorAll(
-            "script"
-        );
-
+    const scripts = container.querySelectorAll("script");
 
     scripts.forEach(function (oldScript) {
+        const newScript = document.createElement("script");
 
-        const newScript =
-            document.createElement(
-                "script"
-            );
+        Array.from(oldScript.attributes).forEach(function (attribute) {
+            newScript.setAttribute(attribute.name, attribute.value);
+        });
 
-
-        /*
-         * Copy attributes.
-         */
-
-        Array
-            .from(oldScript.attributes)
-            .forEach(function (attribute) {
-
-                newScript.setAttribute(
-                    attribute.name,
-                    attribute.value
-                );
-
-            });
-
-
-        /*
-         * Copy inline JavaScript.
-         */
-
-        newScript.textContent =
-            oldScript.textContent;
-
-
-        /*
-         * Replace old script.
-         */
-
-        oldScript.parentNode.replaceChild(
-            newScript,
-            oldScript
-        );
-
+        newScript.textContent = oldScript.textContent;
+        oldScript.parentNode.replaceChild(newScript, oldScript);
     });
-
 }
 
 
@@ -577,30 +226,11 @@ function executeLoadedScripts() {
    ========================================================= */
 
 (async function () {
+    const currentPage = getCurrentPage();
 
-    /*
-     * If the current page is already A.html,
-     * don't load the template again.
-     */
-
-    const currentPage =
-        getCurrentPage();
-
-
-    if (
-        currentPage &&
-        currentPage.toLowerCase() === "a.html"
-    ) {
-
+    if (currentPage && currentPage.toLowerCase() === "a.html") {
         return;
-
     }
 
-
-    /*
-     * Load A.html first.
-     */
-
     await loadTemplate();
-
 })();
