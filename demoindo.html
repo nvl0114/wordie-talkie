@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordie Talkie 🧋 Demo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+    :root {
+        --cream: #fff8ef;
+        --cream-dark: #f8eee2;
+        --white: #ffffff;
+
+        --brown: #5c4033;
+        --brown-light: #8b6b58;
+        --brown-soft: #b8865c;
+
+        --pink: #e9a0ad;
+        --pink-light: #fce8ec;
+
+        --green: #7b9b76;
+        --green-dark: #5f7d59;
+        --green-light: #edf5ea;
+
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+
+        --border: #eadfd3;
+
+        --shadow: 0 8px 25px rgba(92, 64, 51, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--brown);
+        font-family: "Nunito", sans-serif;
+        line-height: 1.75;
+    }
+
+    .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 36px 18px 70px;
+    }
+
+    /* ============== HERO ============== */
+
+    .hero {
+        text-align: center;
+        margin-bottom: 26px;
+    }
+
+    .hero .emoji-row {
+        font-size: 34px;
+        margin-bottom: 6px;
+    }
+
+    .hero h1 {
+        margin: 0 0 6px;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    .hero p {
+        margin: 0;
+        color: var(--brown-light);
+        font-size: 14px;
+    }
+
+    /* ============== CARD ============== */
+
+    .card {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px 22px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+        margin: 0 0 12px;
+        font-size: 19px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card p {
+        margin: 8px 0;
+        font-size: 15px;
+    }
+
+    .signature {
+        margin-top: 14px;
+        font-weight: 700;
+        color: var(--brown-soft);
+    }
+
+    .badge {
+        display: inline-block;
+        background: var(--pink-light);
+        color: var(--brown);
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        margin: 3px 4px 3px 0;
+    }
+
+    /* ============== MATERI LIST ============== */
+
+    .materi-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--cream-dark);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+    }
+
+    .materi-item .indo {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--brown);
+    }
+
+    .materi-item .zh {
+        font-size: 13px;
+        color: var(--brown-light);
+    }
+
+    .sound-btn {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 50%;
+        background: var(--green);
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .sound-btn:active { transform: scale(0.92); }
+
+    /* ============== STEPPER ============== */
+
+    .stepper-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+    }
+
+    .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--border);
+    }
+
+    .dot.active { background: var(--brown-soft); }
+    .dot.done { background: var(--green); }
+
+    .stage-label {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: var(--brown-soft);
+        margin-bottom: 4px;
+    }
+
+    .stage-title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+
+    .stage-sub {
+        text-align: center;
+        font-size: 13px;
+        color: var(--brown-light);
+        margin-bottom: 18px;
+    }
+
+    /* ============== OPTIONS ============== */
+
+    .option-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-btn {
+        text-align: left;
+        padding: 13px 16px;
+        border: 2px solid var(--border);
+        border-radius: 14px;
+        background: var(--cream-dark);
+        color: var(--brown);
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .option-btn:active { transform: scale(0.98); }
+
+    .option-btn.correct {
+        background: var(--green);
+        border-color: var(--green-dark);
+        color: white;
+    }
+
+    .option-btn.wrong {
+        background: var(--red);
+        border-color: var(--red-dark);
+        color: white;
+    }
+
+    .option-btn.disabled { cursor: default; }
+
+    /* ============== ARRANGE (CHIPS) ============== */
+
+    .answer-slots {
+        min-height: 52px;
+        border: 2px dashed var(--border);
+        border-radius: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px;
+        margin-bottom: 16px;
+    }
+
+    .chip-bank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .chip {
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: var(--pink-light);
+        color: var(--brown);
+        font-weight: 800;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .chip.used { opacity: 0.35; pointer-events: none; }
+
+    .slot-chip {
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: var(--brown-soft);
+        color: white;
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    /* ============== INPUT ============== */
+
+    .type-input {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid var(--border);
+        border-radius: 14px;
+        font-size: 15px;
+        font-family: inherit;
+        margin-bottom: 12px;
+    }
+
+    .type-input:focus { outline: none; border-color: var(--brown-soft); }
+
+    /* ============== BUTTONS ============== */
+
+    .btn-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 13px;
+        border: none;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 15px;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .btn-primary { background: var(--brown); color: white; }
+    .btn-ghost { background: var(--cream-dark); color: var(--brown); }
+    .btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* ============== FEEDBACK ============== */
+
+    .feedback-box {
+        display: none;
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .feedback-box.show { display: block; }
+    .feedback-box.ok { background: var(--green-light); color: var(--green-dark); }
+    .feedback-box.no { background: #fdeceb; color: var(--red-dark); }
+
+    /* ============== FINAL / DONE ============== */
+
+    .done-screen { text-align: center; }
+    .done-screen .big-emoji { font-size: 52px; }
+
+    /* ============== CLOSING ============== */
+
+    .ig-box {
+        background: var(--pink-light);
+        border-radius: 16px;
+        padding: 16px;
+        text-align: center;
+        margin: 14px 0;
+    }
+
+    .ig-link {
+        display: inline-block;
+        margin-top: 8px;
+        background: var(--brown);
+        color: white !important;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .example-box {
+        background: var(--green-light);
+        border-radius: 14px;
+        padding: 14px 16px;
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .example-box .zh-word { font-size: 17px; font-weight: 800; }
+
+    .float-emoji {
+        position: fixed;
+        font-size: 20px;
+        opacity: 0.5;
+        animation: floaty 6s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    @keyframes floaty {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-18px) rotate(8deg); }
+    }
+
+    @media (max-width: 480px) {
+        .wrap { padding: 26px 14px 60px; }
+        .hero h1 { font-size: 23px; }
+    }
+
+</style>
+</head>
+
+<body>
+
+<span class="float-emoji" style="top:8%; left:6%;">🧋</span>
+<span class="float-emoji" style="top:20%; right:8%; animation-delay:1.5s;">🌱</span>
+<span class="float-emoji" style="bottom:12%; left:10%; animation-delay:3s;">🍵</span>
+
+<div class="wrap">
+
+    <!-- ============== HERO ============== -->
+
+    <div class="hero">
+        <div class="emoji-row">🧋🌱📚</div>
+        <h1>Wordie Talkie</h1>
+        <p>印尼語學習小網站・demo 版本</p>
+    </div>
+
+    <!-- ============== KATA PENGANTAR (中文) ============== -->
+
+    <div class="card">
+        <h2>👋 哈囉哈囉！</h2>
+        <p>謝謝你願意當我的學習夥伴〜我叫 Nadia，是印尼人，現在住在台灣的桃園。說不定我們之前已經在 DM 認識過了☺️</p>
+        <p>我很想學中文，也很想找到可以一起堅持學習的夥伴。因為你們這麼好心願意教我中文和台語，所以我也會盡力把我最擅長的外語教給你們。So here we are 〜</p>
+        <p>我會透過這個自己做的網站分享學習內容，裡面有教材，也有一些小遊戲可以玩，簡單來說有點像多鄰國（Duolingo）。我希望大家可以慢慢來、輕鬆學！</p>
+        <p>麻煩看看這個 demo，喜歡或不喜歡都歡迎直接 DM 跟我說 🙏</p>
+        <div class="signature">— Nadia 🧋</div>
+    </div>
+
+    <!-- ============== ISI MATERI ============== -->
+
+    <div class="card">
+        <h2>📦 這次的教材內容</h2>
+        <p>
+            <span class="badge">Vocab</span>
+            <span class="badge">Pattern</span>
+            <span class="badge">Pilihan Ganda</span>
+            <span class="badge">Arrange the Sentence</span>
+            <span class="badge">Listening</span>
+            <span class="badge">Translating</span>
+            <span class="badge">Final Challenge</span>
+        </p>
+
+        <div class="materi-item">
+            <div>
+                <div class="indo">Siapa nama kamu?</div>
+                <div class="zh">你叫什麼名字？</div>
+            </div>
+            <button class="sound-btn" onclick="speakID('Siapa nama kamu')">🔊</button>
+        </div>
+
+        <div class="materi-item">
+            <div>
+                <div class="indo">Nama aku Alex.</div>
+                <div class="zh">我的名字是 Alex。</div>
+            </div>
+            <button class="sound-btn" onclick="speakID('Nama aku Alex')">🔊</button>
+        </div>
+
+        <div class="materi-item">
+            <div>
+                <div class="indo">Apa kabar?</div>
+                <div class="zh">你好嗎？</div>
+            </div>
+            <button class="sound-btn" onclick="speakID('Apa kabar')">🔊</button>
+        </div>
+    </div>
+
+    <!-- ============== INTERACTIVE DEMO ============== -->
+
+    <div class="card">
+
+        <div class="stepper-dots" id="stepperDots"></div>
+
+        <div id="stageArea"></div>
+
+    </div>
+
+    <!-- ============== PENUTUP (中文) ============== -->
+
+    <div class="card">
+        <h2>🎙️ 關於口說練習</h2>
+        <p>因為這個網站沒辦法錄音和批改口說練習（也是為了安全考量啦），所以口說練習的部分，我們就用 IG 的 DM 來進行囉！</p>
+
+        <div class="ig-box">
+            <div>麻煩追蹤我的 Instagram 📸</div>
+            <a class="ig-link" href="https://instagram.com/nvl0114" target="_blank" rel="noopener">@nvl0114</a>
+        </div>
+
+        <p>然後傳一則語音訊息給我，內容是今天學的教材，例如你只要說「siapa nama kamu」「nama aku (你的名字)」還有「apa kabar?」，我會幫你聽聽看發音準不準〜</p>
+
+        <p>作為交換，也麻煩你在 DM 傳給我，你覺得很酷或很實用的中文或台語單字，還有例句跟怎麼念，例如：</p>
+
+        <div class="example-box">
+            <div class="zh-word">麻吉 = best friend</div>
+            <div>我們是麻吉</div>
+            <div style="opacity:0.7;">(發音：我們是麻吉)</div>
+        </div>
+
+        <p>之後我也會傳語音訊息給你，麻煩幫我糾正一下發音！</p>
+
+        <p style="margin-top:18px;">希望我們可以長期當學習夥伴，一起保持學習的習慣。記住，想學會一件事沒有捷徑，也沒有速成的方法 🌱</p>
+
+        <div class="signature">— Nadia 🧋</div>
+    </div>
+
+</div>
+
+<script>
+
+    /* ================================================
+       AUDIO
+       ================================================ */
+
+    function speakID(text) {
+
+        if (!("speechSynthesis" in window)) return;
+
+        window.speechSynthesis.cancel();
+
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "id-ID";
+        utter.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        const idVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("id"));
+
+        if (idVoice) utter.voice = idVoice;
+
+        window.speechSynthesis.speak(utter);
+    }
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+
+
+    /* ================================================
+       STAGE DEFINITIONS
+       ================================================ */
+
+    const stageNames = ["Vocab", "Pattern", "Pilihan Ganda", "Arrange", "Listening", "Translating", "Final"];
+    let currentStage = 0;
+
+    const dotsEl = document.getElementById("stepperDots");
+    const stageArea = document.getElementById("stageArea");
+
+    function renderDots() {
+
+        dotsEl.innerHTML = "";
+
+        stageNames.forEach((_, i) => {
+
+            const d = document.createElement("div");
+            d.className = "dot" + (i === currentStage ? " active" : i < currentStage ? " done" : "");
+            dotsEl.appendChild(d);
+        });
+    }
+
+    function goToStage(index) {
+
+        currentStage = index;
+        renderDots();
+
+        stageArea.innerHTML = "";
+
+        stageRenderers[currentStage]();
+    }
+
+    function stageHeader(label, title, sub) {
+
+        const wrap = document.createElement("div");
+
+        wrap.innerHTML = `
+            <div class="stage-label">${label}</div>
+            <div class="stage-title">${title}</div>
+            <div class="stage-sub">${sub}</div>
+        `;
+
+        stageArea.appendChild(wrap);
+    }
+
+    function nextButtonRow(onNext, label) {
+
+        const row = document.createElement("div");
+        row.className = "btn-row";
+
+        const btn = document.createElement("button");
+        btn.className = "btn btn-primary";
+        btn.textContent = label || "下一步 →";
+        btn.disabled = true;
+        btn.onclick = onNext;
+
+        row.appendChild(btn);
+        stageArea.appendChild(row);
+
+        return btn;
+    }
+
+
+    /* ================================================
+       STAGE 1 — VOCAB (FLASHCARD)
+       ================================================ */
+
+    function stageVocab() {
+
+        stageHeader("STAGE 1", "📖 Vocab", "點卡片聽發音，再翻到背面看意思");
+
+        const words = [
+            { id: "Siapa", zh: "誰／什麼" },
+            { id: "Nama", zh: "名字" },
+            { id: "Kabar", zh: "消息／近況" }
+        ];
+
+        let flippedCount = 0;
+
+        words.forEach(w => {
+
+            const card = document.createElement("div");
+            card.className = "materi-item";
+            card.style.cursor = "pointer";
+
+            const left = document.createElement("div");
+            left.innerHTML = `<div class="indo">${w.id}</div><div class="zh">點一下查看意思</div>`;
+
+            card.appendChild(left);
+
+            const btn = document.createElement("button");
+            btn.className = "sound-btn";
+            btn.textContent = "🔊";
+            btn.onclick = (e) => { e.stopPropagation(); speakID(w.id); };
+            card.appendChild(btn);
+
+            card.addEventListener("click", () => {
+
+                if (left.dataset.flipped) return;
+
+                left.innerHTML = `<div class="indo">${w.id}</div><div class="zh">${w.zh}</div>`;
+                left.dataset.flipped = "1";
+
+                flippedCount++;
+
+                if (flippedCount === words.length) next.disabled = false;
+            });
+
+            stageArea.appendChild(card);
+        });
+
+        const next = nextButtonRow(() => goToStage(1));
+    }
+
+
+    /* ================================================
+       STAGE 2 — PATTERN
+       ================================================ */
+
+    function stagePattern() {
+
+        stageHeader("STAGE 2", "🧩 Pattern", "看看句子怎麼組成的");
+
+        const box = document.createElement("div");
+        box.className = "card";
+        box.style.background = "var(--cream-dark)";
+        box.style.boxShadow = "none";
+
+        box.innerHTML = `
+            <div style="font-size:20px; font-weight:800; text-align:center; margin-bottom:14px;">
+                Siapa nama kamu?
+            </div>
+        `;
+
+        const parts = [["Siapa", "誰 / 什麼"], ["nama", "名字"], ["kamu", "你"]];
+
+        parts.forEach(([id, zh]) => {
+
+            const row = document.createElement("div");
+            row.style.display = "flex";
+            row.style.justifyContent = "space-between";
+            row.style.padding = "8px 4px";
+            row.style.borderBottom = "1px solid var(--border)";
+
+            row.innerHTML = `<b>${id}</b><span style="color:var(--brown-light)">${zh}</span>`;
+            box.appendChild(row);
+        });
+
+        stageArea.appendChild(box);
+
+        const p = document.createElement("p");
+        p.style.textAlign = "center";
+        p.style.fontSize = "13px";
+        p.style.color = "var(--brown-light)";
+        p.style.marginTop = "10px";
+        p.textContent = "→ 整句直接翻譯：「誰 名字 你」= 你叫什麼名字？";
+        stageArea.appendChild(p);
+
+        nextButtonRow(() => goToStage(2)).disabled = false;
+    }
+
+
+    /* ================================================
+       STAGE 3 — PILIHAN GANDA
+       ================================================ */
+
+    function stagePilihanGanda() {
+
+        stageHeader("STAGE 3", "✅ Pilihan Ganda", "「Apa kabar?」是什麼意思？");
+
+        const options = [
+            { text: "你好嗎？", correct: true },
+            { text: "你叫什麼名字？", correct: false },
+            { text: "謝謝你", correct: false },
+            { text: "再見", correct: false }
+        ];
+
+        const list = document.createElement("div");
+        list.className = "option-list";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        let answered = false;
+
+        options.forEach(opt => {
+
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.textContent = opt.text;
+
+            btn.onclick = () => {
+
+                if (answered) return;
+                answered = true;
+
+                document.querySelectorAll(".option-btn").forEach(b => b.classList.add("disabled"));
+
+                if (opt.correct) {
+
+                    btn.classList.add("correct");
+                    feedback.className = "feedback-box show ok";
+                    feedback.textContent = "✓ 對了！Apa kabar = 你好嗎？";
+
+                } else {
+
+                    btn.classList.add("wrong");
+                    feedback.className = "feedback-box show no";
+                    feedback.textContent = "✗ 再想想〜正確答案是「你好嗎？」";
+                }
+
+                next.disabled = false;
+            };
+
+            list.appendChild(btn);
+        });
+
+        stageArea.appendChild(list);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(3));
+    }
+
+
+    /* ================================================
+       STAGE 4 — ARRANGE THE SENTENCE
+       ================================================ */
+
+    function stageArrange() {
+
+        stageHeader("STAGE 4", "🔤 Arrange the Sentence", "把單字排成「Nama aku Alex」");
+
+        const correctOrder = ["Nama", "aku", "Alex"];
+        const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
+
+        const slots = document.createElement("div");
+        slots.className = "answer-slots";
+
+        const bank = document.createElement("div");
+        bank.className = "chip-bank";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        let picked = [];
+
+        function checkComplete() {
+
+            if (picked.length !== correctOrder.length) return;
+
+            const isCorrect = picked.join(" ") === correctOrder.join(" ");
+
+            if (isCorrect) {
+                feedback.className = "feedback-box show ok";
+                feedback.textContent = "✓ 對了！Nama aku Alex = 我的名字是 Alex";
+            } else {
+                feedback.className = "feedback-box show no";
+                feedback.textContent = "✗ 順序不對喔，正確是：Nama aku Alex";
+            }
+
+            next.disabled = false;
+        }
+
+        shuffled.forEach(word => {
+
+            const chip = document.createElement("button");
+            chip.className = "chip";
+            chip.textContent = word;
+
+            chip.onclick = () => {
+
+                chip.classList.add("used");
+
+                const slotChip = document.createElement("div");
+                slotChip.className = "slot-chip";
+                slotChip.textContent = word;
+                slots.appendChild(slotChip);
+
+                picked.push(word);
+                checkComplete();
+            };
+
+            bank.appendChild(chip);
+        });
+
+        stageArea.appendChild(slots);
+        stageArea.appendChild(bank);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(4));
+    }
+
+
+    /* ================================================
+       STAGE 5 — LISTENING PILIHAN GANDA
+       ================================================ */
+
+    function stageListening() {
+
+        stageHeader("STAGE 5", "🎧 Listening", "點喇叭聽發音，選出正確的意思");
+
+        const playRow = document.createElement("div");
+        playRow.style.textAlign = "center";
+        playRow.style.marginBottom = "16px";
+
+        const playBtn = document.createElement("button");
+        playBtn.className = "sound-btn";
+        playBtn.style.width = "56px";
+        playBtn.style.height = "56px";
+        playBtn.style.fontSize = "22px";
+        playBtn.textContent = "🔊";
+        playBtn.onclick = () => speakID("Siapa nama kamu");
+
+        playRow.appendChild(playBtn);
+        stageArea.appendChild(playRow);
+
+        const options = [
+            { text: "你叫什麼名字？", correct: true },
+            { text: "你好嗎？", correct: false },
+            { text: "謝謝你", correct: false }
+        ];
+
+        const list = document.createElement("div");
+        list.className = "option-list";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        let answered = false;
+
+        options.forEach(opt => {
+
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.textContent = opt.text;
+
+            btn.onclick = () => {
+
+                if (answered) return;
+                answered = true;
+
+                document.querySelectorAll(".option-btn").forEach(b => b.classList.add("disabled"));
+
+                if (opt.correct) {
+                    btn.classList.add("correct");
+                    feedback.className = "feedback-box show ok";
+                    feedback.textContent = "✓ 沒錯！剛剛播的是 Siapa nama kamu?";
+                } else {
+                    btn.classList.add("wrong");
+                    feedback.className = "feedback-box show no";
+                    feedback.textContent = "✗ 再聽一次看看〜";
+                }
+
+                next.disabled = false;
+            };
+
+            list.appendChild(btn);
+        });
+
+        stageArea.appendChild(list);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(5));
+
+        speakID("Siapa nama kamu");
+    }
+
+
+    /* ================================================
+       STAGE 6 — TRANSLATING (MENGETIK)
+       ================================================ */
+
+    function stageTranslating() {
+
+        stageHeader("STAGE 6", "⌨️ Translating", "把「你好嗎？」翻成印尼文，打出來看看");
+
+        const input = document.createElement("input");
+        input.className = "type-input";
+        input.placeholder = "在這裡輸入印尼文...";
+
+        const checkBtn = document.createElement("button");
+        checkBtn.className = "btn btn-ghost";
+        checkBtn.textContent = "檢查答案";
+        checkBtn.style.marginBottom = "10px";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        checkBtn.onclick = () => {
+
+            const val = input.value.trim().toLowerCase().replace(/[?？.!]/g, "");
+
+            if (val === "apa kabar") {
+                feedback.className = "feedback-box show ok";
+                feedback.textContent = "✓ 太棒了！就是 Apa kabar?";
+            } else {
+                feedback.className = "feedback-box show no";
+                feedback.textContent = "✗ 再試試看〜提示：Apa + kabar";
+            }
+
+            next.disabled = false;
+        };
+
+        stageArea.appendChild(input);
+        stageArea.appendChild(checkBtn);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(6));
+    }
+
+
+    /* ================================================
+       STAGE 7 — FINAL CHALLENGE
+       ================================================ */
+
+    function stageFinal() {
+
+        stageHeader("STAGE 7", "🏆 Final Challenge", "把三句話都複習一次");
+
+        const questions = [
+            { text: "「Siapa nama kamu?」的意思是？", options: ["你叫什麼名字？", "你好嗎？"], correctIndex: 0 },
+            { text: "「我的名字是 Alex」印尼文怎麼說？", options: ["Apa kabar", "Nama aku Alex"], correctIndex: 1 },
+            { text: "「Apa kabar?」的意思是？", options: ["你好嗎？", "謝謝你"], correctIndex: 0 }
+        ];
+
+        let qIndex = 0;
+        let score = 0;
+
+        function renderQ() {
+
+            stageArea.innerHTML = "";
+
+            stageHeader("STAGE 7 · " + (qIndex + 1) + "/" + questions.length, "🏆 Final Challenge", "把三句話都複習一次");
+
+            const q = questions[qIndex];
+
+            const qTitle = document.createElement("div");
+            qTitle.style.fontWeight = "800";
+            qTitle.style.fontSize = "16px";
+            qTitle.style.marginBottom = "12px";
+            qTitle.style.textAlign = "center";
+            qTitle.textContent = q.text;
+            stageArea.appendChild(qTitle);
+
+            const list = document.createElement("div");
+            list.className = "option-list";
+
+            let answered = false;
+
+            q.options.forEach((opt, i) => {
+
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt;
+
+                btn.onclick = () => {
+
+                    if (answered) return;
+                    answered = true;
+
+                    document.querySelectorAll(".option-btn").forEach(b => b.classList.add("disabled"));
+
+                    if (i === q.correctIndex) {
+                        btn.classList.add("correct");
+                        score++;
+                    } else {
+                        btn.classList.add("wrong");
+                    }
+
+                    setTimeout(() => {
+
+                        qIndex++;
+
+                        if (qIndex < questions.length) {
+                            renderQ();
+                        } else {
+                            showDone();
+                        }
+
+                    }, 700);
+                };
+
+                list.appendChild(btn);
+            });
+
+            stageArea.appendChild(list);
+        }
+
+        function showDone() {
+
+            stageArea.innerHTML = "";
+
+            const done = document.createElement("div");
+            done.className = "done-screen";
+
+            done.innerHTML = `
+                <div class="big-emoji">🎉🧋</div>
+                <div class="stage-title">Demo 完成！</div>
+                <div class="stage-sub">你答對了 ${score} / ${questions.length} 題，太棒了！</div>
+            `;
+
+            stageArea.appendChild(done);
+        }
+
+        renderQ();
+    }
+
+
+    const stageRenderers = [
+        stageVocab,
+        stagePattern,
+        stagePilihanGanda,
+        stageArrange,
+        stageListening,
+        stageTranslating,
+        stageFinal
+    ];
+
+    goToStage(0);
+
+</script>
+
+</body>
+</html>
