@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wordie Talkie</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* ==================================================
+           WORDIE TALKIE
+           Main Template
+           ================================================== */
+
+        :root {
+
+            --cream: #fff8ef;
+            --cream-dark: #f8eee2;
+
+            --white: #ffffff;
+
+            --brown: #5c4033;
+            --brown-light: #8b6b58;
+            --brown-soft: #b8865c;
+
+            --pink: #e9a0ad;
+            --pink-light: #fce8ec;
+
+            --green: #8fae78;
+            --green-light: #edf5e8;
+
+            --border: #eadfd3;
+
+            --shadow:
+                0 8px 25px rgba(92, 64, 51, 0.08);
+
+            --sidebar-width: 245px;
+        }
+
+
+        /* ==================================================
+           RESET
+           ================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: var(--cream);
+
+            color: var(--brown);
+
+            font-family: "Nunito", sans-serif;
+
+            line-height: 1.6;
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family: inherit;
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+           ================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: var(--sidebar-width);
+            height: 100vh;
+
+            background: var(--white);
+
+            border-right: 1px solid var(--border);
+
+            padding: 30px 20px;
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 1000;
+
+            overflow-y: auto;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+
+        /* ==================================================
+           LOGO
+           ================================================== */
+
+        .sidebar-logo {
+
+            text-align: center;
+
+            margin-bottom: 32px;
+        }
+
+
+        .sidebar-logo img {
+
+            width: 155px;
+
+            max-width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            margin: 0 auto 12px;
+        }
+
+
+        .sidebar-tagline {
+
+            margin: 0 auto;
+
+            max-width: 180px;
+
+            color: var(--brown-light);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==================================================
+           NAVIGATION
+           ================================================== */
+
+        .sidebar-nav {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .nav-label {
+
+            padding: 0 12px;
+
+            margin: 8px 0 4px;
+
+            color: #a89587;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .nav-link {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 14px;
+
+            border-radius: 13px;
+
+            color: var(--brown-light);
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .nav-link:hover {
+
+            background: var(--cream);
+
+            color: var(--brown);
+
+            transform: translateX(2px);
+        }
+
+
+        .nav-link.active {
+
+            background: var(--pink-light);
+
+            color: var(--brown);
+        }
+
+
+        .nav-icon {
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 9px;
+
+            background: var(--cream-dark);
+
+            font-size: 16px;
+        }
+
+
+        .nav-link.active .nav-icon {
+
+            background: var(--white);
+        }
+
+
+        /* ==================================================
+           MAIN
+           ================================================== */
+
+        .main {
+
+            min-height: 100vh;
+
+            margin-left: var(--sidebar-width);
+
+            padding: 40px 25px 60px;
+        }
+
+
+        .content {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: 0 auto;
+        }
+
+
+        /* ==================================================
+           PAGE CONTENT
+           
+           Put page-specific content here.
+           ================================================== */
+
+        .page-content {
+
+            width: 100%;
+        }
+
+
+        /* ==================================================
+           MOBILE MENU BUTTON
+           ================================================== */
+
+        .menu-button {
+
+            display: none;
+
+            position: fixed;
+
+            top: 16px;
+            left: 16px;
+
+            width: 44px;
+            height: 44px;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            background: var(--white);
+
+            color: var(--brown);
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            box-shadow: var(--shadow);
+
+            z-index: 1100;
+        }
+
+
+        /* ==================================================
+           MOBILE OVERLAY
+           ================================================== */
+
+        .overlay {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(92, 64, 51, 0.25);
+
+            z-index: 900;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+           ================================================== */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+                box-shadow:
+                    8px 0 30px
+                    rgba(92, 64, 51, 0.08);
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .menu-button {
+
+                display: flex;
+            }
+
+
+            .overlay.show {
+
+                display: block;
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                padding:
+                    75px
+                    16px
+                    45px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .main {
+
+                padding-left: 14px;
+
+                padding-right: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         MOBILE MENU BUTTON
+         ================================================== -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
+    >
+        ☰
+    </button>
+
+
+    <!-- ==================================================
+         MOBILE OVERLAY
+         ================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+    ></div>
+
+
+    <!-- ==================================================
+         SIDEBAR
+         ================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <img
+                src="logo.png"
+                alt="Wordie Talkie"
+            >
+
+            <p class="sidebar-tagline">
+                Wordie learned a new word! 🌱
+            </p>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <div class="nav-label">
+                Menu
+            </div>
+
+
+            <a
+                href="index.html"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    🏠
+                </span>
+
+                <span>
+                    Home
+                </span>
+
+            </a>
+
+
+            <a
+                href="english.html"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    🇬🇧
+                </span>
+
+                <span>
+                    English
+                </span>
+
+            </a>
+
+
+            <a
+                href="indonesia.html"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    🇮🇩
+                </span>
+
+                <span>
+                    Indonesia
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+    <!-- ==================================================
+         MAIN CONTENT
+         
+         ================================================
+         PAGE-SPECIFIC CONTENT GOES HERE.
+         ================================================
+         -->
+
+    <main class="main">
+
+        <div class="content">
+
+            <div
+                class="page-content"
+                id="page-content"
+            >
+
+                <!--
+                    CONTENT GOES HERE
+                -->
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+         ================================================== -->
+
+    <script>
+
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+
+        const overlay =
+            document.getElementById("overlay");
+
+
+        /* ================================================
+           OPEN MENU
+           ================================================= */
+
+        function openMenu() {
+
+            sidebar.classList.add("open");
+
+            overlay.classList.add("show");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            menuButton.innerHTML = "✕";
+        }
+
+
+        /* ================================================
+           CLOSE MENU
+           ================================================= */
+
+        function closeMenu() {
+
+            sidebar.classList.remove("open");
+
+            overlay.classList.remove("show");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuButton.innerHTML = "☰";
+        }
+
+
+        /* ================================================
+           MENU BUTTON
+           ================================================= */
+
+        menuButton.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    sidebar.classList.contains("open")
+                ) {
+
+                    closeMenu();
+
+                } else {
+
+                    openMenu();
+
+                }
+
+            }
+        );
+
+
+        /* ================================================
+           OVERLAY
+           ================================================= */
+
+        overlay.addEventListener(
+            "click",
+            closeMenu
+        );
+
+
+        /* ================================================
+           CLOSE MENU AFTER NAVIGATION
+           ================================================= */
+
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            window.innerWidth <= 800
+                        ) {
+
+                            closeMenu();
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        /* ================================================
+           WINDOW RESIZE
+           ================================================= */
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (
+                    window.innerWidth > 800
+                ) {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+
+        /* ================================================
+           ACTIVE NAVIGATION
+           
+           Automatically highlights the current page.
+           ================================================= */
+
+        const currentPage =
+            window.location.pathname
+                .split("/")
+                .pop()
+                .toLowerCase();
+
+
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(function (link) {
+
+                const linkPage =
+                    link
+                        .getAttribute("href")
+                        .split("/")
+                        .pop()
+                        .toLowerCase();
+
+
+                if (
+                    linkPage === currentPage
+                ) {
+
+                    link.classList.add("active");
+
+                }
+
+            });
+
+    </script>
+
+
+</body>
+</html>
