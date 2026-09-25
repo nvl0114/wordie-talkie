@@ -434,14 +434,6 @@
 
         <div class="materi-item">
             <div>
-                <div class="indo">Kamu</div>
-                <div class="zh">你 / 妳 / 您</div>
-            </div>
-            <button class="sound-btn" onclick="speakID('Kamu')">🔊</button>
-        </div>
-
-        <div class="materi-item">
-            <div>
                 <div class="indo">Siapa nama kamu?</div>
                 <div class="zh">您叫什麼名字？</div>
             </div>
@@ -607,9 +599,12 @@
         stageHeader("STAGE 1", "📖 Vocab", "點卡片聽發音，再翻到背面看意思");
 
         const words = [
-            { id: "Kamu", zh: "你 / 妳 / 您" },
-            { id: "Apa kabar?", zh: "您好嗎？" },
-            { id: "Nama aku...", zh: "我的名字是..." }
+            { id: "Siapa", zh: "誰／什麼" },
+            { id: "Nama", zh: "名字" },
+            { id: "Kamu", zh: "你／妳／您" },
+            { id: "Aku", zh: "我" },
+            { id: "Apa", zh: "什麼" },
+            { id: "Kabar", zh: "消息／近況" }
         ];
 
         let flippedCount = 0;
@@ -628,7 +623,7 @@
             const btn = document.createElement("button");
             btn.className = "sound-btn";
             btn.textContent = "🔊";
-            btn.onclick = (e) => { e.stopPropagation(); speakID(w.id.replace("...", "")); };
+            btn.onclick = (e) => { e.stopPropagation(); speakID(w.id); };
             card.appendChild(btn);
 
             card.addEventListener("click", () => {
