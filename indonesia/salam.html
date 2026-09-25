@@ -1,489 +1,491 @@
-<!-- =========================================
-     WORDIE TALKIE
-     indonesia/salam.html
+<!--
+    =====================================================
+    KONTEN: indonesia/salam.html
+    (Es Teh Break｜打招呼與問候)
 
-     CONTENT + QUIZ JAVASCRIPT
-     Tidak membutuhkan salam.js
-========================================= -->
+    File ini adalah KONTEN halaman (bukan halaman penuh).
+    Sidebar & layout datang dari A.html lewat script.js.
+
+    PENTING: tag <script src="../script.js"> di paling
+    bawah file ini WAJIB ada — itu yang men-trigger
+    pemasangan sidebar saat file ini dibuka langsung oleh
+    browser. Jangan dihapus.
+    =====================================================
+-->
 
 <style>
-/* =========================================
-   PILIH GAMBAR QUIZ
-========================================= */
 
-#page-content .image-quiz {
-    width: 100%;
-    max-width: 850px;
-    margin: 0 auto;
-}
-
-/* =========================================
-   HERO
-========================================= */
-
-#page-content .quiz-hero {
-    text-align: center;
-    margin-bottom: 28px;
-}
-
-#page-content .quiz-badge {
-    display: inline-block;
-    background: var(--pink-light);
-    color: var(--brown);
-    padding: 7px 15px;
-    border-radius: 999px;
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-}
-
-#page-content .quiz-hero h1 {
-    margin: 0 0 10px;
-    color: var(--brown);
-    font-size: 2rem;
-}
-
-#page-content .quiz-hero p {
-    max-width: 650px;
-    margin: 0 auto;
-    color: var(--brown-light);
-    line-height: 1.8;
-    font-size: 0.95rem;
-}
-
-/* =========================================
-   QUIZ CARD
-========================================= */
-
-#page-content .quiz-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 28px;
-    box-shadow: 0 8px 25px rgba(92, 64, 51, 0.06);
-}
-
-/* =========================================
-   HEADER
-========================================= */
-
-#page-content .quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 22px;
-}
-
-#page-content .quiz-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--brown);
-    font-weight: 800;
-    font-size: 0.95rem;
-}
-
-#page-content .quiz-counter {
-    background: var(--cream-dark);
-    color: var(--brown);
-    padding: 7px 13px;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-/* =========================================
-   QUESTION
-========================================= */
-
-#page-content .question-box {
-    background: var(--cream);
-    border-radius: 18px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 22px;
-}
-
-#page-content .question-box h2 {
-    margin: 0;
-    color: var(--brown);
-    font-size: 1.2rem;
-    line-height: 1.7;
-    font-weight: 800;
-}
-
-/* =========================================
-   IMAGE GRID
-========================================= */
-
-#page-content .image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-}
-
-/* =========================================
-   IMAGE OPTION
-========================================= */
-
-#page-content .image-option {
-    position: relative;
-    width: 100%;
-    border: 2px solid var(--border);
-    background: var(--white);
-    border-radius: 18px;
-    padding: 10px;
-    cursor: pointer;
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-    text-align: left;
-    font-family: inherit;
-}
-
-#page-content .image-option:hover {
-    transform: translateY(-3px);
-    border-color: var(--brown-soft);
-    box-shadow: 0 8px 18px rgba(92, 64, 51, 0.08);
-}
-
-#page-content .image-option:disabled {
-    cursor: default;
-}
-
-#page-content .image-option img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 13px;
-}
-
-/* =========================================
-   IMAGE CAPTION
-========================================= */
-
-#page-content .image-caption {
-    display: block;
-    padding: 11px 7px 5px;
-    text-align: center;
-    color: var(--brown);
-    font-size: 0.88rem;
-    font-weight: 800;
-}
-
-/* =========================================
-   SOUND INDICATOR
-========================================= */
-
-#page-content .sound-indicator {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.95);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 0.95rem;
-
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-/* =========================================
-   PLAYING SOUND
-========================================= */
-
-#page-content .image-option.playing-sound {
-    border-color: var(--brown-soft);
-    box-shadow: 0 0 0 4px rgba(184, 134, 92, 0.12);
-}
-
-/* =========================================
-   CORRECT
-========================================= */
-
-#page-content .image-option.correct,
-#page-content .image-option.show-correct {
-    background: #7b9b76;
-    border-color: #5f7d59;
-}
-
-#page-content .image-option.correct .image-caption,
-#page-content .image-option.show-correct .image-caption {
-    color: white;
-}
-
-/* =========================================
-   WRONG
-========================================= */
-
-#page-content .image-option.wrong {
-    background: #c96f6f;
-    border-color: #a3504f;
-}
-
-#page-content .image-option.wrong .image-caption {
-    color: white;
-}
-
-/* =========================================
-   ANSWER INDICATOR
-========================================= */
-
-#page-content .answer-indicator {
-    position: absolute;
-
-    left: 16px;
-    top: 16px;
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: 900;
-    color: white;
-
-    background: rgba(0, 0, 0, 0.18);
-}
-
-/* =========================================
-   FEEDBACK
-========================================= */
-
-#page-content .feedback {
-    display: none;
-
-    margin-top: 22px;
-
-    border-radius: 18px;
-
-    padding: 20px;
-}
-
-#page-content .feedback.correct {
-    display: block;
-
-    background: #7b9b76;
-    border: 1px solid #5f7d59;
-
-    color: white;
-}
-
-#page-content .feedback.wrong {
-    display: block;
-
-    background: #c96f6f;
-    border: 1px solid #a3504f;
-
-    color: white;
-}
-
-#page-content .feedback-title {
-    font-size: 1.1rem;
-    font-weight: 900;
-
-    margin-bottom: 8px;
-}
-
-#page-content .correct-answer-label {
-    font-size: 0.82rem;
-    opacity: 0.9;
-
-    margin-top: 8px;
-}
-
-#page-content .correct-answer {
-    font-size: 1.15rem;
-    font-weight: 900;
-
-    margin-top: 3px;
-}
-
-#page-content .explanation {
-    margin-top: 12px;
-
-    font-size: 0.9rem;
-    line-height: 1.7;
-}
-
-/* =========================================
-   COUNTDOWN
-========================================= */
-
-#page-content .countdown {
-    margin-top: 16px;
-
-    font-size: 0.85rem;
-    font-weight: 800;
-
-    opacity: 0.9;
-}
-
-/* =========================================
-   NEXT BUTTON
-========================================= */
-
-#page-content .next-button {
-    display: none;
-
-    width: 100%;
-
-    margin-top: 18px;
-
-    padding: 13px 20px;
-
-    border: none;
-    border-radius: 14px;
-
-    background: var(--brown);
-    color: white;
-
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-#page-content .next-button:hover {
-    transform: translateY(-2px);
-    opacity: 0.92;
-}
-
-/* =========================================
-   FINISHED
-========================================= */
-
-#page-content .quiz-finished {
-    display: none;
-
-    text-align: center;
-
-    padding: 35px 20px;
-}
-
-#page-content .quiz-finished-icon {
-    font-size: 3rem;
-
-    margin-bottom: 10px;
-}
-
-#page-content .quiz-finished h2 {
-    color: var(--brown);
-
-    margin: 0 0 10px;
-}
-
-#page-content .quiz-finished p {
-    color: var(--brown-light);
-
-    line-height: 1.7;
-
-    margin: 0;
-}
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 650px) {
-
-    #page-content .quiz-card {
-        padding: 18px;
-        border-radius: 20px;
+    #page-content {
+        --cream: #fff8ef;
+        --brown: #5c4033;
+        --light-brown: #b8865c;
+        --soft-brown: #f3e4d3;
+        --white: #ffffff;
+
+        --green: #7b9b76;
+        --green-dark: #5f7d59;
+        --green-light: #edf5ea;
+
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+        --red-light: #fff0f0;
+
+        --border: #ead8c5;
     }
 
-    #page-content .quiz-header {
-        align-items: flex-start;
+    .lesson-container {
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 10px 0 40px;
+        line-height: 1.8;
+        color: var(--brown);
     }
 
-    #page-content .quiz-hero h1 {
-        font-size: 1.65rem;
+    .hero {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 28px 24px;
+        margin-bottom: 22px;
+
+        box-shadow:
+            0 5px 18px rgba(92, 64, 51, 0.08);
     }
 
-    #page-content .quiz-hero p {
-        font-size: 0.88rem;
+    .badge {
+        display: inline-block;
+
+        background: var(--soft-brown);
+        color: var(--brown);
+
+        padding: 5px 12px;
+        border-radius: 999px;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        margin-bottom: 10px;
     }
 
-    #page-content .question-box {
-        padding: 16px;
+    .lesson-container h1 {
+        margin: 0 0 10px;
+        font-size: 30px;
     }
 
-    #page-content .question-box h2 {
-        font-size: 1rem;
+    .lesson-container p {
+        margin: 8px 0;
     }
 
-    #page-content .image-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+    /* =========================
+       QUIZ
+    ========================= */
+
+    .quiz-card {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px;
+
+        box-shadow:
+            0 5px 18px rgba(92, 64, 51, 0.07);
     }
 
-    #page-content .image-option {
-        padding: 7px;
-        border-radius: 14px;
+    .quiz-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 12px;
+
+        margin-bottom: 14px;
     }
 
-    #page-content .image-option img {
-        border-radius: 10px;
+    .quiz-label {
+        display: inline-block;
+
+        background: var(--soft-brown);
+        color: var(--brown);
+
+        padding: 5px 12px;
+
+        border-radius: 999px;
+
+        font-size: 13px;
+        font-weight: 700;
     }
 
-    #page-content .image-caption {
-        font-size: 0.75rem;
-        padding: 8px 3px 3px;
+    .question-counter {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--light-brown);
     }
 
-    #page-content .sound-indicator,
-    #page-content .answer-indicator {
-        width: 28px;
-        height: 28px;
+    .question {
+        font-size: 22px;
+        font-weight: 800;
 
-        font-size: 0.75rem;
+        line-height: 1.5;
+
+        margin: 8px 0 20px;
+    }
+
+    .image-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+    .image-option {
+        position: relative;
+
+        border: 3px solid transparent;
+        border-radius: 18px;
+
+        background: #fffaf4;
+
+        padding: 0;
+
+        cursor: pointer;
+
+        overflow: hidden;
+
+        transition:
+            transform 0.18s ease,
+            background-color 0.18s ease,
+            border-color 0.18s ease,
+            box-shadow 0.18s ease;
+
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .image-option:hover:not(.disabled) {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 7px 18px rgba(92, 64, 51, 0.12);
+    }
+
+    .image-option:focus-visible {
+        outline: 3px solid rgba(184, 134, 92, 0.35);
+        outline-offset: 2px;
+    }
+
+    .image-option img {
+        display: block;
+
+        width: 100%;
+
+        aspect-ratio: 4 / 3;
+
+        object-fit: cover;
+
+        background: #f7eee4;
+    }
+
+    .image-caption {
+        padding: 9px 10px;
+
+        text-align: center;
+
+        font-size: 13px;
+
+        color: #806b5d;
+
+        min-height: 43px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: color 0.18s ease;
+    }
+
+    .image-option.playing-sound {
+        box-shadow:
+            0 0 0 3px rgba(123, 155, 118, 0.35);
+    }
+
+    /* =========================
+       ANSWER STATES — kartu diberi warna solid
+    ========================= */
+
+    .image-option.correct,
+    .image-option.show-correct {
+        background: var(--green);
+        border-color: var(--green-dark);
+
+        animation: answerPop 0.3s ease;
+    }
+
+    .image-option.correct .image-caption,
+    .image-option.show-correct .image-caption {
+        color: var(--white);
+        font-weight: 700;
+    }
+
+    .image-option.wrong {
+        background: var(--red);
+        border-color: var(--red-dark);
+
+        animation: answerShake 0.35s ease;
+    }
+
+    .image-option.wrong .image-caption {
+        color: var(--white);
+        font-weight: 700;
+    }
+
+    .image-option.disabled {
+        cursor: default;
+    }
+
+    .answer-indicator {
+        position: absolute;
 
         top: 10px;
-    }
-
-    #page-content .sound-indicator {
-        right: 10px;
-    }
-
-    #page-content .answer-indicator {
         left: 10px;
+
+        padding: 4px 10px;
+
+        border-radius: 999px;
+
+        font-size: 13px;
+        font-weight: 800;
+
+        background: rgba(255, 255, 255, 0.95);
+
+        box-shadow:
+            0 3px 8px rgba(0, 0, 0, 0.08);
     }
-}
+
+    .correct .answer-indicator,
+    .show-correct .answer-indicator {
+        color: var(--green-dark);
+    }
+
+    .wrong .answer-indicator {
+        color: var(--red-dark);
+    }
+
+    /* =========================
+       FEEDBACK — kolom penjelasan diberi warna solid
+    ========================= */
+
+    .feedback {
+        display: none;
+
+        margin-top: 20px;
+
+        border-radius: 16px;
+
+        padding: 18px;
+
+        animation: feedbackIn 0.3s ease;
+    }
+
+    .feedback.show {
+        display: block;
+    }
+
+    .feedback.correct-feedback {
+        background: var(--green);
+        border-left: 5px solid var(--green-dark);
+    }
+
+    .feedback.wrong-feedback {
+        background: var(--red);
+        border-left: 5px solid var(--red-dark);
+    }
+
+    .feedback-title {
+        font-size: 20px;
+        font-weight: 800;
+
+        margin-bottom: 8px;
+    }
+
+    .feedback.correct-feedback .feedback-title,
+    .feedback.correct-feedback .correct-answer-label,
+    .feedback.correct-feedback .correct-answer,
+    .feedback.correct-feedback .explanation {
+        color: var(--white);
+    }
+
+    .feedback.wrong-feedback .feedback-title,
+    .feedback.wrong-feedback .correct-answer-label,
+    .feedback.wrong-feedback .correct-answer,
+    .feedback.wrong-feedback .explanation {
+        color: var(--white);
+    }
+
+    .correct-answer-label {
+        font-size: 14px;
+
+        margin-top: 10px;
+
+        opacity: 0.85;
+    }
+
+    .correct-answer {
+        font-size: 21px;
+
+        font-weight: 800;
+
+        margin: 3px 0 8px;
+    }
+
+    .explanation {
+        font-size: 15px;
+    }
+
+    /* =========================
+       NEXT AREA
+    ========================= */
+
+    .next-area {
+        margin-top: 18px;
+
+        text-align: center;
+    }
+
+    .countdown {
+        display: none;
+
+        font-size: 14px;
+
+        color: #806b5d;
+
+        margin-bottom: 8px;
+    }
+
+    .countdown.show {
+        display: block;
+    }
+
+    .next-button {
+        display: none;
+
+        border: none;
+
+        background: var(--brown);
+        color: white;
+
+        padding: 11px 20px;
+
+        border-radius: 999px;
+
+        font-size: 15px;
+        font-weight: 800;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.18s ease,
+            opacity 0.18s ease;
+    }
+
+    .next-button.show {
+        display: inline-block;
+    }
+
+    .next-button:hover {
+        transform: translateY(-1px);
+    }
+
+    .next-button:active {
+        transform: translateY(1px);
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes answerPop {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.015); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes answerShake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-4px); }
+        75% { transform: translateX(4px); }
+    }
+
+    @keyframes feedbackIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 650px) {
+
+        .hero,
+        .quiz-card {
+            padding: 20px 17px;
+        }
+
+        .lesson-container h1 {
+            font-size: 25px;
+        }
+
+        .question {
+            font-size: 19px;
+        }
+
+        .image-grid {
+            gap: 10px;
+        }
+
+        .image-option {
+            border-radius: 14px;
+            border-width: 3px;
+        }
+
+        .image-caption {
+            font-size: 12px;
+            padding: 7px 6px;
+            min-height: 38px;
+        }
+
+        .answer-indicator {
+            top: 7px;
+            left: 7px;
+
+            font-size: 12px;
+
+            padding: 3px 8px;
+        }
+    }
+
+    @media (max-width: 400px) {
+
+        .image-grid {
+            gap: 8px;
+        }
+
+        .image-caption {
+            font-size: 11px;
+        }
+    }
+
 </style>
 
 
-<!-- =========================================
-     QUIZ CONTENT
-========================================= -->
+<!--
+    =====================================================
+    PAGE CONTENT
+    =====================================================
+-->
 
-<section class="image-quiz">
+<div class="lesson-container">
 
-    <!-- HERO -->
+    <section class="hero">
 
-    <div class="quiz-hero">
-
-        <div class="quiz-badge">
+        <div class="badge">
             BAHASA INDONESIA • PILIH GAMBAR
         </div>
 
@@ -491,1382 +493,630 @@
 
         <p>
             看看圖片，選出最符合題目情境的圖片。
-            <br>
-            每一題有四張圖片，只有一張是正確答案。
-            點一下圖片就會播放這張圖片的印尼文發音。
         </p>
 
-    </div>
+        <p>
+            每一題有四張圖片，只有一張是正確答案。點一下圖片就會播放這張圖片的印尼文發音。
+        </p>
+
+    </section>
 
 
-    <!-- QUIZ -->
+    <section class="quiz-card">
 
-    <div class="quiz-card" id="imageQuiz">
-
-        <div class="quiz-header">
+        <div class="quiz-top">
 
             <div class="quiz-label">
                 🧋 Pilih Gambar
             </div>
 
-            <div
-                class="quiz-counter"
-                id="questionCounter"
-            >
+            <div class="question-counter" id="questionCounter">
                 1 / 20
             </div>
 
         </div>
 
 
-        <!-- QUESTION -->
-
-        <div class="question-box">
-
-            <h2 id="question">
-                載入中……
-            </h2>
-
-        </div>
+        <div class="question" id="question"></div>
 
 
-        <!-- IMAGE OPTIONS -->
-
-        <div
-            class="image-grid"
-            id="imageGrid"
-        ></div>
+        <div class="image-grid" id="imageGrid"></div>
 
 
-        <!-- FEEDBACK -->
+        <div class="feedback" id="feedback">
 
-        <div
-            class="feedback"
-            id="feedback"
-        >
+            <div class="feedback-title" id="feedbackTitle"></div>
 
-            <div
-                class="feedback-title"
-                id="feedbackTitle"
-            ></div>
+            <div class="correct-answer-label" id="correctAnswerLabel"></div>
 
-            <div
-                class="correct-answer-label"
-                id="correctAnswerLabel"
-            ></div>
+            <div class="correct-answer" id="correctAnswer"></div>
 
-            <div
-                class="correct-answer"
-                id="correctAnswer"
-            ></div>
-
-            <div
-                class="explanation"
-                id="explanation"
-            ></div>
-
-            <div
-                class="countdown"
-                id="countdown"
-            ></div>
+            <div class="explanation" id="explanation"></div>
 
         </div>
 
 
-        <!-- NEXT -->
+        <div class="next-area">
 
-        <button
-            class="next-button"
-            id="nextButton"
-            type="button"
-        >
-            下一題 →
-        </button>
+            <div class="countdown" id="countdown"></div>
 
-
-        <!-- FINISHED -->
-
-        <div
-            class="quiz-finished"
-            id="quizFinished"
-        >
-
-            <div class="quiz-finished-icon">
-                🎉
-            </div>
-
-            <h2>
-                完成啦！
-            </h2>
-
-            <p>
-                你已經完成這一組「Pilih Gambar」練習。
-                <br>
-                可以再玩一次，加深印尼語單字的印象！
-            </p>
+            <button type="button" class="next-button" id="nextButton">
+                下一題 →
+            </button>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
+</div>
 
+
+<!--
+    =====================================================
+    QUIZ JAVASCRIPT
+    =====================================================
+-->
 
 <script>
-/* =========================================
-   QUIZ DATA
-========================================= */
 
-const quizData = [
-
-    {
-        question: "Yang mana sapaan 你好（嗨）？",
-        questionZh: "哪一個是「你好／嗨」？",
-
-        correctAnswer: "Hai",
-
-        explanation:
-            "Hai adalah sapaan santai yang sangat umum digunakan dalam percakapan sehari-hari.",
-
-        explanationZh:
-            "Hai 是非常常見的日常口語招呼，可以用來表示「嗨、你好」。",
-
-        correctImage:
-            "https://i.postimg.cc/3wNKcBqK/Hai-20260912-154053-0000.png",
-
-        correctCaption:
-            "Sapaan sehari-hari",
-
-        soundText: "Hai"
-    },
-
-
-    {
-        question: "Yang mana sapaan 你好（哈囉）？",
-        questionZh: "哪一個是「你好／哈囉」？",
-
-        correctAnswer: "Halo",
-
-        explanation:
-            "Halo juga merupakan sapaan umum dalam bahasa Indonesia dan sering digunakan ketika menyapa seseorang.",
-
-        explanationZh:
-            "Halo 是印尼語中很常見的招呼語，可以表示「哈囉、你好」。",
-
-        correctImage:
-            "https://i.postimg.cc/vZqyfnZ7/Hai-20260912-154054-0001.png",
-
-        correctCaption:
-            "Sapaan sehari-hari",
-
-        soundText: "Halo"
-    },
-
-
-    {
-        question: "Yang mana ucapan formal untuk 早安？",
-        questionZh: "哪一個是正式的「早安」？",
-
-        correctAnswer: "Selamat pagi",
-
-        explanation:
-            "Selamat pagi digunakan untuk menyapa seseorang pada pagi hari dan terdengar lebih sopan atau formal.",
-
-        explanationZh:
-            "Selamat pagi 是正式、禮貌的「早安」，用於早上的問候。",
-
-        correctImage:
-            "https://i.postimg.cc/Ss8bBtf4/Hai-20260912-154054-0002.png",
-
-        correctCaption:
-            "Selamat pagi"
-    },
-
-
-    {
-        question: "Yang mana ucapan formal untuk 午安（12–14）？",
-        questionZh: "哪一個是正式的「午安」（12–14 點）？",
-
-        correctAnswer: "Selamat siang",
-
-        explanation:
-            "Selamat siang biasanya digunakan pada siang hari, terutama sekitar pukul 12 sampai 14.",
-
-        explanationZh:
-            "Selamat siang 通常用於中午時段，特別是大約 12 點到 14 點。",
-
-        correctImage:
-            "https://i.postimg.cc/Wbscy8D8/Hai-20260912-154054-0003.png",
-
-        correctCaption:
-            "Selamat siang"
-    },
-
-
-    {
-        question: "Yang mana ucapan formal untuk 午安（15–17）？",
-        questionZh: "哪一個是正式的「午安」（15–17 點）？",
-
-        correctAnswer: "Selamat sore",
-
-        explanation:
-            "Selamat sore digunakan pada sore hari, biasanya sekitar pukul 15 sampai 17.",
-
-        explanationZh:
-            "Selamat sore 用於下午較晚的時段，通常大約是 15 點到 17 點。",
-
-        correctImage:
-            "https://i.postimg.cc/Njzh5wNG/Hai-20260912-154054-0004.png",
-
-        correctCaption:
-            "Selamat sore"
-    },
-
-
-    {
-        question: "Yang mana ucapan formal untuk 晚安？",
-        questionZh: "哪一個是正式的「晚安」？",
-
-        correctAnswer: "Selamat malam",
-
-        explanation:
-            "Selamat malam digunakan untuk menyapa seseorang pada malam hari.",
-
-        explanationZh:
-            "Selamat malam 是晚上的正式問候語，可以表示「晚安／晚上好」。",
-
-        correctImage:
-            "https://i.postimg.cc/qR2Wb6pv/Hai-20260912-154054-0005.png",
-
-        correctCaption:
-            "Selamat malam"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 早安？",
-        questionZh: "哪一個是比較口語的「早安」？",
-
-        correctAnswer: "Pagi",
-
-        explanation:
-            "Dalam percakapan santai, Selamat pagi sering dipendekkan menjadi Pagi.",
-
-        explanationZh:
-            "在日常口語中，Selamat pagi 常常會簡化成 Pagi。",
-
-        correctImage:
-            "https://i.postimg.cc/MpXNkFzm/Hai-20260912-154054-0006.png",
-
-        correctCaption:
-            "Pagi"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 午安（12–14）？",
-        questionZh: "哪一個是比較口語的「午安」（12–14 點）？",
-
-        correctAnswer: "Siang",
-
-        explanation:
-            "Dalam percakapan santai, Selamat siang sering disingkat menjadi Siang.",
-
-        explanationZh:
-            "在日常口語中，Selamat siang 常常簡化成 Siang。",
-
-        correctImage:
-            "https://i.postimg.cc/Ls1W5gYN/Hai-20260912-154054-0007.png",
-
-        correctCaption:
-            "Siang"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 午安（15–17）？",
-        questionZh: "哪一個是比較口語的「午安」（15–17 點）？",
-
-        correctAnswer: "Sore",
-
-        explanation:
-            "Dalam percakapan santai, Selamat sore sering disingkat menjadi Sore.",
-
-        explanationZh:
-            "在日常口語中，Selamat sore 常常簡化成 Sore。",
-
-        correctImage:
-            "https://i.postimg.cc/zBwPSmkT/Hai-20260912-154054-0008.png",
-
-        correctCaption:
-            "Sore"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 晚安？",
-        questionZh: "哪一個是比較口語的「晚安」？",
-
-        correctAnswer: "Malam",
-
-        explanation:
-            "Dalam percakapan santai, Selamat malam sering disingkat menjadi Malam.",
-
-        explanationZh:
-            "在日常口語中，Selamat malam 常常簡化成 Malam。",
-
-        correctImage:
-            "https://i.postimg.cc/bYTBZhJ1/Hai-20260912-154055-0009.png",
-
-        correctCaption:
-            "Malam"
-    },
-
-
-    {
-        question: "Yang mana ucapan formal untuk 謝謝？",
-        questionZh: "哪一個是正式的「謝謝」？",
-
-        correctAnswer: "Terima kasih",
-
-        explanation:
-            "Terima kasih adalah cara standar dan sopan untuk mengatakan terima kasih.",
-
-        explanationZh:
-            "Terima kasih 是標準又禮貌的「謝謝」。",
-
-        correctImage:
-            "https://i.postimg.cc/HkfSqWZj/Hai-20260912-154055-0010.png",
-
-        correctCaption:
-            "Terima kasih"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 謝謝？",
-        questionZh: "哪一個是比較口語的「謝謝」？",
-
-        correctAnswer: "Makasih",
-
-        explanation:
-            "Makasih adalah bentuk santai dari Terima kasih dan sangat umum digunakan dalam percakapan.",
-
-        explanationZh:
-            "Makasih 是 Terima kasih 的口語縮短形式，在日常對話中非常常見。",
-
-        correctImage:
-            "https://i.postimg.cc/3rntKFSt/Hai-20260912-154055-0011.png",
-
-        correctCaption:
-            "Makasih"
-    },
-
-
-    {
-        question: "Yang mana berarti 不客氣？",
-        questionZh: "哪一個是「不客氣」？",
-
-        correctAnswer: "Sama-sama",
-
-        explanation:
-            "Sama-sama digunakan sebagai jawaban ketika seseorang mengucapkan Terima kasih.",
-
-        explanationZh:
-            "Sama-sama 是別人說 Terima kasih（謝謝）時，常用的回應「不客氣」。",
-
-        correctImage:
-            "https://i.postimg.cc/yd6HJd5w/Hai-20260925-211323-0000.png",
-
-        correctCaption:
-            "Sama-sama"
-    },
-
-
-    {
-        question: "Yang mana berarti 沒問題？",
-        questionZh: "哪一個是「沒問題／沒關係」？",
-
-        correctAnswer: "Gak apa-apa",
-
-        explanation:
-            "Gak apa-apa adalah bentuk santai yang berarti tidak apa-apa atau tidak masalah.",
-
-        explanationZh:
-            "Gak apa-apa 是很口語的說法，可以表示「沒關係、沒問題、沒事」。",
-
-        correctImage:
-            "https://i.postimg.cc/52FvG9sD/Hai-20260925-212504-0000.png",
-
-        correctCaption:
-            "Gak apa-apa"
-    },
-
-
-    {
-        question: "Yang mana bisa digunakan untuk 不好意思、借過、請問？",
-        questionZh: "哪一個可以用來表示「不好意思、借過、請問」？",
-
-        correctAnswer: "Permisi",
-
-        explanation:
-            "Permisi digunakan ketika ingin meminta izin, menarik perhatian seseorang, atau meminta jalan.",
-
-        explanationZh:
-            "Permisi 可以用來表示「不好意思、借過」，也可以在詢問別人之前使用。",
-
-        correctImage:
-            "https://i.postimg.cc/RFGLZvRC/Hai-20260912-154055-0012.png",
-
-        correctCaption:
-            "Permisi"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 不好意思？",
-        questionZh: "哪一個是比較口語的「不好意思／對不起」？",
-
-        correctAnswer: "Maaf",
-
-        explanation:
-            "Maaf berarti maaf atau sorry dan digunakan untuk meminta maaf.",
-
-        explanationZh:
-            "Maaf 可以表示「對不起、抱歉、不好意思」，常用來道歉。",
-
-        correctImage:
-            "https://i.postimg.cc/JzJ3BNqv/Hai-20260912-154055-0013.png",
-
-        correctCaption:
-            "Maaf"
-    },
-
-
-    {
-        question: "Yang mana berarti 最近怎麼樣？",
-        questionZh: "哪一個是「最近怎麼樣？」？",
-
-        correctAnswer: "Apa kabar?",
-
-        explanation:
-            "Apa kabar? adalah pertanyaan umum untuk menanyakan keadaan atau kabar seseorang.",
-
-        explanationZh:
-            "Apa kabar? 是很常見的問候語，用來詢問對方「最近怎麼樣？」。",
-
-        correctImage:
-            "https://i.postimg.cc/3JG0LKv6/Hai-20260912-154055-0016.png",
-
-        correctCaption:
-            "Apa kabar?"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 最近怎麼樣？",
-        questionZh: "哪一個是比較口語的「最近怎麼樣？」？",
-
-        correctAnswer: "Gimana kabar?",
-
-        explanation:
-            "Gimana kabar? adalah bentuk yang lebih santai dan percakapan dari Apa kabar?",
-
-        explanationZh:
-            "Gimana kabar? 是比較口語、自然的「最近怎麼樣？」。",
-
-        correctImage:
-            "https://i.postimg.cc/HnynP2Vr/Hai-20260912-161752-0000.png",
-
-        correctCaption:
-            "Gimana kabar?"
-    },
-
-
-    {
-        question: "Yang mana berarti 很高興認識你（正式）？",
-        questionZh: "哪一個是比較正式的「很高興認識你」？",
-
-        correctAnswer: "Senang bertemu dengan Anda",
-
-        explanation:
-            "Senang bertemu dengan Anda adalah ungkapan yang lebih formal dan sopan untuk mengatakan senang bertemu dengan Anda.",
-
-        explanationZh:
-            "Senang bertemu dengan Anda 是比較正式、禮貌的「很高興見到／認識你」。",
-
-        correctImage:
-            "https://i.postimg.cc/43QzWXrR/Hai-20260912-154055-0014.png",
-
-        correctCaption:
-            "Senang bertemu dengan Anda"
-    },
-
-
-    {
-        question: "Yang mana cara santai mengatakan 很高興認識你？",
-        questionZh: "哪一個是比較口語的「很高興認識你」？",
-
-        correctAnswer: "Salam kenal",
-
-        explanation:
-            "Salam kenal adalah ungkapan yang sangat umum digunakan ketika baru berkenalan dengan seseorang.",
-
-        explanationZh:
-            "Salam kenal 是剛認識一個人時非常自然、常見的說法，可以表示「很高興認識你」。",
-
-        correctImage:
-            "https://i.postimg.cc/50kQrygv/Hai-20260912-154055-0015.png",
-
-        correctCaption:
-            "Salam kenal"
-    }
-
-];
-
-
-/* =========================================
-   QUIZ VARIABLES
-========================================= */
-
-let currentQuestionIndex = 0;
-
-let answered = false;
-
-let countdownTimer = null;
-
-let selectedOption = null;
-
-
-/* =========================================
-   DOM
-========================================= */
-
-const questionElement =
-    document.getElementById("question");
-
-const questionCounterElement =
-    document.getElementById("questionCounter");
-
-const imageGridElement =
-    document.getElementById("imageGrid");
-
-const feedbackElement =
-    document.getElementById("feedback");
-
-const feedbackTitleElement =
-    document.getElementById("feedbackTitle");
-
-const correctAnswerLabelElement =
-    document.getElementById("correctAnswerLabel");
-
-const correctAnswerElement =
-    document.getElementById("correctAnswer");
-
-const explanationElement =
-    document.getElementById("explanation");
-
-const countdownElement =
-    document.getElementById("countdown");
-
-const nextButton =
-    document.getElementById("nextButton");
-
-const quizFinished =
-    document.getElementById("quizFinished");
-
-
-/* =========================================
-   IMAGE BANK
-========================================= */
-
-const imageBank = quizData.map(item => {
-
-    return {
-        image: item.correctImage,
-        caption: item.correctCaption,
-        answer: item.correctAnswer
-    };
-
-});
-
-
-/* =========================================
-   SHUFFLE
-========================================= */
-
-function shuffle(array) {
-
-    const copiedArray = [...array];
-
-    for (
-        let i = copiedArray.length - 1;
-        i > 0;
-        i--
-    ) {
-
-        const j =
-            Math.floor(Math.random() * (i + 1));
-
-        [
-            copiedArray[i],
-            copiedArray[j]
-        ] =
-        [
-            copiedArray[j],
-            copiedArray[i]
-        ];
-
-    }
-
-    return copiedArray;
-}
-
-
-/* =========================================
-   SPEECH
-========================================= */
-
-function speakIndonesian(
-    text,
-    cardElement
-) {
-
-    if (
-        !text ||
-        !("speechSynthesis" in window)
-    ) {
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    document
-        .querySelectorAll(
-            "#page-content .image-option.playing-sound"
-        )
-        .forEach(card => {
-
-            card.classList.remove(
-                "playing-sound"
-            );
-
-        });
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
-
-    utterance.lang = "id-ID";
-
-    utterance.rate = 0.95;
-
-
-    const voices =
-        window.speechSynthesis.getVoices();
-
-    const indonesianVoice =
-        voices.find(
-            voice =>
-                voice.lang &&
-                voice.lang
-                    .toLowerCase()
-                    .startsWith("id")
+    const quizData = [
+
+        {
+            question: 'Yang mana sapaan 你好 （嗨）？',
+            questionZh: '哪一個是 你好（嗨）的印尼文問候語？',
+            correctAnswer: 'Hai / Halo',
+            soundText: 'Hai',
+            explanation: 'Orang Indonesia bilang 你好 pakai Hai atau Halo.',
+            explanationZh: '印尼人會用「Hai」或「Halo」來表示 你好，也就是「嗨／哈囉」。',
+            correctImage: 'https://i.postimg.cc/3wNKcBqK/Hai-20260912-154053-0000.png',
+            correctCaption: 'Sapaan sehari-hari'
+        },
+
+        {
+            question: 'Yang mana sapaan 你好 （哈囉）？',
+            questionZh: '哪一個是 你好（哈囉）的印尼文問候語？',
+            correctAnswer: 'Hai / Halo',
+            soundText: 'Halo',
+            explanation: 'Orang Indonesia bilang 你好 pakai Hai atau Halo.',
+            explanationZh: '印尼人會用「Hai」或「Halo」來表示 你好，也就是「嗨／哈囉」。',
+            correctImage: 'https://i.postimg.cc/vZqyfnZ7/Hai-20260912-154054-0001.png',
+            correctCaption: 'Sapaan sehari-hari'
+        },
+
+        {
+            question: 'Yang mana sapaan sopan 早安？',
+            questionZh: '哪一個是比較禮貌的 早安？',
+            correctAnswer: 'Selamat pagi',
+            explanation: 'Biasanya sapaan waktu menggunakan kata "Selamat" dipakai di lingkungan formal.',
+            explanationZh: '在印尼文中，用「Selamat」開頭的時間問候語通常比較正式，適合較正式的場合。',
+            correctImage: 'https://i.postimg.cc/Ss8bBtf4/Hai-20260912-154054-0002.png',
+            correctCaption: 'Sapaan pagi yang sopan'
+        },
+
+        {
+            question: 'Yang mana sapaan sopan 午安 12點–14點？',
+            questionZh: '哪一個是 12 點到 14 點使用的禮貌問候語？',
+            correctAnswer: 'Selamat siang',
+            explanation: 'Biasanya sapaan waktu menggunakan kata "Selamat" dipakai di lingkungan formal.',
+            explanationZh: '用「Selamat」開頭的時間問候語通常比較正式，適合較正式的場合。',
+            correctImage: 'https://i.postimg.cc/Wbscy8D8/Hai-20260912-154054-0003.png',
+            correctCaption: 'Sapaan siang yang sopan'
+        },
+
+        {
+            question: 'Yang mana sapaan sopan 午安 15點–17點？',
+            questionZh: '哪一個是 15 點到 17 點使用的禮貌問候語？',
+            correctAnswer: 'Selamat sore',
+            explanation: 'Biasanya sapaan waktu menggunakan kata "Selamat" dipakai di lingkungan formal.',
+            explanationZh: '用「Selamat」開頭的時間問候語通常比較正式，適合較正式的場合。',
+            correctImage: 'https://i.postimg.cc/Njzh5wNG/Hai-20260912-154054-0004.png',
+            correctCaption: 'Sapaan sore yang sopan'
+        },
+
+        {
+            question: 'Yang mana sapaan sopan 晚安？',
+            questionZh: '哪一個是比較禮貌的 晚安？',
+            correctAnswer: 'Selamat malam',
+            explanation: 'Biasanya sapaan waktu menggunakan kata "Selamat" dipakai di lingkungan formal.',
+            explanationZh: '用「Selamat」開頭的時間問候語通常比較正式，適合較正式的場合。',
+            correctImage: 'https://i.postimg.cc/qR2Wb6pv/Hai-20260912-154054-0005.png',
+            correctCaption: 'Sapaan malam yang sopan'
+        },
+
+        {
+            question: 'Yang mana sapaan akrab 早安？',
+            questionZh: '哪一個是日常比較親近的 早安？',
+            correctAnswer: 'Pagi',
+            explanation: 'Sehari-hari biasanya hanya menyebutkan waktunya.',
+            explanationZh: '在日常生活中，熟人之間通常會直接說時間，例如早上就說「Pagi」。',
+            correctImage: 'https://i.postimg.cc/MpXNkFzm/Hai-20260912-154054-0006.png',
+            correctCaption: 'Sapaan pagi yang akrab'
+        },
+
+        {
+            question: 'Yang mana sapaan akrab 午安 12點–14點？',
+            questionZh: '哪一個是 12 點到 14 點日常比較親近的說法？',
+            correctAnswer: 'Siang',
+            explanation: 'Sehari-hari biasanya hanya menyebutkan waktunya.',
+            explanationZh: '在日常生活中，熟人之間通常會直接說時間，例如中午可以說「Siang」。',
+            correctImage: 'https://i.postimg.cc/Ls1W5gYN/Hai-20260912-154054-0007.png',
+            correctCaption: 'Sapaan siang yang akrab'
+        },
+
+        {
+            question: 'Yang mana sapaan akrab 午安 15點–17點？',
+            questionZh: '哪一個是 15 點到 17 點日常比較親近的說法？',
+            correctAnswer: 'Sore',
+            explanation: 'Sehari-hari biasanya hanya menyebutkan waktunya.',
+            explanationZh: '在日常生活中，熟人之間通常會直接說時間，例如下午可以說「Sore」。',
+            correctImage: 'https://i.postimg.cc/zBwPSmkT/Hai-20260912-154054-0008.png',
+            correctCaption: 'Sapaan sore yang akrab'
+        },
+
+        {
+            question: 'Yang mana sapaan akrab 晚安？',
+            questionZh: '哪一個是日常比較親近的 晚安？',
+            correctAnswer: 'Malam',
+            explanation: 'Sehari-hari biasanya hanya menyebutkan waktunya.',
+            explanationZh: '在日常生活中，熟人之間通常會直接說時間，例如晚上可以說「Malam」。',
+            correctImage: 'https://i.postimg.cc/bYTBZhJ1/Hai-20260912-154055-0009.png',
+            correctCaption: 'Sapaan malam yang akrab'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 謝謝 yang formal?',
+            questionZh: '比較正式的「謝謝」要怎麼說？',
+            correctAnswer: 'Terima kasih',
+            explanation: 'Benar / Salah.',
+            explanationZh: '「Terima kasih」是印尼文中最常見、也可以用在正式場合的「謝謝」。',
+            correctImage: 'https://i.postimg.cc/HkfSqWZj/Hai-20260912-154055-0010.png',
+            correctCaption: 'Ucapan terima kasih'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 謝謝 secara casual?',
+            questionZh: '比較 casual 的「謝謝」要怎麼說？',
+            correctAnswer: 'Makasih',
+            explanation: 'Benar / Salah.',
+            explanationZh: '「Makasih」是「Terima kasih」比較口語、輕鬆的說法，日常聊天中很常見。',
+            correctImage: 'https://i.postimg.cc/3rntKFSt/Hai-20260912-154055-0011.png',
+            correctCaption: 'Ucapan terima kasih casual'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 不客氣?',
+            questionZh: '哪一個是 不客氣 的說法？',
+            correctAnswer: 'Sama-sama',
+            explanation: 'Orang Indonesia bilang 不客氣 dengan "Sama-sama", biasanya sebagai balasan setelah "Terima kasih".',
+            explanationZh: '印尼人用「Sama-sama」來表示「不客氣」，通常是用來回應別人說的「Terima kasih（謝謝）」。',
+            correctImage: 'https://i.postimg.cc/yd6HJd5w/Hai-20260925-211323-0000.png',
+            correctCaption: 'Balasan setelah terima kasih'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 沒問題?',
+            questionZh: '哪一個是 沒問題 的說法？',
+            correctAnswer: 'Gak apa-apa',
+            explanation: 'Orang Indonesia bilang 沒問題 dengan "Gak apa-apa", sering dipakai untuk menanggapi sesuatu dengan santai.',
+            explanationZh: '印尼人用「Gak apa-apa」來表示「沒問題」，是比較輕鬆、口語的說法。',
+            correctImage: 'https://i.postimg.cc/52FvG9sD/Hai-20260925-212504-0000.png',
+            correctCaption: 'Menanggapi dengan santai'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 不好意思、借過、請問 yang semi kasual?',
+            questionZh: '「不好意思、借過、請問」比較半口語的說法是什麼？',
+            correctAnswer: 'Permisi',
+            explanation: 'Permisi sebenarnya kata formal, tapi dalam kehidupan sehari-hari masih sering digunakan, jadi bisa dibilang semi kasual.',
+            explanationZh: '「Permisi」其實比較正式，但在日常生活中仍然很常使用，所以可以算是比較半口語的說法。',
+            correctImage: 'https://i.postimg.cc/RFGLZvRC/Hai-20260912-154055-0012.png',
+            correctCaption: 'Meminta izin dengan sopan'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 不好意思、借過、請問 yang kasual?',
+            questionZh: '「不好意思、借過、請問」比較口語的說法是什麼？',
+            correctAnswer: 'Maaf',
+            explanation: 'Kebanyakan orang akan bilang "Maaf", tapi Maaf juga bisa berarti 對不起.',
+            explanationZh: '大多數人在日常生活中會說「Maaf」。不過「Maaf」也可以表示「對不起」，要根據情境判斷。',
+            correctImage: 'https://i.postimg.cc/JzJ3BNqv/Hai-20260912-154055-0013.png',
+            correctCaption: 'Meminta jalan secara casual'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 最近怎麼樣 yang semi formal?',
+            questionZh: '「最近怎麼樣」比較半正式的說法是什麼？',
+            correctAnswer: 'Apa kabar?',
+            explanation: 'Apa kabar sebenarnya kata formal, tapi dalam kehidupan sehari-hari masih sering digunakan, jadi bisa dibilang semi kasual.',
+            explanationZh: '「Apa kabar?」其實比較正式，但在日常生活中仍然很常使用，所以可以算是比較半口語的說法。',
+            correctImage: 'https://i.postimg.cc/3JG0LKv6/Hai-20260912-154055-0016.png',
+            correctCaption: 'Menanyakan kabar'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 最近怎麼樣 yang kasual?',
+            questionZh: '「最近怎麼樣」比較口語的說法是什麼？',
+            correctAnswer: 'Gimana kabar?',
+            explanation: 'Pada kehidupan sehari-hari, kebanyakan orang akan menggunakan frasa "gimana kabar" untuk menanyakan kabar.',
+            explanationZh: '在日常生活中，大多數人會用「gimana kabar」這個說法來詢問對方最近過得怎麼樣。',
+            correctImage: 'https://i.postimg.cc/HnynP2Vr/Hai-20260912-161752-0000.png',
+            correctCaption: 'Menanyakan kabar secara casual'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 很高興認識你 yang formal?',
+            questionZh: '比較正式的「很高興認識你」要怎麼說？',
+            correctAnswer: 'Senang bertemu dengan Anda',
+            explanation: 'Sebenarnya sangat jarang menggunakan "senang bertemu dengan Anda".',
+            explanationZh: '其實印尼人在日常生活中很少使用「Senang bertemu dengan Anda」這種說法。',
+            correctImage: 'https://i.postimg.cc/43QzWXrR/Hai-20260912-154055-0014.png',
+            correctCaption: 'Ungkapan formal'
+        },
+
+        {
+            question: 'Bagaimana mengucapkan 很高興認識你 yang kasual?',
+            questionZh: '比較口語的「很高興認識你」要怎麼說？',
+            correctAnswer: 'Salam kenal',
+            explanation: 'Sebagian besar orang akan bilang "salam kenal" ketika bertemu seseorang yang baru dia kenal.',
+            explanationZh: '大多數人在第一次認識新朋友時，會說「Salam kenal」。',
+            correctImage: 'https://i.postimg.cc/50kQrygv/Hai-20260912-154055-0015.png',
+            correctCaption: 'Salam kenal'
+        }
+
+    ];
+
+
+    const imageBank = quizData.map((item, index) => ({
+        url: item.correctImage,
+        caption: item.correctCaption || `Situasi ${index + 1}`,
+        sound: item.soundText || item.correctAnswer,
+        sourceQuestion: index
+    }));
+
+
+    let currentUtterance = null;
+
+    function speakIndonesian(text, cardElement) {
+
+        if (!text) return;
+        if (!("speechSynthesis" in window)) return;
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "id-ID";
+        utterance.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+
+        const idVoice = voices.find(
+            voice => voice.lang && voice.lang.toLowerCase().startsWith("id")
         );
 
-    if (indonesianVoice) {
-
-        utterance.voice =
-            indonesianVoice;
-
-    }
-
-
-    utterance.onstart = () => {
+        if (idVoice) {
+            utterance.voice = idVoice;
+        }
 
         if (cardElement) {
 
-            cardElement.classList.add(
-                "playing-sound"
-            );
-
-        }
-
-    };
-
-
-    const removePlaying =
-        () => {
-
-            if (cardElement) {
-
-                cardElement.classList.remove(
-                    "playing-sound"
-                );
-
-            }
-
-        };
-
-
-    utterance.onend =
-        removePlaying;
-
-    utterance.onerror =
-        removePlaying;
-
-
-    window.speechSynthesis.speak(
-        utterance
-    );
-
-}
-
-
-/* =========================================
-   CREATE OPTIONS
-========================================= */
-
-function createOptions(questionIndex) {
-
-    const currentQuestion =
-        quizData[questionIndex];
-
-
-    const correctOption = {
-
-        image:
-            currentQuestion.correctImage,
-
-        caption:
-            currentQuestion.correctCaption,
-
-        answer:
-            currentQuestion.correctAnswer,
-
-        soundText:
-            currentQuestion.soundText ||
-            currentQuestion.correctAnswer,
-
-        isCorrect: true
-
-    };
-
-
-    const distractors =
-        shuffle(
-
-            imageBank.filter(
-                item =>
-                    item.answer !==
-                    currentQuestion.correctAnswer
-            )
-
-        )
-        .slice(0, 3)
-        .map(item => {
-
-            return {
-
-                image:
-                    item.image,
-
-                caption:
-                    item.caption,
-
-                answer:
-                    item.answer,
-
-                soundText:
-                    item.answer,
-
-                isCorrect: false
-
+            utterance.onstart = () => {
+                cardElement.classList.add("playing-sound");
             };
 
-        });
-
-
-    return shuffle([
-        correctOption,
-        ...distractors
-    ]);
-
-}
-
-
-/* =========================================
-   RESET FEEDBACK
-========================================= */
-
-function resetFeedback() {
-
-    feedbackElement.className =
-        "feedback";
-
-    feedbackTitleElement.textContent =
-        "";
-
-    correctAnswerLabelElement.textContent =
-        "";
-
-    correctAnswerElement.textContent =
-        "";
-
-    explanationElement.textContent =
-        "";
-
-    countdownElement.textContent =
-        "";
-
-    nextButton.style.display =
-        "none";
-
-}
-
-
-/* =========================================
-   RENDER QUESTION
-========================================= */
-
-function renderQuestion() {
-
-    clearCountdown();
-
-
-    if (
-        "speechSynthesis" in window
-    ) {
-
-        window.speechSynthesis.cancel();
-
-    }
-
-
-    answered = false;
-
-    selectedOption = null;
-
-
-    const currentQuestion =
-        quizData[currentQuestionIndex];
-
-
-    questionCounterElement.textContent =
-        `${currentQuestionIndex + 1} / ${quizData.length}`;
-
-
-    questionElement.textContent =
-        currentQuestion.questionZh;
-
-
-    resetFeedback();
-
-
-    imageGridElement.innerHTML =
-        "";
-
-
-    const options =
-        createOptions(
-            currentQuestionIndex
-        );
-
-
-    options.forEach(
-        (option, index) => {
-
-            const button =
-                document.createElement("button");
-
-            button.type =
-                "button";
-
-            button.className =
-                "image-option";
-
-
-            button.setAttribute(
-                "aria-label",
-                option.caption
-            );
-
-
-            const image =
-                document.createElement("img");
-
-            image.src =
-                option.image;
-
-            image.alt =
-                option.caption;
-
-            image.loading =
-                "lazy";
-
-
-            const caption =
-                document.createElement("span");
-
-            caption.className =
-                "image-caption";
-
-            caption.textContent =
-                option.caption;
-
-
-            const soundIndicator =
-                document.createElement("span");
-
-            soundIndicator.className =
-                "sound-indicator";
-
-            soundIndicator.textContent =
-                "🔊";
-
-
-            button.appendChild(
-                image
-            );
-
-            button.appendChild(
-                caption
-            );
-
-            button.appendChild(
-                soundIndicator
-            );
-
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    handleAnswer(
-                        button,
-                        option.isCorrect,
-                        option.soundText
-                    );
-
-                }
-            );
-
-
-            imageGridElement.appendChild(
-                button
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   HANDLE ANSWER
-========================================= */
-
-function handleAnswer(
-    button,
-    isCorrect,
-    soundText
-) {
-
-    if (answered) {
-        return;
-    }
-
-
-    answered = true;
-
-    selectedOption =
-        button;
-
-
-    speakIndonesian(
-        soundText,
-        button
-    );
-
-
-    const allOptions =
-        imageGridElement.querySelectorAll(
-            ".image-option"
-        );
-
-
-    allOptions.forEach(
-        option => {
-
-            option.disabled =
-                true;
-
-        }
-    );
-
-
-    if (isCorrect) {
-
-        button.classList.add(
-            "correct"
-        );
-
-        addAnswerIndicator(
-            button,
-            "✓"
-        );
-
-        showCorrectFeedback();
-
-    } else {
-
-        button.classList.add(
-            "wrong"
-        );
-
-        addAnswerIndicator(
-            button,
-            "✗"
-        );
-
-
-        const correctButton =
-            findCorrectButton();
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "show-correct"
-            );
-
-            addAnswerIndicator(
-                correctButton,
-                "✓"
-            );
-
+            utterance.onend = () => {
+                cardElement.classList.remove("playing-sound");
+            };
+
+            utterance.onerror = () => {
+                cardElement.classList.remove("playing-sound");
+            };
         }
 
+        currentUtterance = utterance;
 
-        showWrongFeedback();
+        window.speechSynthesis.speak(utterance);
+    }
 
+    if ("speechSynthesis" in window) {
+
+        window.speechSynthesis.getVoices();
+
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
     }
 
 
-    startCountdown();
-
-}
-
-
-/* =========================================
-   ADD INDICATOR
-========================================= */
-
-function addAnswerIndicator(
-    button,
-    symbol
-) {
-
-    const existing =
-        button.querySelector(
-            ".answer-indicator"
-        );
+    const questionElement = document.getElementById("question");
+    const questionCounterElement = document.getElementById("questionCounter");
+    const imageGrid = document.getElementById("imageGrid");
+    const feedback = document.getElementById("feedback");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const correctAnswerLabel = document.getElementById("correctAnswerLabel");
+    const correctAnswer = document.getElementById("correctAnswer");
+    const explanation = document.getElementById("explanation");
+    const countdown = document.getElementById("countdown");
+    const nextButton = document.getElementById("nextButton");
 
 
-    if (existing) {
+    let currentQuestionIndex = 0;
+    let answered = false;
+    let countdownTimer = null;
+    let selectedOption = null;
 
-        existing.textContent =
-            symbol;
 
-        return;
+    function shuffle(array) {
 
+        const result = [...array];
+
+        for (let i = result.length - 1; i > 0; i--) {
+
+            const j = Math.floor(Math.random() * (i + 1));
+
+            [result[i], result[j]] = [result[j], result[i]];
+        }
+
+        return result;
     }
 
 
-    const indicator =
-        document.createElement("span");
+    function createOptions(questionIndex) {
 
-    indicator.className =
-        "answer-indicator";
-
-    indicator.textContent =
-        symbol;
-
-
-    button.appendChild(
-        indicator
-    );
-
-}
-
-
-/* =========================================
-   FIND CORRECT BUTTON
-========================================= */
-
-function findCorrectButton() {
-
-    const buttons =
-        imageGridElement.querySelectorAll(
-            ".image-option"
+        const correctImage = imageBank.find(
+            image => image.sourceQuestion === questionIndex
         );
 
-
-    return Array.from(buttons)
-        .find(
-            button => {
-
-                const caption =
-                    button.querySelector(
-                        ".image-caption"
-                    );
-
-                if (!caption) {
-                    return false;
-                }
-
-
-                return (
-                    caption.textContent ===
-                    quizData[
-                        currentQuestionIndex
-                    ].correctCaption
-                );
-
-            }
+        const distractors = imageBank.filter(
+            image => image.sourceQuestion !== questionIndex
         );
 
-}
+        const randomDistractors = shuffle(distractors).slice(0, 3);
 
-
-/* =========================================
-   CORRECT FEEDBACK
-========================================= */
-
-function showCorrectFeedback() {
-
-    const currentQuestion =
-        quizData[currentQuestionIndex];
-
-
-    feedbackElement.className =
-        "feedback correct";
-
-
-    feedbackTitleElement.textContent =
-        "✓ 正確！";
-
-
-    correctAnswerLabelElement.textContent =
-        "正確答案：";
-
-
-    correctAnswerElement.textContent =
-        currentQuestion.correctAnswer;
-
-
-    explanationElement.textContent =
-        currentQuestion.explanationZh;
-
-}
-
-
-/* =========================================
-   WRONG FEEDBACK
-========================================= */
-
-function showWrongFeedback() {
-
-    const currentQuestion =
-        quizData[currentQuestionIndex];
-
-
-    feedbackElement.className =
-        "feedback wrong";
-
-
-    feedbackTitleElement.textContent =
-        "✗ 錯誤";
-
-
-    correctAnswerLabelElement.textContent =
-        "正確答案是：";
-
-
-    correctAnswerElement.textContent =
-        currentQuestion.correctAnswer;
-
-
-    explanationElement.textContent =
-        currentQuestion.explanationZh;
-
-}
-
-
-/* =========================================
-   COUNTDOWN
-========================================= */
-
-function startCountdown() {
-
-    clearCountdown();
-
-
-    let seconds = 5;
-
-
-    countdownElement.textContent =
-        `下一題將在 ${seconds} 秒後出現`;
-
-
-    countdownTimer =
-        setInterval(
-            () => {
-
-                seconds--;
-
-
-                if (seconds <= 0) {
-
-                    clearCountdown();
-
-                    countdownElement.textContent =
-                        "準備好了嗎？";
-
-
-                    nextButton.style.display =
-                        "block";
-
-
-                    return;
-
-                }
-
-
-                countdownElement.textContent =
-                    `下一題將在 ${seconds} 秒後出現`;
-
-            },
-            1000
-        );
-
-}
-
-
-/* =========================================
-   CLEAR COUNTDOWN
-========================================= */
-
-function clearCountdown() {
-
-    if (countdownTimer) {
-
-        clearInterval(
-            countdownTimer
-        );
-
-        countdownTimer =
-            null;
-
+        return shuffle([
+            { ...correctImage, isCorrect: true },
+            ...randomDistractors.map(image => ({ ...image, isCorrect: false }))
+        ]);
     }
 
-}
 
-
-/* =========================================
-   NEXT QUESTION
-========================================= */
-
-nextButton.addEventListener(
-    "click",
-    () => {
+    function renderQuestion() {
 
         clearCountdown();
 
+        if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
+        }
+
+        answered = false;
+        selectedOption = null;
+
+        const question = quizData[currentQuestionIndex];
+
+        questionCounterElement.textContent =
+            `${currentQuestionIndex + 1} / ${quizData.length}`;
+
+        questionElement.textContent = question.questionZh;
+
+        feedback.className = "feedback";
+        feedbackTitle.textContent = "";
+        correctAnswerLabel.textContent = "";
+        correctAnswer.textContent = "";
+        explanation.textContent = "";
+
+        nextButton.classList.remove("show");
+        nextButton.disabled = true;
+
+        countdown.classList.remove("show");
+        countdown.textContent = "";
+
+        const options = createOptions(currentQuestionIndex);
+
+        imageGrid.innerHTML = "";
+
+        options.forEach((option, index) => {
+
+            const button = document.createElement("button");
+
+            button.type = "button";
+            button.className = "image-option";
+            button.dataset.correct = option.isCorrect ? "true" : "false";
+
+            const img = document.createElement("img");
+
+            img.src = option.url;
+            img.alt = `Pilihan gambar ${index + 1}`;
+            img.loading = "lazy";
+
+            const caption = document.createElement("div");
+
+            caption.className = "image-caption";
+            caption.textContent = option.caption;
+
+            button.appendChild(img);
+            button.appendChild(caption);
+
+            button.addEventListener("click", () =>
+                handleAnswer(button, option.isCorrect, option.sound)
+            );
+
+            imageGrid.appendChild(button);
+        });
+    }
+
+
+    function handleAnswer(button, isCorrect, sound) {
+
+        if (answered) return;
+
+        answered = true;
+        selectedOption = button;
+
+        speakIndonesian(sound, button);
+
+        const allOptions = imageGrid.querySelectorAll(".image-option");
+
+        allOptions.forEach(option => {
+            option.classList.add("disabled");
+            option.setAttribute("aria-disabled", "true");
+        });
+
+        if (isCorrect) {
+
+            button.classList.add("correct");
+            addIndicator(button, "✓ 正確");
+            showCorrectFeedback();
+
+        } else {
+
+            button.classList.add("wrong");
+            addIndicator(button, "✗ 錯誤");
+
+            const correctOption = [...allOptions].find(
+                option => option.dataset.correct === "true"
+            );
+
+            if (correctOption) {
+                correctOption.classList.add("show-correct");
+                addIndicator(correctOption, "✓ 正確答案");
+            }
+
+            showWrongFeedback();
+        }
+
+        startCountdown();
+    }
+
+
+    function addIndicator(button, text) {
+
+        const existing = button.querySelector(".answer-indicator");
+
+        if (existing) existing.remove();
+
+        const indicator = document.createElement("div");
+
+        indicator.className = "answer-indicator";
+        indicator.textContent = text;
+
+        button.appendChild(indicator);
+    }
+
+
+    function showCorrectFeedback() {
+
+        const question = quizData[currentQuestionIndex];
+
+        feedback.className = "feedback correct-feedback show";
+        feedbackTitle.textContent = "✓ 正確！";
+        correctAnswerLabel.textContent = "";
+        correctAnswer.textContent = question.correctAnswer;
+        explanation.textContent = question.explanationZh;
+    }
+
+    function showWrongFeedback() {
+
+        const question = quizData[currentQuestionIndex];
+
+        feedback.className = "feedback wrong-feedback show";
+        feedbackTitle.textContent = "✗ 錯誤";
+        correctAnswerLabel.textContent = "正確答案是：";
+        correctAnswer.textContent = question.correctAnswer;
+        explanation.textContent = question.explanationZh;
+    }
+
+
+    function startCountdown() {
+
+        clearCountdown();
+
+        let seconds = 5;
+
+        countdown.classList.add("show");
+        countdown.textContent = `下一題 ${seconds}...`;
+
+        countdownTimer = setInterval(() => {
+
+            seconds--;
+
+            if (seconds > 0) {
+
+                countdown.textContent = `下一題 ${seconds}...`;
+
+            } else {
+
+                clearCountdown();
+
+                countdown.classList.remove("show");
+
+                nextButton.classList.add("show");
+                nextButton.disabled = false;
+            }
+
+        }, 1000);
+    }
+
+    function clearCountdown() {
+
+        if (countdownTimer !== null) {
+            clearInterval(countdownTimer);
+            countdownTimer = null;
+        }
+    }
+
+
+    nextButton.addEventListener("click", () => {
+
+        if (nextButton.disabled || !answered) return;
+
+        if (currentQuestionIndex >= quizData.length - 1) {
+            showFinished();
+            return;
+        }
 
         currentQuestionIndex++;
 
+        renderQuestion();
+    });
 
-        if (
-            currentQuestionIndex >=
-            quizData.length
-        ) {
 
-            showFinished();
+    function showFinished() {
 
-            return;
+        clearCountdown();
 
+        if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
         }
 
+        questionCounterElement.textContent =
+            `${quizData.length} / ${quizData.length}`;
 
-        renderQuestion();
+        questionElement.textContent = "🎉 練習完成！";
 
-    }
-);
+        imageGrid.innerHTML = "";
 
+        feedback.className = "feedback correct-feedback show";
+        feedbackTitle.textContent = "☕ Es Teh Break 小結";
+        correctAnswerLabel.textContent = "";
+        correctAnswer.textContent = "很好！";
+        explanation.textContent =
+            "你已經完成這次圖片練習。可以再重新整理頁面，再玩一次。";
 
-/* =========================================
-   FINISHED
-========================================= */
-
-function showFinished() {
-
-    clearCountdown();
-
-
-    if (
-        "speechSynthesis" in window
-    ) {
-
-        window.speechSynthesis.cancel();
-
+        countdown.classList.remove("show");
+        nextButton.classList.remove("show");
     }
 
 
-    imageGridElement.style.display =
-        "none";
+    renderQuestion();
 
-    document.querySelector(
-        "#page-content .question-box"
-    ).style.display =
-        "none";
-
-    feedbackElement.style.display =
-        "none";
-
-    nextButton.style.display =
-        "none";
-
-    quizFinished.style.display =
-        "block";
-
-    questionCounterElement.textContent =
-        `${quizData.length} / ${quizData.length}`;
-
-}
-
-
-/* =========================================
-   INITIALIZE
-========================================= */
-
-renderQuestion();
-
-
-/* =========================================
-   LOAD INDONESIAN VOICES
-========================================= */
-
-if (
-    "speechSynthesis" in window
-) {
-
-    window.speechSynthesis.onvoiceschanged =
-        () => {
-
-            window.speechSynthesis.getVoices();
-
-        };
-
-}
 </script>
+
+
+<!--
+    =====================================================
+    SHARED SCRIPT — TRIGGER SIDEBAR/A.HTML LOADER
+    Jangan dihapus.
+    =====================================================
+-->
+
+<script src="../script.js"></script>
