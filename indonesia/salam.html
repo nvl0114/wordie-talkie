@@ -3,26 +3,17 @@
     KONTEN: indonesia/salam.html
     (Es Teh Break｜打招呼與問候)
 
-    File ini HANYA berisi konten (bukan halaman penuh),
-    karena akan di-load ke dalam #page-content oleh
-    script.js + A.html (sidebar & desain).
+    File ini adalah KONTEN halaman (bukan halaman penuh).
+    Sidebar & layout datang dari A.html lewat script.js.
 
-    Cara pakai:
-    1. Simpan file ini sebagai: /indonesia/salam.html
-    2. Tambahkan link ke halaman ini di sidebar (A.html),
-       misalnya:
-       <a href="/indonesia/salam.html" class="nav-link">
+    PENTING: tag <script src="../script.js"> di paling
+    bawah file ini WAJIB ada — itu yang men-trigger
+    pemasangan sidebar saat file ini dibuka langsung oleh
+    browser. Jangan dihapus.
     =====================================================
 -->
 
 <style>
-
-    /*
-     * Variabel warna khusus untuk halaman ini,
-     * di-scope ke #page-content saja
-     * (BUKAN :root) supaya tidak menimpa warna
-     * sidebar / desain utama Wordie Talkie.
-     */
 
     #page-content {
         --cream: #fff8ef;
@@ -31,15 +22,13 @@
         --soft-brown: #f3e4d3;
         --white: #ffffff;
 
-        --green: #58cc02;
-        --green-light: #d7ffb8;
-        --green-card-bg: #f7ffe8;
-        --green-border: #89e219;
+        --green: #7b9b76;
+        --green-dark: #5f7d59;
+        --green-light: #edf5ea;
 
-        --red: #ff4b4b;
-        --red-light: #ffdfe0;
-        --red-card-bg: #fff0f0;
-        --red-border: #ff8b8b;
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+        --red-light: #fff0f0;
 
         --border: #ead8c5;
     }
@@ -80,11 +69,6 @@
     .lesson-container h1 {
         margin: 0 0 10px;
         font-size: 30px;
-    }
-
-    .lesson-container h2 {
-        margin-top: 0;
-        font-size: 22px;
     }
 
     .lesson-container p {
@@ -143,10 +127,6 @@
         margin: 8px 0 20px;
     }
 
-    /*
-     * 4 gambar
-     * Desktop = 2 x 2
-     */
     .image-grid {
         display: grid;
 
@@ -171,8 +151,8 @@
 
         transition:
             transform 0.18s ease,
-            border-color 0.18s ease,
             background-color 0.18s ease,
+            border-color 0.18s ease,
             box-shadow 0.18s ease;
 
         -webkit-tap-highlight-color: transparent;
@@ -216,34 +196,43 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        transition: color 0.18s ease;
     }
 
-    /* Saat suara diputar, gambar diberi highlight halus */
     .image-option.playing-sound {
         box-shadow:
             0 0 0 3px rgba(123, 155, 118, 0.35);
     }
 
     /* =========================
-       ANSWER STATES (DUOLINGO STYLE)
+       ANSWER STATES — kartu diberi warna solid
     ========================= */
 
-    .image-option.correct {
-        border-color: var(--green);
-        background-color: var(--green-card-bg);
+    .image-option.correct,
+    .image-option.show-correct {
+        background: var(--green);
+        border-color: var(--green-dark);
+
         animation: answerPop 0.3s ease;
+    }
+
+    .image-option.correct .image-caption,
+    .image-option.show-correct .image-caption {
+        color: var(--white);
+        font-weight: 700;
     }
 
     .image-option.wrong {
-        border-color: var(--red);
-        background-color: var(--red-card-bg);
+        background: var(--red);
+        border-color: var(--red-dark);
+
         animation: answerShake 0.35s ease;
     }
 
-    .image-option.show-correct {
-        border-color: var(--green);
-        background-color: var(--green-card-bg);
-        animation: answerPop 0.3s ease;
+    .image-option.wrong .image-caption {
+        color: var(--white);
+        font-weight: 700;
     }
 
     .image-option.disabled {
@@ -271,15 +260,15 @@
 
     .correct .answer-indicator,
     .show-correct .answer-indicator {
-        color: #2b7a0b;
+        color: var(--green-dark);
     }
 
     .wrong .answer-indicator {
-        color: var(--red);
+        color: var(--red-dark);
     }
 
     /* =========================
-       FEEDBACK
+       FEEDBACK — kolom penjelasan diberi warna solid
     ========================= */
 
     .feedback {
@@ -299,15 +288,13 @@
     }
 
     .feedback.correct-feedback {
-        background: var(--green-light);
-        border: 2px solid var(--green-border);
-        border-left: 8px solid var(--green);
+        background: var(--green);
+        border-left: 5px solid var(--green-dark);
     }
 
     .feedback.wrong-feedback {
-        background: var(--red-light);
-        border: 2px solid var(--red-border);
-        border-left: 8px solid var(--red);
+        background: var(--red);
+        border-left: 5px solid var(--red-dark);
     }
 
     .feedback-title {
@@ -317,20 +304,26 @@
         margin-bottom: 8px;
     }
 
-    .feedback.correct-feedback .feedback-title {
-        color: #2b7a0b;
+    .feedback.correct-feedback .feedback-title,
+    .feedback.correct-feedback .correct-answer-label,
+    .feedback.correct-feedback .correct-answer,
+    .feedback.correct-feedback .explanation {
+        color: var(--white);
     }
 
-    .feedback.wrong-feedback .feedback-title {
-        color: #c92a2a;
+    .feedback.wrong-feedback .feedback-title,
+    .feedback.wrong-feedback .correct-answer-label,
+    .feedback.wrong-feedback .correct-answer,
+    .feedback.wrong-feedback .explanation {
+        color: var(--white);
     }
 
     .correct-answer-label {
         font-size: 14px;
 
-        color: #5c4033;
-
         margin-top: 10px;
+
+        opacity: 0.85;
     }
 
     .correct-answer {
@@ -338,15 +331,11 @@
 
         font-weight: 800;
 
-        color: var(--brown);
-
         margin: 3px 0 8px;
     }
 
     .explanation {
         font-size: 15px;
-
-        color: var(--brown);
     }
 
     /* =========================
@@ -494,7 +483,6 @@
 
 <div class="lesson-container">
 
-    <!-- INTRO -->
     <section class="hero">
 
         <div class="badge">
@@ -514,7 +502,6 @@
     </section>
 
 
-    <!-- QUIZ -->
     <section class="quiz-card">
 
         <div class="quiz-top">
@@ -536,8 +523,6 @@
         <div class="image-grid" id="imageGrid"></div>
 
 
-        <!-- FEEDBACK -->
-
         <div class="feedback" id="feedback">
 
             <div class="feedback-title" id="feedbackTitle"></div>
@@ -550,8 +535,6 @@
 
         </div>
 
-
-        <!-- NEXT -->
 
         <div class="next-area">
 
@@ -575,12 +558,6 @@
 -->
 
 <script>
-
-    /*
-     * =====================================================
-     * DATA
-     * =====================================================
-     */
 
     const quizData = [
 
@@ -789,12 +766,6 @@
     ];
 
 
-    /*
-     * =====================================================
-     * IMAGE BANK
-     * =====================================================
-     */
-
     const imageBank = quizData.map((item, index) => ({
         url: item.correctImage,
         caption: item.correctCaption || `Situasi ${index + 1}`,
@@ -802,12 +773,6 @@
         sourceQuestion: index
     }));
 
-
-    /*
-     * =====================================================
-     * TEXT TO SPEECH (SUARA GAMBAR)
-     * =====================================================
-     */
 
     let currentUtterance = null;
 
@@ -863,12 +828,6 @@
     }
 
 
-    /*
-     * =====================================================
-     * ELEMENTS
-     * =====================================================
-     */
-
     const questionElement = document.getElementById("question");
     const questionCounterElement = document.getElementById("questionCounter");
     const imageGrid = document.getElementById("imageGrid");
@@ -881,23 +840,11 @@
     const nextButton = document.getElementById("nextButton");
 
 
-    /*
-     * =====================================================
-     * STATE
-     * =====================================================
-     */
-
     let currentQuestionIndex = 0;
     let answered = false;
     let countdownTimer = null;
     let selectedOption = null;
 
-
-    /*
-     * =====================================================
-     * RANDOMIZE
-     * =====================================================
-     */
 
     function shuffle(array) {
 
@@ -913,12 +860,6 @@
         return result;
     }
 
-
-    /*
-     * =====================================================
-     * GET 4 IMAGE OPTIONS
-     * =====================================================
-     */
 
     function createOptions(questionIndex) {
 
@@ -938,12 +879,6 @@
         ]);
     }
 
-
-    /*
-     * =====================================================
-     * RENDER QUESTION
-     * =====================================================
-     */
 
     function renderQuestion() {
 
@@ -1010,12 +945,6 @@
     }
 
 
-    /*
-     * =====================================================
-     * HANDLE ANSWER
-     * =====================================================
-     */
-
     function handleAnswer(button, isCorrect, sound) {
 
         if (answered) return;
@@ -1059,12 +988,6 @@
     }
 
 
-    /*
-     * =====================================================
-     * INDICATOR
-     * =====================================================
-     */
-
     function addIndicator(button, text) {
 
         const existing = button.querySelector(".answer-indicator");
@@ -1079,12 +1002,6 @@
         button.appendChild(indicator);
     }
 
-
-    /*
-     * =====================================================
-     * CORRECT / WRONG FEEDBACK
-     * =====================================================
-     */
 
     function showCorrectFeedback() {
 
@@ -1109,17 +1026,11 @@
     }
 
 
-    /*
-     * =====================================================
-     * COUNTDOWN
-     * =====================================================
-     */
-
     function startCountdown() {
 
         clearCountdown();
 
-        let seconds = 3;
+        let seconds = 5;
 
         countdown.classList.add("show");
         countdown.textContent = `下一題 ${seconds}...`;
@@ -1154,32 +1065,20 @@
     }
 
 
-    /*
-     * =====================================================
-     * NEXT QUESTION
-     * =====================================================
-     */
-
     nextButton.addEventListener("click", () => {
 
         if (nextButton.disabled || !answered) return;
 
-        currentQuestionIndex++;
-
-        if (currentQuestionIndex >= quizData.length) {
+        if (currentQuestionIndex >= quizData.length - 1) {
             showFinished();
             return;
         }
 
+        currentQuestionIndex++;
+
         renderQuestion();
     });
 
-
-    /*
-     * =====================================================
-     * FINISH
-     * =====================================================
-     */
 
     function showFinished() {
 
@@ -1208,12 +1107,16 @@
     }
 
 
-    /*
-     * =====================================================
-     * START
-     * =====================================================
-     */
-
     renderQuestion();
 
 </script>
+
+
+<!--
+    =====================================================
+    SHARED SCRIPT — TRIGGER SIDEBAR/A.HTML LOADER
+    Jangan dihapus.
+    =====================================================
+-->
+
+<script src="../script.js"></script>
