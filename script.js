@@ -1,125 +1,543 @@
-/* ==================================================
-   WORDIE TALKIE - Master script.js
-   ================================================== */
+/* =========================================================
+   WORDIE TALKIE
+   Universal Template Loader
+   =========================================================
 
-document.addEventListener("DOMContentLoaded", function () {
+   Structure:
 
-    /* ================================================
-       1. MOBILE MENU & OVERLAY INTERACTION
-       ================================================ */
-    const menuButton = document.getElementById("menuButton");
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
+   /
+   ├── A.html
+   ├── script.js
+   ├── index.html
+   ├── logo.png
+   ├── favicon.png
+   │
+   ├── english/
+   │   ├── 1.html
+   │   ├── 2.html
+   │   └── ...
+   │
+   └── indonesia/
+       ├── 1.html
+       ├── 2.html
+       └── ...
 
-    function openMenu() {
-        if (sidebar) sidebar.classList.add("open");
-        if (overlay) overlay.classList.add("show");
-        if (menuButton) {
-            menuButton.setAttribute("aria-expanded", "true");
-            menuButton.innerHTML = "✕";
-        }
+   ========================================================= */
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+const TEMPLATE_FILE = "/a.html";
+
+
+/* =========================================================
+   GET CURRENT PAGE
+   ========================================================= */
+
+function getCurrentPage() {
+
+    let path = window.location.pathname;
+
+    path = path.replace(/\/+$/, "");
+
+    const parts = path.split("/");
+
+    return parts[parts.length - 1];
+
+}
+
+
+/* =========================================================
+   GET CONTENT FILE
+   ========================================================= */
+
+function getContentFile() {
+
+    const path =
+        window.location.pathname
+            .replace(/\/+$/, "");
+
+
+    const parts = path.split("/");
+
+
+    if (parts.length < 3) {
+
+        return null;
+
     }
 
-    function closeMenu() {
-        if (sidebar) sidebar.classList.remove("open");
-        if (overlay) overlay.classList.remove("show");
-        if (menuButton) {
-            menuButton.setAttribute("aria-expanded", "false");
-            menuButton.innerHTML = "☰";
-        }
+
+    const folder =
+        parts[parts.length - 2];
+
+
+    const file =
+        parts[parts.length - 1];
+
+
+    if (
+        !file.endsWith(".html")
+    ) {
+
+        return null;
+
     }
 
-    if (menuButton) {
-        menuButton.addEventListener("click", function () {
-            if (sidebar && sidebar.classList.contains("open")) {
-                closeMenu();
-            } else {
-                openMenu();
+
+    if (
+        file.toLowerCase() === "a.html"
+    ) {
+
+        return null;
+
+    }
+
+
+    if (
+        file.toLowerCase() === "index.html"
+    ) {
+
+        return null;
+
+    }
+
+
+    return `/${folder}/${file}`;
+
+}
+
+
+/* =========================================================
+   LOAD TEMPLATE
+   ========================================================= */
+
+async function loadTemplate() {
+
+    try {
+
+        const response =
+            await fetch(TEMPLATE_FILE);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load A.html"
+            );
+
+        }
+
+
+        const templateHTML =
+            await response.text();
+
+
+        document.open();
+
+        document.write(templateHTML);
+
+        document.close();
+
+
+        await waitForPage();
+
+
+        await loadContent();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Wordie Talkie Template Error:",
+            error
+        );
+
+
+        document.body.innerHTML = `
+            <div style="
+                max-width:700px;
+                margin:80px auto;
+                padding:30px;
+                font-family:sans-serif;
+                text-align:center;
+            ">
+
+                <h2>
+                    🌱 Wordie Talkie
+                </h2>
+
+                <p>
+                    Sorry, this page could not be loaded.
+                </p>
+
+                <p style="font-size:13px;color:#888;">
+                    ${error.message}
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD CONTENT
+   ========================================================= */
+
+async function loadContent() {
+
+    const contentFile =
+        getContentFile();
+
+
+    if (!contentFile) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(contentFile);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Could not load ${contentFile}`
+            );
+
+        }
+
+
+        const contentHTML =
+            await response.text();
+
+
+        const container =
+            document.getElementById(
+                "page-content"
+            );
+
+
+        if (!container) {
+
+            throw new Error(
+                "A.html is missing #page-content"
+            );
+
+        }
+
+
+        container.innerHTML =
+            contentHTML;
+
+
+        setActiveNavigation();
+
+
+        /*
+         * Jalankan ulang <script> yang ada di dalam
+         * konten yang baru saja di-load — KECUALI
+         * <script src="../script.js"> milik loader ini
+         * sendiri. Kalau tag itu ikut dijalankan ulang,
+         * loader ini akan memuat template lagi dari awal
+         * berulang-ulang (loop), yang bikin quiz macet
+         * di tengah jalan.
+         */
+
+        executeLoadedScripts();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Wordie Talkie Content Error:",
+            error
+        );
+
+
+        const container =
+            document.getElementById(
+                "page-content"
+            );
+
+
+        if (container) {
+
+            container.innerHTML = `
+
+                <div style="
+                    text-align:center;
+                    padding:40px 20px;
+                ">
+
+                    <h2>
+                        🌱 Oops!
+                    </h2>
+
+                    <p>
+                        This lesson could not be loaded.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   WAIT FOR DOCUMENT
+   ========================================================= */
+
+function waitForPage() {
+
+    return new Promise(function (resolve) {
+
+        if (
+            document.readyState === "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                resolve,
+                { once: true }
+            );
+
+        } else {
+
+            resolve();
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+   ========================================================= */
+
+function setActiveNavigation() {
+
+    const currentPath =
+        window.location.pathname
+            .replace(/\/+$/, "")
+            .toLowerCase();
+
+
+    document
+        .querySelectorAll(".nav-link")
+        .forEach(function (link) {
+
+            link.classList.remove(
+                "active"
+            );
+
+
+            const href =
+                link.getAttribute("href");
+
+
+            if (!href) return;
+
+
+            const linkURL =
+                new URL(
+                    href,
+                    window.location.origin
+                );
+
+
+            const linkPath =
+                linkURL.pathname
+                    .replace(/\/+$/, "")
+                    .toLowerCase();
+
+
+            if (
+                currentPath === linkPath
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+                return;
+
             }
+
+
+            if (
+                currentPath.startsWith(
+                    "/english/"
+                ) &&
+                linkPath.includes(
+                    "/english"
+                )
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                currentPath.startsWith(
+                    "/indonesia/"
+                ) &&
+                linkPath.includes(
+                    "/indonesia"
+                )
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
         });
-    }
 
-    if (overlay) {
-        overlay.addEventListener("click", closeMenu);
-    }
+}
 
-    // Tutup menu saat link diklik di layar kecil
-    document.querySelectorAll(".nav-link").forEach(function (link) {
-        link.addEventListener("click", function () {
-            if (window.innerWidth <= 800) {
-                closeMenu();
-            }
-        });
+
+/* =========================================================
+   EXECUTE SCRIPTS FROM LOADED CONTENT
+   =========================================================
+
+   Skip any <script src="...script.js"> tag found inside the
+   loaded content — that tag's only job is to trigger this
+   loader when the page is opened directly by the browser.
+   Re-running it here (after the content is already injected)
+   would call loadTemplate() again and again, wiping out the
+   quiz state every time — which is why "next question" used
+   to get stuck.
+   ========================================================= */
+
+function executeLoadedScripts() {
+
+    const container =
+        document.getElementById(
+            "page-content"
+        );
+
+
+    if (!container) return;
+
+
+    const scripts =
+        container.querySelectorAll(
+            "script"
+        );
+
+
+    scripts.forEach(function (oldScript) {
+
+        const src =
+            oldScript.getAttribute("src");
+
+        if (
+            src &&
+            src.toLowerCase().indexOf("script.js") !== -1
+        ) {
+
+            oldScript.remove();
+
+            return;
+
+        }
+
+
+        const newScript =
+            document.createElement(
+                "script"
+            );
+
+
+        Array
+            .from(oldScript.attributes)
+            .forEach(function (attribute) {
+
+                newScript.setAttribute(
+                    attribute.name,
+                    attribute.value
+                );
+
+            });
+
+
+        newScript.textContent =
+            oldScript.textContent;
+
+
+        oldScript.parentNode.replaceChild(
+            newScript,
+            oldScript
+        );
+
     });
 
-    // Reset menu saat ukuran layar diperbesar
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 800) {
-            closeMenu();
-        }
-    });
+}
 
 
-    /* ================================================
-       2. ACTIVE NAVIGATION HIGHLIGHT
-       ================================================ */
-    const currentPath = window.location.pathname.toLowerCase();
-    
-    document.querySelectorAll(".nav-link").forEach(function (link) {
-        const linkHref = link.getAttribute("href").toLowerCase();
-        if (currentPath.includes(linkHref) && linkHref !== "index.html") {
-            link.classList.add("active");
-        } else if (currentPath.endsWith("/") || currentPath.endsWith("index.html")) {
-            if (linkHref === "index.html") {
-                link.classList.add("active");
-            }
-        }
-    });
+/* =========================================================
+   START
+   =========================================================
 
+   window.__wordieTemplateLoaded is a one-time guard.
+   It lives on `window`, which survives document.open()/
+   write()/close() (the DOM is replaced but the JS global
+   object is not) — so even if something inside the loaded
+   content re-triggers this script, it will see the flag
+   already set and simply do nothing instead of loading the
+   template a second time.
+   ========================================================= */
 
-    /* ================================================
-       3. AUTOMATIC CONTENT LOADER (UNTUK MATERI BARU)
-       ================================================ */
-    const pageContent = document.getElementById("page-content");
+(async function () {
 
-    if (pageContent) {
-        const pathArray = window.location.pathname.split("/");
-        let filename = pathArray.pop().toLowerCase();
+    if (window.__wordieTemplateLoaded) {
 
-        // Jika halaman diakses langsung dari root tapi file materinya ada di dalam folder
-        if (filename && filename !== "index.html" && filename !== "" && filename !== "a.html") {
-            let targetFolder = "";
+        return;
 
-            // Deteksi otomatis apakah halaman ini masuk kategori indonesia atau english
-            // (Atau Anda bisa sesuaikan dengan struktur URL Anda)
-            if (window.location.pathname.includes("indonesia") || document.title.toLowerCase().includes("indonesia")) {
-                targetFolder = "indonesia/";
-            } else if (window.location.pathname.includes("english") || document.title.toLowerCase().includes("english")) {
-                targetFolder = "english/";
-            }
-
-            const fileToFetch = targetFolder + filename;
-
-            fetch(fileToFetch)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("File materi tidak ditemukan.");
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    pageContent.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error(error);
-                    pageContent.innerHTML = `
-                        <div style="text-align: center; padding: 40px; color: var(--brown-light);">
-                            <h3>Materi Belum Tersedia 📚</h3>
-                            <p>File konten untuk halaman ini belum dibuat di dalam folder.</p>
-                        </div>
-                    `;
-                });
-        }
     }
 
-});
+    window.__wordieTemplateLoaded = true;
+
+
+    const currentPage =
+        getCurrentPage();
+
+
+    if (
+        currentPage &&
+        currentPage.toLowerCase() === "a.html"
+    ) {
+
+        return;
+
+    }
+
+
+    await loadTemplate();
+
+})();
