@@ -407,12 +407,12 @@
         <p>印尼語學習小網站・demo 版本</p>
     </div>
 
-    <!-- ============== KATA PENGANTAR (中文) ============== -->
+    <!-- ============== KATA PENGANTAR (中文) - Menggunakan 您 ============== -->
 
     <div class="card">
         <h2>👋 哈囉哈囉！</h2>
-        <p>謝謝你願意當我的學習夥伴〜我叫 Nadia，是印尼人，現在住在台灣的桃園。說不定我們之前已經在 DM 認識過了☺️</p>
-        <p>我很想學中文，也很想找到可以一起堅持學習的夥伴。因為你們這麼好心願意教我中文和台語，所以我也會盡力把我最擅長的外語教給你們。So here we are 〜</p>
+        <p>謝謝您願意當我的學習夥伴〜我叫 Nadia，是印尼人，現在住在台灣的桃園。說不定我們之前已經在 DM 認識過了☺️</p>
+        <p>我很想學中文，也很想找到可以一起堅持學習的夥伴。因為您們這麼好心願意教我中文和台語，所以我也會盡力把我最擅長的外語教給您們。So here we are 〜</p>
         <p>我會透過這個自己做的網站分享學習內容，裡面有教材，也有一些小遊戲可以玩，簡單來說有點像多鄰國（Duolingo）。我希望大家可以慢慢來、輕鬆學！</p>
         <p>麻煩看看這個 demo，喜歡或不喜歡都歡迎直接 DM 跟我說 🙏</p>
         <div class="signature">— Nadia 🧋</div>
@@ -434,8 +434,16 @@
 
         <div class="materi-item">
             <div>
+                <div class="indo">Kamu</div>
+                <div class="zh">你 / 妳 / 您</div>
+            </div>
+            <button class="sound-btn" onclick="speakID('Kamu')">🔊</button>
+        </div>
+
+        <div class="materi-item">
+            <div>
                 <div class="indo">Siapa nama kamu?</div>
-                <div class="zh">你叫什麼名字？</div>
+                <div class="zh">您叫什麼名字？</div>
             </div>
             <button class="sound-btn" onclick="speakID('Siapa nama kamu')">🔊</button>
         </div>
@@ -451,7 +459,7 @@
         <div class="materi-item">
             <div>
                 <div class="indo">Apa kabar?</div>
-                <div class="zh">你好嗎？</div>
+                <div class="zh">您好嗎？</div>
             </div>
             <button class="sound-btn" onclick="speakID('Apa kabar')">🔊</button>
         </div>
@@ -467,7 +475,7 @@
 
     </div>
 
-    <!-- ============== PENUTUP (中文) ============== -->
+    <!-- ============== PENUTUP (中文) - Menggunakan 您 ============== -->
 
     <div class="card">
         <h2>🎙️ 關於口說練習</h2>
@@ -478,9 +486,9 @@
             <a class="ig-link" href="https://instagram.com/nvl0114" target="_blank" rel="noopener">@nvl0114</a>
         </div>
 
-        <p>然後傳一則語音訊息給我，內容是今天學的教材，例如你只要說「siapa nama kamu」「nama aku (你的名字)」還有「apa kabar?」，我會幫你聽聽看發音準不準〜</p>
+        <p>然後傳一則語音訊息給我，內容是今天學的教材，例如您只要說「siapa nama kamu」「nama aku (您的名字)」還有「apa kabar?」，我會幫您聽聽看發音準不準〜</p>
 
-        <p>作為交換，也麻煩你在 DM 傳給我，你覺得很酷或很實用的中文或台語單字，還有例句跟怎麼念，例如：</p>
+        <p>作為交換，也麻煩您在 DM 傳給我，您覺得很酷或很實用的中文或台語單字，還有例句跟怎麼念，例如：</p>
 
         <div class="example-box">
             <div class="zh-word">麻吉 = best friend</div>
@@ -488,7 +496,7 @@
             <div style="opacity:0.7;">(發音：我們是麻吉)</div>
         </div>
 
-        <p>之後我也會傳語音訊息給你，麻煩幫我糾正一下發音！</p>
+        <p>之後我也會傳語音訊息給您，麻煩幫我糾正一下發音！</p>
 
         <p style="margin-top:18px;">希望我們可以長期當學習夥伴，一起保持學習的習慣。記住，想學會一件事沒有捷徑，也沒有速成的方法 🌱</p>
 
@@ -599,9 +607,9 @@
         stageHeader("STAGE 1", "📖 Vocab", "點卡片聽發音，再翻到背面看意思");
 
         const words = [
-            { id: "Siapa", zh: "誰／什麼" },
-            { id: "Nama", zh: "名字" },
-            { id: "Kabar", zh: "消息／近況" }
+            { id: "Kamu", zh: "你 / 妳 / 您" },
+            { id: "Apa kabar?", zh: "您好嗎？" },
+            { id: "Nama aku...", zh: "我的名字是..." }
         ];
 
         let flippedCount = 0;
@@ -620,7 +628,7 @@
             const btn = document.createElement("button");
             btn.className = "sound-btn";
             btn.textContent = "🔊";
-            btn.onclick = (e) => { e.stopPropagation(); speakID(w.id); };
+            btn.onclick = (e) => { e.stopPropagation(); speakID(w.id.replace("...", "")); };
             card.appendChild(btn);
 
             card.addEventListener("click", () => {
@@ -643,12 +651,12 @@
 
 
     /* ================================================
-       STAGE 2 — PATTERN
+       STAGE 2 — PATTERN (RUMUS BIKIN KALIMAT)
        ================================================ */
 
     function stagePattern() {
 
-        stageHeader("STAGE 2", "🧩 Pattern", "看看句子怎麼組成的");
+        stageHeader("STAGE 2", "🧩 Pattern", "印尼語核心句型結構");
 
         const box = document.createElement("div");
         box.className = "card";
@@ -656,52 +664,54 @@
         box.style.boxShadow = "none";
 
         box.innerHTML = `
-            <div style="font-size:20px; font-weight:800; text-align:center; margin-bottom:14px;">
-                Siapa nama kamu?
+            <div style="font-size:16px; font-weight:800; text-align:center; margin-bottom:14px; color:var(--brown-soft);">
+                📝 核心教材句型
             </div>
         `;
 
-        const parts = [["Siapa", "誰 / 什麼"], ["nama", "名字"], ["kamu", "你"]];
+        const patterns = [
+            { formula: "Apa kabar?", zh: "問候語：您好嗎？" },
+            { formula: "Siapa nama kamu?", zh: "問名句：您叫什麼名字？" },
+            { formula: "Nama aku + [名字]", zh: "自我介紹：我的名字是..." }
+        ];
 
-        parts.forEach(([id, zh]) => {
+        patterns.forEach(p => {
 
             const row = document.createElement("div");
-            row.style.display = "flex";
-            row.style.justifyContent = "space-between";
-            row.style.padding = "8px 4px";
+            row.style.padding = "10px 4px";
             row.style.borderBottom = "1px solid var(--border)";
 
-            row.innerHTML = `<b>${id}</b><span style="color:var(--brown-light)">${zh}</span>`;
+            row.innerHTML = `<div style="font-weight:800; font-size:16px; color:var(--brown);">${p.formula}</div><div style="color:var(--brown-light); font-size:13px; margin-top:2px;">${p.zh}</div>`;
             box.appendChild(row);
         });
 
         stageArea.appendChild(box);
-
-        const p = document.createElement("p");
-        p.style.textAlign = "center";
-        p.style.fontSize = "13px";
-        p.style.color = "var(--brown-light)";
-        p.style.marginTop = "10px";
-        p.textContent = "→ 整句直接翻譯：「誰 名字 你」= 你叫什麼名字？";
-        stageArea.appendChild(p);
 
         nextButtonRow(() => goToStage(2)).disabled = false;
     }
 
 
     /* ================================================
-       STAGE 3 — PILIHAN GANDA
+       STAGE 3 — PILIHAN GANDA (MENANYAKAN: Nama aku Alex)
        ================================================ */
 
     function stagePilihanGanda() {
 
-        stageHeader("STAGE 3", "✅ Pilihan Ganda", "「Apa kabar?」是什麼意思？");
+        stageHeader("STAGE 3", "✅ Pilihan Ganda", "請選擇正確的翻譯");
+
+        const box = document.createElement("div");
+        box.style.textAlign = "center";
+        box.style.fontSize = "18px";
+        box.style.fontWeight = "800";
+        box.style.marginBottom = "14px";
+        box.textContent = "「Nama aku Alex」是什麼意思？";
+        stageArea.appendChild(box);
 
         const options = [
-            { text: "你好嗎？", correct: true },
-            { text: "你叫什麼名字？", correct: false },
-            { text: "謝謝你", correct: false },
-            { text: "再見", correct: false }
+            { text: "您好嗎？", correct: false },
+            { text: "我的名字是 Alex", correct: true },
+            { text: "您叫什麼名字？", correct: false },
+            { text: "你／妳／您", correct: false }
         ];
 
         const list = document.createElement("div");
@@ -729,13 +739,13 @@
 
                     btn.classList.add("correct");
                     feedback.className = "feedback-box show ok";
-                    feedback.textContent = "✓ 對了！Apa kabar = 你好嗎？";
+                    feedback.textContent = "✓ 對了！Nama aku Alex = 我的名字是 Alex";
 
                 } else {
 
                     btn.classList.add("wrong");
                     feedback.className = "feedback-box show no";
-                    feedback.textContent = "✗ 再想想〜正確答案是「你好嗎？」";
+                    feedback.textContent = "✗ 再想想〜正確答案是「我的名字是 Alex」";
                 }
 
                 next.disabled = false;
@@ -752,14 +762,14 @@
 
 
     /* ================================================
-       STAGE 4 — ARRANGE THE SENTENCE
+       STAGE 4 — ARRANGE THE SENTENCE (MENYUSUN: Apa kabar?)
        ================================================ */
 
     function stageArrange() {
 
-        stageHeader("STAGE 4", "🔤 Arrange the Sentence", "把單字排成「Nama aku Alex」");
+        stageHeader("STAGE 4", "🔤 Arrange the Sentence", "把單字排成「Apa kabar?」");
 
-        const correctOrder = ["Nama", "aku", "Alex"];
+        const correctOrder = ["Apa", "kabar"];
         const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
 
         const slots = document.createElement("div");
@@ -781,10 +791,10 @@
 
             if (isCorrect) {
                 feedback.className = "feedback-box show ok";
-                feedback.textContent = "✓ 對了！Nama aku Alex = 我的名字是 Alex";
+                feedback.textContent = "✓ 對了！Apa kabar = 您好嗎？";
             } else {
                 feedback.className = "feedback-box show no";
-                feedback.textContent = "✗ 順序不對喔，正確是：Nama aku Alex";
+                feedback.textContent = "✗ 順序不對喔，正確是：Apa kabar";
             }
 
             next.disabled = false;
@@ -821,12 +831,12 @@
 
 
     /* ================================================
-       STAGE 5 — LISTENING PILIHAN GANDA
+       STAGE 5 — LISTENING (MENDENGARKAN: Apa kabar?)
        ================================================ */
 
     function stageListening() {
 
-        stageHeader("STAGE 5", "🎧 Listening", "點喇叭聽發音，選出正確的意思");
+        stageHeader("STAGE 5", "🎧 Listening", "點喇叭聽發音，選出正確的問候語");
 
         const playRow = document.createElement("div");
         playRow.style.textAlign = "center";
@@ -838,15 +848,15 @@
         playBtn.style.height = "56px";
         playBtn.style.fontSize = "22px";
         playBtn.textContent = "🔊";
-        playBtn.onclick = () => speakID("Siapa nama kamu");
+        playBtn.onclick = () => speakID("Apa kabar");
 
         playRow.appendChild(playBtn);
         stageArea.appendChild(playRow);
 
         const options = [
-            { text: "你叫什麼名字？", correct: true },
-            { text: "你好嗎？", correct: false },
-            { text: "謝謝你", correct: false }
+            { text: "您好嗎？ (Apa kabar)", correct: true },
+            { text: "您叫什麼名字？ (Siapa nama kamu)", correct: false },
+            { text: "我的名字是 Alex (Nama aku Alex)", correct: false }
         ];
 
         const list = document.createElement("div");
@@ -873,7 +883,7 @@
                 if (opt.correct) {
                     btn.classList.add("correct");
                     feedback.className = "feedback-box show ok";
-                    feedback.textContent = "✓ 沒錯！剛剛播的是 Siapa nama kamu?";
+                    feedback.textContent = "✓ 沒錯！剛剛播的是 Apa kabar?";
                 } else {
                     btn.classList.add("wrong");
                     feedback.className = "feedback-box show no";
@@ -891,17 +901,17 @@
 
         const next = nextButtonRow(() => goToStage(5));
 
-        speakID("Siapa nama kamu");
+        speakID("Apa kabar");
     }
 
 
     /* ================================================
-       STAGE 6 — TRANSLATING (MENGETIK)
+       STAGE 6 — TRANSLATING (MENGETIK: Apa kabar?)
        ================================================ */
 
     function stageTranslating() {
 
-        stageHeader("STAGE 6", "⌨️ Translating", "把「你好嗎？」翻成印尼文，打出來看看");
+        stageHeader("STAGE 6", "⌨️ Translating", "把「您好嗎？」翻成印尼文，打出來看看");
 
         const input = document.createElement("input");
         input.className = "type-input";
@@ -939,17 +949,17 @@
 
 
     /* ================================================
-       STAGE 7 — FINAL CHALLENGE
+       STAGE 7 — FINAL CHALLENGE (KUIS KETIGA MATERI)
        ================================================ */
 
     function stageFinal() {
 
-        stageHeader("STAGE 7", "🏆 Final Challenge", "把三句話都複習一次");
+        stageHeader("STAGE 7", "🏆 Final Challenge", "三句核心教材總複習");
 
         const questions = [
-            { text: "「Siapa nama kamu?」的意思是？", options: ["你叫什麼名字？", "你好嗎？"], correctIndex: 0 },
-            { text: "「我的名字是 Alex」印尼文怎麼說？", options: ["Apa kabar", "Nama aku Alex"], correctIndex: 1 },
-            { text: "「Apa kabar?」的意思是？", options: ["你好嗎？", "謝謝你"], correctIndex: 0 }
+            { text: "「Kamu」的中文意思是？", options: ["你／妳／您", "名字"], correctIndex: 0 },
+            { text: "「Apa kabar?」的意思是？", options: ["您叫什麼名字？", "您好嗎？"], correctIndex: 1 },
+            { text: "「我的名字是 Alex」印尼文怎麼說？", options: ["Nama aku Alex", "Siapa nama kamu"], correctIndex: 0 }
         ];
 
         let qIndex = 0;
@@ -959,7 +969,7 @@
 
             stageArea.innerHTML = "";
 
-            stageHeader("STAGE 7 · " + (qIndex + 1) + "/" + questions.length, "🏆 Final Challenge", "把三句話都複習一次");
+            stageHeader("STAGE 7 · " + (qIndex + 1) + "/" + questions.length, "🏆 Final Challenge", "三句核心教材總複習");
 
             const q = questions[qIndex];
 
