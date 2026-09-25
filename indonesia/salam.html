@@ -554,10 +554,23 @@
 <!--
     =====================================================
     QUIZ JAVASCRIPT
+
+    CATATAN PENTING:
+    type="text/plain" di bawah ini SENGAJA dipasang.
+    Ini membuat browser TIDAK langsung menjalankan script
+    ini saat halaman ini dibuka sendiri secara mentah.
+    script.js yang akan "menghidupkan" script ini SATU KALI
+    saja setelah sidebar/template terpasang. Kalau atribut
+    ini dihapus, script akan sempat jalan dua kali (sekali
+    mentah, sekali lagi oleh script.js) dan menyebabkan
+    error "sudah dideklarasikan" — akibatnya gambar tidak
+    bisa diklik sama sekali.
+
+    JANGAN HAPUS type="text/plain" DI BAWAH INI.
     =====================================================
 -->
 
-<script>
+<script type="text/plain">
 
     const quizData = [
 
