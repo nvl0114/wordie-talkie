@@ -1,1389 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="theme-color"
-        content="#fff8ef"
-    >
+    <title>🌱 Wordie Talkie</title>
 
-    <meta
-        name="description"
-        content="Wordie Talkie — a cozy space for language exchange."
-    >
+    <link rel="icon" type="image/png" href="favicon.png">
 
-    <title>Wordie Talkie</title>
-
-
-    <!-- ================================
-         FAVICON
-    ================================= -->
-
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        rel="icon"
-        type="image/png"
-        href="favicon.png"
-    >
-
-
-    <!-- ================================
-         FONT
-    ================================= -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-
-    <!-- ================================
-         ALL CSS
-    ================================= -->
-
     <style>
-
-        /* =================================
-           ROOT
-        ================================= */
+        /* =====================================================
+           WORDIE TALKIE
+           Boba Break Study inspired design
+           ===================================================== */
 
         :root {
-
             --cream: #fff8ef;
-            --white: #fffdf9;
+            --cream-dark: #f8eee2;
+            --white: #ffffff;
 
             --brown: #5c4033;
-            --brown-soft: #8a6a59;
+            --brown-light: #8b6b58;
+            --brown-soft: #b8865c;
 
-            --pink: #f59aaa;
-            --pink-soft: #ffe2e7;
+            --pink: #e9a0ad;
+            --pink-light: #fce8ec;
 
-            --green: #75b84d;
-            --green-soft: #edf7e7;
+            --green: #8fae78;
+            --green-light: #edf5e8;
 
-            --yellow: #f7b942;
+            --border: #eadfd3;
 
-            --border: #eadbca;
+            --shadow: 0 8px 25px rgba(92, 64, 51, 0.08);
 
-            --shadow:
-                0 12px 35px
-                rgba(92, 64, 51, 0.09);
-
+            --sidebar-width: 245px;
         }
-
-
-        /* =================================
-           RESET
-        ================================= */
 
         * {
             box-sizing: border-box;
         }
 
-
         html {
             scroll-behavior: smooth;
         }
 
-
         body {
-
             margin: 0;
-
-            min-height: 100vh;
-
             background: var(--cream);
-
             color: var(--brown);
-
-            font-family:
-                "Nunito",
-                "Arial Rounded MT Bold",
-                Arial,
-                sans-serif;
-
+            font-family: "Nunito", sans-serif;
+            line-height: 1.6;
         }
 
+        button,
+        a {
+            font-family: inherit;
+        }
 
         a {
-
             color: inherit;
-
             text-decoration: none;
-
         }
 
-
-        button {
-
-            font: inherit;
-
-        }
-
-
-
-        /* =================================
+        /* =====================================================
            SIDEBAR
-        ================================= */
+           ===================================================== */
 
         .sidebar {
-
             position: fixed;
-
-            top: 0;
             left: 0;
-            bottom: 0;
+            top: 0;
 
-            width: 260px;
-
-            padding:
-                28px
-                20px
-                22px;
+            width: var(--sidebar-width);
+            height: 100vh;
 
             background: var(--white);
 
-            border-right:
-                1px solid var(--border);
+            border-right: 1px solid var(--border);
+
+            padding: 30px 20px;
 
             display: flex;
-
             flex-direction: column;
 
             z-index: 1000;
 
+            overflow-y: auto;
         }
 
-
-
-        /* =================================
-           LOGO
-        ================================= */
-
-        .logo-box {
-
+        .sidebar-logo {
             text-align: center;
-
-            margin-bottom: 28px;
-
+            margin-bottom: 32px;
         }
 
-
-        .logo {
-
-            display: block;
-
-            width: 190px;
-
+        .sidebar-logo img {
+            width: 155px;
             max-width: 100%;
-
             height: auto;
-
-            margin:
-                0 auto 7px;
-
+            display: block;
+            margin: 0 auto 12px;
         }
 
+        .sidebar-tagline {
+            font-size: 13px;
+            color: var(--brown-light);
+            line-height: 1.5;
+            margin: 0 auto;
+            max-width: 180px;
+        }
 
-        .logo-caption {
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-            margin: 0;
+        .nav-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #a89587;
+
+            padding: 0 12px;
+            margin: 8px 0 4px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 14px;
+
+            border-radius: 13px;
+
+            color: var(--brown-light);
+
+            font-size: 15px;
+            font-weight: 700;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--cream);
+            color: var(--brown);
+            transform: translateX(2px);
+        }
+
+        .nav-link.active {
+            background: var(--pink-light);
+            color: var(--brown);
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: var(--cream-dark);
+
+            font-size: 16px;
+        }
+
+        .nav-link.active .nav-icon {
+            background: var(--white);
+        }
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .main {
+            margin-left: var(--sidebar-width);
+
+            min-height: 100vh;
+
+            padding: 42px 25px 60px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           TOP BAR
+           ===================================================== */
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+        .page-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
 
             color: var(--brown-soft);
 
             font-size: 12px;
-
-            line-height: 1.5;
-
-        }
-
-
-
-        /* =================================
-           NAVIGATION LABEL
-        ================================= */
-
-        .nav-label {
-
-            margin:
-                5px
-                10px
-                10px;
-
-            color: #a18370;
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            letter-spacing: .14em;
-
-            text-transform: uppercase;
-
-        }
-
-
-
-        /* =================================
-           NAVIGATION
-        ================================= */
-
-        .nav {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 7px;
-
-        }
-
-
-        .nav-link {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            padding:
-                13px
-                14px;
-
-            border-radius: 16px;
-
             font-weight: 800;
 
-            transition:
-                background .2s ease,
-                transform .2s ease;
-
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
+        /* =====================================================
+           HERO
+           ===================================================== */
 
-        .nav-link:hover {
+        .hero {
+            background: var(--white);
 
-            background:
-                var(--pink-soft);
+            border: 1px solid var(--border);
 
-            transform:
-                translateX(3px);
+            border-radius: 22px;
 
+            padding: 36px 34px;
+
+            box-shadow: var(--shadow);
+
+            text-align: center;
+
+            margin-bottom: 22px;
         }
 
+        .hero-icon {
+            width: 68px;
+            height: 68px;
 
-        .nav-link.active {
+            margin: 0 auto 18px;
 
-            background:
-                var(--pink-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            border-radius: 20px;
+
+            background: var(--green-light);
+
+            font-size: 35px;
         }
 
+        .hero h1 {
+            margin: 0 0 8px;
 
-        .nav-icon {
+            color: var(--brown);
 
-            width: 34px;
+            font-size: clamp(28px, 5vw, 40px);
+            line-height: 1.2;
 
-            height: 34px;
+            font-weight: 800;
+        }
 
-            flex: 0 0 34px;
+        .hero-subtitle {
+            margin: 0 auto;
 
+            max-width: 570px;
+
+            color: var(--brown-light);
+
+            font-size: 16px;
+        }
+
+        .hero-tagline {
+            margin-top: 16px;
+
+            color: var(--green);
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           EMPTY HOME CARD
+           ===================================================== */
+
+        .empty-card {
+            background: var(--white);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            padding: 48px 30px;
+
+            text-align: center;
+
+            box-shadow: var(--shadow);
+        }
+
+        .empty-illustration {
+            font-size: 42px;
+
+            margin-bottom: 14px;
+
+            letter-spacing: 5px;
+        }
+
+        .empty-card h2 {
+            margin: 0 0 7px;
+
+            font-size: 21px;
+            font-weight: 800;
+
+            color: var(--brown);
+        }
+
+        .empty-card p {
+            margin: 0 auto;
+
+            max-width: 450px;
+
+            color: var(--brown-light);
+
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           LANGUAGE CARDS
+           ===================================================== */
+
+        .language-grid {
             display: grid;
 
-            place-items: center;
+            grid-template-columns: repeat(2, 1fr);
 
-            border-radius: 11px;
+            gap: 16px;
 
-            background: #fff;
-
-            border:
-                1px solid var(--border);
-
-            font-size: 17px;
-
+            margin-top: 22px;
         }
 
+        .language-card {
+            background: var(--white);
 
-
-        /* =================================
-           SIDEBAR FOOTER
-        ================================= */
-
-        .sidebar-note {
-
-            margin-top: auto;
-
-            padding: 16px;
-
-            border:
-                1px solid #dceacb;
+            border: 1px solid var(--border);
 
             border-radius: 18px;
 
-            background:
-                var(--green-soft);
+            padding: 22px;
 
-            color: #718065;
+            box-shadow: var(--shadow);
 
-            text-align: center;
-
-            font-size: 12px;
-
-            line-height: 1.6;
-
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
+        .language-card:hover {
+            transform: translateY(-3px);
 
-        .sidebar-note strong {
-
-            color:
-                #568b3d;
-
+            box-shadow:
+                0 12px 30px rgba(92, 64, 51, 0.11);
         }
 
+        .language-card .language-icon {
+            font-size: 28px;
 
-
-        /* =================================
-           MOBILE HEADER
-        ================================= */
-
-        .mobile-header {
-
-            display: none;
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 900;
-
-            height: 68px;
-
-            padding:
-                8px 15px;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            background:
-                rgba(
-                    255,
-                    253,
-                    249,
-                    .96
-                );
-
-            border-bottom:
-                1px solid var(--border);
-
-            backdrop-filter:
-                blur(10px);
-
+            margin-bottom: 10px;
         }
 
+        .language-card h3 {
+            margin: 0 0 5px;
 
-        .mobile-brand {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 9px;
-
-            font-weight: 900;
-
+            font-size: 18px;
+            font-weight: 800;
         }
 
+        .language-card p {
+            margin: 0;
 
-        .mobile-brand img {
+            color: var(--brown-light);
 
-            width: 46px;
-
-            height: 46px;
-
-            object-fit: contain;
-
+            font-size: 13px;
         }
 
+        /* =====================================================
+           MOBILE MENU BUTTON
+           ===================================================== */
 
         .menu-button {
+            display: none;
+
+            position: fixed;
+
+            top: 16px;
+            left: 16px;
 
             width: 44px;
-
             height: 44px;
 
-            border: 0;
-
+            border: 1px solid var(--border);
             border-radius: 13px;
 
-            background:
-                var(--pink-soft);
+            background: var(--white);
 
-            color:
-                var(--brown);
-
-            cursor: pointer;
+            color: var(--brown);
 
             font-size: 21px;
 
+            cursor: pointer;
+
+            box-shadow: var(--shadow);
+
+            z-index: 1100;
         }
 
-
-
-        /* =================================
-           MAIN
-        ================================= */
-
-        .main {
-
-            margin-left: 260px;
-
-            min-height: 100vh;
-
-        }
-
-
-        .page {
-
-            width:
-                min(
-                    1050px,
-                    calc(100% - 48px)
-                );
-
-            margin: 0 auto;
-
-            padding:
-                58px 0 80px;
-
-        }
-
-
-
-        /* =================================
-           HERO
-        ================================= */
-
-        .hero {
-
-            position: relative;
-
-            overflow: hidden;
-
-            padding:
-                52px 45px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 30px;
-
-            background:
-                var(--white);
-
-            box-shadow:
-                var(--shadow);
-
-        }
-
-
-        .hero::before {
-
-            content: "🌸";
-
-            position: absolute;
-
-            right: 55px;
-
-            top: 32px;
-
-            font-size: 42px;
-
-            opacity: .18;
-
-            transform:
-                rotate(10deg);
-
-        }
-
-
-        .hero::after {
-
-            content: "🌱";
-
-            position: absolute;
-
-            right: 110px;
-
-            bottom: 30px;
-
-            font-size: 38px;
-
-            opacity: .15;
-
-            transform:
-                rotate(-12deg);
-
-        }
-
-
-
-        /* =================================
-           HERO BADGE
-        ================================= */
-
-        .eyebrow {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 7px;
-
-            margin-bottom: 15px;
-
-            padding:
-                7px 13px;
-
-            border-radius: 999px;
-
-            background:
-                var(--green-soft);
-
-            color:
-                #568b3d;
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            letter-spacing: .08em;
-
-            text-transform: uppercase;
-
-        }
-
-
-
-        /* =================================
-           HERO TITLE
-        ================================= */
-
-        .hero h1 {
-
-            max-width: 720px;
-
-            margin:
-                0 0 15px;
-
-            font-size:
-                clamp(
-                    38px,
-                    6vw,
-                    64px
-                );
-
-            line-height: 1.04;
-
-            letter-spacing:
-                -.04em;
-
-        }
-
-
-        .hero h1 .pink {
-
-            color:
-                var(--pink);
-
-        }
-
-
-
-        /* =================================
-           HERO DESCRIPTION
-        ================================= */
-
-        .hero-description {
-
-            max-width: 650px;
-
-            margin: 0;
-
-            color:
-                var(--brown-soft);
-
-            font-size: 17px;
-
-            line-height: 1.8;
-
-        }
-
-
-
-        /* =================================
-           EMPTY HOME
-        ================================= */
-
-        .home-placeholder {
-
-            min-height: 450px;
-
-            margin-top: 24px;
-
-            display: grid;
-
-            place-items: center;
-
-            border:
-                2px dashed var(--border);
-
-            border-radius: 30px;
-
-            background:
-                rgba(
-                    255,
-                    253,
-                    249,
-                    .55
-                );
-
-        }
-
-
-        .placeholder-content {
-
-            padding:
-                45px 25px;
-
-            text-align: center;
-
-        }
-
-
-        .placeholder-flower {
-
-            margin-bottom: 15px;
-
-            font-size: 60px;
-
-        }
-
-
-        .placeholder-content h2 {
-
-            margin:
-                0 0 8px;
-
-            font-size: 25px;
-
-        }
-
-
-        .placeholder-content p {
-
-            max-width: 420px;
-
-            margin: 0 auto;
-
-            color:
-                #957c6b;
-
-            line-height: 1.7;
-
-        }
-
-
-
-        /* =================================
-           MOBILE OVERLAY
-        ================================= */
+        /* =====================================================
+           OVERLAY
+           ===================================================== */
 
         .overlay {
-
             display: none;
 
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(92, 64, 51, 0.25);
+
+            z-index: 900;
         }
 
+        /* =====================================================
+           FOOTER
+           ===================================================== */
 
+        .footer {
+            text-align: center;
 
-        /* =================================
-           TABLET / MOBILE
-        ================================= */
+            margin-top: 28px;
+
+            color: #a89587;
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
 
         @media (max-width: 800px) {
 
-
             .sidebar {
+                transform: translateX(-100%);
 
-                transform:
-                    translateX(-105%);
+                transition: transform 0.25s ease;
 
-                transition:
-                    transform .25s ease;
-
-                box-shadow:
-                    12px 0 30px
-                    rgba(
-                        92,
-                        64,
-                        51,
-                        .12
-                    );
-
+                box-shadow: 8px 0 30px rgba(92, 64, 51, 0.08);
             }
-
 
             .sidebar.open {
-
-                transform:
-                    translateX(0);
-
+                transform: translateX(0);
             }
 
-
-            .overlay {
-
-                position: fixed;
-
-                inset: 0;
-
-                z-index: 950;
-
-                background:
-                    rgba(
-                        92,
-                        64,
-                        51,
-                        .22
-                    );
-
-            }
-
-
-            .overlay.show {
-
-                display: block;
-
-            }
-
-
-            .mobile-header {
-
+            .menu-button {
                 display: flex;
 
+                align-items: center;
+                justify-content: center;
             }
 
+            .overlay.show {
+                display: block;
+            }
 
             .main {
-
                 margin-left: 0;
 
-            }
-
-
-            .page {
-
-                width:
-                    calc(100% - 28px);
-
                 padding:
-                    28px 0 55px;
-
+                    75px
+                    16px
+                    45px;
             }
-
 
             .hero {
-
-                padding:
-                    35px 25px;
-
-                border-radius: 25px;
-
+                padding: 30px 22px;
             }
 
-
-            .hero::before {
-
-                right: 20px;
-
-                top: 20px;
-
-                font-size: 34px;
-
+            .language-grid {
+                grid-template-columns: 1fr;
             }
-
-
-            .hero::after {
-
-                right: 60px;
-
-                bottom: 20px;
-
-                font-size: 30px;
-
-            }
-
-
-            .hero h1 {
-
-                font-size:
-                    clamp(
-                        36px,
-                        10vw,
-                        50px
-                    );
-
-            }
-
-
-            .hero-description {
-
-                font-size: 15px;
-
-            }
-
-
-            .home-placeholder {
-
-                min-height: 380px;
-
-            }
-
         }
 
-
-
-        /* =================================
-           SMALL PHONE
-        ================================= */
-
-        @media (max-width: 430px) {
-
-
-            .mobile-brand {
-
-                font-size: 15px;
-
-            }
-
-
-            .mobile-brand img {
-
-                width: 42px;
-
-                height: 42px;
-
-            }
-
-
-            .hero {
-
-                padding:
-                    30px 20px;
-
-            }
-
+        @media (max-width: 480px) {
 
             .hero h1 {
-
-                font-size: 36px;
-
+                font-size: 29px;
             }
 
-
-            .placeholder-content {
-
-                padding:
-                    35px 18px;
-
+            .hero-subtitle {
+                font-size: 14px;
             }
 
+            .empty-card {
+                padding: 38px 22px;
+            }
+
+            .main {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
         }
 
     </style>
-
 </head>
-
-
 
 <body>
 
+    <!-- =====================================================
+         MOBILE MENU
+         ===================================================== -->
 
-    <!-- ========================================
-         SIDEBAR
-    ========================================= -->
-
-    <aside
-        class="sidebar"
-        aria-label="Main navigation"
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
     >
+        ☰
+    </button>
+
+    <div class="overlay" id="overlay"></div>
 
 
-        <!-- LOGO -->
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
 
-        <div class="logo-box">
+    <aside class="sidebar" id="sidebar">
 
-            <a
-                href="index.html"
-                aria-label="Wordie Talkie Home"
+        <div class="sidebar-logo">
+
+            <img
+                src="logo.png"
+                alt="Wordie Talkie"
             >
 
-                <img
-                    class="logo"
-                    src="logo.png"
-                    alt="Wordie Talkie logo"
-                >
-
-            </a>
-
-
-            <p class="logo-caption">
-
-                Wordie learned a new word! 🌱🌸
-
+            <p class="sidebar-tagline">
+                Wordie learned a new word! 🌱
             </p>
 
         </div>
 
 
+        <nav class="sidebar-nav">
 
-        <!-- NAVIGATION TITLE -->
-
-        <div class="nav-label">
-
-            Language Exchange
-
-        </div>
-
-
-
-        <!-- NAVIGATION -->
-
-        <nav
-            class="nav"
-            aria-label="Language navigation"
-        >
-
-
-            <!-- HOME -->
+            <div class="nav-label">
+                Menu
+            </div>
 
             <a
-                class="nav-link active"
                 href="index.html"
+                class="nav-link active"
             >
-
-                <span
-                    class="nav-icon"
-                    aria-hidden="true"
-                >
-                    🏠
-                </span>
-
-                <span>
-                    Home
-                </span>
-
+                <span class="nav-icon">🏠</span>
+                <span>Home</span>
             </a>
 
 
-
-            <!-- ENGLISH -->
-
             <a
-                class="nav-link"
                 href="english.html"
+                class="nav-link"
             >
-
-                <span
-                    class="nav-icon"
-                    aria-hidden="true"
-                >
-                    🇬🇧
-                </span>
-
-                <span>
-                    English
-                </span>
-
+                <span class="nav-icon">🇬🇧</span>
+                <span>English</span>
             </a>
 
-
-
-            <!-- INDONESIA -->
 
             <a
-                class="nav-link"
                 href="indonesia.html"
+                class="nav-link"
             >
-
-                <span
-                    class="nav-icon"
-                    aria-hidden="true"
-                >
-                    🇮🇩
-                </span>
-
-                <span>
-                    Indonesia
-                </span>
-
+                <span class="nav-icon">🇮🇩</span>
+                <span>Indonesia</span>
             </a>
-
 
         </nav>
-
-
-
-        <!-- SIDEBAR MESSAGE -->
-
-        <div class="sidebar-note">
-
-            <strong>
-                🌱 Keep growing!
-            </strong>
-
-            <br>
-
-            Learn a word, share a word,
-
-            <br>
-
-            and grow together.
-
-        </div>
-
 
     </aside>
 
 
-
-    <!-- ========================================
-         MOBILE OVERLAY
-    ========================================= -->
-
-    <div
-        class="overlay"
-        aria-hidden="true"
-    ></div>
-
-
-
-    <!-- ========================================
-         MOBILE HEADER
-    ========================================= -->
-
-    <header
-        class="mobile-header"
-    >
-
-
-        <a
-            class="mobile-brand"
-            href="index.html"
-            aria-label="Wordie Talkie Home"
-        >
-
-            <img
-                src="logo.png"
-                alt=""
-            >
-
-            <span>
-                Wordie Talkie
-            </span>
-
-        </a>
-
-
-
-        <button
-            class="menu-button"
-            type="button"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-        >
-
-            ☰
-
-        </button>
-
-
-    </header>
-
-
-
-    <!-- ========================================
+    <!-- =====================================================
          MAIN CONTENT
-    ========================================= -->
+         ===================================================== -->
 
     <main class="main">
 
+        <div class="content">
 
-        <div class="page">
+
+            <!-- TOP LABEL -->
+
+            <div class="top-bar">
+
+                <div class="page-label">
+                    🌱 WORDIE TALKIE
+                </div>
+
+            </div>
 
 
-            <!-- ==================================
-                 HERO
-            =================================== -->
+            <!-- HERO -->
 
             <section class="hero">
 
-
-                <div class="eyebrow">
-
-                    🌱 LANGUAGE EXCHANGE
-
+                <div class="hero-icon">
+                    🌱
                 </div>
-
-
 
                 <h1>
-
-                    Welcome to
-
-                    <span class="pink">
-                        Wordie Talkie
-                    </span>
-
+                    Welcome to Wordie Talkie
                 </h1>
 
-
-
-                <p class="hero-description">
-
-                    A cozy little place where
-                    languages grow through words,
-                    conversations, and people.
-
-                    <br>
-
-                    Wordie is still growing,
-                    so let's see where this
-                    little flower takes us. 🌸
-
+                <p class="hero-subtitle">
+                    Learn useful words, discover new languages,
+                    and grow your vocabulary one little word at a time.
                 </p>
 
-
-            </section>
-
-
-
-            <!-- ==================================
-                 HOME CONTENT
-
-                 TEMPORARILY EMPTY
-            =================================== -->
-
-            <section
-                class="home-placeholder"
-                aria-label="Coming soon"
-            >
-
-
-                <div
-                    class="placeholder-content"
-                >
-
-
-                    <div
-                        class="placeholder-flower"
-                        aria-hidden="true"
-                    >
-                        🌱🌸
-                    </div>
-
-
-
-                    <h2>
-
-                        Something is growing here...
-
-                    </h2>
-
-
-
-                    <p>
-
-                        The Home page is still
-                        waiting for its first idea.
-
-                        <br><br>
-
-                        We'll add something fun here
-                        later!
-
-                    </p>
-
-
+                <div class="hero-tagline">
+                    Wordie learned a new word! 🌱🌸
                 </div>
 
+            </section>
+
+
+            <!-- =================================================
+                 HOME PLACEHOLDER
+
+                 Content can be added here later.
+                 ================================================= -->
+
+            <section class="empty-card">
+
+                <div class="empty-illustration">
+                    🌱 🌸
+                </div>
+
+                <h2>
+                    Something is growing here...
+                </h2>
+
+                <p>
+                    Wordie is still learning.
+                    New words, lessons, and language activities
+                    will grow here soon.
+                </p>
 
             </section>
 
 
-        </div>
+            <!-- =================================================
+                 LANGUAGE CARDS
 
+                 Kept simple for now.
+                 These can later become actual course sections.
+                 ================================================= -->
+
+            <div class="language-grid">
+
+                <a
+                    href="english.html"
+                    class="language-card"
+                >
+
+                    <div class="language-icon">
+                        🇬🇧
+                    </div>
+
+                    <h3>
+                        English
+                    </h3>
+
+                    <p>
+                        Learn useful English words and everyday expressions.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="indonesia.html"
+                    class="language-card"
+                >
+
+                    <div class="language-icon">
+                        🇮🇩
+                    </div>
+
+                    <h3>
+                        Indonesian
+                    </h3>
+
+                    <p>
+                        Discover natural Indonesian words and expressions.
+                    </p>
+
+                </a>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <footer class="footer">
+                🌱 Keep learning, one word at a time.
+            </footer>
+
+        </div>
 
     </main>
 
 
-
-    <!-- ========================================
+    <!-- =====================================================
          JAVASCRIPT
-         Mobile sidebar
-    ========================================= -->
+         ===================================================== -->
 
     <script>
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
+        const menuButton = document.getElementById("menuButton");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
 
 
-                const sidebar =
-                    document.querySelector(
-                        ".sidebar"
-                    );
+        function openMenu() {
+
+            sidebar.classList.add("open");
+            overlay.classList.add("show");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            menuButton.innerHTML = "✕";
+        }
 
 
-                const menuButton =
-                    document.querySelector(
-                        ".menu-button"
-                    );
+        function closeMenu() {
+
+            sidebar.classList.remove("open");
+            overlay.classList.remove("show");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuButton.innerHTML = "☰";
+        }
 
 
-                const overlay =
-                    document.querySelector(
-                        ".overlay"
-                    );
+        menuButton.addEventListener("click", function () {
+
+            if (sidebar.classList.contains("open")) {
+
+                closeMenu();
+
+            } else {
+
+                openMenu();
+
+            }
+
+        });
 
 
-
-                if (
-                    !sidebar ||
-                    !menuButton ||
-                    !overlay
-                ) {
-
-                    return;
-
-                }
+        overlay.addEventListener(
+            "click",
+            closeMenu
+        );
 
 
+        /*
+         * Close the mobile sidebar after
+         * clicking a navigation link.
+         */
 
-                /* ==============================
-                   CLOSE MENU
-                ============================== */
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(function (link) {
 
-                function closeMenu() {
-
-                    sidebar.classList.remove(
-                        "open"
-                    );
-
-                    overlay.classList.remove(
-                        "show"
-                    );
-
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-
-
-                /* ==============================
-                   MENU BUTTON
-                ============================== */
-
-                menuButton.addEventListener(
+                link.addEventListener(
                     "click",
                     function () {
 
+                        if (
+                            window.innerWidth <= 800
+                        ) {
 
-                        const isOpen =
-                            sidebar.classList.toggle(
-                                "open"
-                            );
+                            closeMenu();
 
-
-                        overlay.classList.toggle(
-                            "show",
-                            isOpen
-                        );
-
-
-                        menuButton.setAttribute(
-                            "aria-expanded",
-                            String(isOpen)
-                        );
-
+                        }
 
                     }
                 );
 
+            });
 
 
-                /* ==============================
-                   OVERLAY CLICK
-                ============================== */
+        /*
+         * Keep the menu state sensible
+         * when resizing the browser.
+         */
 
-                overlay.addEventListener(
-                    "click",
-                    closeMenu
-                );
+        window.addEventListener(
+            "resize",
+            function () {
 
+                if (window.innerWidth > 800) {
 
+                    closeMenu();
 
-                /* ==============================
-                   NAVIGATION CLICK
-                ================================= */
-
-                document
-                    .querySelectorAll(
-                        ".nav-link"
-                    )
-                    .forEach(
-                        function (link) {
-
-                            link.addEventListener(
-                                "click",
-                                closeMenu
-                            );
-
-                        }
-                    );
-
+                }
 
             }
         );
 
     </script>
 
-
 </body>
-
 </html>
