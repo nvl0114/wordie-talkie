@@ -336,6 +336,18 @@
             Array.prototype.forEach.call(
                 oldScript.attributes,
                 function (attr) {
+
+                    /* Jangan salin "type" — kalau isinya
+                       text/plain (dipakai supaya script ini
+                       tidak ikut dieksekusi browser saat
+                       parsing awal), script baru harus
+                       kembali ke type default JS supaya
+                       benar-benar jalan. */
+
+                    if (attr.name.toLowerCase() === "type") {
+                        return;
+                    }
+
                     newScript.setAttribute(attr.name, attr.value);
                 }
             );
