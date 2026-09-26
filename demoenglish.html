@@ -442,7 +442,7 @@
         <div class="materi-item">
             <div>
                 <div class="indo">My name is Alex.</div>
-                <div class="zh">我的名字是 Alex。</div>
+                <div class="zh">我的名字叫 Alex。</div>
             </div>
             <button class="sound-btn" onclick="speakEN('My name is Alex')">🔊</button>
         </div>
@@ -665,7 +665,7 @@
         const patterns = [
             { formula: "How are you?", zh: "問候語：你好嗎？" },
             { formula: "What is your name?", zh: "問名句：你叫什麼名字？" },
-            { formula: "My name is + [名字]", zh: "自我介紹：我的名字是..." }
+            { formula: "My name is + [名字]", zh: "自我介紹：我的名字叫..." }
         ];
 
         patterns.forEach(p => {
@@ -702,7 +702,7 @@
 
         const options = [
             { text: "你好嗎？", correct: false },
-            { text: "我的名字是 Alex", correct: true },
+            { text: "我的名字叫 Alex", correct: true },
             { text: "你叫什麼名字？", correct: false },
             { text: "你是誰？", correct: false }
         ];
@@ -732,13 +732,13 @@
 
                     btn.classList.add("correct");
                     feedback.className = "feedback-box show ok";
-                    feedback.textContent = "✓ 對了！My name is Alex = 我的名字是 Alex";
+                    feedback.textContent = "✓ 對了！My name is Alex = 我的名字叫 Alex";
 
                 } else {
 
                     btn.classList.add("wrong");
                     feedback.className = "feedback-box show no";
-                    feedback.textContent = "✗ 再想想〜正確答案是「我的名字是 Alex」";
+                    feedback.textContent = "✗ 再想想〜正確答案是「我的名字叫 Alex」";
                 }
 
                 next.disabled = false;
@@ -849,7 +849,7 @@
         const options = [
             { text: "你好嗎？ (How are you)", correct: true },
             { text: "你叫什麼名字？ (What is your name)", correct: false },
-            { text: "我的名字是 Alex (My name is Alex)", correct: false }
+            { text: "我的名字叫 Alex (My name is Alex)", correct: false }
         ];
 
         const list = document.createElement("div");
@@ -952,7 +952,7 @@
         const questions = [
             { text: "「Your」的中文意思是？", options: ["你的", "名字"], correctIndex: 0 },
             { text: "「How are you?」的意思是？", options: ["你叫什麼名字？", "你好嗎？"], correctIndex: 1 },
-            { text: "「我的名字是 Alex」英文怎麼說？", options: ["My name is Alex", "What is your name"], correctIndex: 0 }
+            { text: "「我的名字叫 Alex」英文怎麼說？", options: ["My name is Alex", "What is your name"], correctIndex: 0 }
         ];
 
         let qIndex = 0;
