@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordie Talkie ☕ Demo (English)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+    :root {
+        --cream: #fff8ef;
+        --cream-dark: #f8eee2;
+        --white: #ffffff;
+
+        --brown: #5c4033;
+        --brown-light: #8b6b58;
+        --brown-soft: #b8865c;
+
+        --pink: #e9a0ad;
+        --pink-light: #fce8ec;
+
+        --green: #7b9b76;
+        --green-dark: #5f7d59;
+        --green-light: #edf5ea;
+
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+
+        --border: #eadfd3;
+
+        --shadow: 0 8px 25px rgba(92, 64, 51, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--brown);
+        font-family: "Nunito", sans-serif;
+        line-height: 1.75;
+    }
+
+    .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 36px 18px 70px;
+    }
+
+    /* ============== HERO ============== */
+
+    .hero {
+        text-align: center;
+        margin-bottom: 26px;
+    }
+
+    .hero .emoji-row {
+        font-size: 34px;
+        margin-bottom: 6px;
+    }
+
+    .hero h1 {
+        margin: 0 0 6px;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    .hero p {
+        margin: 0;
+        color: var(--brown-light);
+        font-size: 14px;
+    }
+
+    /* ============== CARD ============== */
+
+    .card {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px 22px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+        margin: 0 0 12px;
+        font-size: 19px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card p {
+        margin: 8px 0;
+        font-size: 15px;
+    }
+
+    .signature {
+        margin-top: 14px;
+        font-weight: 700;
+        color: var(--brown-soft);
+    }
+
+    .badge {
+        display: inline-block;
+        background: var(--pink-light);
+        color: var(--brown);
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        margin: 3px 4px 3px 0;
+    }
+
+    /* ============== MATERI LIST ============== */
+
+    .materi-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--cream-dark);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+    }
+
+    .materi-item .indo {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--brown);
+    }
+
+    .materi-item .zh {
+        font-size: 13px;
+        color: var(--brown-light);
+    }
+
+    .sound-btn {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 50%;
+        background: var(--green);
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .sound-btn:active { transform: scale(0.92); }
+
+    /* ============== STEPPER ============== */
+
+    .stepper-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+    }
+
+    .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--border);
+    }
+
+    .dot.active { background: var(--brown-soft); }
+    .dot.done { background: var(--green); }
+
+    .stage-label {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: var(--brown-soft);
+        margin-bottom: 4px;
+    }
+
+    .stage-title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+
+    .stage-sub {
+        text-align: center;
+        font-size: 13px;
+        color: var(--brown-light);
+        margin-bottom: 18px;
+    }
+
+    /* ============== OPTIONS ============== */
+
+    .option-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-btn {
+        text-align: left;
+        padding: 13px 16px;
+        border: 2px solid var(--border);
+        border-radius: 14px;
+        background: var(--cream-dark);
+        color: var(--brown);
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .option-btn:active { transform: scale(0.98); }
+
+    .option-btn.correct {
+        background: var(--green);
+        border-color: var(--green-dark);
+        color: white;
+    }
+
+    .option-btn.wrong {
+        background: var(--red);
+        border-color: var(--red-dark);
+        color: white;
+    }
+
+    .option-btn.disabled { cursor: default; }
+
+    /* ============== ARRANGE (CHIPS) ============== */
+
+    .answer-slots {
+        min-height: 52px;
+        border: 2px dashed var(--border);
+        border-radius: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px;
+        margin-bottom: 16px;
+    }
+
+    .chip-bank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .chip {
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: var(--pink-light);
+        color: var(--brown);
+        font-weight: 800;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .chip.used { opacity: 0.35; pointer-events: none; }
+
+    .slot-chip {
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: var(--brown-soft);
+        color: white;
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    /* ============== INPUT ============== */
+
+    .type-input {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid var(--border);
+        border-radius: 14px;
+        font-size: 15px;
+        font-family: inherit;
+        margin-bottom: 12px;
+    }
+
+    .type-input:focus { outline: none; border-color: var(--brown-soft); }
+
+    /* ============== BUTTONS ============== */
+
+    .btn-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 13px;
+        border: none;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 15px;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .btn-primary { background: var(--brown); color: white; }
+    .btn-ghost { background: var(--cream-dark); color: var(--brown); }
+    .btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* ============== FEEDBACK ============== */
+
+    .feedback-box {
+        display: none;
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .feedback-box.show { display: block; }
+    .feedback-box.ok { background: var(--green-light); color: var(--green-dark); }
+    .feedback-box.no { background: #fdeceb; color: var(--red-dark); }
+
+    /* ============== FINAL / DONE ============== */
+
+    .done-screen { text-align: center; }
+    .done-screen .big-emoji { font-size: 52px; }
+
+    /* ============== CLOSING ============== */
+
+    .ig-box {
+        background: var(--pink-light);
+        border-radius: 16px;
+        padding: 16px;
+        text-align: center;
+        margin: 14px 0;
+    }
+
+    .ig-link {
+        display: inline-block;
+        margin-top: 8px;
+        background: var(--brown);
+        color: white !important;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .example-box {
+        background: var(--green-light);
+        border-radius: 14px;
+        padding: 14px 16px;
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .example-box .zh-word { font-size: 17px; font-weight: 800; }
+
+    .float-emoji {
+        position: fixed;
+        font-size: 20px;
+        opacity: 0.5;
+        animation: floaty 6s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    @keyframes floaty {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-18px) rotate(8deg); }
+    }
+
+    @media (max-width: 480px) {
+        .wrap { padding: 26px 14px 60px; }
+        .hero h1 { font-size: 23px; }
+    }
+
+</style>
+</head>
+
+<body>
+
+<span class="float-emoji" style="top:8%; left:6%;">☕</span>
+<span class="float-emoji" style="top:20%; right:8%; animation-delay:1.5s;">📘</span>
+<span class="float-emoji" style="bottom:12%; left:10%; animation-delay:3s;">✨</span>
+
+<div class="wrap">
+
+    <!-- ============== HERO ============== -->
+
+    <div class="hero">
+        <div class="emoji-row">☕📘✨</div>
+        <h1>Wordie Talkie</h1>
+        <p>英語學習小網站・English Demo</p>
+    </div>
+
+    <!-- ============== KATA PENGANTAR (中文) - Menggunakan 您 ============== -->
+
+    <div class="card">
+        <h2>👋 哈囉哈囉！</h2>
+        <p>謝謝您願意當我的英文學習夥伴〜這是一個用來練習英文口說與基礎會話的小天地。說不定我們之前已經在 IG 認識過了☺️</p>
+        <p>我很想把英文學好，也想找到可以一起堅持學習的夥伴。這個小網站裡有教材，也有一些小遊戲可以玩，簡單來說有點像多鄰國（Duolingo）。我希望大家可以慢慢來、輕鬆學！</p>
+        <p>麻煩看看這個 English demo，喜歡或不喜歡都歡迎直接 DM 跟我說 🙏</p>
+        <div class="signature">— Nadia ☕</div>
+    </div>
+
+    <!-- ============== ISI MATERI (Bahasa Inggris) ============== -->
+
+    <div class="card">
+        <h2>📦 這次的英文教材內容</h2>
+        <p>
+            <span class="badge">Vocab</span>
+            <span class="badge">Pattern</span>
+            <span class="badge">Pilihan Ganda</span>
+            <span class="badge">Arrange the Sentence</span>
+            <span class="badge">Listening</span>
+            <span class="badge">Translating</span>
+            <span class="badge">Final Challenge</span>
+        </p>
+
+        <div class="materi-item">
+            <div>
+                <div class="indo">What is your name?</div>
+                <div class="zh">你叫什麼名字？</div>
+            </div>
+            <button class="sound-btn" onclick="speakEN('What is your name')">🔊</button>
+        </div>
+
+        <div class="materi-item">
+            <div>
+                <div class="indo">My name is Alex.</div>
+                <div class="zh">我的名字是 Alex。</div>
+            </div>
+            <button class="sound-btn" onclick="speakEN('My name is Alex')">🔊</button>
+        </div>
+
+        <div class="materi-item">
+            <div>
+                <div class="indo">How are you?</div>
+                <div class="zh">你好嗎？</div>
+            </div>
+            <button class="sound-btn" onclick="speakEN('How are you')">🔊</button>
+        </div>
+    </div>
+
+    <!-- ============== INTERACTIVE DEMO ============== -->
+
+    <div class="card">
+
+        <div class="stepper-dots" id="stepperDots"></div>
+
+        <div id="stageArea"></div>
+
+    </div>
+
+    <!-- ============== PENUTUP (中文) - Menggunakan 您 ============== -->
+
+    <div class="card">
+        <h2>🎙️ 關於英文口說練習</h2>
+        <p>因為這個網站沒辦法錄音和批改口說練習，所以口說練習的部分，我們一樣用 IG 的 DM 來進行囉！</p>
+
+        <div class="ig-box">
+            <div>麻煩追蹤我的 Instagram 📸</div>
+            <a class="ig-link" href="https://instagram.com/nvl0114" target="_blank" rel="noopener">@nvl0114</a>
+        </div>
+
+        <p>然後傳一則語音訊息給我，內容是今天學的英文教材，例如您只要說「What is your name?」「My name is (您的名字)」還有「How are you?」，我會幫您聽聽看發音準不準〜</p>
+
+        <p>作為交換，也歡迎您隨時傳給我實用的英文單字或俚語，例如：</p>
+
+        <div class="example-box">
+            <div class="zh-word">Piece of cake = 非常簡單</div>
+            <div>This test is a piece of cake.</div>
+            <div style="opacity:0.7;">(發音：這項測驗非常簡單)</div>
+        </div>
+
+        <p>希望我們可以長期當學習夥伴，一起保持英文學習的習慣 🌱</p>
+
+        <div class="signature">— Nadia ☕</div>
+    </div>
+
+</div>
+
+<script>
+
+    /* ================================================
+       AUDIO (English - en-US)
+       ================================================ */
+
+    function speakEN(text) {
+
+        if (!("speechSynthesis" in window)) return;
+
+        window.speechSynthesis.cancel();
+
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "en-US";
+        utter.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        const enVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("en"));
+
+        if (enVoice) utter.voice = enVoice;
+
+        window.speechSynthesis.speak(utter);
+    }
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+
+
+    /* ================================================
+       STAGE DEFINITIONS
+       ================================================ */
+
+    const stageNames = ["Vocab", "Pattern", "Pilihan Ganda", "Arrange", "Listening", "Translating", "Final"];
+    let currentStage = 0;
+
+    const dotsEl = document.getElementById("stepperDots");
+    const stageArea = document.getElementById("stageArea");
+
+    function renderDots() {
+
+        dotsEl.innerHTML = "";
+
+        stageNames.forEach((_, i) => {
+
+            const d = document.createElement("div");
+            d.className = "dot" + (i === currentStage ? " active" : i < currentStage ? " done" : "");
+            dotsEl.appendChild(d);
+        });
+    }
+
+    function goToStage(index) {
+
+        currentStage = index;
+        renderDots();
+
+        stageArea.innerHTML = "";
+
+        stageRenderers[currentStage]();
+    }
+
+    function stageHeader(label, title, sub) {
+
+        const wrap = document.createElement("div");
+
+        wrap.innerHTML = `
+            <div class="stage-label">${label}</div>
+            <div class="stage-title">${title}</div>
+            <div class="stage-sub">${sub}</div>
+        `;
+
+        stageArea.appendChild(wrap);
+    }
+
+    function nextButtonRow(onNext, label) {
+
+        const row = document.createElement("div");
+        row.className = "btn-row";
+
+        const btn = document.createElement("button");
+        btn.className = "btn btn-primary";
+        btn.textContent = label || "下一步 →";
+        btn.disabled = true;
+        btn.onclick = onNext;
+
+        row.appendChild(btn);
+        stageArea.appendChild(row);
+
+        return btn;
+    }
+
+
+    /* ================================================
+       STAGE 1 — VOCAB (FLASHCARD) [ENGLISH]
+       ================================================ */
+
+    function stageVocab() {
+
+        stageHeader("STAGE 1", "📖 Vocab", "點卡片聽發音，再翻到背面看意思");
+
+        const words = [
+            { en: "What", zh: "什麼" },
+            { en: "Name", zh: "名字" },
+            { en: "You", zh: "你／妳／您" },
+            { en: "My", zh: "我的" },
+            { en: "How", zh: "如何／怎麼" },
+            { en: "Are", zh: "是（be動詞）" }
+        ];
+
+        let flippedCount = 0;
+
+        words.forEach(w => {
+
+            const card = document.createElement("div");
+            card.className = "materi-item";
+            card.style.cursor = "pointer";
+
+            const left = document.createElement("div");
+            left.innerHTML = `<div class="indo">${w.en}</div><div class="zh">點一下查看意思</div>`;
+
+            card.appendChild(left);
+
+            const btn = document.createElement("button");
+            btn.className = "sound-btn";
+            btn.textContent = "🔊";
+            btn.onclick = (e) => { e.stopPropagation(); speakEN(w.en); };
+            card.appendChild(btn);
+
+            card.addEventListener("click", () => {
+
+                if (left.dataset.flipped) return;
+
+                left.innerHTML = `<div class="indo">${w.en}</div><div class="zh">${w.zh}</div>`;
+                left.dataset.flipped = "1";
+
+                flippedCount++;
+
+                if (flippedCount === words.length) next.disabled = false;
+            });
+
+            stageArea.appendChild(card);
+        });
+
+        const next = nextButtonRow(() => goToStage(1));
+    }
+
+
+    /* ================================================
+       STAGE 2 — PATTERN (RUMUS BIKIN KALIMAT) [ENGLISH]
+       ================================================ */
+
+    function stagePattern() {
+
+        stageHeader("STAGE 2", "🧩 Pattern", "英語核心句型結構");
+
+        const box = document.createElement("div");
+        box.className = "card";
+        box.style.background = "var(--cream-dark)";
+        box.style.boxShadow = "none";
+
+        box.innerHTML = `
+            <div style="font-size:16px; font-weight:800; text-align:center; margin-bottom:14px; color:var(--brown-soft);">
+                📝 核心英語句型
+            </div>
+        `;
+
+        const patterns = [
+            { formula: "How are you?", zh: "問候語：你好嗎？" },
+            { formula: "What is your name?", zh: "問名句：你叫什麼名字？" },
+            { formula: "My name is + [名字]", zh: "自我介紹：我的名字是..." }
+        ];
+
+        patterns.forEach(p => {
+
+            const row = document.createElement("div");
+            row.style.padding = "10px 4px";
+            row.style.borderBottom = "1px solid var(--border)";
+
+            row.innerHTML = `<div style="font-weight:800; font-size:16px; color:var(--brown);">${p.formula}</div><div style="color:var(--brown-light); font-size:13px; margin-top:2px;">${p.zh}</div>`;
+            box.appendChild(row);
+        });
+
+        stageArea.appendChild(box);
+
+        nextButtonRow(() => goToStage(2)).disabled = false;
+    }
+
+
+    /* ================================================
+       STAGE 3 — PILIHAN GANDA [ENGLISH]
+       ================================================ */
+
+    function stagePilihanGanda() {
+
+        stageHeader("STAGE 3", "✅ Pilihan Ganda", "請選擇正確的英文翻譯");
+
+        const box = document.createElement("div");
+        box.style.textAlign = "center";
+        box.style.fontSize = "18px";
+        box.style.fontWeight = "800";
+        box.style.marginBottom = "14px";
+        box.textContent = "「My name is Alex」是什麼意思？";
+        stageArea.appendChild(box);
+
+        const options = [
+            { text: "你好嗎？", correct: false },
+            { text: "我的名字是 Alex", correct: true },
+            { text: "你叫什麼名字？", correct: false },
+            { text: "你是誰？", correct: false }
+        ];
+
+        const list = document.createElement("div");
+        list.className = "option-list";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        let answered = false;
+
+        options.forEach(opt => {
+
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.textContent = opt.text;
+
+            btn.onclick = () => {
+
+                if (answered) return;
+                answered = true;
+
+                document.querySelectorAll(".option-btn").forEach(b => b.classList.add("disabled"));
+
+                if (opt.correct) {
+
+                    btn.classList.add("correct");
+                    feedback.className = "feedback-box show ok";
+                    feedback.textContent = "✓ 對了！My name is Alex = 我的名字是 Alex";
+
+                } else {
+
+                    btn.classList.add("wrong");
+                    feedback.className = "feedback-box show no";
+                    feedback.textContent = "✗ 再想想〜正確答案是「我的名字是 Alex」";
+                }
+
+                next.disabled = false;
+            };
+
+            list.appendChild(btn);
+        });
+
+        stageArea.appendChild(list);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(3));
+    }
+
+
+    /* ================================================
+       STAGE 4 — ARRANGE THE SENTENCE [ENGLISH]
+       ================================================ */
+
+    function stageArrange() {
+
+        stageHeader("STAGE 4", "🔤 Arrange the Sentence", "把單字排成「How are you?」");
+
+        const correctOrder = ["How", "are", "you"];
+        const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
+
+        const slots = document.createElement("div");
+        slots.className = "answer-slots";
+
+        const bank = document.createElement("div");
+        bank.className = "chip-bank";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        let picked = [];
+
+        function checkComplete() {
+
+            if (picked.length !== correctOrder.length) return;
+
+            const isCorrect = picked.join(" ") === correctOrder.join(" ");
+
+            if (isCorrect) {
+                feedback.className = "feedback-box show ok";
+                feedback.textContent = "✓ 對了！How are you = 你好嗎？";
+            } else {
+                feedback.className = "feedback-box show no";
+                feedback.textContent = "✗ 順序不對喔，正確是：How are you";
+            }
+
+            next.disabled = false;
+        }
+
+        shuffled.forEach(word => {
+
+            const chip = document.createElement("button");
+            chip.className = "chip";
+            chip.textContent = word;
+
+            chip.onclick = () => {
+
+                chip.classList.add("used");
+
+                const slotChip = document.createElement("div");
+                slotChip.className = "slot-chip";
+                slotChip.textContent = word;
+                slots.appendChild(slotChip);
+
+                picked.push(word);
+                checkComplete();
+            };
+
+            bank.appendChild(chip);
+        });
+
+        stageArea.appendChild(slots);
+        stageArea.appendChild(bank);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(4));
+    }
+
+
+    /* ================================================
+       STAGE 5 — LISTENING [ENGLISH]
+       ================================================ */
+
+    function stageListening() {
+
+        stageHeader("STAGE 5", "🎧 Listening", "點喇叭聽發音，選出正確的問候語");
+
+        const playRow = document.createElement("div");
+        playRow.style.textAlign = "center";
+        playRow.style.marginBottom = "16px";
+
+        const playBtn = document.createElement("button");
+        playBtn.className = "sound-btn";
+        playBtn.style.width = "56px";
+        playBtn.style.height = "56px";
+        playBtn.style.fontSize = "22px";
+        playBtn.textContent = "🔊";
+        playBtn.onclick = () => speakEN("How are you");
+
+        playRow.appendChild(playBtn);
+        stageArea.appendChild(playRow);
+
+        const options = [
+            { text: "你好嗎？ (How are you)", correct: true },
+            { text: "你叫什麼名字？ (What is your name)", correct: false },
+            { text: "我的名字是 Alex (My name is Alex)", correct: false }
+        ];
+
+        const list = document.createElement("div");
+        list.className = "option-list";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        let answered = false;
+
+        options.forEach(opt => {
+
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.textContent = opt.text;
+
+            btn.onclick = () => {
+
+                if (answered) return;
+                answered = true;
+
+                document.querySelectorAll(".option-btn").forEach(b => b.classList.add("disabled"));
+
+                if (opt.correct) {
+                    btn.classList.add("correct");
+                    feedback.className = "feedback-box show ok";
+                    feedback.textContent = "✓ 沒錯！剛剛播的是 How are you?";
+                } else {
+                    btn.classList.add("wrong");
+                    feedback.className = "feedback-box show no";
+                    feedback.textContent = "✗ 再聽一次看看〜";
+                }
+
+                next.disabled = false;
+            };
+
+            list.appendChild(btn);
+        });
+
+        stageArea.appendChild(list);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(5));
+
+        speakEN("How are you");
+    }
+
+
+    /* ================================================
+       STAGE 6 — TRANSLATING [ENGLISH]
+       ================================================ */
+
+    function stageTranslating() {
+
+        stageHeader("STAGE 6", "⌨️ Translating", "把「你好嗎？」翻成英文，打出來看看");
+
+        const input = document.createElement("input");
+        input.className = "type-input";
+        input.placeholder = "Type in English here...";
+
+        const checkBtn = document.createElement("button");
+        checkBtn.className = "btn btn-ghost";
+        checkBtn.textContent = "檢查答案";
+        checkBtn.style.marginBottom = "10px";
+
+        const feedback = document.createElement("div");
+        feedback.className = "feedback-box";
+
+        checkBtn.onclick = () => {
+
+            const val = input.value.trim().toLowerCase().replace(/[?？.!]/g, "");
+
+            if (val === "how are you") {
+                feedback.className = "feedback-box show ok";
+                feedback.textContent = "✓ 太棒了！就是 How are you?";
+            } else {
+                feedback.className = "feedback-box show no";
+                feedback.textContent = "✗ 再試試看〜提示：How + are + you";
+            }
+
+            next.disabled = false;
+        };
+
+        stageArea.appendChild(input);
+        stageArea.appendChild(checkBtn);
+        stageArea.appendChild(feedback);
+
+        const next = nextButtonRow(() => goToStage(6));
+    }
+
+
+    /* ================================================
+       STAGE 7 — FINAL CHALLENGE [ENGLISH]
+       ================================================ */
+
+    function stageFinal() {
+
+        stageHeader("STAGE 7", "🏆 Final Challenge", "三句核心英文教材總複習");
+
+        const questions = [
+            { text: "「You」的中文意思是？", options: ["你／妳／您", "名字"], correctIndex: 0 },
+            { text: "「How are you?」的意思是？", options: ["你叫什麼名字？", "你好嗎？"], correctIndex: 1 },
+            { text: "「我的名字是 Alex」英文怎麼說？", options: ["My name is Alex", "What is your name"], correctIndex: 0 }
+        ];
+
+        let qIndex = 0;
+        let score = 0;
+
+        function renderQ() {
+
+            stageArea.innerHTML = "";
+
+            stageHeader("STAGE 7 · " + (qIndex + 1) + "/" + questions.length, "🏆 Final Challenge", "三句核心英文教材總複習");
+
+            const q = questions[qIndex];
+
+            const qTitle = document.createElement("div");
+            qTitle.style.fontWeight = "800";
+            qTitle.style.fontSize = "16px";
+            qTitle.style.marginBottom = "12px";
+            qTitle.style.textAlign = "center";
+            qTitle.textContent = q.text;
+            stageArea.appendChild(qTitle);
+
+            const list = document.createElement("div");
+            list.className = "option-list";
+
+            let answered = false;
+
+            q.options.forEach((opt, i) => {
+
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt;
+
+                btn.onclick = () => {
+
+                    if (answered) return;
+                    answered = true;
+
+                    document.querySelectorAll(".option-btn").forEach(b => b.classList.add("disabled"));
+
+                    if (i === q.correctIndex) {
+                        btn.classList.add("correct");
+                        score++;
+                    } else {
+                        btn.classList.add("wrong");
+                    }
+
+                    setTimeout(() => {
+
+                        qIndex++;
+
+                        if (qIndex < questions.length) {
+                            renderQ();
+                        } else {
+                            showDone();
+                        }
+
+                    }, 700);
+                };
+
+                list.appendChild(btn);
+            });
+
+            stageArea.appendChild(list);
+        }
+
+        function showDone() {
+
+            stageArea.innerHTML = "";
+
+            const done = document.createElement("div");
+            done.className = "done-screen";
+
+            done.innerHTML = `
+                <div class="big-emoji">🎉☕</div>
+                <div class="stage-title">Demo 完成！</div>
+                <div class="stage-sub">你答對了 ${score} / ${questions.length} 題，太棒了！</div>
+            `;
+
+            stageArea.appendChild(done);
+        }
+
+        renderQ();
+    }
+
+
+    const stageRenderers = [
+        stageVocab,
+        stagePattern,
+        stagePilihanGanda,
+        stageArrange,
+        stageListening,
+        stageTranslating,
+        stageFinal
+    ];
+
+    goToStage(0);
+
+</script>
+
+</body>
+</html>
