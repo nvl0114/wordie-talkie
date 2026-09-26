@@ -443,7 +443,7 @@
         <div class="materi-item">
             <div>
                 <div class="indo">Nama aku Alex.</div>
-                <div class="zh">我的名字是 Alex。</div>
+                <div class="zh">我的名字叫 Alex。</div>
             </div>
             <button class="sound-btn" onclick="speakID('Nama aku Alex')">🔊</button>
         </div>
@@ -667,7 +667,7 @@
         const patterns = [
             { formula: "Apa kabar?", zh: "問候語：您好嗎？" },
             { formula: "Siapa nama kamu?", zh: "問名句：您叫什麼名字？" },
-            { formula: "Nama aku + [名字]", zh: "自我介紹：我的名字是..." }
+            { formula: "Nama aku + [名字]", zh: "自我介紹：我的名字叫..." }
         ];
 
         patterns.forEach(p => {
@@ -704,7 +704,7 @@
 
         const options = [
             { text: "您好嗎？", correct: false },
-            { text: "我的名字是 Alex", correct: true },
+            { text: "我的名字叫 Alex", correct: true },
             { text: "您叫什麼名字？", correct: false },
             { text: "你／妳／您", correct: false }
         ];
@@ -734,13 +734,13 @@
 
                     btn.classList.add("correct");
                     feedback.className = "feedback-box show ok";
-                    feedback.textContent = "✓ 對了！Nama aku Alex = 我的名字是 Alex";
+                    feedback.textContent = "✓ 對了！Nama aku Alex = 我的名字叫 Alex";
 
                 } else {
 
                     btn.classList.add("wrong");
                     feedback.className = "feedback-box show no";
-                    feedback.textContent = "✗ 再想想〜正確答案是「我的名字是 Alex」";
+                    feedback.textContent = "✗ 再想想〜正確答案是「我的名字叫 Alex」";
                 }
 
                 next.disabled = false;
@@ -851,7 +851,7 @@
         const options = [
             { text: "您好嗎？ (Apa kabar)", correct: true },
             { text: "您叫什麼名字？ (Siapa nama kamu)", correct: false },
-            { text: "我的名字是 Alex (Nama aku Alex)", correct: false }
+            { text: "我的名字叫 Alex (Nama aku Alex)", correct: false }
         ];
 
         const list = document.createElement("div");
@@ -954,7 +954,7 @@
         const questions = [
             { text: "「Kamu」的中文意思是？", options: ["你／妳／您", "名字"], correctIndex: 0 },
             { text: "「Apa kabar?」的意思是？", options: ["您叫什麼名字？", "您好嗎？"], correctIndex: 1 },
-            { text: "「我的名字是 Alex」印尼文怎麼說？", options: ["Nama aku Alex", "Siapa nama kamu"], correctIndex: 0 }
+            { text: "「我的名字叫 Alex」印尼文怎麼說？", options: ["Nama aku Alex", "Siapa nama kamu"], correctIndex: 0 }
         ];
 
         let qIndex = 0;
