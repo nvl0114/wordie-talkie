@@ -287,6 +287,47 @@
         padding: 10px 0;
     }
 
+    /* =========================
+       MATCH GAME
+    ========================= */
+
+    .tb-match-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+    .tb-match-tile {
+        width: 46%;
+        padding: 13px 10px;
+        text-align: center;
+        border-radius: 12px;
+        background: var(--soft-brown);
+        color: var(--brown);
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .tb-match-table td.tb-match-tile.en { margin-right: 8%; }
+
+    .tb-match-tile.selected {
+        box-shadow: 0 0 0 3px var(--light-brown);
+    }
+
+    .tb-match-tile.matched {
+        background: var(--green);
+        color: var(--white);
+        cursor: default;
+    }
+
+    .tb-match-tile.wrong-flash {
+        background: var(--red);
+        color: var(--white);
+    }
+
     @keyframes tbFeedbackIn {
         from { opacity: 0; transform: translateY(5px); }
         to { opacity: 1; transform: translateY(0); }
@@ -388,6 +429,16 @@
         <div id="body-bei"></div>
     </section>
 
+    <!-- ============ 配對遊戲 ============ -->
+
+    <section class="tb-game-card" id="game-match">
+        <div class="tb-game-top">
+            <div class="tb-game-label">🧩 配對練習・英文與繁體中文</div>
+            <div class="tb-counter" id="counter-match">1 / 7</div>
+        </div>
+        <div id="body-match"></div>
+    </section>
+
     <section class="tb-explain">
         <h2>🎯 小挑戰</h2>
         <p>請用 to be 的四種用法：是、很、正在、被，各造一個英文句子，一共四個句子～</p>
@@ -418,6 +469,54 @@
 -->
 
 <script type="text/plain">
+
+    const tbMatchStages = [
+        [
+            { en: "Girl", zh: "女生" },
+            { en: "Teacher", zh: "老師" },
+            { en: "Engineer", zh: "工程師" },
+            { en: "Employee", zh: "員工" },
+            { en: "Friends", zh: "朋友" }
+        ],
+        [
+            { en: "Student", zh: "學生" },
+            { en: "Doctor", zh: "醫生" },
+            { en: "Chef", zh: "廚師" },
+            { en: "Book", zh: "書" },
+            { en: "Excited", zh: "興奮" }
+        ],
+        [
+            { en: "Kind", zh: "善良" },
+            { en: "Tired", zh: "累" },
+            { en: "Busy", zh: "忙" },
+            { en: "Beautiful", zh: "漂亮" },
+            { en: "Strong", zh: "強壯" }
+        ],
+        [
+            { en: "Good", zh: "好" },
+            { en: "Study", zh: "讀書" },
+            { en: "Eat", zh: "吃" },
+            { en: "By", zh: "被" },
+            { en: "Invite", zh: "邀請" }
+        ],
+        [
+            { en: "Call", zh: "打電話" },
+            { en: "Help", zh: "幫助" },
+            { en: "Ask", zh: "問" },
+            { en: "Question", zh: "問題" },
+            { en: "Teach", zh: "教" }
+        ],
+        [
+            { en: "Choose", zh: "選擇" },
+            { en: "Use", zh: "使用" },
+            { en: "Battery", zh: "電池" },
+            { en: "Mother", zh: "媽媽" },
+            { en: "Team", zh: "團隊" }
+        ],
+        [
+            { en: "Everyday", zh: "每天" }
+        ]
+    ];
 
     const tbGames = {
 
@@ -669,6 +768,93 @@
         render();
     }
 
+    function initMatchGame() {
+
+        const body = document.getElementById("body-match");
+        const counterEl = document.getElementById("counter-match");
+
+        let stageIndex = 0;
+
+        function renderStage() {
+
+            const pairs = tbMatchStages[stageIndex];
+            counterEl.textContent = `${stageIndex + 1} / ${tbMatchStages.length}`;
+
+            const zhOrder = tbShuffle(pairs.map((p, i) => i));
+
+            body.innerHTML = `
+                <div class="tb-prompt">點左邊的英文，再點右邊對應的中文</div>
+                <table class="tb-match-table"><tbody id="match-rows"></tbody></table>
+                <div class="tb-next-area">
+                    <button type="button" class="tb-next-btn" id="match-next" style="display:none;">下一組 →</button>
+                </div>
+            `;
+
+            const rows = document.getElementById("match-rows");
+            const nextBtn = document.getElementById("match-next");
+
+            let selected = null;
+            let matchedCount = 0;
+
+            pairs.forEach((pair, i) => {
+
+                const tr = document.createElement("tr");
+
+                const tdEn = document.createElement("td");
+                tdEn.className = "tb-match-tile en";
+                tdEn.textContent = pair.en;
+
+                const tdZh = document.createElement("td");
+                tdZh.className = "tb-match-tile zh";
+                const zhPairIndex = zhOrder[i];
+                tdZh.textContent = pairs[zhPairIndex].zh;
+
+                tdEn.addEventListener("click", () => {
+                    if (tdEn.classList.contains("matched")) return;
+                    tbSpeak(pair.en, tdEn);
+                    document.querySelectorAll("#match-rows .tb-match-tile.en").forEach(t => t.classList.remove("selected"));
+                    tdEn.classList.add("selected");
+                    selected = { el: tdEn, pairIndex: i };
+                });
+
+                tdZh.addEventListener("click", () => {
+                    if (tdZh.classList.contains("matched") || !selected) return;
+                    if (selected.pairIndex === zhPairIndex) {
+                        selected.el.classList.remove("selected");
+                        selected.el.classList.add("matched");
+                        tdZh.classList.add("matched");
+                        matchedCount++;
+                        selected = null;
+                        if (matchedCount === pairs.length) {
+                            nextBtn.style.display = "inline-block";
+                        }
+                    } else {
+                        tdZh.classList.add("wrong-flash");
+                        setTimeout(() => tdZh.classList.remove("wrong-flash"), 400);
+                        selected.el.classList.remove("selected");
+                        selected = null;
+                    }
+                });
+
+                tr.appendChild(tdEn);
+                tr.appendChild(tdZh);
+                rows.appendChild(tr);
+            });
+
+            nextBtn.addEventListener("click", () => {
+                if (stageIndex >= tbMatchStages.length - 1) {
+                    body.innerHTML = `<div class="tb-done">🎉 配對練習完成！可以往下滑到小挑戰。</div>`;
+                    return;
+                }
+                stageIndex++;
+                renderStage();
+            });
+        }
+
+        renderStage();
+    }
+
+    initMatchGame();
     Object.keys(tbGames).forEach(key => initArrangeGame(key, tbGames[key]));
 
 </script>
