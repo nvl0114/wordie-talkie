@@ -549,6 +549,7 @@
                     <div class="tb-feedback-title" id="${key}-feedback-title"></div>
                     <div class="correct-sentence" id="${key}-correct-sentence"></div>
                     <div id="${key}-correct-zh"></div>
+                    <button type="button" class="tb-reset-btn" id="${key}-play-full" style="margin-top:10px;background:rgba(255,255,255,0.9);">🔊 聽整句</button>
                 </div>
                 <div class="tb-next-area">
                     <div class="tb-countdown" id="${key}-countdown"></div>
@@ -565,6 +566,9 @@
             const correctSentence = document.getElementById(`${key}-correct-sentence`);
             const correctZh = document.getElementById(`${key}-correct-zh`);
             const countdown = document.getElementById(`${key}-countdown`);
+            const playFullBtn = document.getElementById(`${key}-play-full`);
+
+            playFullBtn.addEventListener("click", () => tbSpeak(item.en));
 
             let placedOrder = [];
 
@@ -617,6 +621,8 @@
                 feedbackTitle.textContent = isCorrect ? "✓ 正確！" : "✗ 順序不對，正確答案是：";
                 correctSentence.textContent = item.en;
                 correctZh.textContent = item.zh;
+
+                setTimeout(() => tbSpeak(item.en), 400);
 
                 startCountdown();
             }
