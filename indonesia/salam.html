@@ -348,18 +348,46 @@
         text-align: center;
     }
 
-    .countdown {
-        display: none;
+    .nav-buttons {
+        display: flex;
 
-        font-size: 14px;
+        justify-content: center;
+        align-items: center;
 
-        color: #806b5d;
-
-        margin-bottom: 8px;
+        gap: 12px;
     }
 
-    .countdown.show {
-        display: block;
+    .prev-button {
+        border: 2px solid var(--brown);
+
+        background: transparent;
+        color: var(--brown);
+
+        padding: 9px 18px;
+
+        border-radius: 999px;
+
+        font-size: 15px;
+        font-weight: 800;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.18s ease,
+            opacity 0.18s ease;
+    }
+
+    .prev-button:hover:not(:disabled) {
+        transform: translateY(-1px);
+    }
+
+    .prev-button:active:not(:disabled) {
+        transform: translateY(1px);
+    }
+
+    .prev-button:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
     }
 
     .next-button {
@@ -602,11 +630,17 @@
 
         <div class="next-area">
 
-            <div class="countdown" id="countdown"></div>
+            <div class="nav-buttons">
 
-            <button type="button" class="next-button" id="nextButton">
-                下一題 →
-            </button>
+                <button type="button" class="prev-button" id="prevButton">
+                    ← 上一題
+                </button>
+
+                <button type="button" class="next-button" id="nextButton">
+                    下一題 →
+                </button>
+
+            </div>
 
         </div>
 
@@ -947,14 +981,13 @@
     const correctAnswerLabel = document.getElementById("correctAnswerLabel");
     const correctAnswer = document.getElementById("correctAnswer");
     const explanation = document.getElementById("explanation");
-    const countdown = document.getElementById("countdown");
     const nextButton = document.getElementById("nextButton");
+    const prevButton = document.getElementById("prevButton");
     const finalNote = document.getElementById("finalNote");
 
 
     let currentQuestionIndex = 0;
     let answered = false;
-    let countdownTimer = null;
     let selectedOption = null;
 
 
@@ -994,8 +1027,6 @@
 
     function renderQuestion() {
 
-        clearCountdown();
-
         if ("speechSynthesis" in window) {
             window.speechSynthesis.cancel();
         }
@@ -1019,8 +1050,7 @@
         nextButton.classList.remove("show");
         nextButton.disabled = true;
 
-        countdown.classList.remove("show");
-        countdown.textContent = "";
+        prevButton.disabled = currentQuestionIndex === 0;
 
         finalNote.classList.remove("show");
 
@@ -1098,7 +1128,8 @@
             showWrongFeedback();
         }
 
-        startCountdown();
+        nextButton.classList.add("show");
+        nextButton.disabled = false;
     }
 
 
@@ -1140,45 +1171,6 @@
     }
 
 
-    function startCountdown() {
-
-        clearCountdown();
-
-        let seconds = 5;
-
-        countdown.classList.add("show");
-        countdown.textContent = `下一題 ${seconds}...`;
-
-        countdownTimer = setInterval(() => {
-
-            seconds--;
-
-            if (seconds > 0) {
-
-                countdown.textContent = `下一題 ${seconds}...`;
-
-            } else {
-
-                clearCountdown();
-
-                countdown.classList.remove("show");
-
-                nextButton.classList.add("show");
-                nextButton.disabled = false;
-            }
-
-        }, 1000);
-    }
-
-    function clearCountdown() {
-
-        if (countdownTimer !== null) {
-            clearInterval(countdownTimer);
-            countdownTimer = null;
-        }
-    }
-
-
     nextButton.addEventListener("click", () => {
 
         if (nextButton.disabled || !answered) return;
@@ -1189,6 +1181,16 @@
         }
 
         currentQuestionIndex++;
+
+        renderQuestion();
+    });
+
+
+    prevButton.addEventListener("click", () => {
+
+        if (currentQuestionIndex <= 0) return;
+
+        currentQuestionIndex--;
 
         renderQuestion();
     });
@@ -1216,8 +1218,8 @@
         explanation.textContent =
             "你已經完成這次圖片練習。可以再重新整理頁面，再玩一次。";
 
-        countdown.classList.remove("show");
         nextButton.classList.remove("show");
+        prevButton.disabled = false;
 
         finalNote.classList.add("show");
     }
