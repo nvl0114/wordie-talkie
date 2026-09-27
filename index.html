@@ -342,6 +342,294 @@
         }
 
         /* =====================================================
+           GROWING FLOWER ANIMATION
+           ===================================================== */
+
+        .growing-plant {
+            position: relative;
+
+            width: 150px;
+            height: 190px;
+
+            margin: 0 auto 20px;
+        }
+
+        .plant {
+            position: absolute;
+
+            left: 50%;
+            bottom: 55px;
+
+            width: 80px;
+            height: 125px;
+
+            transform: translateX(-50%);
+        }
+
+        /* STEM */
+
+        .stem {
+            position: absolute;
+
+            left: 50%;
+            bottom: 0;
+
+            width: 7px;
+            height: 0;
+
+            background: var(--green);
+
+            border-radius: 10px;
+
+            transform: translateX(-50%);
+
+            animation: growStem 2.5s ease-out forwards;
+        }
+
+        /* LEAVES */
+
+        .leaf {
+            position: absolute;
+
+            width: 35px;
+            height: 20px;
+
+            background: var(--green);
+
+            opacity: 0;
+
+            transform-origin: bottom center;
+        }
+
+        .leaf-left {
+            left: 8px;
+            bottom: 42px;
+
+            border-radius: 100% 0 100% 0;
+
+            transform: rotate(-25deg) scale(0);
+
+            animation: growLeafLeft 1s ease-out 1.3s forwards;
+        }
+
+        .leaf-right {
+            right: 8px;
+            bottom: 62px;
+
+            border-radius: 0 100% 0 100%;
+
+            transform: rotate(25deg) scale(0);
+
+            animation: growLeafRight 1s ease-out 1.7s forwards;
+        }
+
+        /* FLOWER */
+
+        .flower {
+            position: absolute;
+
+            left: 50%;
+            top: -5px;
+
+            width: 65px;
+            height: 65px;
+
+            transform: translateX(-50%) scale(0);
+
+            opacity: 0;
+
+            animation: bloomFlower 1.5s ease-out 2.4s forwards;
+        }
+
+        .petal {
+            position: absolute;
+
+            width: 30px;
+            height: 30px;
+
+            background: var(--pink);
+
+            border-radius: 50% 50% 45% 45%;
+        }
+
+        .petal-1 {
+            top: 0;
+            left: 17px;
+        }
+
+        .petal-2 {
+            top: 17px;
+            left: 0;
+
+            transform: rotate(-45deg);
+        }
+
+        .petal-3 {
+            top: 17px;
+            right: 0;
+
+            transform: rotate(45deg);
+        }
+
+        .petal-4 {
+            bottom: 0;
+            left: 17px;
+
+            transform: rotate(180deg);
+        }
+
+        .flower-center {
+            position: absolute;
+
+            top: 22px;
+            left: 22px;
+
+            width: 21px;
+            height: 21px;
+
+            background: #f4c96b;
+
+            border-radius: 50%;
+
+            box-shadow: 0 2px 5px rgba(92, 64, 51, 0.12);
+        }
+
+        /* POT */
+
+        .pot {
+            position: absolute;
+
+            left: 50%;
+            bottom: 0;
+
+            width: 85px;
+            height: 55px;
+
+            transform: translateX(-50%);
+        }
+
+        .pot-top {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 85px;
+            height: 15px;
+
+            background: #c98f68;
+
+            border-radius: 50%;
+
+            z-index: 2;
+        }
+
+        .pot-body {
+            position: absolute;
+
+            top: 7px;
+            left: 8px;
+
+            width: 69px;
+            height: 48px;
+
+            background: #dca27b;
+
+            clip-path: polygon(
+                5% 0,
+                95% 0,
+                82% 100%,
+                18% 100%
+            );
+
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* =====================================================
+           GROWING ANIMATION
+           ===================================================== */
+
+        @keyframes growStem {
+
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 105px;
+            }
+
+        }
+
+        @keyframes growLeafLeft {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    rotate(-25deg)
+                    scale(0);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    rotate(-25deg)
+                    scale(1);
+            }
+
+        }
+
+        @keyframes growLeafRight {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    rotate(25deg)
+                    scale(0);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    rotate(25deg)
+                    scale(1);
+            }
+
+        }
+
+        @keyframes bloomFlower {
+
+            0% {
+                opacity: 0;
+
+                transform:
+                    translateX(-50%)
+                    scale(0);
+            }
+
+            70% {
+                opacity: 1;
+
+                transform:
+                    translateX(-50%)
+                    scale(1.15);
+            }
+
+            100% {
+                opacity: 1;
+
+                transform:
+                    translateX(-50%)
+                    scale(1);
+            }
+
+        }
+
+        /* =====================================================
            LANGUAGE CARDS
            ===================================================== */
 
@@ -682,8 +970,35 @@
 
             <section class="empty-card">
 
-                <div class="empty-illustration">
-                    🌱 🌸
+                <div class="growing-plant" aria-label="A flower slowly growing">
+
+                    <div class="plant">
+
+                        <div class="stem"></div>
+
+                        <div class="leaf leaf-left"></div>
+                        <div class="leaf leaf-right"></div>
+
+                        <div class="flower">
+
+                            <div class="petal petal-1"></div>
+                            <div class="petal petal-2"></div>
+                            <div class="petal petal-3"></div>
+                            <div class="petal petal-4"></div>
+
+                            <div class="flower-center"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="pot">
+
+                        <div class="pot-top"></div>
+                        <div class="pot-body"></div>
+
+                    </div>
+
                 </div>
 
                 <h2>
