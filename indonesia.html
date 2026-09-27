@@ -579,39 +579,30 @@
 
 <!-- =====================================================
      SEARCH SCRIPT
-
-     Dipertahankan dari kode sebelumnya
 ===================================================== -->
 
-<script type="text/plain">
+<script>
 
 window.filterEnglishCourse = function (value) {
-
 
     const card =
         document.getElementById(
             "english-alphabet-card"
         );
 
-
     const empty =
         document.getElementById(
             "courses-empty"
         );
 
-
     if (!card || !empty) {
-
         return;
-
     }
-
 
     const keyword =
         String(value || "")
             .trim()
             .toLowerCase();
-
 
     const title =
         (
@@ -621,7 +612,6 @@ window.filterEnglishCourse = function (value) {
         )
         .toLowerCase();
 
-
     const description =
         (
             card.getAttribute(
@@ -629,7 +619,6 @@ window.filterEnglishCourse = function (value) {
             ) || ""
         )
         .toLowerCase();
-
 
     const isMatch =
 
@@ -643,28 +632,17 @@ window.filterEnglishCourse = function (value) {
 
         description.includes(keyword);
 
-
     if (isMatch) {
-
         card.style.display = "";
-
         empty.style.display = "none";
-
     } else {
-
         card.style.display = "none";
-
         empty.style.display = "block";
-
     }
 
 };
 
-
-<!-- =====================================================
-     INITIAL STATE
-===================================================== -->
-
+// initial state
 window.filterEnglishCourse("");
 
 </script>
