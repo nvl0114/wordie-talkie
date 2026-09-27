@@ -1,19 +1,23 @@
 <!--
     =====================================================
-    WORDIE TALKIE — ENGLISH COURSE SEARCH
+    WORDIE TALKIE — ENGLISH COURSES
     =====================================================
 
-    File ini adalah CONTENT halaman.
+    CONTENT PAGE
 
-    Template + Sidebar:
-        script.js
+    Halaman ini dimuat ke dalam #page-content oleh script.js.
 
-    Search:
-        - Search berdasarkan title + description
-        - Pagination 12 cards
-        - Tidak menggunakan MutationObserver
-        - Tidak membuat render loop
-        - Aman digunakan dengan reExecuteScripts()
+    Search menggunakan:
+        oninput="filterEnglishCourses(this.value)"
+
+    Jadi search tidak bergantung pada:
+        - addEventListener
+        - MutationObserver
+        - event delegation
+
+    Pagination:
+        12 courses per page
+
     =====================================================
 -->
 
@@ -21,27 +25,21 @@
 <style>
 
     #page-content {
+
         --cream: #fff8ef;
         --brown: #5c4033;
         --light-brown: #b8865c;
         --soft-brown: #f3e4d3;
         --white: #ffffff;
 
-        --green: #7b9b76;
-        --green-dark: #5f7d59;
-        --green-light: #edf5ea;
-
-        --red: #c96f6f;
-        --red-dark: #a3504f;
-        --red-light: #fff0f0;
-
         --border: #ead8c5;
+
     }
 
 
-    /* =========================
+    /* ==================================================
        CONTAINER
-    ========================= */
+    ================================================== */
 
     .courses-container {
 
@@ -58,11 +56,11 @@
     }
 
 
-    /* =========================
+    /* ==================================================
        HERO
-    ========================= */
+    ================================================== */
 
-    .hero {
+    .courses-hero {
 
         background: var(--white);
 
@@ -80,7 +78,7 @@
     }
 
 
-    .badge {
+    .courses-badge {
 
         display: inline-block;
 
@@ -101,7 +99,7 @@
     }
 
 
-    .courses-container h1 {
+    .courses-title {
 
         margin: 0 0 10px;
 
@@ -118,14 +116,14 @@
 
         font-size: 14px;
 
-        margin-bottom: 25px;
+        margin: 0 0 25px;
 
     }
 
 
-    /* =========================
+    /* ==================================================
        SEARCH
-    ========================= */
+    ================================================== */
 
     .courses-search-wrap {
 
@@ -133,7 +131,7 @@
 
         max-width: 480px;
 
-        margin: 0 auto 30px;
+        margin: 0 auto;
 
     }
 
@@ -190,9 +188,9 @@
     }
 
 
-    /* =========================
+    /* ==================================================
        COURSE GRID
-    ========================= */
+    ================================================== */
 
     .courses-grid {
 
@@ -205,6 +203,10 @@
 
     }
 
+
+    /* ==================================================
+       COURSE CARD
+    ================================================== */
 
     .course-card {
 
@@ -297,6 +299,10 @@
     }
 
 
+    /* ==================================================
+       BUTTON
+    ================================================== */
+
     .course-start-btn {
 
         border: none;
@@ -333,9 +339,9 @@
     }
 
 
-    /* =========================
-       EMPTY SEARCH RESULT
-    ========================= */
+    /* ==================================================
+       EMPTY STATE
+    ================================================== */
 
     .courses-empty {
 
@@ -352,16 +358,16 @@
 
     .courses-empty .emoji {
 
-        font-size: 26px;
+        font-size: 28px;
 
         margin-bottom: 10px;
 
     }
 
 
-    /* =========================
+    /* ==================================================
        PAGINATION
-    ========================= */
+    ================================================== */
 
     .courses-pagination {
 
@@ -447,9 +453,9 @@
     }
 
 
-    /* =========================
+    /* ==================================================
        MOBILE
-    ========================= */
+    ================================================== */
 
     @media (max-width: 600px) {
 
@@ -460,14 +466,14 @@
         }
 
 
-        .hero {
+        .courses-hero {
 
             padding: 20px 17px;
 
         }
 
 
-        .courses-container h1 {
+        .courses-title {
 
             font-size: 25px;
 
@@ -511,23 +517,22 @@
 </style>
 
 
-<!--
-    =====================================================
-    PAGE CONTENT
-    =====================================================
--->
+<!-- =====================================================
+     PAGE CONTENT
+===================================================== -->
 
 
 <main class="courses-container">
 
 
-    <!-- =========================
+    <!-- =================================================
          HERO
-    ========================= -->
+    ================================================== -->
 
-    <section class="hero">
+    <section class="courses-hero">
 
-        <div class="badge">
+
+        <div class="courses-badge">
 
             ENGLISH • COURSES
 
@@ -548,9 +553,15 @@
         </p>
 
 
-        <!-- SEARCH -->
+        <!-- =================================================
+             SEARCH
+
+             IMPORTANT:
+             Search menggunakan oninput langsung.
+             ================================================== -->
 
         <div class="courses-search-wrap">
+
 
             <i class="fa-solid fa-magnifying-glass"></i>
 
@@ -560,17 +571,20 @@
                 id="course-search"
                 placeholder="Search courses, e.g. grammar, greetings..."
                 autocomplete="off"
-                aria-label="Search English courses"
+                oninput="filterEnglishCourses(this.value)"
             >
 
+
         </div>
+
 
     </section>
 
 
-    <!-- =========================
+    <!-- =================================================
          COURSE GRID
-    ========================= -->
+    ================================================== -->
+
 
     <div
         class="courses-grid"
@@ -578,13 +592,17 @@
     >
 
 
-        <!-- COURSE 1 -->
+        <!-- =================================================
+             COURSE 1
+        ================================================== -->
+
 
         <div
             class="course-card"
             data-title="English Alphabet"
-            data-desc="Learn the English alphabet from A to Z, pronunciation, letters and basic spelling."
+            data-desc="Learn the English alphabet from A to Z, letters, pronunciation, and basic spelling."
         >
+
 
             <div class="course-icon">
 
@@ -618,27 +636,28 @@
 
             </a>
 
+
         </div>
 
 
-        <!--
-        =================================================
-        TAMBAHKAN COURSE LAINNYA DI SINI
-        =================================================
+        <!-- =================================================
+             COURSE 2
+        ================================================== -->
 
-        Contoh:
 
         <div
             class="course-card"
             data-title="English Greetings"
-            data-desc="Learn basic English greetings and everyday expressions."
+            data-desc="Learn basic English greetings, hello, good morning, good afternoon, good evening, and everyday expressions."
         >
+
 
             <div class="course-icon">
 
-                <i class="fa-solid fa-comments"></i>
+                <i class="fa-solid fa-hand"></i>
 
             </div>
+
 
             <div class="course-name">
 
@@ -646,12 +665,14 @@
 
             </div>
 
+
             <div class="course-desc">
 
                 Learn useful English greetings
                 and everyday expressions.
 
             </div>
+
 
             <a
                 class="course-start-btn"
@@ -662,22 +683,493 @@
 
             </a>
 
+
         </div>
 
-        -->
+
+        <!-- =================================================
+             COURSE 3
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Self Introduction"
+            data-desc="Learn how to introduce yourself in English, talk about your name, age, country, hobbies, and basic information."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Self Introduction
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn how to introduce yourself
+                and share basic information in English.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/3-self-introduction.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 4
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="English Pronouns"
+            data-desc="Learn I, you, he, she, it, we, and they and understand how English subject pronouns work."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                English Pronouns
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn the basic English subject pronouns
+                and how to use them in sentences.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/4-pronouns.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 5
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="To Be: Am Is Are"
+            data-desc="Learn am, is, and are and understand how to use to be in English sentences."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-link"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                To Be: Am • Is • Are
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Understand how am, is, and are
+                work in everyday English sentences.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/5-to-be.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 6
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Articles A An The"
+            data-desc="Learn how to use a, an, and the in English with simple examples."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-font"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                A • An • The
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn the basic rules for using
+                a, an, and the.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/6-articles.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 7
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Present Simple"
+            data-desc="Learn the present simple tense and use it to talk about habits, routines, facts, and everyday activities."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-calendar-day"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Present Simple
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn how to talk about routines,
+                habits, and everyday activities.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/7-present-simple.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 8
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Present Continuous"
+            data-desc="Learn am is are plus verb ing and use the present continuous to talk about actions happening now."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-person-running"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Present Continuous
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn how to describe actions
+                happening right now.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/8-present-continuous.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 9
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Past Simple"
+            data-desc="Learn the past simple tense and talk about things that happened in the past."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Past Simple
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn how to talk about
+                completed actions in the past.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/9-past-simple.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 10
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Question Words"
+            data-desc="Learn what, where, when, who, why, and how and use English question words naturally."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Question Words
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Learn what, where, when, who,
+                why, and how.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/10-question-words.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 11
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Everyday Vocabulary"
+            data-desc="Learn useful English vocabulary for everyday conversations, daily activities, and common situations."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-book"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Everyday Vocabulary
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Build useful English vocabulary
+                for everyday conversations.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/11-everyday-vocabulary.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             COURSE 12
+        ================================================== -->
+
+
+        <div
+            class="course-card"
+            data-title="Everyday Conversation"
+            data-desc="Practice simple English conversations for daily life, meeting people, asking questions, and responding naturally."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-comments"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                Everyday Conversation
+
+            </div>
+
+
+            <div class="course-desc">
+
+                Practice simple English conversations
+                for everyday situations.
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/12-everyday-conversation.html"
+            >
+
+                Start Learning
+
+            </a>
+
+
+        </div>
 
 
     </div>
 
 
-    <!-- =========================
-         EMPTY STATE
-    ========================= -->
+    <!-- =================================================
+         EMPTY SEARCH RESULT
+    ================================================== -->
+
 
     <div
         class="courses-empty"
         id="courses-empty"
     >
+
 
         <div class="emoji">
 
@@ -693,22 +1185,26 @@
 
         </p>
 
+
     </div>
 
 
-    <!-- =========================
+    <!-- =================================================
          PAGINATION
-    ========================= -->
+    ================================================== -->
+
 
     <div
         class="courses-pagination"
         id="courses-pagination"
     >
 
+
         <button
             type="button"
             class="pagination-btn"
             id="courses-prev"
+            onclick="englishCoursePreviousPage()"
         >
 
             ← Previous
@@ -730,11 +1226,13 @@
             type="button"
             class="pagination-btn"
             id="courses-next"
+            onclick="englishCourseNextPage()"
         >
 
             Next →
 
         </button>
+
 
     </div>
 
@@ -742,19 +1240,13 @@
 </main>
 
 
-<!--
-    =====================================================
-    SEARCH + PAGINATION
-    =====================================================
+<!-- =====================================================
+     SEARCH + PAGINATION JAVASCRIPT
 
-    type="text/plain" DIPERTAHANKAN karena Wordie Talkie
-    script.js menggunakan reExecuteScripts() untuk
-    mengaktifkan script setelah content dimasukkan
-    ke #page-content.
-
-    Tidak menggunakan MutationObserver.
-    =====================================================
--->
+     Tetap menggunakan type="text/plain" karena
+     script.js Wordie Talkie akan menjalankan ulang
+     script melalui reExecuteScripts().
+===================================================== -->
 
 
 <script type="text/plain">
@@ -764,49 +1256,54 @@
     "use strict";
 
 
-    function initCourseSearch() {
+    /*
+     * =================================================
+     * GLOBAL DATA
+     * =================================================
+     */
 
-        const searchInput =
-            document.getElementById("course-search");
+    window.englishCoursePage = 1;
+
+    window.englishCourseKeyword = "";
+
+    window.englishCoursePerPage = 12;
+
+
+    /*
+     * =================================================
+     * GET COURSES
+     * =================================================
+     */
+
+    window.getEnglishCourseCards = function () {
 
         const grid =
             document.getElementById("courses-grid");
 
+        if (!grid) {
 
-        /*
-         * Pastikan elemen halaman sudah ada.
-         */
-
-        if (!searchInput || !grid) {
-
-            return;
+            return [];
 
         }
 
-
-        /*
-         * Jangan pasang event listener lebih dari sekali.
-         */
-
-        if (
-            searchInput.dataset.searchReady === "true"
-        ) {
-
-            return;
-
-        }
-
-
-        searchInput.dataset.searchReady = "true";
-
-
-        /*
-         * Ambil semua course card.
-         */
-
-        const cards = Array.from(
+        return Array.from(
             grid.querySelectorAll(".course-card")
         );
+
+    };
+
+
+    /*
+     * =================================================
+     * FILTER + DISPLAY
+     * =================================================
+     */
+
+    window.filterEnglishCourses = function (value) {
+
+
+        const cards =
+            window.getEnglishCourseCards();
 
 
         const emptyState =
@@ -839,345 +1336,443 @@
             );
 
 
-        const CARDS_PER_PAGE = 12;
+        /*
+         * Simpan keyword.
+         */
 
-
-        let currentPage = 1;
-
-        let keyword = "";
+        window.englishCourseKeyword =
+            String(value || "")
+                .trim()
+                .toLowerCase();
 
 
         /*
-         * Simpan data pencarian sekali saja.
-         *
-         * Search kemudian tidak perlu membaca
-         * DOM berulang kali.
+         * Search semua course.
          */
 
-        const courseData = cards.map(
-            function (card) {
+        const matchedCards =
+            cards.filter(function (card) {
 
-                return {
 
-                    element: card,
+                const title =
+                    (
+                        card.getAttribute(
+                            "data-title"
+                        ) || ""
+                    ).toLowerCase();
 
-                    searchText: (
-                        (card.dataset.title || "") +
-                        " " +
-                        (card.dataset.desc || "")
-                    ).toLowerCase()
 
-                };
+                const description =
+                    (
+                        card.getAttribute(
+                            "data-desc"
+                        ) || ""
+                    ).toLowerCase();
 
-            }
+
+                return (
+
+                    window.englishCourseKeyword === ""
+
+                    ||
+
+                    title.includes(
+                        window.englishCourseKeyword
+                    )
+
+                    ||
+
+                    description.includes(
+                        window.englishCourseKeyword
+                    )
+
+                );
+
+            });
+
+
+        /*
+         * Search selalu kembali ke halaman 1.
+         */
+
+        window.englishCoursePage = 1;
+
+
+        /*
+         * Render hasil.
+         */
+
+        window.renderEnglishCourses(
+            matchedCards,
+            emptyState,
+            pagination,
+            pageInfo,
+            prevButton,
+            nextButton
         );
 
+    };
+
+
+    /*
+     * =================================================
+     * RENDER
+     * =================================================
+     */
+
+    window.renderEnglishCourses = function (
+        matchedCards,
+        emptyState,
+        pagination,
+        pageInfo,
+        prevButton,
+        nextButton
+    ) {
+
+
+        const cards =
+            window.getEnglishCourseCards();
+
+
+        const perPage =
+            window.englishCoursePerPage;
+
 
         /*
-         * ==============================
-         * RENDER
-         * ==============================
+         * Total halaman.
          */
 
-        function renderCourses() {
+        const totalPages =
+            Math.max(
+                1,
+                Math.ceil(
+                    matchedCards.length /
+                    perPage
+                )
+            );
 
 
-            const matched = courseData.filter(
-                function (course) {
+        /*
+         * Pastikan current page valid.
+         */
+
+        if (
+            window.englishCoursePage >
+            totalPages
+        ) {
+
+            window.englishCoursePage =
+                totalPages;
+
+        }
+
+
+        if (
+            window.englishCoursePage < 1
+        ) {
+
+            window.englishCoursePage = 1;
+
+        }
+
+
+        /*
+         * Index card.
+         */
+
+        const start =
+            (
+                window.englishCoursePage -
+                1
+            ) * perPage;
+
+
+        const end =
+            start + perPage;
+
+
+        /*
+         * Hide semua card.
+         */
+
+        cards.forEach(function (card) {
+
+            card.style.display = "none";
+
+        });
+
+
+        /*
+         * Tampilkan card yang cocok.
+         */
+
+        matchedCards
+            .slice(start, end)
+            .forEach(function (card) {
+
+                card.style.display = "";
+
+            });
+
+
+        /*
+         * Empty state.
+         */
+
+        if (emptyState) {
+
+            emptyState.style.display =
+                matchedCards.length === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        /*
+         * Pagination hanya muncul
+         * jika hasil lebih dari 12.
+         */
+
+        if (pagination) {
+
+            pagination.style.display =
+                matchedCards.length >
+                perPage
+                    ? "flex"
+                    : "none";
+
+        }
+
+
+        /*
+         * Page number.
+         */
+
+        if (pageInfo) {
+
+            pageInfo.textContent =
+                "Page " +
+                window.englishCoursePage +
+                " / " +
+                totalPages;
+
+        }
+
+
+        /*
+         * Previous.
+         */
+
+        if (prevButton) {
+
+            prevButton.disabled =
+                window.englishCoursePage <= 1;
+
+        }
+
+
+        /*
+         * Next.
+         */
+
+        if (nextButton) {
+
+            nextButton.disabled =
+                window.englishCoursePage >=
+                totalPages;
+
+        }
+
+    };
+
+
+    /*
+     * =================================================
+     * GET CURRENT SEARCH RESULT
+     * =================================================
+     */
+
+    window.getCurrentEnglishSearchResults =
+        function () {
+
+
+            const cards =
+                window.getEnglishCourseCards();
+
+
+            const keyword =
+                window.englishCourseKeyword;
+
+
+            return cards.filter(
+                function (card) {
+
+
+                    const title =
+                        (
+                            card.getAttribute(
+                                "data-title"
+                            ) || ""
+                        ).toLowerCase();
+
+
+                    const description =
+                        (
+                            card.getAttribute(
+                                "data-desc"
+                            ) || ""
+                        ).toLowerCase();
+
 
                     return (
-                        keyword === "" ||
-                        course.searchText.includes(
-                            keyword
-                        )
+
+                        keyword === ""
+
+                        ||
+
+                        title.includes(keyword)
+
+                        ||
+
+                        description.includes(keyword)
+
                     );
 
                 }
             );
 
+        };
 
-            /*
-             * Total halaman
-             */
 
-            const totalPages = Math.max(
+    /*
+     * =================================================
+     * PREVIOUS PAGE
+     * =================================================
+     */
 
-                1,
+    window.englishCoursePreviousPage =
+        function () {
 
-                Math.ceil(
-                    matched.length /
-                    CARDS_PER_PAGE
+
+            if (
+                window.englishCoursePage <= 1
+            ) {
+
+                return;
+
+            }
+
+
+            window.englishCoursePage--;
+
+
+            const matchedCards =
+                window.getCurrentEnglishSearchResults();
+
+
+            window.renderEnglishCourses(
+
+                matchedCards,
+
+                document.getElementById(
+                    "courses-empty"
+                ),
+
+                document.getElementById(
+                    "courses-pagination"
+                ),
+
+                document.getElementById(
+                    "courses-page-info"
+                ),
+
+                document.getElementById(
+                    "courses-prev"
+                ),
+
+                document.getElementById(
+                    "courses-next"
                 )
 
             );
 
-
-            /*
-             * Pastikan halaman valid.
-             */
-
-            if (
-                currentPage >
-                totalPages
-            ) {
-
-                currentPage =
-                    totalPages;
-
-            }
-
-
-            if (
-                currentPage < 1
-            ) {
-
-                currentPage = 1;
-
-            }
-
-
-            /*
-             * Tentukan card yang tampil.
-             */
-
-            const start =
-                (currentPage - 1) *
-                CARDS_PER_PAGE;
-
-
-            const end =
-                start +
-                CARDS_PER_PAGE;
-
-
-            /*
-             * Hide semua card.
-             */
-
-            cards.forEach(
-                function (card) {
-
-                    card.hidden = true;
-
-                }
-            );
-
-
-            /*
-             * Show card yang sesuai.
-             */
-
-            matched
-                .slice(start, end)
-                .forEach(
-                    function (course) {
-
-                        course.element.hidden =
-                            false;
-
-                    }
-                );
-
-
-            /*
-             * ==========================
-             * EMPTY STATE
-             * ==========================
-             */
-
-            if (emptyState) {
-
-                emptyState.style.display =
-                    matched.length === 0
-                        ? "block"
-                        : "none";
-
-            }
-
-
-            /*
-             * ==========================
-             * PAGINATION
-             * ==========================
-             */
-
-            if (pagination) {
-
-                pagination.style.display =
-                    matched.length >
-                    CARDS_PER_PAGE
-                        ? "flex"
-                        : "none";
-
-            }
-
-
-            /*
-             * Page information
-             */
-
-            if (pageInfo) {
-
-                pageInfo.textContent =
-                    "Page " +
-                    currentPage +
-                    " / " +
-                    totalPages;
-
-            }
-
-
-            /*
-             * Previous
-             */
-
-            if (prevButton) {
-
-                prevButton.disabled =
-                    currentPage <= 1;
-
-            }
-
-
-            /*
-             * Next
-             */
-
-            if (nextButton) {
-
-                nextButton.disabled =
-                    currentPage >= totalPages;
-
-            }
-
-        }
-
-
-        /*
-         * ==============================
-         * SEARCH INPUT
-         * ==============================
-         */
-
-        searchInput.addEventListener(
-            "input",
-            function () {
-
-
-                keyword =
-                    searchInput.value
-                        .trim()
-                        .toLowerCase();
-
-
-                /*
-                 * Set kembali ke halaman pertama
-                 * setiap kali keyword berubah.
-                 */
-
-                currentPage = 1;
-
-
-                renderCourses();
-
-            }
-        );
-
-
-        /*
-         * ==============================
-         * PREVIOUS BUTTON
-         * ==============================
-         */
-
-        if (prevButton) {
-
-            prevButton.addEventListener(
-                "click",
-                function () {
-
-
-                    if (
-                        currentPage <= 1
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    currentPage--;
-
-
-                    renderCourses();
-
-                }
-            );
-
-        }
-
-
-        /*
-         * ==============================
-         * NEXT BUTTON
-         * ==============================
-         */
-
-        if (nextButton) {
-
-            nextButton.addEventListener(
-                "click",
-                function () {
-
-
-                    const totalPages =
-                        Math.max(
-                            1,
-                            Math.ceil(
-                                courseData.length /
-                                CARDS_PER_PAGE
-                            )
-                        );
-
-
-                    if (
-                        currentPage >=
-                        totalPages
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    currentPage++;
-
-
-                    renderCourses();
-
-                }
-            );
-
-        }
-
-
-        /*
-         * ==============================
-         * INITIAL RENDER
-         * ==============================
-         */
-
-        renderCourses();
-
-    }
+        };
 
 
     /*
-     * Jalankan setelah script.js
-     * mengaktifkan script ini.
+     * =================================================
+     * NEXT PAGE
+     * =================================================
      */
 
-    initCourseSearch();
+    window.englishCourseNextPage =
+        function () {
+
+
+            const matchedCards =
+                window.getCurrentEnglishSearchResults();
+
+
+            const totalPages =
+                Math.max(
+                    1,
+                    Math.ceil(
+                        matchedCards.length /
+                        window.englishCoursePerPage
+                    )
+                );
+
+
+            if (
+                window.englishCoursePage >=
+                totalPages
+            ) {
+
+                return;
+
+            }
+
+
+            window.englishCoursePage++;
+
+
+            window.renderEnglishCourses(
+
+                matchedCards,
+
+                document.getElementById(
+                    "courses-empty"
+                ),
+
+                document.getElementById(
+                    "courses-pagination"
+                ),
+
+                document.getElementById(
+                    "courses-page-info"
+                ),
+
+                document.getElementById(
+                    "courses-prev"
+                ),
+
+                document.getElementById(
+                    "courses-next"
+                )
+
+            );
+
+        };
+
+
+    /*
+     * =================================================
+     * INITIAL DISPLAY
+     * =================================================
+     */
+
+    window.filterEnglishCourses("");
 
 
 })();
@@ -1185,17 +1780,10 @@
 </script>
 
 
-<!--
-    =====================================================
-    WORDIE TALKIE SHARED SCRIPT
-    =====================================================
+<!-- =====================================================
+     SHARED SCRIPT
 
-    WAJIB tetap ada.
-
-    Karena file ini berada di folder yang sama dengan
-    struktur content sebelumnya, sesuaikan ../ jika
-    memang courses page berada satu folder di bawah root.
-    =====================================================
--->
+     WAJIB tetap ada.
+===================================================== -->
 
 <script src="script.js"></script>
