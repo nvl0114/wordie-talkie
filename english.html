@@ -1,224 +1,271 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
+<!--
+    =====================================================
+    KONTEN: indonesia/courses.html
+    (Es Teh Break｜課程列表與搜尋)
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    File ini adalah KONTEN halaman (bukan halaman penuh).
+    Sidebar & layout datang dari A.html lewat script.js.
 
-    <title>Wordie Talkie | English</title>
+    PENTING: tag <script src="../script.js"> di paling
+    bawah file ini WAJIB ada — itu yang men-trigger
+    pemasangan sidebar saat file ini dibuka langsung oleh
+    browser. Jangan dihapus.
+    =====================================================
+-->
 
-    <!-- Font Awesome (sudah dipakai juga di template.html) -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
 
-    <style>
+    #page-content {
+        --cream: #fff8ef;
+        --brown: #5c4033;
+        --light-brown: #b8865c;
+        --soft-brown: #f3e4d3;
+        --white: #ffffff;
 
-        .courses-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
+        --green: #7b9b76;
+        --green-dark: #5f7d59;
+        --green-light: #edf5ea;
 
-        .courses-title {
-            text-align: center;
-            color: #5c4033;
-            margin-bottom: 8px;
-        }
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+        --red-light: #fff0f0;
 
-        .courses-subtitle {
-            text-align: center;
-            color: #9b7a65;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
+        --border: #ead8c5;
+    }
 
-        /* Search bar */
-        .courses-search-wrap {
-            position: relative;
-            max-width: 480px;
-            margin: 0 auto 30px;
-        }
+    .courses-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 10px 0 40px;
+        font-family: Arial, sans-serif;
+        color: var(--brown);
+    }
 
-        .courses-search-wrap i {
-            position: absolute;
-            top: 50%;
-            left: 16px;
-            transform: translateY(-50%);
-            color: #b0937e;
-        }
+    .hero {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 28px 24px;
+        margin-bottom: 22px;
+        box-shadow: 0 5px 18px rgba(92, 64, 51, 0.08);
+        text-align: center;
+    }
 
-        #course-search {
-            width: 100%;
-            padding: 13px 16px 13px 42px;
-            border: 1px solid #e6d5c3;
-            border-radius: 30px;
-            background: #fff8ef;
-            color: #5c4033;
-            font-size: 15px;
-            outline: none;
-            transition: 0.2s ease;
-        }
+    .badge {
+        display: inline-block;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
 
-        #course-search:focus {
-            border-color: #b8865c;
-            box-shadow: 0 0 0 3px rgba(184, 134, 92, 0.15);
-        }
+    .courses-container h1 {
+        margin: 0 0 10px;
+        font-size: 30px;
+        color: var(--brown);
+    }
 
-        /* Card grid */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 18px;
-        }
+    .courses-subtitle {
+        color: #9b7a65;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
 
-        .course-card {
-            background: #fff8ef;
-            border: 1px solid #e6d5c3;
-            border-radius: 15px;
-            padding: 22px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 3px 8px rgba(92, 64, 51, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+    /* Search bar */
+    .courses-search-wrap {
+        position: relative;
+        max-width: 480px;
+        margin: 0 auto 30px;
+    }
 
-        .course-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(92, 64, 51, 0.12);
-        }
+    .courses-search-wrap i {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        transform: translateY(-50%);
+        color: #b0937e;
+    }
 
-        .course-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #fff2e5;
-            color: #a87958;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 14px;
-        }
+    #course-search {
+        width: 100%;
+        padding: 13px 16px 13px 42px;
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        background: var(--cream);
+        color: var(--brown);
+        font-size: 15px;
+        outline: none;
+        box-sizing: border-box;
+        transition: 0.2s ease;
+    }
 
-        .course-name {
-            font-size: 17px;
-            font-weight: bold;
-            color: #5c4033;
-            margin-bottom: 8px;
-        }
+    #course-search:focus {
+        border-color: var(--light-brown);
+        box-shadow: 0 0 0 3px rgba(184, 134, 92, 0.15);
+    }
 
-        .course-desc {
-            font-size: 13.5px;
-            color: #8b6d5c;
-            line-height: 1.6;
-            margin-bottom: 18px;
-            flex-grow: 1;
-        }
+    /* Card grid */
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 18px;
+    }
 
-        .course-start-btn {
-            border: none;
-            background: #b8865c;
-            color: #fff8ef;
-            font-weight: bold;
-            font-size: 14px;
-            padding: 10px 22px;
-            border-radius: 25px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s ease;
-        }
+    .course-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 22px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 3px 8px rgba(92, 64, 51, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-        .course-start-btn:hover {
-            background: #a2724c;
-        }
+    .course-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(92, 64, 51, 0.12);
+    }
 
-        /* Empty state saat search tidak ketemu */
-        .courses-empty {
-            display: none;
-            text-align: center;
-            color: #9b7a65;
-            padding: 40px 10px;
-        }
+    .course-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--soft-brown);
+        color: var(--light-brown);
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+    }
 
-        .courses-empty .emoji {
-            font-size: 26px;
-            margin-bottom: 10px;
-        }
+    .course-name {
+        font-size: 17px;
+        font-weight: bold;
+        color: var(--brown);
+        margin-bottom: 8px;
+    }
 
-        /* =========================
-           PAGINATION
-        ========================= */
+    .course-desc {
+        font-size: 13.5px;
+        color: #8b6d5c;
+        line-height: 1.6;
+        margin-bottom: 18px;
+        flex-grow: 1;
+    }
 
-        .courses-pagination {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            margin-top: 28px;
-        }
+    .course-start-btn {
+        border: none;
+        background: var(--light-brown);
+        color: var(--cream);
+        font-weight: bold;
+        font-size: 14px;
+        padding: 10px 22px;
+        border-radius: 25px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.18s ease;
+    }
 
-        .pagination-btn {
-            border: 2px solid #5c4033;
-            background: transparent;
-            color: #5c4033;
-            padding: 9px 20px;
-            border-radius: 999px;
-            font-size: 14px;
-            font-weight: 800;
-            cursor: pointer;
-            transition:
-                transform 0.18s ease,
-                opacity 0.18s ease,
-                background-color 0.18s ease,
-                color 0.18s ease;
-        }
+    .course-start-btn:hover {
+        background: var(--brown);
+        transform: translateY(-1px);
+    }
 
-        .pagination-btn:hover:not(:disabled) {
-            background: #5c4033;
-            color: #fff8ef;
-            transform: translateY(-1px);
-        }
+    /* Empty state saat search tidak ketemu */
+    .courses-empty {
+        display: none;
+        text-align: center;
+        color: #9b7a65;
+        padding: 40px 10px;
+    }
 
-        .pagination-btn:active:not(:disabled) {
-            transform: translateY(1px);
-        }
+    .courses-empty .emoji {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
 
-        .pagination-btn:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-        }
+    /* =========================
+       PAGINATION
+    ========================= */
 
-        .pagination-info {
-            font-size: 14px;
-            font-weight: 700;
-            color: #8b6d5c;
-            min-width: 90px;
-            text-align: center;
-        }
+    .courses-pagination {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        margin-top: 28px;
+    }
 
-        @media (max-width: 600px) {
-            .courses-container { padding: 15px; }
-            .courses-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
-            .course-card { padding: 18px 14px; }
-            .courses-pagination { gap: 8px; }
-            .pagination-btn { padding: 8px 14px; font-size: 13px; }
-        }
+    .pagination-btn {
+        border: 2px solid var(--brown);
+        background: transparent;
+        color: var(--brown);
+        padding: 9px 20px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 800;
+        cursor: pointer;
+        transition:
+            transform 0.18s ease,
+            opacity 0.18s ease,
+            background-color 0.18s ease,
+            color 0.18s ease;
+    }
 
-    </style>
-</head>
+    .pagination-btn:hover:not(:disabled) {
+        background: var(--brown);
+        color: var(--cream);
+        transform: translateY(-1px);
+    }
 
-<body>
+    .pagination-btn:active:not(:disabled) {
+        transform: translateY(1px);
+    }
 
-    <!-- 載入共用模板 -->
-    <div id="app"></div>
+    .pagination-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
 
-    <!-- Courses Content -->
-    <!-- id="page-source" wajib ada, supaya script.js bisa pindahkan
-         konten ini ke #page-content di dalam template -->
-    <main id="page-source" class="courses-container">
+    .pagination-info {
+        font-size: 14px;
+        font-weight: 700;
+        color: #8b6d5c;
+        min-width: 90px;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        .courses-container { padding: 15px; }
+        .hero { padding: 20px 17px; }
+        .courses-container h1 { font-size: 25px; }
+        .courses-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+        .course-card { padding: 18px 14px; }
+        .courses-pagination { gap: 8px; }
+        .pagination-btn { padding: 8px 14px; font-size: 13px; }
+    }
+
+</style>
+
+
+<!--
+    =====================================================
+    PAGE CONTENT
+    =====================================================
+-->
+
+<main class="courses-container">
+
+    <section class="hero">
+        <div class="badge">
+            ENGLISH • COURSES
+        </div>
 
         <h1 class="courses-title">你想學什麼？</h1>
         <p class="courses-subtitle">選一個主題，或直接搜尋你想學的內容 🧊🍵</p>
@@ -230,160 +277,162 @@
                 id="course-search"
                 placeholder="搜尋課程，例如：點餐、問路...">
         </div>
+    </section>
 
-        <div class="courses-grid" id="courses-grid">
-
-
-<div class="course-card" data-title="印尼文 ABC 字母" data-desc="從 A 到 Z 認識印尼文的字母與發音">
-    <div class="course-icon"><i class="fa-solid fa-font"></i></div>
-    <div class="course-name">印尼文 ABC 字母</div>
-    <div class="course-desc">從 A 到 Z 認識印尼文的字母、發音和基本拼讀方式，輕鬆學會印尼文的 ABC。</div>
-    <a class="course-start-btn" href="lessons/1-alfabet.html">開始學習</a>
-</div>
-
-
+    <div class="courses-grid" id="courses-grid">
+        <div class="course-card" data-title="印尼文 ABC 字母" data-desc="從 A 到 Z 認識印尼文的字母與發音">
+            <div class="course-icon"><i class="fa-solid fa-font"></i></div>
+            <div class="course-name">印尼文 ABC 字母</div>
+            <div class="course-desc">從 A 到 Z 認識印尼文的字母、發音和基本拼讀方式，輕鬆學會印尼文的 ABC。</div>
+            <a class="course-start-btn" href="lessons/1-alfabet.html">開始學習</a>
         </div>
+        <!-- Tambahkan kartu kursus lainnya di sini dengan struktur data-title & data-desc yang sama -->
+    </div>
 
-        <div class="courses-empty" id="courses-empty">
-            <div class="emoji">🧊🍵</div>
-            <p>找不到符合的課程，換個關鍵字試試看～</p>
-        </div>
+    <div class="courses-empty" id="courses-empty">
+        <div class="emoji">🧊🍵</div>
+        <p>找不到符合的課程，換個關鍵字試試看～</p>
+    </div>
 
-        <!-- Pagination -->
-        <!-- Otomatis disembunyikan lewat JS kalau kartu <= 12 -->
-        <div class="courses-pagination" id="courses-pagination">
-            <button type="button" class="pagination-btn" id="courses-prev">← 上一頁</button>
-            <span class="pagination-info" id="courses-page-info">第 1 / 1 頁</span>
-            <button type="button" class="pagination-btn" id="courses-next">下頁 →</button>
-        </div>
+    <!-- Pagination -->
+    <div class="courses-pagination" id="courses-pagination">
+        <button type="button" class="pagination-btn" id="courses-prev">← 上一頁</button>
+        <span class="pagination-info" id="courses-page-info">第 1 / 1 頁</span>
+        <button type="button" class="pagination-btn" id="courses-next">下頁 →</button>
+    </div>
 
-    </main>
+</main>
 
-    <!-- 載入 script.js -->
-    <script src="script.js"></script>
 
-    <!-- Search + Pagination Script -->
-    <!-- FIX: pakai event delegation di document, BUKAN ambil elemen
-         langsung pas parsing. Soalnya script.js membongkar #page-source lalu
-         menyusun ulang jadi HTML string baru, jadi input, tombol & card yang
-         ada sekarang bakal jadi elemen baru yang belum ada listener-nya.
-         Untuk render awal pagination, dipakai MutationObserver supaya
-         nunggu sampai script.js selesai menyusun ulang DOM-nya. -->
-    <script>
-        (function () {
+<!--
+    =====================================================
+    SEARCH + PAGINATION JAVASCRIPT
 
-            const CARDS_PER_PAGE = 12;
+    CATATAN PENTING:
+    type="text/plain" dipasang agar script tidak langsung 
+    dijalankan mentah-mentah oleh browser sebelum dipindahkan 
+    oleh script.js utama.
+    =====================================================
+-->
 
-            let currentPage = 1;
-            let keyword = "";
+<script type="text/plain">
+    (function () {
 
-            function renderCards() {
+        const CARDS_PER_PAGE = 12;
 
-                const grid = document.getElementById("courses-grid");
+        let currentPage = 1;
+        let keyword = "";
 
-                if (!grid) return;
+        function renderCards() {
 
-                const allCards = Array.from(
-                    grid.querySelectorAll(".course-card")
+            const grid = document.getElementById("courses-grid");
+
+            if (!grid) return;
+
+            const allCards = Array.from(
+                grid.querySelectorAll(".course-card")
+            );
+
+            if (allCards.length === 0) return;
+
+            const matched = allCards.filter((card) => {
+
+                const title = (card.dataset.title || "").toLowerCase();
+                const desc = (card.dataset.desc || "").toLowerCase();
+
+                return (
+                    keyword === "" ||
+                    title.includes(keyword) ||
+                    desc.includes(keyword)
                 );
+            });
 
-                if (allCards.length === 0) return;
+            const totalPages = Math.max(
+                1,
+                Math.ceil(matched.length / CARDS_PER_PAGE)
+            );
 
-                const matched = allCards.filter((card) => {
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
 
-                    const title = (card.dataset.title || "").toLowerCase();
-                    const desc = (card.dataset.desc || "").toLowerCase();
+            const start = (currentPage - 1) * CARDS_PER_PAGE;
+            const end = start + CARDS_PER_PAGE;
+            const visibleOnThisPage = matched.slice(start, end);
 
-                    return (
-                        keyword === "" ||
-                        title.includes(keyword) ||
-                        desc.includes(keyword)
-                    );
-                });
+            allCards.forEach((card) => {
+                card.style.display = "none";
+            });
 
-                const totalPages = Math.max(
-                    1,
-                    Math.ceil(matched.length / CARDS_PER_PAGE)
-                );
+            visibleOnThisPage.forEach((card) => {
+                card.style.display = "";
+            });
 
-                if (currentPage > totalPages) currentPage = totalPages;
-                if (currentPage < 1) currentPage = 1;
+            const emptyState = document.getElementById("courses-empty");
 
-                const start = (currentPage - 1) * CARDS_PER_PAGE;
-                const end = start + CARDS_PER_PAGE;
-                const visibleOnThisPage = matched.slice(start, end);
-
-                allCards.forEach((card) => {
-                    card.style.display = "none";
-                });
-
-                visibleOnThisPage.forEach((card) => {
-                    card.style.display = "";
-                });
-
-                const emptyState = document.getElementById("courses-empty");
-
-                if (emptyState) {
-                    emptyState.style.display =
-                        matched.length === 0 ? "block" : "none";
-                }
-
-                const pagination = document.getElementById("courses-pagination");
-                const pageInfo = document.getElementById("courses-page-info");
-                const prevButton = document.getElementById("courses-prev");
-                const nextButton = document.getElementById("courses-next");
-
-                if (pagination) {
-                    pagination.style.display =
-                        matched.length > CARDS_PER_PAGE ? "flex" : "none";
-                }
-
-                if (pageInfo) {
-                    pageInfo.textContent = `第 ${currentPage} / ${totalPages} 頁`;
-                }
-
-                if (prevButton) prevButton.disabled = currentPage <= 1;
-                if (nextButton) nextButton.disabled = currentPage >= totalPages;
+            if (emptyState) {
+                emptyState.style.display =
+                    matched.length === 0 ? "block" : "none";
             }
 
-            document.addEventListener("input", (event) => {
+            const pagination = document.getElementById("courses-pagination");
+            const pageInfo = document.getElementById("courses-page-info");
+            const prevButton = document.getElementById("courses-prev");
+            const nextButton = document.getElementById("courses-next");
 
-                if (event.target.id !== "course-search") return;
+            if (pagination) {
+                pagination.style.display =
+                    matched.length > CARDS_PER_PAGE ? "flex" : "none";
+            }
 
-                keyword = event.target.value.trim().toLowerCase();
-                currentPage = 1;
+            if (pageInfo) {
+                pageInfo.textContent = `第 ${currentPage} / ${totalPages} 頁`;
+            }
 
-                renderCards();
-            });
+            if (prevButton) prevButton.disabled = currentPage <= 1;
+            if (nextButton) nextButton.disabled = currentPage >= totalPages;
+        }
 
-            document.addEventListener("click", (event) => {
+        document.addEventListener("input", (event) => {
 
-                if (event.target.id === "courses-prev") {
-                    currentPage--;
-                    renderCards();
-                } else if (event.target.id === "courses-next") {
-                    currentPage++;
-                    renderCards();
-                }
-            });
+            if (event.target.id !== "course-search") return;
 
-            // Coba render segera (kalau kartu sudah ada di DOM).
+            keyword = event.target.value.trim().toLowerCase();
+            currentPage = 1;
+
             renderCards();
+        });
 
-            // Terus pantau perubahan DOM (misal setelah script.js
-            // menyusun ulang halaman), lalu render ulang pagination.
-            const observer = new MutationObserver(() => {
+        document.addEventListener("click", (event) => {
+
+            if (event.target.id === "courses-prev") {
+                currentPage--;
                 renderCards();
-            });
+            } else if (event.target.id === "courses-next") {
+                currentPage++;
+                renderCards();
+            }
+        });
 
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
+        renderCards();
 
-        })();
-    </script>
+        const observer = new MutationObserver(() => {
+            renderCards();
+        });
 
-</body>
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
-</html>
+    })();
+</script>
+
+
+<!--
+    =====================================================
+    SHARED SCRIPT — TRIGGER SIDEBAR/A.HTML LOADER
+    Jangan dihapus.
+    =====================================================
+-->
+
+<script src="script.js"></script>
