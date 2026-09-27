@@ -1,4 +1,30 @@
-us<!-- =====================================================
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wordie Talkie — Indonesia Courses</title>
+
+    <!-- =====================================================
+         FONT AWESOME
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
      WORDIE TALKIE — INDONESIA COURSE SEARCH
      ===================================================== -->
 
@@ -233,6 +259,10 @@ us<!-- =====================================================
     }
 
 
+    /* ==================================================
+       COURSE ICON
+    ================================================== */
+
     .course-icon {
 
         width: 60px;
@@ -254,6 +284,17 @@ us<!-- =====================================================
         justify-content: center;
 
         margin-bottom: 14px;
+
+    }
+
+
+    .course-icon i {
+
+        color: var(--light-brown);
+
+        font-size: 24px;
+
+        display: block;
 
     }
 
@@ -394,7 +435,6 @@ us<!-- =====================================================
 
         }
 
-
     }
 
 </style>
@@ -450,7 +490,7 @@ us<!-- =====================================================
                 id="course-search"
                 placeholder="搜尋課程，例如：文法、單字、會話……"
                 autocomplete="off"
-                oninput="filterEnglishCourse(this.value)"
+                oninput="filterIndonesiaCourse(this.value)"
             >
 
 
@@ -461,35 +501,64 @@ us<!-- =====================================================
 
 
     <!-- =================================================
-         COURSE CARD
+         COURSE GRID
     ================================================== -->
 
-    <div
-    class="course-card"
-    data-title="印尼語日常用語：打招呼、謝謝與不好意思"
-    data-desc="學習印尼語中常見的日常招呼，以及表達感謝、道歉和禮貌請求的自然說法。"
->
+    <div class="courses-grid">
 
-    <div class="course-icon">
-        <i class="fa-solid fa-hand"></i>
-    </div>
 
-    <div class="course-name">
-        印尼語日常用語
-    </div>
+        <!-- =================================================
+             COURSE CARD
+        ================================================== -->
 
-    <div class="course-desc">
-        從日常打招呼開始，學會用印尼語自然地說謝謝、對不起、借過與請問。
-    </div>
+        <div
+            class="course-card"
+            id="indonesia-greetings-card"
+            data-title="印尼語日常用語：打招呼、謝謝與不好意思"
+            data-desc="學習印尼語中常見的日常招呼，以及表達感謝、道歉和禮貌請求的自然說法。"
+        >
 
-    <a
-        class="course-start-btn"
-        href="indonesia/salam.html"
-    >
-        開始學習
-    </a>
 
-</div>
+            <!-- ICON -->
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-hand"></i>
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="course-name">
+
+                印尼語日常用語
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="course-desc">
+
+                從日常打招呼開始，學會用印尼語自然地說謝謝、對不起、借過與請問。
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <a
+                class="course-start-btn"
+                href="indonesia/salam.html"
+            >
+
+                開始學習
+
+            </a>
+
+
+        </div>
 
 
     </div>
@@ -503,6 +572,7 @@ us<!-- =====================================================
         class="courses-empty"
         id="courses-empty"
     >
+
 
         <div class="emoji">
 
@@ -518,6 +588,7 @@ us<!-- =====================================================
 
         </p>
 
+
     </div>
 
 
@@ -526,25 +597,16 @@ us<!-- =====================================================
 
 <!-- =====================================================
      SEARCH SCRIPT
-
-     Search:
-     - Course title
-     - Course description
-
-     Tidak menggunakan:
-     - MutationObserver
-     - Pagination
-     - addEventListener
 ===================================================== -->
 
-<script type="text/plain">
+<script>
 
-window.filterEnglishCourse = function (value) {
+window.filterIndonesiaCourse = function (value) {
 
 
     const card =
         document.getElementById(
-            "english-alphabet-card"
+            "indonesia-greetings-card"
         );
 
 
@@ -619,7 +681,7 @@ window.filterEnglishCourse = function (value) {
      INITIAL STATE
 ===================================================== -->
 
-window.filterEnglishCourse("");
+window.filterIndonesiaCourse("");
 
 </script>
 
@@ -629,3 +691,8 @@ window.filterEnglishCourse("");
 ===================================================== -->
 
 <script src="script.js"></script>
+
+
+</body>
+
+</html>
