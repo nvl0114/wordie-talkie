@@ -1,0 +1,671 @@
+<!--
+    =====================================================
+    KONTEN: english/tobe.html
+    (To Be Lab｜be 動詞：是・很・正在・被)
+
+    File ini adalah KONTEN halaman (bukan halaman penuh).
+    Sidebar & layout datang dari A.html lewat script.js.
+
+    PENTING: tag <script src="../script.js"> di paling
+    bawah file ini WAJIB ada — itu yang men-trigger
+    pemasangan sidebar saat file ini dibuka langsung oleh
+    browser. Jangan dihapus.
+    =====================================================
+-->
+
+<style>
+
+    #page-content {
+        --cream: #f3f7fb;
+        --brown: #274257;
+        --light-brown: #5b7c94;
+        --soft-brown: #e2edf5;
+        --white: #ffffff;
+
+        --green: #5f9b7d;
+        --green-dark: #46795f;
+
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+
+        --border: #d7e5ef;
+    }
+
+    .tb-container {
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 10px 0 40px;
+        line-height: 1.8;
+        color: var(--brown);
+    }
+
+    .tb-hero {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 28px 24px;
+        margin-bottom: 22px;
+        box-shadow: 0 5px 18px rgba(39, 66, 87, 0.08);
+    }
+
+    .tb-badge {
+        display: inline-block;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .tb-hero h1 { margin: 0 0 10px; font-size: 28px; }
+    .tb-hero p { margin: 8px 0; }
+
+    /* =========================
+       EXPLANATION CARD
+    ========================= */
+
+    .tb-explain {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px;
+        margin: 22px 0 14px;
+        box-shadow: 0 5px 18px rgba(39, 66, 87, 0.07);
+    }
+
+    .tb-explain h2 {
+        margin: 0 0 12px;
+        font-size: 21px;
+    }
+
+    .tb-example {
+        background: var(--cream);
+        border-left: 4px solid var(--light-brown);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin: 10px 0;
+    }
+
+    .tb-example .en {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .tb-example .zh {
+        color: var(--light-brown);
+        font-size: 14px;
+    }
+
+    .tb-tip {
+        background: #fff8e8;
+        border-left: 4px solid #d9a441;
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin: 14px 0 0;
+        font-size: 14px;
+        color: #7a5c1e;
+    }
+
+    .tb-compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin-top: 8px;
+    }
+
+    .tb-compare-table td {
+        border: 1px solid var(--border);
+        padding: 8px 10px;
+    }
+
+    .tb-compare-table td.zh { color: var(--light-brown); font-size: 13px; }
+
+    /* =========================
+       ARRANGE GAME
+    ========================= */
+
+    .tb-game-card {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px;
+        margin-bottom: 22px;
+        box-shadow: 0 5px 18px rgba(39, 66, 87, 0.07);
+    }
+
+    .tb-game-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .tb-game-label {
+        display: inline-block;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .tb-counter {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--light-brown);
+    }
+
+    .tb-prompt {
+        font-size: 19px;
+        font-weight: 800;
+        margin: 8px 0 16px;
+    }
+
+    .tb-answer-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        min-height: 46px;
+        padding: 10px;
+        background: var(--cream);
+        border: 2px dashed var(--border);
+        border-radius: 14px;
+        margin-bottom: 14px;
+    }
+
+    .tb-bank-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .tb-tile {
+        border: none;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 10px 16px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s ease, background-color 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .tb-tile:hover:not(:disabled) { transform: translateY(-2px); }
+    .tb-tile:disabled { opacity: 0.35; cursor: default; }
+
+    .tb-tile.placed {
+        background: var(--brown);
+        color: var(--white);
+    }
+
+    .tb-tile.playing {
+        box-shadow: 0 0 0 3px rgba(95, 155, 125, 0.4);
+    }
+
+    .tb-actions {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .tb-reset-btn {
+        border: 1px solid var(--border);
+        background: var(--white);
+        color: var(--light-brown);
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .tb-feedback {
+        display: none;
+        margin-top: 16px;
+        border-radius: 16px;
+        padding: 16px;
+        animation: tbFeedbackIn 0.3s ease;
+    }
+
+    .tb-feedback.show { display: block; }
+
+    .tb-feedback.correct {
+        background: var(--green);
+        border-left: 5px solid var(--green-dark);
+        color: var(--white);
+    }
+
+    .tb-feedback.wrong {
+        background: var(--red);
+        border-left: 5px solid var(--red-dark);
+        color: var(--white);
+    }
+
+    .tb-feedback-title {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 6px;
+    }
+
+    .tb-feedback .correct-sentence {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .tb-next-area { margin-top: 16px; text-align: center; }
+
+    .tb-countdown {
+        display: none;
+        font-size: 14px;
+        color: var(--light-brown);
+        margin-bottom: 8px;
+    }
+    .tb-countdown.show { display: block; }
+
+    .tb-next-btn {
+        display: none;
+        border: none;
+        background: var(--brown);
+        color: white;
+        padding: 11px 20px;
+        border-radius: 999px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+    .tb-next-btn.show { display: inline-block; }
+
+    .tb-done {
+        text-align: center;
+        font-weight: 700;
+        color: var(--light-brown);
+        padding: 10px 0;
+    }
+
+    @keyframes tbFeedbackIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 650px) {
+        .tb-hero, .tb-explain, .tb-game-card { padding: 18px 16px; }
+        .tb-hero h1 { font-size: 23px; }
+        .tb-prompt { font-size: 17px; }
+        .tb-tile { padding: 8px 12px; font-size: 14px; }
+    }
+
+</style>
+
+<div class="tb-container">
+
+    <section class="tb-hero">
+        <div class="tb-badge">ENGLISH • TO BE LAB</div>
+        <h1>🔤 be 動詞是什麼意思？</h1>
+        <p>嗨嗨～我們先不要急著直接開始英文對話。如果 be 動詞（am / is / are）的基礎還不熟，直接進入對話會比較難理解，所以先一起把基礎打好，之後學起來會更輕鬆！</p>
+        <p>在英文裡，<strong>to be（am / is / are）</strong> 不是只有「是」的意思，要看後面接的內容才知道它實際的意思。這一課會帶你認識它的四種用法：<strong>是・很・正在・被</strong>，每一種用法後面都有排字遊戲可以馬上練習。</p>
+    </section>
+
+    <!-- ============ 是 ============ -->
+
+    <section class="tb-explain">
+        <h2>① 是 — 介紹身分、職業、東西</h2>
+        <p>用來說明一個人或一個東西「是什麼」。</p>
+        <div class="tb-example"><div class="en">I am a girl.</div><div class="zh">我是一個女生。</div></div>
+        <div class="tb-example"><div class="en">She is a teacher.</div><div class="zh">她是一位老師。</div></div>
+        <div class="tb-tip">💡 a 或 an 怎麼選？單字字首是 A、I、U、E、O 的話用 an（an apple、an engineer），其他情況用 a（a student、a teacher）。</div>
+    </section>
+
+    <section class="tb-game-card" id="game-shi">
+        <div class="tb-game-top">
+            <div class="tb-game-label">🧩 排字練習・是</div>
+            <div class="tb-counter" id="counter-shi">1 / 7</div>
+        </div>
+        <div id="body-shi"></div>
+    </section>
+
+    <!-- ============ 很 ============ -->
+
+    <section class="tb-explain">
+        <h2>② 很 — 放在形容詞前面，表示狀態或感覺</h2>
+        <div class="tb-example"><div class="en">I am happy.</div><div class="zh">我很開心。</div></div>
+        <div class="tb-example"><div class="en">He is nervous.</div><div class="zh">他很緊張。</div></div>
+        <p>這裡的 am / is / are 不是直接翻成「是」，而是用來連接「人」和「形容詞」。</p>
+    </section>
+
+    <section class="tb-game-card" id="game-hen">
+        <div class="tb-game-top">
+            <div class="tb-game-label">🧩 排字練習・很</div>
+            <div class="tb-counter" id="counter-hen">1 / 7</div>
+        </div>
+        <div id="body-hen"></div>
+    </section>
+
+    <!-- ============ 正在 ============ -->
+
+    <section class="tb-explain">
+        <h2>③ 正在 — be + V-ing，表示正在做某件事</h2>
+        <div class="tb-example"><div class="en">She is studying.</div><div class="zh">她正在讀書。</div></div>
+        <div class="tb-example"><div class="en">They are eating.</div><div class="zh">他們正在吃飯。</div></div>
+    </section>
+
+    <section class="tb-game-card" id="game-zhengzai">
+        <div class="tb-game-top">
+            <div class="tb-game-label">🧩 排字練習・正在</div>
+            <div class="tb-counter" id="counter-zhengzai">1 / 7</div>
+        </div>
+        <div id="body-zhengzai"></div>
+    </section>
+
+    <!-- ============ 被 ============ -->
+
+    <section class="tb-explain">
+        <h2>④ 被 — be + 過去分詞（V3），表示被動語態</h2>
+        <div class="tb-example"><div class="en">She is invited by Tom.</div><div class="zh">她被 Tom 邀請。</div></div>
+        <div class="tb-example"><div class="en">The door is closed.</div><div class="zh">門被關上了。</div></div>
+        <p>be + V-ing（正在）和 be + V3（被）都是「am / is / are + 動詞」的結構，但意思不一樣：</p>
+        <div class="tb-example"><div class="en">She is kissing her boyfriend.</div><div class="zh">她正在親她的男朋友。</div></div>
+        <div class="tb-example"><div class="en">She is kissed by her boyfriend.</div><div class="zh">她被她的男朋友親。🤭</div></div>
+
+        <p style="margin-top:14px;">兩者對照一下就更清楚了：</p>
+        <table class="tb-compare-table">
+            <tr><td>We are helping the teacher.</td><td class="zh">我們正在幫助老師。</td></tr>
+            <tr><td>We are helped by the teacher.</td><td class="zh">我們受到老師的幫助。</td></tr>
+            <tr><td>She is teaching English.</td><td class="zh">她正在教英文。</td></tr>
+            <tr><td>She is taught English.</td><td class="zh">她被教英文。</td></tr>
+        </table>
+    </section>
+
+    <section class="tb-game-card" id="game-bei">
+        <div class="tb-game-top">
+            <div class="tb-game-label">🧩 排字練習・被</div>
+            <div class="tb-counter" id="counter-bei">1 / 7</div>
+        </div>
+        <div id="body-bei"></div>
+    </section>
+
+    <section class="tb-explain">
+        <h2>🎯 小挑戰</h2>
+        <p>用 be 動詞的四種用法（是、很、正在、被）各自造一個英文句子，寫在下面練習看看，寫完可以對照前面的例句自我檢查！</p>
+        <textarea rows="4" placeholder="在這裡寫下你的四個句子..." style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:12px;padding:10px;font-size:14px;font-family:inherit;"></textarea>
+    </section>
+
+</div>
+
+<!--
+    =====================================================
+    GAME JAVASCRIPT
+
+    CATATAN PENTING:
+    type="text/plain" di bawah ini SENGAJA dipasang, sama
+    seperti pola di indonesia/salam.html. Ini mencegah
+    script dieksekusi dua kali (sekali mentah oleh browser,
+    sekali lagi oleh script.js) — kalau dihapus, tombol jadi
+    tidak bisa diklik.
+
+    JANGAN HAPUS type="text/plain" DI BAWAH INI.
+    =====================================================
+-->
+
+<script type="text/plain">
+
+    const tbGames = {
+
+        shi: {
+            countdownId: "counter-shi",
+            bodyId: "body-shi",
+            items: [
+                { en: "I am an engineer.", zh: "我是一名工程師。" },
+                { en: "You are an employee.", zh: "你是一名員工。" },
+                { en: "We are friends.", zh: "我們是朋友。" },
+                { en: "They are students.", zh: "他們是學生。" },
+                { en: "She is a doctor.", zh: "她是一名醫生。" },
+                { en: "He is a chef.", zh: "他是一名廚師。" },
+                { en: "It is a book.", zh: "它是一本書。" }
+            ]
+        },
+
+        hen: {
+            countdownId: "counter-hen",
+            bodyId: "body-hen",
+            items: [
+                { en: "I am excited.", zh: "我很興奮。" },
+                { en: "You are kind.", zh: "你很善良。" },
+                { en: "We are tired.", zh: "我們很累。" },
+                { en: "They are busy.", zh: "他們很忙。" },
+                { en: "She is beautiful.", zh: "她很漂亮。" },
+                { en: "He is strong.", zh: "他很強壯。" },
+                { en: "It is good.", zh: "它很好。" }
+            ]
+        },
+
+        zhengzai: {
+            countdownId: "counter-zhengzai",
+            bodyId: "body-zhengzai",
+            items: [
+                { en: "I am inviting my friend.", zh: "我正在邀請我的朋友。" },
+                { en: "You are calling your mother.", zh: "你正在打電話給你的媽媽。" },
+                { en: "We are helping the teacher.", zh: "我們正在幫助老師。" },
+                { en: "They are asking a question.", zh: "他們正在問一個問題。" },
+                { en: "She is teaching English.", zh: "她正在教英文。" },
+                { en: "He is choosing a book.", zh: "他正在選一本書。" },
+                { en: "It is using a battery.", zh: "它正在使用電池。" }
+            ]
+        },
+
+        bei: {
+            countdownId: "counter-bei",
+            bodyId: "body-bei",
+            items: [
+                { en: "I am invited by my friend.", zh: "我被我的朋友邀請。" },
+                { en: "You are called by your mother.", zh: "你被你的媽媽打電話。" },
+                { en: "We are helped by the teacher.", zh: "我們受到老師的幫助。" },
+                { en: "They are asked a question.", zh: "他們被問了一個問題。" },
+                { en: "She is taught English.", zh: "她被教英文。" },
+                { en: "He is chosen for the team.", zh: "他被選進這個團隊。" },
+                { en: "It is used every day.", zh: "它每天都被使用。" }
+            ]
+        }
+    };
+
+    function tbSpeak(word, tileEl) {
+
+        if (!("speechSynthesis" in window)) return;
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = "en-US";
+        utterance.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        const enVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("en"));
+        if (enVoice) utterance.voice = enVoice;
+
+        if (tileEl) {
+            utterance.onstart = () => tileEl.classList.add("playing");
+            utterance.onend = () => tileEl.classList.remove("playing");
+            utterance.onerror = () => tileEl.classList.remove("playing");
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+
+    function tbShuffle(array) {
+        const result = [...array];
+        for (let i = result.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [result[i], result[j]] = [result[j], result[i]];
+        }
+        return result;
+    }
+
+    function tbTokenize(sentence) {
+        return sentence.replace(/\.$/, "").split(" ");
+    }
+
+    function initArrangeGame(key, config) {
+
+        const body = document.getElementById(config.bodyId);
+        const counterEl = document.getElementById(config.countdownId);
+
+        let index = 0;
+        let countdownTimer = null;
+
+        function render() {
+
+            clearInterval(countdownTimer);
+
+            const item = config.items[index];
+            const words = tbTokenize(item.en);
+
+            counterEl.textContent = `${index + 1} / ${config.items.length}`;
+
+            const order = tbShuffle(words.map((w, i) => i));
+
+            body.innerHTML = `
+                <div class="tb-prompt">${item.zh}</div>
+                <div class="tb-answer-row" id="${key}-answer"></div>
+                <div class="tb-bank-row" id="${key}-bank"></div>
+                <div class="tb-actions">
+                    <button type="button" class="tb-reset-btn" id="${key}-reset">🔄 重排</button>
+                </div>
+                <div class="tb-feedback" id="${key}-feedback">
+                    <div class="tb-feedback-title" id="${key}-feedback-title"></div>
+                    <div class="correct-sentence" id="${key}-correct-sentence"></div>
+                    <div id="${key}-correct-zh"></div>
+                </div>
+                <div class="tb-next-area">
+                    <div class="tb-countdown" id="${key}-countdown"></div>
+                    <button type="button" class="tb-next-btn" id="${key}-next">下一句 →</button>
+                </div>
+            `;
+
+            const answerRow = document.getElementById(`${key}-answer`);
+            const bankRow = document.getElementById(`${key}-bank`);
+            const resetBtn = document.getElementById(`${key}-reset`);
+            const nextBtn = document.getElementById(`${key}-next`);
+            const feedback = document.getElementById(`${key}-feedback`);
+            const feedbackTitle = document.getElementById(`${key}-feedback-title`);
+            const correctSentence = document.getElementById(`${key}-correct-sentence`);
+            const correctZh = document.getElementById(`${key}-correct-zh`);
+            const countdown = document.getElementById(`${key}-countdown`);
+
+            let placedOrder = [];
+
+            function buildBank() {
+                bankRow.innerHTML = "";
+                order.forEach(originalIndex => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "tb-tile";
+                    btn.textContent = words[originalIndex];
+                    btn.dataset.originalIndex = originalIndex;
+                    btn.addEventListener("click", () => placeTile(originalIndex, btn));
+                    bankRow.appendChild(btn);
+                });
+            }
+
+            function buildAnswer() {
+                answerRow.innerHTML = "";
+                placedOrder.forEach(originalIndex => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "tb-tile placed";
+                    btn.textContent = words[originalIndex];
+                    btn.addEventListener("click", () => tbSpeak(words[originalIndex], btn));
+                    answerRow.appendChild(btn);
+                });
+            }
+
+            function placeTile(originalIndex, tileEl) {
+                if (tileEl.disabled) return;
+                tileEl.disabled = true;
+                tileEl.classList.add("placed");
+                placedOrder.push(originalIndex);
+                tbSpeak(words[originalIndex], tileEl);
+                buildAnswer();
+
+                if (placedOrder.length === words.length) {
+                    setTimeout(checkAnswer, 300);
+                }
+            }
+
+            function checkAnswer() {
+
+                const isCorrect = placedOrder.every((v, i) => v === i);
+
+                bankRow.querySelectorAll(".tb-tile").forEach(t => t.disabled = true);
+                resetBtn.style.display = "none";
+
+                feedback.className = isCorrect ? "tb-feedback show correct" : "tb-feedback show wrong";
+                feedbackTitle.textContent = isCorrect ? "✓ 正確！" : "✗ 順序不對，正確答案是：";
+                correctSentence.textContent = item.en;
+                correctZh.textContent = item.zh;
+
+                startCountdown();
+            }
+
+            function startCountdown() {
+                let seconds = 4;
+                countdown.classList.add("show");
+                countdown.textContent = `下一句 ${seconds}...`;
+
+                countdownTimer = setInterval(() => {
+                    seconds--;
+                    if (seconds > 0) {
+                        countdown.textContent = `下一句 ${seconds}...`;
+                    } else {
+                        clearInterval(countdownTimer);
+                        countdown.classList.remove("show");
+                        nextBtn.classList.add("show");
+                    }
+                }, 1000);
+            }
+
+            resetBtn.addEventListener("click", () => {
+                placedOrder = [];
+                buildAnswer();
+                bankRow.querySelectorAll(".tb-tile").forEach(t => {
+                    t.disabled = false;
+                    t.classList.remove("placed");
+                });
+            });
+
+            nextBtn.addEventListener("click", () => {
+                if (index >= config.items.length - 1) {
+                    body.innerHTML = `<div class="tb-done">🎉 這個部分練習完成！可以往下滑到下一個用法繼續。</div>`;
+                    return;
+                }
+                index++;
+                render();
+            });
+
+            buildBank();
+            buildAnswer();
+        }
+
+        render();
+    }
+
+    Object.keys(tbGames).forEach(key => initArrangeGame(key, tbGames[key]));
+
+</script>
+
+<!--
+    =====================================================
+    SHARED SCRIPT — TRIGGER SIDEBAR/A.HTML LOADER
+    Jangan dihapus.
+    =====================================================
+-->
+
+<script src="../script.js"></script>
