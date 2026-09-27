@@ -397,6 +397,66 @@
     }
 
     /* =========================
+       FINAL NOTE (voice note exchange invite)
+    ========================= */
+
+    .final-note {
+        display: none;
+
+        background: var(--cream);
+        border: 2px dashed var(--light-brown);
+        border-radius: 20px;
+
+        padding: 22px 20px;
+        margin-top: 22px;
+
+        line-height: 1.9;
+
+        animation: feedbackIn 0.3s ease;
+    }
+
+    .final-note.show {
+        display: block;
+    }
+
+    .final-note p {
+        margin: 8px 0;
+    }
+
+    .final-note-title {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .ig-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        margin-top: 12px;
+
+        background: var(--brown);
+        color: white !important;
+
+        text-decoration: none;
+
+        padding: 11px 20px;
+
+        border-radius: 999px;
+
+        font-size: 15px;
+        font-weight: 800;
+
+        transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .ig-link:hover {
+        transform: translateY(-1px);
+        opacity: 0.92;
+    }
+
+    /* =========================
        ANIMATIONS
     ========================= */
 
@@ -458,6 +518,10 @@
             font-size: 12px;
 
             padding: 3px 8px;
+        }
+
+        .final-note {
+            padding: 18px 15px;
         }
     }
 
@@ -543,6 +607,36 @@
             <button type="button" class="next-button" id="nextButton">
                 下一題 →
             </button>
+
+        </div>
+
+
+        <div class="final-note" id="finalNote">
+
+            <div class="final-note-title">
+                🎙️ 一起練習發音吧！
+            </div>
+
+            <p>
+                完成之後，歡迎把你唸這些句子的 voice note 傳到我的 Instagram DM 給我！
+            </p>
+
+            <p>
+                作為交換，我也很樂意幫你把這些句子翻成中文或台語 🙂 因為其實我自己的中文 speaking 還是很不好 😭，所以我也會錄 voice note 給你，希望你也可以幫我糾正一下我的發音。
+            </p>
+
+            <p>
+                如果有任何問題，或是還有其他想聊的事情，都可以直接 DM 我 IG 或 Threads。我們一起學習吧！💪🏻
+            </p>
+
+            <a
+                class="ig-link"
+                href="https://ig.me/m/nvl0114"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                📩 DM di Instagram (@nvl0114)
+            </a>
 
         </div>
 
@@ -851,6 +945,7 @@
     const explanation = document.getElementById("explanation");
     const countdown = document.getElementById("countdown");
     const nextButton = document.getElementById("nextButton");
+    const finalNote = document.getElementById("finalNote");
 
 
     let currentQuestionIndex = 0;
@@ -922,6 +1017,8 @@
 
         countdown.classList.remove("show");
         countdown.textContent = "";
+
+        finalNote.classList.remove("show");
 
         const options = createOptions(currentQuestionIndex);
 
@@ -1117,6 +1214,8 @@
 
         countdown.classList.remove("show");
         nextButton.classList.remove("show");
+
+        finalNote.classList.add("show");
     }
 
 
