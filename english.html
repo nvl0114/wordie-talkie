@@ -1,25 +1,6 @@
-<!--
-    =====================================================
-    WORDIE TALKIE — ENGLISH COURSES
-    =====================================================
-
-    CONTENT PAGE
-
-    Halaman ini dimuat ke dalam #page-content oleh script.js.
-
-    Search menggunakan:
-        oninput="filterEnglishCourses(this.value)"
-
-    Jadi search tidak bergantung pada:
-        - addEventListener
-        - MutationObserver
-        - event delegation
-
-    Pagination:
-        12 courses per page
-
-    =====================================================
--->
+<!-- =====================================================
+     WORDIE TALKIE — ENGLISH COURSE SEARCH
+     ===================================================== -->
 
 
 <style>
@@ -31,7 +12,6 @@
         --light-brown: #b8865c;
         --soft-brown: #f3e4d3;
         --white: #ffffff;
-
         --border: #ead8c5;
 
     }
@@ -48,8 +28,6 @@
         margin: 0 auto;
 
         padding: 10px 0 40px;
-
-        font-family: Arial, sans-serif;
 
         color: var(--brown);
 
@@ -118,6 +96,8 @@
 
         margin: 0 0 25px;
 
+        line-height: 1.6;
+
     }
 
 
@@ -174,6 +154,13 @@
         box-sizing: border-box;
 
         transition: 0.2s ease;
+
+    }
+
+
+    #course-search::placeholder {
+
+        color: #b0937e;
 
     }
 
@@ -358,97 +345,18 @@
 
     .courses-empty .emoji {
 
-        font-size: 28px;
+        font-size: 30px;
 
         margin-bottom: 10px;
 
     }
 
 
-    /* ==================================================
-       PAGINATION
-    ================================================== */
+    .courses-empty p {
 
-    .courses-pagination {
-
-        display: none;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 14px;
-
-        margin-top: 28px;
-
-    }
-
-
-    .pagination-btn {
-
-        border: 2px solid var(--brown);
-
-        background: transparent;
-
-        color: var(--brown);
-
-        padding: 9px 20px;
-
-        border-radius: 999px;
+        margin: 0;
 
         font-size: 14px;
-
-        font-weight: 800;
-
-        cursor: pointer;
-
-        transition:
-            transform 0.18s ease,
-            opacity 0.18s ease,
-            background-color 0.18s ease,
-            color 0.18s ease;
-
-    }
-
-
-    .pagination-btn:hover:not(:disabled) {
-
-        background: var(--brown);
-
-        color: var(--cream);
-
-        transform: translateY(-1px);
-
-    }
-
-
-    .pagination-btn:active:not(:disabled) {
-
-        transform: translateY(1px);
-
-    }
-
-
-    .pagination-btn:disabled {
-
-        opacity: 0.35;
-
-        cursor: not-allowed;
-
-    }
-
-
-    .pagination-info {
-
-        font-size: 14px;
-
-        font-weight: 700;
-
-        color: #8b6d5c;
-
-        min-width: 90px;
-
-        text-align: center;
 
     }
 
@@ -468,7 +376,7 @@
 
         .courses-hero {
 
-            padding: 20px 17px;
+            padding: 22px 17px;
 
         }
 
@@ -482,35 +390,10 @@
 
         .courses-grid {
 
-            grid-template-columns:
-                repeat(auto-fill, minmax(150px, 1fr));
-
-            gap: 14px;
+            grid-template-columns: 1fr;
 
         }
 
-
-        .course-card {
-
-            padding: 18px 14px;
-
-        }
-
-
-        .courses-pagination {
-
-            gap: 8px;
-
-        }
-
-
-        .pagination-btn {
-
-            padding: 8px 14px;
-
-            font-size: 13px;
-
-        }
 
     }
 
@@ -518,9 +401,8 @@
 
 
 <!-- =====================================================
-     PAGE CONTENT
-===================================================== -->
-
+     PAGE
+     ===================================================== -->
 
 <main class="courses-container">
 
@@ -548,17 +430,15 @@
 
         <p class="courses-subtitle">
 
-            Choose a topic or search for something you want to learn 📚✨
+            Choose a topic or search for something
+            you want to learn 📚✨
 
         </p>
 
 
         <!-- =================================================
              SEARCH
-
-             IMPORTANT:
-             Search menggunakan oninput langsung.
-             ================================================== -->
+        ================================================== -->
 
         <div class="courses-search-wrap">
 
@@ -569,9 +449,9 @@
             <input
                 type="text"
                 id="course-search"
-                placeholder="Search courses, e.g. grammar, greetings..."
+                placeholder="Search courses..."
                 autocomplete="off"
-                oninput="filterEnglishCourses(this.value)"
+                oninput="filterEnglishCourse(this.value)"
             >
 
 
@@ -582,9 +462,9 @@
 
 
     <!-- =================================================
-         COURSE GRID
+         COURSE CARD
+         HANYA 1 KARTU DULU
     ================================================== -->
-
 
     <div
         class="courses-grid"
@@ -592,15 +472,11 @@
     >
 
 
-        <!-- =================================================
-             COURSE 1
-        ================================================== -->
-
-
         <div
             class="course-card"
+            id="english-alphabet-card"
             data-title="English Alphabet"
-            data-desc="Learn the English alphabet from A to Z, letters, pronunciation, and basic spelling."
+            data-desc="Learn the English alphabet from A to Z, including letters, pronunciation, and basic spelling."
         >
 
 
@@ -640,523 +516,6 @@
         </div>
 
 
-        <!-- =================================================
-             COURSE 2
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="English Greetings"
-            data-desc="Learn basic English greetings, hello, good morning, good afternoon, good evening, and everyday expressions."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-hand"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                English Greetings
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn useful English greetings
-                and everyday expressions.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/2-greetings.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 3
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Self Introduction"
-            data-desc="Learn how to introduce yourself in English, talk about your name, age, country, hobbies, and basic information."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-user"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Self Introduction
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn how to introduce yourself
-                and share basic information in English.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/3-self-introduction.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 4
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="English Pronouns"
-            data-desc="Learn I, you, he, she, it, we, and they and understand how English subject pronouns work."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-users"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                English Pronouns
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn the basic English subject pronouns
-                and how to use them in sentences.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/4-pronouns.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 5
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="To Be: Am Is Are"
-            data-desc="Learn am, is, and are and understand how to use to be in English sentences."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-link"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                To Be: Am • Is • Are
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Understand how am, is, and are
-                work in everyday English sentences.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/5-to-be.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 6
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Articles A An The"
-            data-desc="Learn how to use a, an, and the in English with simple examples."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-font"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                A • An • The
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn the basic rules for using
-                a, an, and the.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/6-articles.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 7
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Present Simple"
-            data-desc="Learn the present simple tense and use it to talk about habits, routines, facts, and everyday activities."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-calendar-day"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Present Simple
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn how to talk about routines,
-                habits, and everyday activities.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/7-present-simple.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 8
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Present Continuous"
-            data-desc="Learn am is are plus verb ing and use the present continuous to talk about actions happening now."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-person-running"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Present Continuous
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn how to describe actions
-                happening right now.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/8-present-continuous.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 9
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Past Simple"
-            data-desc="Learn the past simple tense and talk about things that happened in the past."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-clock-rotate-left"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Past Simple
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn how to talk about
-                completed actions in the past.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/9-past-simple.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 10
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Question Words"
-            data-desc="Learn what, where, when, who, why, and how and use English question words naturally."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-circle-question"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Question Words
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Learn what, where, when, who,
-                why, and how.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/10-question-words.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 11
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Everyday Vocabulary"
-            data-desc="Learn useful English vocabulary for everyday conversations, daily activities, and common situations."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-book"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Everyday Vocabulary
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Build useful English vocabulary
-                for everyday conversations.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/11-everyday-vocabulary.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
-        <!-- =================================================
-             COURSE 12
-        ================================================== -->
-
-
-        <div
-            class="course-card"
-            data-title="Everyday Conversation"
-            data-desc="Practice simple English conversations for daily life, meeting people, asking questions, and responding naturally."
-        >
-
-
-            <div class="course-icon">
-
-                <i class="fa-solid fa-comments"></i>
-
-            </div>
-
-
-            <div class="course-name">
-
-                Everyday Conversation
-
-            </div>
-
-
-            <div class="course-desc">
-
-                Practice simple English conversations
-                for everyday situations.
-
-            </div>
-
-
-            <a
-                class="course-start-btn"
-                href="lessons/12-everyday-conversation.html"
-            >
-
-                Start Learning
-
-            </a>
-
-
-        </div>
-
-
     </div>
 
 
@@ -1164,12 +523,10 @@
          EMPTY SEARCH RESULT
     ================================================== -->
 
-
     <div
         class="courses-empty"
         id="courses-empty"
     >
-
 
         <div class="emoji">
 
@@ -1180,59 +537,10 @@
 
         <p>
 
-            No courses found.
+            No course found.
             Try another keyword~
 
         </p>
-
-
-    </div>
-
-
-    <!-- =================================================
-         PAGINATION
-    ================================================== -->
-
-
-    <div
-        class="courses-pagination"
-        id="courses-pagination"
-    >
-
-
-        <button
-            type="button"
-            class="pagination-btn"
-            id="courses-prev"
-            onclick="englishCoursePreviousPage()"
-        >
-
-            ← Previous
-
-        </button>
-
-
-        <span
-            class="pagination-info"
-            id="courses-page-info"
-        >
-
-            Page 1 / 1
-
-        </span>
-
-
-        <button
-            type="button"
-            class="pagination-btn"
-            id="courses-next"
-            onclick="englishCourseNextPage()"
-        >
-
-            Next →
-
-        </button>
-
 
     </div>
 
@@ -1241,549 +549,107 @@
 
 
 <!-- =====================================================
-     SEARCH + PAGINATION JAVASCRIPT
+     SEARCH SCRIPT
 
-     Tetap menggunakan type="text/plain" karena
-     script.js Wordie Talkie akan menjalankan ulang
-     script melalui reExecuteScripts().
+     Search:
+     - Course title
+     - Course description
+
+     Tidak menggunakan:
+     - MutationObserver
+     - Pagination
+     - addEventListener
 ===================================================== -->
-
 
 <script type="text/plain">
 
-(function () {
-
-    "use strict";
+window.filterEnglishCourse = function (value) {
 
 
-    /*
-     * =================================================
-     * GLOBAL DATA
-     * =================================================
-     */
-
-    window.englishCoursePage = 1;
-
-    window.englishCourseKeyword = "";
-
-    window.englishCoursePerPage = 12;
-
-
-    /*
-     * =================================================
-     * GET COURSES
-     * =================================================
-     */
-
-    window.getEnglishCourseCards = function () {
-
-        const grid =
-            document.getElementById("courses-grid");
-
-        if (!grid) {
-
-            return [];
-
-        }
-
-        return Array.from(
-            grid.querySelectorAll(".course-card")
+    const card =
+        document.getElementById(
+            "english-alphabet-card"
         );
 
-    };
 
-
-    /*
-     * =================================================
-     * FILTER + DISPLAY
-     * =================================================
-     */
-
-    window.filterEnglishCourses = function (value) {
-
-
-        const cards =
-            window.getEnglishCourseCards();
-
-
-        const emptyState =
-            document.getElementById(
-                "courses-empty"
-            );
-
-
-        const pagination =
-            document.getElementById(
-                "courses-pagination"
-            );
-
-
-        const pageInfo =
-            document.getElementById(
-                "courses-page-info"
-            );
-
-
-        const prevButton =
-            document.getElementById(
-                "courses-prev"
-            );
-
-
-        const nextButton =
-            document.getElementById(
-                "courses-next"
-            );
-
-
-        /*
-         * Simpan keyword.
-         */
-
-        window.englishCourseKeyword =
-            String(value || "")
-                .trim()
-                .toLowerCase();
-
-
-        /*
-         * Search semua course.
-         */
-
-        const matchedCards =
-            cards.filter(function (card) {
-
-
-                const title =
-                    (
-                        card.getAttribute(
-                            "data-title"
-                        ) || ""
-                    ).toLowerCase();
-
-
-                const description =
-                    (
-                        card.getAttribute(
-                            "data-desc"
-                        ) || ""
-                    ).toLowerCase();
-
-
-                return (
-
-                    window.englishCourseKeyword === ""
-
-                    ||
-
-                    title.includes(
-                        window.englishCourseKeyword
-                    )
-
-                    ||
-
-                    description.includes(
-                        window.englishCourseKeyword
-                    )
-
-                );
-
-            });
-
-
-        /*
-         * Search selalu kembali ke halaman 1.
-         */
-
-        window.englishCoursePage = 1;
-
-
-        /*
-         * Render hasil.
-         */
-
-        window.renderEnglishCourses(
-            matchedCards,
-            emptyState,
-            pagination,
-            pageInfo,
-            prevButton,
-            nextButton
+    const empty =
+        document.getElementById(
+            "courses-empty"
         );
 
-    };
 
+    if (!card || !empty) {
 
-    /*
-     * =================================================
-     * RENDER
-     * =================================================
-     */
+        return;
 
-    window.renderEnglishCourses = function (
-        matchedCards,
-        emptyState,
-        pagination,
-        pageInfo,
-        prevButton,
-        nextButton
-    ) {
+    }
 
 
-        const cards =
-            window.getEnglishCourseCards();
+    const keyword =
+        String(value || "")
+            .trim()
+            .toLowerCase();
 
 
-        const perPage =
-            window.englishCoursePerPage;
+    const title =
+        (
+            card.getAttribute(
+                "data-title"
+            ) || ""
+        )
+        .toLowerCase();
 
 
-        /*
-         * Total halaman.
-         */
+    const description =
+        (
+            card.getAttribute(
+                "data-desc"
+            ) || ""
+        )
+        .toLowerCase();
 
-        const totalPages =
-            Math.max(
-                1,
-                Math.ceil(
-                    matchedCards.length /
-                    perPage
-                )
-            );
 
+    const isMatch =
 
-        /*
-         * Pastikan current page valid.
-         */
+        keyword === ""
 
-        if (
-            window.englishCoursePage >
-            totalPages
-        ) {
+        ||
 
-            window.englishCoursePage =
-                totalPages;
+        title.includes(keyword)
 
-        }
+        ||
 
+        description.includes(keyword);
 
-        if (
-            window.englishCoursePage < 1
-        ) {
 
-            window.englishCoursePage = 1;
+    if (isMatch) {
 
-        }
+        card.style.display = "";
 
+        empty.style.display = "none";
 
-        /*
-         * Index card.
-         */
+    } else {
 
-        const start =
-            (
-                window.englishCoursePage -
-                1
-            ) * perPage;
+        card.style.display = "none";
 
+        empty.style.display = "block";
 
-        const end =
-            start + perPage;
+    }
 
+};
 
-        /*
-         * Hide semua card.
-         */
 
-        cards.forEach(function (card) {
+<!-- =====================================================
+     INITIAL STATE
+===================================================== -->
 
-            card.style.display = "none";
-
-        });
-
-
-        /*
-         * Tampilkan card yang cocok.
-         */
-
-        matchedCards
-            .slice(start, end)
-            .forEach(function (card) {
-
-                card.style.display = "";
-
-            });
-
-
-        /*
-         * Empty state.
-         */
-
-        if (emptyState) {
-
-            emptyState.style.display =
-                matchedCards.length === 0
-                    ? "block"
-                    : "none";
-
-        }
-
-
-        /*
-         * Pagination hanya muncul
-         * jika hasil lebih dari 12.
-         */
-
-        if (pagination) {
-
-            pagination.style.display =
-                matchedCards.length >
-                perPage
-                    ? "flex"
-                    : "none";
-
-        }
-
-
-        /*
-         * Page number.
-         */
-
-        if (pageInfo) {
-
-            pageInfo.textContent =
-                "Page " +
-                window.englishCoursePage +
-                " / " +
-                totalPages;
-
-        }
-
-
-        /*
-         * Previous.
-         */
-
-        if (prevButton) {
-
-            prevButton.disabled =
-                window.englishCoursePage <= 1;
-
-        }
-
-
-        /*
-         * Next.
-         */
-
-        if (nextButton) {
-
-            nextButton.disabled =
-                window.englishCoursePage >=
-                totalPages;
-
-        }
-
-    };
-
-
-    /*
-     * =================================================
-     * GET CURRENT SEARCH RESULT
-     * =================================================
-     */
-
-    window.getCurrentEnglishSearchResults =
-        function () {
-
-
-            const cards =
-                window.getEnglishCourseCards();
-
-
-            const keyword =
-                window.englishCourseKeyword;
-
-
-            return cards.filter(
-                function (card) {
-
-
-                    const title =
-                        (
-                            card.getAttribute(
-                                "data-title"
-                            ) || ""
-                        ).toLowerCase();
-
-
-                    const description =
-                        (
-                            card.getAttribute(
-                                "data-desc"
-                            ) || ""
-                        ).toLowerCase();
-
-
-                    return (
-
-                        keyword === ""
-
-                        ||
-
-                        title.includes(keyword)
-
-                        ||
-
-                        description.includes(keyword)
-
-                    );
-
-                }
-            );
-
-        };
-
-
-    /*
-     * =================================================
-     * PREVIOUS PAGE
-     * =================================================
-     */
-
-    window.englishCoursePreviousPage =
-        function () {
-
-
-            if (
-                window.englishCoursePage <= 1
-            ) {
-
-                return;
-
-            }
-
-
-            window.englishCoursePage--;
-
-
-            const matchedCards =
-                window.getCurrentEnglishSearchResults();
-
-
-            window.renderEnglishCourses(
-
-                matchedCards,
-
-                document.getElementById(
-                    "courses-empty"
-                ),
-
-                document.getElementById(
-                    "courses-pagination"
-                ),
-
-                document.getElementById(
-                    "courses-page-info"
-                ),
-
-                document.getElementById(
-                    "courses-prev"
-                ),
-
-                document.getElementById(
-                    "courses-next"
-                )
-
-            );
-
-        };
-
-
-    /*
-     * =================================================
-     * NEXT PAGE
-     * =================================================
-     */
-
-    window.englishCourseNextPage =
-        function () {
-
-
-            const matchedCards =
-                window.getCurrentEnglishSearchResults();
-
-
-            const totalPages =
-                Math.max(
-                    1,
-                    Math.ceil(
-                        matchedCards.length /
-                        window.englishCoursePerPage
-                    )
-                );
-
-
-            if (
-                window.englishCoursePage >=
-                totalPages
-            ) {
-
-                return;
-
-            }
-
-
-            window.englishCoursePage++;
-
-
-            window.renderEnglishCourses(
-
-                matchedCards,
-
-                document.getElementById(
-                    "courses-empty"
-                ),
-
-                document.getElementById(
-                    "courses-pagination"
-                ),
-
-                document.getElementById(
-                    "courses-page-info"
-                ),
-
-                document.getElementById(
-                    "courses-prev"
-                ),
-
-                document.getElementById(
-                    "courses-next"
-                )
-
-            );
-
-        };
-
-
-    /*
-     * =================================================
-     * INITIAL DISPLAY
-     * =================================================
-     */
-
-    window.filterEnglishCourses("");
-
-
-})();
+window.filterEnglishCourse("");
 
 </script>
 
 
 <!-- =====================================================
-     SHARED SCRIPT
-
-     WAJIB tetap ada.
+     WORDIE TALKIE LOADER
 ===================================================== -->
 
 <script src="script.js"></script>
