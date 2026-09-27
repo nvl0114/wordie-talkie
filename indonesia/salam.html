@@ -438,7 +438,7 @@
         padding: 22px 20px;
         margin-top: 22px;
 
-        line-height: 1.9;
+        line-height: 1.8;
 
         animation: feedbackIn 0.3s ease;
     }
@@ -447,35 +447,69 @@
         display: block;
     }
 
-    .final-note p {
-        margin: 8px 0;
+    .final-note-title {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 14px;
+        color: var(--brown);
     }
 
-    .final-note-title {
-        font-size: 18px;
+    .language-exchange-message {
+        margin: 15px 0 20px;
+    }
+
+    .language-exchange-message p {
+        margin: 0 0 14px;
+    }
+
+    .greetings-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin: 16px 0;
+    }
+
+    .greetings-list div {
+        padding: 8px 12px;
+        background: var(--white);
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brown);
+    }
+
+    .ending {
+        text-align: center;
         font-weight: 800;
-        margin-bottom: 10px;
+        font-size: 17px;
+        margin-top: 20px !important;
+        color: var(--brown);
     }
 
     .ig-link {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
 
-        margin-top: 12px;
+        width: 100%;
+        margin-top: 15px;
 
         background: var(--brown);
         color: white !important;
 
         text-decoration: none;
 
-        padding: 11px 20px;
+        padding: 12px 20px;
 
         border-radius: 999px;
 
         font-size: 15px;
         font-weight: 800;
 
+        box-sizing: border-box;
         transition: transform 0.18s ease, opacity 0.18s ease;
     }
 
@@ -550,6 +584,10 @@
 
         .final-note {
             padding: 18px 15px;
+        }
+
+        .greetings-list {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -650,95 +688,46 @@
             <div class="final-note-title">
                 🎙️ 一起練習發音吧！
             </div>
-    <p>
-        現在我要給你一個小任務，就是請你把下面這些問候語念給我聽：
-    </p>
+   
+            <div class="language-exchange-message">
+                <p>
+                    現在我要給你一個小任務，就是請你把下面這些問候語念給我聽：
+                </p>
 
-    <div class="greetings-list">
-        <div>Selamat pagi</div>
-        <div>Selamat siang</div>
-        <div>Selamat sore</div>
-        <div>Selamat malam</div>
-        <div>Makasih</div>
-        <div>Sama-sama</div>
-        <div>Salam kenal</div>
-        <div>Maaf</div>
-        <div>Permisi</div>
-        <div>Gimana kabar?</div>
-        <div>Gak apa-apa</div>
-    </div>
+                <div class="greetings-list">
+                    <div>Selamat pagi</div>
+                    <div>Selamat siang</div>
+                    <div>Selamat sore</div>
+                    <div>Selamat malam</div>
+                    <div>Makasih</div>
+                    <div>Sama-sama</div>
+                    <div>Salam kenal</div>
+                    <div>Maaf</div>
+                    <div>Permisi</div>
+                    <div>Gimana kabar?</div>
+                    <div>Gak apa-apa</div>
+                </div>
 
-    <p>
-        然後再把你的 voice note 傳到我的 Instagram DM 給我。
-    </p>
+                <p>
+                    然後再把你的 voice note 傳到我的 Instagram DM 給我。
+                </p>
 
-    <p>
-        作為交換，也想請你幫我把這些句子翻成中文或台語給我。
-        因為其實我的中文 speaking 還是很不好 😭
-        所以我也會錄 voice note 給你，希望你可以幫我糾正一下我的發音。
-    </p>
+                <p>
+                    作為交換，也想請你幫我把這些句子翻成中文或台語給我。
+                    因為其實我的中文 speaking 還是很不好 😭
+                    所以我也會錄 voice note 給你，希望你可以幫我糾正一下我的發音。
+                </p>
 
-    <p>
-        如果有任何問題，或是還有其他想聊的事情，
-        都可以直接 DM 我 IG 或 Threads。
-    </p>
+                <p>
+                    如果有任何問題，或是還有其他想聊的事情，
+                    都可以直接 DM 我 IG 或 Threads。
+                </p>
 
-    <p class="ending">
-        我們一起學習吧！💪🏻
-    </p>
-</div>
+                <p class="ending">
+                    我們一起學習吧！💪🏻
+                </p>
+            </div>
 
-<style>
-.language-exchange-message {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 25px;
-    background: #fff8ef;
-    border-radius: 18px;
-    color: #5c4033;
-    font-family: Arial, "Noto Sans TC", sans-serif;
-    line-height: 1.8;
-    box-sizing: border-box;
-}
-
-.language-exchange-message p {
-    margin: 0 0 18px;
-}
-
-.greetings-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.greetings-list div {
-    padding: 10px 14px;
-    background: white;
-    border-radius: 10px;
-    border: 1px solid #ead8c5;
-    text-align: center;
-    font-weight: 500;
-}
-
-.ending {
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 25px !important;
-}
-
-@media (max-width: 600px) {
-    .language-exchange-message {
-        margin: 15px;
-        padding: 20px;
-    }
-
-    .greetings-list {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
             <a
                 class="ig-link"
                 href="https://ig.me/m/nvl0114"
