@@ -314,35 +314,8 @@
             box-shadow: var(--shadow);
         }
 
-        .empty-illustration {
-            font-size: 42px;
-
-            margin-bottom: 14px;
-
-            letter-spacing: 5px;
-        }
-
-        .empty-card h2 {
-            margin: 0 0 7px;
-
-            font-size: 21px;
-            font-weight: 800;
-
-            color: var(--brown);
-        }
-
-        .empty-card p {
-            margin: 0 auto;
-
-            max-width: 450px;
-
-            color: var(--brown-light);
-
-            font-size: 14px;
-        }
-
         /* =====================================================
-           GROWING FLOWER ANIMATION
+           GROWING FLOWER
            ===================================================== */
 
         .growing-plant {
@@ -383,7 +356,11 @@
 
             transform: translateX(-50%);
 
-            animation: growStem 2.5s ease-out forwards;
+            animation:
+                growStem
+                6s
+                ease-in-out
+                infinite;
         }
 
         /* LEAVES */
@@ -407,9 +384,15 @@
 
             border-radius: 100% 0 100% 0;
 
-            transform: rotate(-25deg) scale(0);
+            transform:
+                rotate(-25deg)
+                scale(0);
 
-            animation: growLeafLeft 1s ease-out 1.3s forwards;
+            animation:
+                growLeafLeft
+                6s
+                ease-in-out
+                infinite;
         }
 
         .leaf-right {
@@ -418,9 +401,15 @@
 
             border-radius: 0 100% 0 100%;
 
-            transform: rotate(25deg) scale(0);
+            transform:
+                rotate(25deg)
+                scale(0);
 
-            animation: growLeafRight 1s ease-out 1.7s forwards;
+            animation:
+                growLeafRight
+                6s
+                ease-in-out
+                infinite;
         }
 
         /* FLOWER */
@@ -434,11 +423,17 @@
             width: 65px;
             height: 65px;
 
-            transform: translateX(-50%) scale(0);
-
             opacity: 0;
 
-            animation: bloomFlower 1.5s ease-out 2.4s forwards;
+            transform:
+                translateX(-50%)
+                scale(0);
+
+            animation:
+                bloomFlower
+                6s
+                ease-in-out
+                infinite;
         }
 
         .petal {
@@ -449,7 +444,11 @@
 
             background: var(--pink);
 
-            border-radius: 50% 50% 45% 45%;
+            border-radius:
+                50%
+                50%
+                45%
+                45%;
         }
 
         .petal-1 {
@@ -491,7 +490,9 @@
 
             border-radius: 50%;
 
-            box-shadow: 0 2px 5px rgba(92, 64, 51, 0.12);
+            box-shadow:
+                0 2px 5px
+                rgba(92, 64, 51, 0.12);
         }
 
         /* POT */
@@ -542,28 +543,47 @@
                 18% 100%
             );
 
-            border-radius: 0 0 12px 12px;
+            border-radius:
+                0
+                0
+                12px
+                12px;
         }
 
         /* =====================================================
-           GROWING ANIMATION
+           LOOP ANIMATION
            ===================================================== */
 
         @keyframes growStem {
 
-            from {
+            0% {
                 height: 0;
             }
 
-            to {
+            30% {
+                height: 0;
+            }
+
+            48% {
                 height: 105px;
             }
 
+            78% {
+                height: 105px;
+            }
+
+            90% {
+                height: 0;
+            }
+
+            100% {
+                height: 0;
+            }
         }
 
         @keyframes growLeafLeft {
 
-            from {
+            0% {
                 opacity: 0;
 
                 transform:
@@ -571,7 +591,15 @@
                     scale(0);
             }
 
-            to {
+            38% {
+                opacity: 0;
+
+                transform:
+                    rotate(-25deg)
+                    scale(0);
+            }
+
+            52% {
                 opacity: 1;
 
                 transform:
@@ -579,11 +607,34 @@
                     scale(1);
             }
 
+            78% {
+                opacity: 1;
+
+                transform:
+                    rotate(-25deg)
+                    scale(1);
+            }
+
+            90% {
+                opacity: 0;
+
+                transform:
+                    rotate(-25deg)
+                    scale(0);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    rotate(-25deg)
+                    scale(0);
+            }
         }
 
         @keyframes growLeafRight {
 
-            from {
+            0% {
                 opacity: 0;
 
                 transform:
@@ -591,7 +642,15 @@
                     scale(0);
             }
 
-            to {
+            44% {
+                opacity: 0;
+
+                transform:
+                    rotate(25deg)
+                    scale(0);
+            }
+
+            58% {
                 opacity: 1;
 
                 transform:
@@ -599,6 +658,29 @@
                     scale(1);
             }
 
+            78% {
+                opacity: 1;
+
+                transform:
+                    rotate(25deg)
+                    scale(1);
+            }
+
+            90% {
+                opacity: 0;
+
+                transform:
+                    rotate(25deg)
+                    scale(0);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    rotate(25deg)
+                    scale(0);
+            }
         }
 
         @keyframes bloomFlower {
@@ -611,7 +693,15 @@
                     scale(0);
             }
 
-            70% {
+            48% {
+                opacity: 0;
+
+                transform:
+                    translateX(-50%)
+                    scale(0);
+            }
+
+            58% {
                 opacity: 1;
 
                 transform:
@@ -619,7 +709,7 @@
                     scale(1.15);
             }
 
-            100% {
+            65% {
                 opacity: 1;
 
                 transform:
@@ -627,6 +717,29 @@
                     scale(1);
             }
 
+            78% {
+                opacity: 1;
+
+                transform:
+                    translateX(-50%)
+                    scale(1);
+            }
+
+            90% {
+                opacity: 0;
+
+                transform:
+                    translateX(-50%)
+                    scale(0);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    translateX(-50%)
+                    scale(0);
+            }
         }
 
         /* =====================================================
@@ -663,7 +776,8 @@
             transform: translateY(-3px);
 
             box-shadow:
-                0 12px 30px rgba(92, 64, 51, 0.11);
+                0 12px 30px
+                rgba(92, 64, 51, 0.11);
         }
 
         .language-card .language-icon {
@@ -729,7 +843,8 @@
 
             inset: 0;
 
-            background: rgba(92, 64, 51, 0.25);
+            background:
+                rgba(92, 64, 51, 0.25);
 
             z-index: 900;
         }
@@ -757,9 +872,12 @@
             .sidebar {
                 transform: translateX(-100%);
 
-                transition: transform 0.25s ease;
+                transition:
+                    transform 0.25s ease;
 
-                box-shadow: 8px 0 30px rgba(92, 64, 51, 0.08);
+                box-shadow:
+                    8px 0 30px
+                    rgba(92, 64, 51, 0.08);
             }
 
             .sidebar.open {
@@ -925,35 +1043,35 @@
                     Welcome to Wordie Talkie
                 </h1>
 
-                 <p>
-    Hi everyone! Welcome to <strong>Wordie Talkie</strong>! 💬✨
-  </p>
+                <p>
+                    Hi everyone! Welcome to <strong>Wordie Talkie</strong>! 💬✨
+                </p>
 
-  <p>
-    This website is a place where I keep the learning materials that I share
-    with my language exchange friends.
-  </p>
+                <p>
+                    This website is a place where I keep the learning materials that I share
+                    with my language exchange friends.
+                </p>
 
-  <p>
-    If you’d like to see the materials I’ve shared before, you can check the
-    <strong>“English”</strong> section if you’re learning English with me,
-    or the <strong>“Indonesian”</strong> section if you’re learning Indonesian with me.
-  </p>
+                <p>
+                    If you’d like to see the materials I’ve shared before, you can check the
+                    <strong>“English”</strong> section if you’re learning English with me,
+                    or the <strong>“Indonesian”</strong> section if you’re learning Indonesian with me.
+                </p>
 
-  <p>
-    Honestly, I’m really happy to have language exchange friends to learn
-    and practice languages with. 🥹💗
-  </p>
+                <p>
+                    Honestly, I’m really happy to have language exchange friends to learn
+                    and practice languages with. 🥹💗
+                </p>
 
-  <p>
-    I hope you won’t get bored learning with me! Let’s keep learning,
-    practicing, and improving together, little by little. 🌱✨
-  </p>
+                <p>
+                    I hope you won’t get bored learning with me! Let’s keep learning,
+                    practicing, and improving together, little by little. 🌱✨
+                </p>
 
-  <p>
-    Thank you for learning with me, and welcome to
-    <strong>Wordie Talkie</strong>! 🫶
-  </p>
+                <p>
+                    Thank you for learning with me, and welcome to
+                    <strong>Wordie Talkie</strong>! 🫶
+                </p>
 
                 <div class="hero-tagline">
                     Wordie learned a new word! 🌱🌸
@@ -970,20 +1088,27 @@
 
             <section class="empty-card">
 
-                <div class="growing-plant" aria-label="A flower slowly growing">
+                <div
+                    class="growing-plant"
+                    aria-label="A flower slowly growing"
+                >
 
                     <div class="plant">
 
                         <div class="stem"></div>
 
                         <div class="leaf leaf-left"></div>
+
                         <div class="leaf leaf-right"></div>
 
                         <div class="flower">
 
                             <div class="petal petal-1"></div>
+
                             <div class="petal petal-2"></div>
+
                             <div class="petal petal-3"></div>
+
                             <div class="petal petal-4"></div>
 
                             <div class="flower-center"></div>
@@ -995,11 +1120,13 @@
                     <div class="pot">
 
                         <div class="pot-top"></div>
+
                         <div class="pot-body"></div>
 
                     </div>
 
                 </div>
+
 
                 <h2>
                     Something is growing here...
@@ -1059,7 +1186,8 @@ Feel free to take a look and see how we learn and practice together! 💬✨.
 
                     <p>
                         Here are some sample learning materials from my language exchange sessions.
-Feel free to take a look and see what we’ve been learning together! </p>
+Feel free to take a look and see what we’ve been learning together!
+                    </p>
 
                 </a>
 
@@ -1083,14 +1211,20 @@ Feel free to take a look and see what we’ve been learning together! </p>
 
     <script>
 
-        const menuButton = document.getElementById("menuButton");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const overlay =
+            document.getElementById("overlay");
 
 
         function openMenu() {
 
             sidebar.classList.add("open");
+
             overlay.classList.add("show");
 
             menuButton.setAttribute(
@@ -1105,6 +1239,7 @@ Feel free to take a look and see what we’ve been learning together! </p>
         function closeMenu() {
 
             sidebar.classList.remove("open");
+
             overlay.classList.remove("show");
 
             menuButton.setAttribute(
@@ -1116,19 +1251,24 @@ Feel free to take a look and see what we’ve been learning together! </p>
         }
 
 
-        menuButton.addEventListener("click", function () {
+        menuButton.addEventListener(
+            "click",
+            function () {
 
-            if (sidebar.classList.contains("open")) {
+                if (
+                    sidebar.classList.contains("open")
+                ) {
 
-                closeMenu();
+                    closeMenu();
 
-            } else {
+                } else {
 
-                openMenu();
+                    openMenu();
+
+                }
 
             }
-
-        });
+        );
 
 
         overlay.addEventListener(
@@ -1173,7 +1313,9 @@ Feel free to take a look and see what we’ve been learning together! </p>
             "resize",
             function () {
 
-                if (window.innerWidth > 800) {
+                if (
+                    window.innerWidth > 800
+                ) {
 
                     closeMenu();
 
