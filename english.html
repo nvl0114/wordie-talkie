@@ -1,15 +1,14 @@
 <!--
     =====================================================
-    KONTEN: indonesia/courses.html
-    (Es Teh Break｜課程列表與搜尋)
 
     File ini adalah KONTEN halaman (bukan halaman penuh).
-    Sidebar & layout datang dari A.html lewat script.js.
+    Sidebar & layout datang dari script.js.
 
-    PENTING: tag <script src="../script.js"> di paling
-    bawah file ini WAJIB ada — itu yang men-trigger
-    pemasangan sidebar saat file ini dibuka langsung oleh
-    browser. Jangan dihapus.
+    SEARCH + PAGINATION sudah dibuat ringan:
+    - Tidak menggunakan MutationObserver
+    - Tidak render terus-menerus
+    - Search langsung bekerja
+    - Pagination tetap 12 kartu per halaman
     =====================================================
 -->
 
@@ -73,7 +72,10 @@
         margin-bottom: 25px;
     }
 
-    /* Search bar */
+    /* =========================
+       SEARCH BAR
+    ========================= */
+
     .courses-search-wrap {
         position: relative;
         max-width: 480px;
@@ -86,6 +88,7 @@
         left: 16px;
         transform: translateY(-50%);
         color: #b0937e;
+        pointer-events: none;
     }
 
     #course-search {
@@ -106,7 +109,10 @@
         box-shadow: 0 0 0 3px rgba(184, 134, 92, 0.15);
     }
 
-    /* Card grid */
+    /* =========================
+       CARD GRID
+    ========================= */
+
     .courses-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -177,7 +183,10 @@
         transform: translateY(-1px);
     }
 
-    /* Empty state saat search tidak ketemu */
+    /* =========================
+       EMPTY STATE
+    ========================= */
+
     .courses-empty {
         display: none;
         text-align: center;
@@ -242,13 +251,39 @@
     }
 
     @media (max-width: 600px) {
-        .courses-container { padding: 15px; }
-        .hero { padding: 20px 17px; }
-        .courses-container h1 { font-size: 25px; }
-        .courses-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
-        .course-card { padding: 18px 14px; }
-        .courses-pagination { gap: 8px; }
-        .pagination-btn { padding: 8px 14px; font-size: 13px; }
+
+        .courses-container {
+            padding: 15px;
+        }
+
+        .hero {
+            padding: 20px 17px;
+        }
+
+        .courses-container h1 {
+            font-size: 25px;
+        }
+
+        .courses-grid {
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(150px, 1fr)
+            );
+            gap: 14px;
+        }
+
+        .course-card {
+            padding: 18px 14px;
+        }
+
+        .courses-pagination {
+            gap: 8px;
+        }
+
+        .pagination-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+        }
     }
 
 </style>
@@ -263,42 +298,158 @@
 <main class="courses-container">
 
     <section class="hero">
+
         <div class="badge">
             ENGLISH • COURSES
         </div>
 
-        <h1 class="courses-title">你想學什麼？</h1>
-        <p class="courses-subtitle">選一個主題，或直接搜尋你想學的內容 🧊🍵</p>
+        <h1 class="courses-title">
+            你想學什麼？
+        </h1>
+
+        <p class="courses-subtitle">
+            選一個主題，或直接搜尋你想學的內容 🧊🍵
+        </p>
 
         <div class="courses-search-wrap">
+
             <i class="fa-solid fa-magnifying-glass"></i>
+
             <input
                 type="text"
                 id="course-search"
-                placeholder="搜尋課程，例如：點餐、問路...">
+                placeholder="搜尋課程，比如：to be,basic sentence, lesson"
+                autocomplete="off"
+            >
+
         </div>
+
     </section>
 
+
+    <!-- =========================
+         COURSE GRID
+    ========================= -->
+
     <div class="courses-grid" id="courses-grid">
-        <div class="course-card" data-title="印尼文 ABC 字母" data-desc="從 A 到 Z 認識印尼文的字母與發音">
-            <div class="course-icon"><i class="fa-solid fa-font"></i></div>
-            <div class="course-name">印尼文 ABC 字母</div>
-            <div class="course-desc">從 A 到 Z 認識印尼文的字母、發音和基本拼讀方式，輕鬆學會印尼文的 ABC。</div>
-            <a class="course-start-btn" href="lessons/1-alfabet.html">開始學習</a>
+
+        <div
+            class="course-card"
+            data-title="印尼文 ABC 字母"
+            data-desc="從 A 到 Z 認識印尼文的字母與發音"
+        >
+
+            <div class="course-icon">
+                <i class="fa-solid fa-font"></i>
+            </div>
+
+            <div class="course-name">
+                印尼文 ABC 字母
+            </div>
+
+            <div class="course-desc">
+                從 A 到 Z 認識印尼文的字母、發音和基本拼讀方式，
+                輕鬆學會印尼文的 ABC。
+            </div>
+
+            <a
+                class="course-start-btn"
+                href="lessons/1-alfabet.html"
+            >
+                開始學習
+            </a>
+
         </div>
-        <!-- Tambahkan kartu kursus lainnya di sini dengan struktur data-title & data-desc yang sama -->
+
+
+        <!--
+            Tambahkan kartu kursus lainnya di sini.
+
+            Contoh:
+
+            <div
+                class="course-card"
+                data-title="打招呼 問候"
+                data-desc="學習印尼語日常打招呼與問候"
+            >
+
+                <div class="course-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+
+                <div class="course-name">
+                    打招呼與問候
+                </div>
+
+                <div class="course-desc">
+                    學習自然、日常的印尼語問候方式。
+                </div>
+
+                <a
+                    class="course-start-btn"
+                    href="lessons/2-greetings.html"
+                >
+                    開始學習
+                </a>
+
+            </div>
+        -->
+
     </div>
 
-    <div class="courses-empty" id="courses-empty">
-        <div class="emoji">🧊🍵</div>
-        <p>找不到符合的課程，換個關鍵字試試看～</p>
+
+    <!-- =========================
+         EMPTY STATE
+    ========================= -->
+
+    <div
+        class="courses-empty"
+        id="courses-empty"
+    >
+
+        <div class="emoji">
+            🧊🍵
+        </div>
+
+        <p>
+            找不到符合的課程，換個關鍵字試試看～
+        </p>
+
     </div>
 
-    <!-- Pagination -->
-    <div class="courses-pagination" id="courses-pagination">
-        <button type="button" class="pagination-btn" id="courses-prev">← 上一頁</button>
-        <span class="pagination-info" id="courses-page-info">第 1 / 1 頁</span>
-        <button type="button" class="pagination-btn" id="courses-next">下頁 →</button>
+
+    <!-- =========================
+         PAGINATION
+    ========================= -->
+
+    <div
+        class="courses-pagination"
+        id="courses-pagination"
+    >
+
+        <button
+            type="button"
+            class="pagination-btn"
+            id="courses-prev"
+        >
+            ← 上一頁
+        </button>
+
+        <span
+            class="pagination-info"
+            id="courses-page-info"
+        >
+            第 1 / 1 頁
+        </span>
+
+        <button
+            type="button"
+            class="pagination-btn"
+            id="courses-next"
+        >
+            下頁 →
+        </button>
+
     </div>
 
 </main>
@@ -307,132 +458,351 @@
 <!--
     =====================================================
     SEARCH + PAGINATION JAVASCRIPT
+    =====================================================
 
-    CATATAN PENTING:
-    type="text/plain" dipasang agar script tidak langsung 
-    dijalankan mentah-mentah oleh browser sebelum dipindahkan 
-    oleh script.js utama.
+    注意：
+    不再使用 type="text/plain"
+
+    不再使用 MutationObserver，
+    避免 renderCards() 反覆觸發造成網頁變慢。
+
+    Script 只初始化一次。
     =====================================================
 -->
 
-<script type="text/plain">
-    (function () {
+<script>
 
-        const CARDS_PER_PAGE = 12;
+(function () {
 
-        let currentPage = 1;
-        let keyword = "";
+    const CARDS_PER_PAGE = 12;
+
+    let currentPage = 1;
+    let keyword = "";
+
+    function initCoursesPage() {
+
+        const grid = document.getElementById("courses-grid");
+        const searchInput = document.getElementById("course-search");
+
+        if (!grid || !searchInput) {
+            return;
+        }
+
+        /*
+         * 防止 script.js 重新載入內容時，
+         * 同一個頁面的事件被綁定多次。
+         */
+        if (grid.dataset.initialized === "true") {
+            return;
+        }
+
+        grid.dataset.initialized = "true";
+
+        const cards = Array.from(
+            grid.querySelectorAll(".course-card")
+        );
+
+        const emptyState =
+            document.getElementById("courses-empty");
+
+        const pagination =
+            document.getElementById("courses-pagination");
+
+        const pageInfo =
+            document.getElementById("courses-page-info");
+
+        const prevButton =
+            document.getElementById("courses-prev");
+
+        const nextButton =
+            document.getElementById("courses-next");
+
+
+        /*
+         * Cache 搜尋資料。
+         *
+         * 這樣搜尋時不需要一直讀取
+         * dataset.title / dataset.desc。
+         */
+        const courseData = cards.map(function (card) {
+
+            return {
+                element: card,
+
+                text: (
+                    (card.dataset.title || "") +
+                    " " +
+                    (card.dataset.desc || "")
+                ).toLowerCase()
+
+            };
+
+        });
+
 
         function renderCards() {
 
-            const grid = document.getElementById("courses-grid");
+            const matchedCards = [];
 
-            if (!grid) return;
+            /*
+             * 找出符合搜尋的課程
+             */
+            courseData.forEach(function (course) {
 
-            const allCards = Array.from(
-                grid.querySelectorAll(".course-card")
-            );
-
-            if (allCards.length === 0) return;
-
-            const matched = allCards.filter((card) => {
-
-                const title = (card.dataset.title || "").toLowerCase();
-                const desc = (card.dataset.desc || "").toLowerCase();
-
-                return (
+                if (
                     keyword === "" ||
-                    title.includes(keyword) ||
-                    desc.includes(keyword)
-                );
+                    course.text.includes(keyword)
+                ) {
+                    matchedCards.push(course);
+                }
+
             });
 
+
+            /*
+             * 計算頁數
+             */
             const totalPages = Math.max(
                 1,
-                Math.ceil(matched.length / CARDS_PER_PAGE)
+                Math.ceil(
+                    matchedCards.length / CARDS_PER_PAGE
+                )
             );
 
-            if (currentPage > totalPages) currentPage = totalPages;
-            if (currentPage < 1) currentPage = 1;
 
-            const start = (currentPage - 1) * CARDS_PER_PAGE;
-            const end = start + CARDS_PER_PAGE;
-            const visibleOnThisPage = matched.slice(start, end);
+            /*
+             * 防止目前頁數超出範圍
+             */
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
 
-            allCards.forEach((card) => {
-                card.style.display = "none";
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+
+
+            /*
+             * 計算這一頁要顯示哪些卡片
+             */
+            const start =
+                (currentPage - 1) * CARDS_PER_PAGE;
+
+            const end =
+                start + CARDS_PER_PAGE;
+
+
+            /*
+             * 先全部隱藏
+             */
+            cards.forEach(function (card) {
+
+                card.hidden = true;
+
             });
 
-            visibleOnThisPage.forEach((card) => {
-                card.style.display = "";
-            });
 
-            const emptyState = document.getElementById("courses-empty");
+            /*
+             * 顯示目前頁面的卡片
+             */
+            matchedCards
+                .slice(start, end)
+                .forEach(function (course) {
 
+                    course.element.hidden = false;
+
+                });
+
+
+            /*
+             * Empty state
+             */
             if (emptyState) {
+
                 emptyState.style.display =
-                    matched.length === 0 ? "block" : "none";
+                    matchedCards.length === 0
+                        ? "block"
+                        : "none";
+
             }
 
-            const pagination = document.getElementById("courses-pagination");
-            const pageInfo = document.getElementById("courses-page-info");
-            const prevButton = document.getElementById("courses-prev");
-            const nextButton = document.getElementById("courses-next");
 
+            /*
+             * Pagination
+             */
             if (pagination) {
+
                 pagination.style.display =
-                    matched.length > CARDS_PER_PAGE ? "flex" : "none";
+                    matchedCards.length > CARDS_PER_PAGE
+                        ? "flex"
+                        : "none";
+
             }
 
+
+            /*
+             * Page number
+             */
             if (pageInfo) {
-                pageInfo.textContent = `第 ${currentPage} / ${totalPages} 頁`;
+
+                pageInfo.textContent =
+                    `第 ${currentPage} / ${totalPages} 頁`;
+
             }
 
-            if (prevButton) prevButton.disabled = currentPage <= 1;
-            if (nextButton) nextButton.disabled = currentPage >= totalPages;
+
+            /*
+             * Button 狀態
+             */
+            if (prevButton) {
+
+                prevButton.disabled =
+                    currentPage <= 1;
+
+            }
+
+            if (nextButton) {
+
+                nextButton.disabled =
+                    currentPage >= totalPages;
+
+            }
+
         }
 
-        document.addEventListener("input", (event) => {
 
-            if (event.target.id !== "course-search") return;
+        /*
+         * =========================
+         * SEARCH
+         * =========================
+         */
 
-            keyword = event.target.value.trim().toLowerCase();
-            currentPage = 1;
+        searchInput.addEventListener(
+            "input",
+            function () {
 
-            renderCards();
-        });
+                keyword =
+                    searchInput.value
+                        .trim()
+                        .toLowerCase();
 
-        document.addEventListener("click", (event) => {
+                currentPage = 1;
 
-            if (event.target.id === "courses-prev") {
-                currentPage--;
                 renderCards();
-            } else if (event.target.id === "courses-next") {
-                currentPage++;
-                renderCards();
+
             }
-        });
+        );
 
+
+        /*
+         * =========================
+         * PREVIOUS
+         * =========================
+         */
+
+        if (prevButton) {
+
+            prevButton.addEventListener(
+                "click",
+                function () {
+
+                    if (currentPage > 1) {
+
+                        currentPage--;
+
+                        renderCards();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /*
+         * =========================
+         * NEXT
+         * =========================
+         */
+
+        if (nextButton) {
+
+            nextButton.addEventListener(
+                "click",
+                function () {
+
+                    currentPage++;
+
+                    renderCards();
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Initial render
+         */
         renderCards();
 
-        const observer = new MutationObserver(() => {
-            renderCards();
-        });
+    }
 
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
 
-    })();
+    /*
+     * 如果 courses.html 本身直接載入，
+     * DOMContentLoaded 可以初始化。
+     */
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initCoursesPage,
+            { once: true }
+        );
+
+    } else {
+
+        initCoursesPage();
+
+    }
+
+
+    /*
+     * 如果 script.js 是用 AJAX / fetch
+     * 動態把 courses.html 放進 #page-content，
+     * script 可能會在 DOM 元素出現之前執行。
+     *
+     * 因此只使用一次非常輕量的延遲初始化，
+     * 不使用 MutationObserver。
+     */
+
+    setTimeout(initCoursesPage, 100);
+
+    setTimeout(initCoursesPage, 500);
+
+})();
+
 </script>
 
 
 <!--
     =====================================================
     SHARED SCRIPT — TRIGGER SIDEBAR/A.HTML LOADER
-    Jangan dihapus.
+
+    如果這個檔案位於：
+        /indonesia/courses.html
+
+    而 script.js 位於：
+        /indonesia/script.js
+
+    使用：
+        ../script.js
+
+    如果 script.js 在網站根目錄，
+    則需要依照你的實際檔案結構調整。
     =====================================================
 -->
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
