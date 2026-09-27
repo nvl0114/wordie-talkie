@@ -1198,8 +1198,6 @@
 
     function showFinished() {
 
-        clearCountdown();
-
         if ("speechSynthesis" in window) {
             window.speechSynthesis.cancel();
         }
