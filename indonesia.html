@@ -1,0 +1,653 @@
+<!-- =====================================================
+     WORDIE TALKIE — INDONESIA COURSE SEARCH
+     ===================================================== -->
+
+
+<style>
+
+    #page-content {
+
+        --cream: #fff8ef;
+        --brown: #5c4033;
+        --light-brown: #b8865c;
+        --soft-brown: #f3e4d3;
+        --white: #ffffff;
+        --border: #ead8c5;
+
+    }
+
+
+    /* ==================================================
+       CONTAINER
+    ================================================== */
+
+    .courses-container {
+
+        max-width: 900px;
+
+        margin: 0 auto;
+
+        padding: 10px 0 40px;
+
+        color: var(--brown);
+
+    }
+
+
+    /* ==================================================
+       HERO
+    ================================================== */
+
+    .courses-hero {
+
+        background: var(--white);
+
+        border-radius: 22px;
+
+        padding: 28px 24px;
+
+        margin-bottom: 22px;
+
+        box-shadow:
+            0 5px 18px rgba(92, 64, 51, 0.08);
+
+        text-align: center;
+
+    }
+
+
+    .courses-badge {
+
+        display: inline-block;
+
+        background: var(--soft-brown);
+
+        color: var(--brown);
+
+        padding: 5px 12px;
+
+        border-radius: 999px;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .courses-title {
+
+        margin: 0 0 10px;
+
+        font-size: 30px;
+
+        color: var(--brown);
+
+    }
+
+
+    .courses-subtitle {
+
+        color: #9b7a65;
+
+        font-size: 14px;
+
+        margin: 0 0 25px;
+
+        line-height: 1.6;
+
+    }
+
+
+    /* ==================================================
+       SEARCH
+    ================================================== */
+
+    .courses-search-wrap {
+
+        position: relative;
+
+        max-width: 480px;
+
+        margin: 0 auto;
+
+    }
+
+
+    .courses-search-wrap i {
+
+        position: absolute;
+
+        top: 50%;
+
+        left: 16px;
+
+        transform: translateY(-50%);
+
+        color: #b0937e;
+
+        pointer-events: none;
+
+    }
+
+
+    #course-search {
+
+        width: 100%;
+
+        padding: 13px 16px 13px 42px;
+
+        border: 1px solid var(--border);
+
+        border-radius: 30px;
+
+        background: var(--cream);
+
+        color: var(--brown);
+
+        font-size: 15px;
+
+        outline: none;
+
+        box-sizing: border-box;
+
+        transition: 0.2s ease;
+
+    }
+
+
+    #course-search::placeholder {
+
+        color: #b0937e;
+
+    }
+
+
+    #course-search:focus {
+
+        border-color: var(--light-brown);
+
+        box-shadow:
+            0 0 0 3px rgba(184, 134, 92, 0.15);
+
+    }
+
+
+    /* ==================================================
+       COURSE GRID
+    ================================================== */
+
+    .courses-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(auto-fill, minmax(230px, 1fr));
+
+        gap: 18px;
+
+    }
+
+
+    /* ==================================================
+       COURSE CARD
+    ================================================== */
+
+    .course-card {
+
+        background: var(--white);
+
+        border: 1px solid var(--border);
+
+        border-radius: 18px;
+
+        padding: 22px 20px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        box-shadow:
+            0 3px 8px rgba(92, 64, 51, 0.08);
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+    }
+
+
+    .course-card:hover {
+
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 6px 16px rgba(92, 64, 51, 0.12);
+
+    }
+
+
+    .course-icon {
+
+        width: 60px;
+
+        height: 60px;
+
+        border-radius: 50%;
+
+        background: var(--soft-brown);
+
+        color: var(--light-brown);
+
+        font-size: 24px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin-bottom: 14px;
+
+    }
+
+
+    .course-name {
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        color: var(--brown);
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .course-desc {
+
+        font-size: 13.5px;
+
+        color: #8b6d5c;
+
+        line-height: 1.6;
+
+        margin-bottom: 18px;
+
+        flex-grow: 1;
+
+    }
+
+
+    /* ==================================================
+       BUTTON
+    ================================================== */
+
+    .course-start-btn {
+
+        border: none;
+
+        background: var(--light-brown);
+
+        color: var(--cream);
+
+        font-weight: bold;
+
+        font-size: 14px;
+
+        padding: 10px 22px;
+
+        border-radius: 25px;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        transition:
+            background 0.2s ease,
+            transform 0.18s ease;
+
+    }
+
+
+    .course-start-btn:hover {
+
+        background: var(--brown);
+
+        transform: translateY(-1px);
+
+    }
+
+
+    /* ==================================================
+       EMPTY STATE
+    ================================================== */
+
+    .courses-empty {
+
+        display: none;
+
+        text-align: center;
+
+        color: #9b7a65;
+
+        padding: 40px 10px;
+
+    }
+
+
+    .courses-empty .emoji {
+
+        font-size: 30px;
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .courses-empty p {
+
+        margin: 0;
+
+        font-size: 14px;
+
+    }
+
+
+    /* ==================================================
+       MOBILE
+    ================================================== */
+
+    @media (max-width: 600px) {
+
+        .courses-container {
+
+            padding: 15px;
+
+        }
+
+
+        .courses-hero {
+
+            padding: 22px 17px;
+
+        }
+
+
+        .courses-title {
+
+            font-size: 25px;
+
+        }
+
+
+        .courses-grid {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+    }
+
+</style>
+
+
+<!-- =====================================================
+     PAGE
+===================================================== -->
+
+<main class="courses-container">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="courses-hero">
+
+
+        <div class="courses-badge">
+
+            INDONESIA • COURSES
+
+        </div>
+
+
+        <h1 class="courses-title">
+
+            你今天想學什麼？
+
+        </h1>
+
+
+        <p class="courses-subtitle">
+
+            選一個你想學的主題，或直接搜尋看看吧！📚✨
+
+        </p>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <div class="courses-search-wrap">
+
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+
+            <input
+                type="text"
+                id="course-search"
+                placeholder="搜尋課程，例如：文法、單字、會話……"
+                autocomplete="off"
+                oninput="filterEnglishCourse(this.value)"
+            >
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         COURSE CARD
+         HANYA 1 KARTU DULU
+    ================================================== -->
+
+    <div
+        class="courses-grid"
+        id="courses-grid"
+    >
+
+
+        <div
+            class="course-card"
+            id="english-alphabet-card"
+            data-title="English Alphabet"
+            data-desc="Learn the English alphabet from A to Z, including letters, pronunciation, and basic spelling."
+        >
+
+
+            <div class="course-icon">
+
+                <i class="fa-solid fa-font"></i>
+
+            </div>
+
+
+            <div class="course-name">
+
+                English Alphabet
+
+            </div>
+
+
+            <div class="course-desc">
+
+                從 A 到 Z 認識英文字母，
+                學習字母的發音、拼字和基本用法。
+
+            </div>
+
+
+            <a
+                class="course-start-btn"
+                href="lessons/1-alphabet.html"
+            >
+
+                開始學習
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         EMPTY SEARCH RESULT
+    ================================================== -->
+
+    <div
+        class="courses-empty"
+        id="courses-empty"
+    >
+
+        <div class="emoji">
+
+            📚✨
+
+        </div>
+
+
+        <p>
+
+            找不到相關課程。<br>
+            換個關鍵字試試看吧～
+
+        </p>
+
+    </div>
+
+
+</main>
+
+
+<!-- =====================================================
+     SEARCH SCRIPT
+
+     Search:
+     - Course title
+     - Course description
+
+     Tidak menggunakan:
+     - MutationObserver
+     - Pagination
+     - addEventListener
+===================================================== -->
+
+<script type="text/plain">
+
+window.filterEnglishCourse = function (value) {
+
+
+    const card =
+        document.getElementById(
+            "english-alphabet-card"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "courses-empty"
+        );
+
+
+    if (!card || !empty) {
+
+        return;
+
+    }
+
+
+    const keyword =
+        String(value || "")
+            .trim()
+            .toLowerCase();
+
+
+    const title =
+        (
+            card.getAttribute(
+                "data-title"
+            ) || ""
+        )
+        .toLowerCase();
+
+
+    const description =
+        (
+            card.getAttribute(
+                "data-desc"
+            ) || ""
+        )
+        .toLowerCase();
+
+
+    const isMatch =
+
+        keyword === ""
+
+        ||
+
+        title.includes(keyword)
+
+        ||
+
+        description.includes(keyword);
+
+
+    if (isMatch) {
+
+        card.style.display = "";
+
+        empty.style.display = "none";
+
+    } else {
+
+        card.style.display = "none";
+
+        empty.style.display = "block";
+
+    }
+
+};
+
+
+<!-- =====================================================
+     INITIAL STATE
+===================================================== -->
+
+window.filterEnglishCourse("");
+
+</script>
+
+
+<!-- =====================================================
+     WORDIE TALKIE LOADER
+===================================================== -->
+
+<script src="script.js"></script>
