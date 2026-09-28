@@ -1,0 +1,2368 @@
+<!--
+    =====================================================
+    KONTEN: indonesia/perkenalan.html
+    INDONESIA — PERKENALAN DASAR
+    Bahasa pengantar: 繁體中文
+    Bahasa target: Bahasa Indonesia
+
+    File ini adalah KONTEN halaman.
+    Sidebar & layout datang dari A.html lewat script.js.
+
+    PENTING:
+    <script src="../script.js"></script>
+    di paling bawah WAJIB ada.
+    =====================================================
+-->
+
+<style>
+
+    #page-content {
+        --cream: #fff8ef;
+        --brown: #5c4033;
+        --light-brown: #8b6b58;
+        --soft-brown: #f2e3d5;
+        --white: #ffffff;
+
+        --green: #68a27f;
+        --green-dark: #4f7f63;
+
+        --red: #c96f6f;
+        --red-dark: #a3504f;
+
+        --border: #e5d5c7;
+        --yellow: #fff5d8;
+        --yellow-dark: #c59a39;
+    }
+
+    .idp-container {
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 10px 0 50px;
+        line-height: 1.8;
+        color: var(--brown);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .idp-hero {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 28px 24px;
+        margin-bottom: 22px;
+        box-shadow: 0 5px 18px rgba(92, 64, 51, 0.08);
+    }
+
+    .idp-badge {
+        display: inline-block;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .idp-hero h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+    }
+
+    .idp-hero p {
+        margin: 8px 0;
+    }
+
+    /* =========================
+       CAROUSEL
+    ========================= */
+
+    .idp-carousel {
+        position: relative;
+    }
+
+    .idp-slide {
+        display: none;
+        animation: idpSlideIn 0.3s ease;
+    }
+
+    .idp-slide.active {
+        display: block;
+    }
+
+    @keyframes idpSlideIn {
+        from {
+            opacity: 0;
+            transform: translateX(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .idp-card {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 5px 18px rgba(92, 64, 51, 0.07);
+    }
+
+    .idp-card h2 {
+        margin: 0 0 12px;
+        font-size: 21px;
+    }
+
+    .idp-card h3 {
+        margin: 18px 0 8px;
+        font-size: 17px;
+    }
+
+    .idp-card p {
+        margin: 9px 0;
+    }
+
+    .idp-number {
+        display: inline-block;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .idp-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .idp-nav-btn {
+        border: none;
+        background: var(--brown);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .idp-nav-btn:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
+
+    .idp-slide-counter {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--light-brown);
+    }
+
+    /* =========================
+       DIALOGUE
+    ========================= */
+
+    .idp-dialogue {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .idp-line {
+        background: var(--cream);
+        border-radius: 14px;
+        padding: 12px 14px;
+    }
+
+    .idp-speaker {
+        font-weight: 800;
+        margin-bottom: 3px;
+    }
+
+    .idp-indonesian {
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .idp-chinese {
+        color: var(--light-brown);
+        font-size: 14px;
+        margin-top: 2px;
+    }
+
+    .idp-speak {
+        border: none;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 9px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 13px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
+    .idp-speak.playing {
+        box-shadow: 0 0 0 3px rgba(104, 162, 127, 0.35);
+    }
+
+    /* =========================
+       VOCAB
+    ========================= */
+
+    .idp-vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .idp-vocab {
+        background: var(--cream);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 12px;
+    }
+
+    .idp-vocab-word {
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .idp-vocab-meaning {
+        color: var(--light-brown);
+        font-size: 14px;
+        margin-top: 3px;
+    }
+
+    /* =========================
+       EXAMPLES
+    ========================= */
+
+    .idp-example {
+        background: var(--cream);
+        border-left: 4px solid var(--light-brown);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin: 10px 0;
+    }
+
+    .idp-example .id {
+        font-weight: 800;
+        font-size: 16px;
+    }
+
+    .idp-example .zh {
+        color: var(--light-brown);
+        font-size: 14px;
+    }
+
+    .idp-tip {
+        background: var(--yellow);
+        border-left: 4px solid var(--yellow-dark);
+        border-radius: 10px;
+        padding: 11px 14px;
+        margin-top: 14px;
+        font-size: 14px;
+    }
+
+    /* =========================
+       GAME
+    ========================= */
+
+    .idp-game {
+        background: var(--white);
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: 0 5px 18px rgba(92, 64, 51, 0.07);
+    }
+
+    .idp-game-label {
+        display: inline-block;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .idp-prompt {
+        font-size: 18px;
+        font-weight: 800;
+        margin: 8px 0 15px;
+    }
+
+    .idp-answer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        min-height: 48px;
+        padding: 10px;
+        background: var(--cream);
+        border: 2px dashed var(--border);
+        border-radius: 14px;
+        margin-bottom: 14px;
+    }
+
+    .idp-bank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .idp-tile {
+        border: none;
+        background: var(--soft-brown);
+        color: var(--brown);
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform 0.15s ease;
+    }
+
+    .idp-tile:hover:not(:disabled) {
+        transform: translateY(-2px);
+    }
+
+    .idp-tile:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
+
+    .idp-tile.placed {
+        background: var(--brown);
+        color: white;
+    }
+
+    .idp-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .idp-reset {
+        border: 1px solid var(--border);
+        background: white;
+        color: var(--light-brown);
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .idp-feedback {
+        display: none;
+        margin-top: 15px;
+        border-radius: 15px;
+        padding: 14px;
+    }
+
+    .idp-feedback.show {
+        display: block;
+    }
+
+    .idp-feedback.correct {
+        background: var(--green);
+        border-left: 5px solid var(--green-dark);
+        color: white;
+    }
+
+    .idp-feedback.wrong {
+        background: var(--red);
+        border-left: 5px solid var(--red-dark);
+        color: white;
+    }
+
+    .idp-feedback-title {
+        font-weight: 800;
+        font-size: 17px;
+        margin-bottom: 4px;
+    }
+
+    .idp-correct {
+        font-weight: 800;
+        font-size: 16px;
+    }
+
+    .idp-next {
+        display: none;
+        border: none;
+        background: var(--brown);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-weight: 800;
+        cursor: pointer;
+        margin-top: 14px;
+    }
+
+    .idp-next.show {
+        display: inline-block;
+    }
+
+    /* =========================
+       MATCH
+    ========================= */
+
+    .idp-match-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 9px;
+        margin-top: 12px;
+    }
+
+    .idp-match-tile {
+        width: 45%;
+        padding: 12px 10px;
+        text-align: center;
+        border-radius: 12px;
+        background: var(--soft-brown);
+        color: var(--brown);
+        font-weight: 800;
+        font-size: 15px;
+        cursor: pointer;
+        transition: box-shadow 0.15s ease;
+    }
+
+    .idp-match-tile.en {
+        margin-right: 10%;
+    }
+
+    .idp-match-tile.selected {
+        box-shadow: 0 0 0 3px var(--light-brown);
+    }
+
+    .idp-match-tile.matched {
+        background: var(--green);
+        color: white;
+        cursor: default;
+    }
+
+    .idp-match-tile.wrong {
+        background: var(--red);
+        color: white;
+    }
+
+    /* =========================
+       HOMEWORK
+    ========================= */
+
+    .idp-homework {
+        background: var(--cream);
+        border-radius: 16px;
+        padding: 16px;
+        margin-top: 15px;
+    }
+
+    .idp-copy-box {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 13px;
+        margin: 10px 0;
+        font-weight: 700;
+    }
+
+    .idp-instagram {
+        display: inline-block;
+        background: var(--brown);
+        color: white;
+        padding: 11px 20px;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        margin-top: 8px;
+    }
+
+    @media (max-width: 650px) {
+
+        .idp-hero,
+        .idp-card,
+        .idp-game {
+            padding: 18px 16px;
+        }
+
+        .idp-hero h1 {
+            font-size: 23px;
+        }
+
+        .idp-vocab-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .idp-tile {
+            padding: 8px 11px;
+            font-size: 14px;
+        }
+
+        .idp-match-tile {
+            font-size: 14px;
+        }
+    }
+
+</style>
+
+
+<div class="idp-container">
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="idp-hero">
+
+        <div class="idp-badge">INDONESIAN • PERKENALAN</div>
+
+        <h1>👋 打招呼與自我介紹</h1>
+
+        <p>
+            嗨嗨～這一課我們要學的是印尼語最基本、也最常用的
+            <strong>打招呼與自我介紹</strong>。
+        </p>
+
+        <p>
+            你會學到怎麼說「嗨、你好、你叫什麼名字、你是哪裡人、
+            我是台灣人、很高興認識你」等等。
+        </p>
+
+        <p>
+            每個部分都有小遊戲，可以一邊學、一邊練習發音 😊
+        </p>
+
+    </section>
+
+
+    <div class="idp-carousel">
+
+
+        <!-- =====================================================
+             CAROUSEL 1
+        ===================================================== -->
+
+        <section class="idp-slide active">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 1</div>
+
+                <h2>💬 對話：第一次認識新朋友</h2>
+
+                <p>
+                    先來看看兩個人第一次見面時，可以怎麼用印尼語聊天。
+                </p>
+
+                <div class="idp-dialogue">
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿豪</div>
+                        <div class="idp-indonesian">
+                            Hai
+                            <button class="idp-speak" data-speak="Hai">🔊</button>
+                        </div>
+                        <div class="idp-chinese">嗨</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿妮</div>
+                        <div class="idp-indonesian">
+                            Halo
+                            <button class="idp-speak" data-speak="Halo">🔊</button>
+                        </div>
+                        <div class="idp-chinese">哈囉／你好</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿豪</div>
+                        <div class="idp-indonesian">
+                            Nama kamu siapa?
+                            <button class="idp-speak" data-speak="Nama kamu siapa?">🔊</button>
+                        </div>
+                        <div class="idp-chinese">你叫什麼名字？</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿妮</div>
+                        <div class="idp-indonesian">
+                            Nama-ku Ani, kalau nama-mu?
+                            <button class="idp-speak" data-speak="Nama-ku Ani, kalau nama-mu?">🔊</button>
+                        </div>
+                        <div class="idp-chinese">我的名字叫 Ani，你的名字呢？</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿豪</div>
+                        <div class="idp-indonesian">
+                            Aku Ahao, kamu orang mana?
+                            <button class="idp-speak" data-speak="Aku Ahao, kamu orang mana?">🔊</button>
+                        </div>
+                        <div class="idp-chinese">我是阿豪，你是哪裡人？</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿妮</div>
+                        <div class="idp-indonesian">
+                            Aku orang Indonesia, kalau kamu?
+                            <button class="idp-speak" data-speak="Aku orang Indonesia, kalau kamu?">🔊</button>
+                        </div>
+                        <div class="idp-chinese">我是印尼人，你呢？</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿豪</div>
+                        <div class="idp-indonesian">
+                            Aku orang Taiwan, salam kenal.
+                            <button class="idp-speak" data-speak="Aku orang Taiwan, salam kenal.">🔊</button>
+                        </div>
+                        <div class="idp-chinese">我是台灣人，很高興認識妳。</div>
+                    </div>
+
+                    <div class="idp-line">
+                        <div class="idp-speaker">阿妮</div>
+                        <div class="idp-indonesian">
+                            Salam kenal juga.
+                            <button class="idp-speak" data-speak="Salam kenal juga.">🔊</button>
+                        </div>
+                        <div class="idp-chinese">我也很高興認識你。</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 2
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 2</div>
+
+                <h2>📚 常用詞彙</h2>
+
+                <p>先記住這些在自我介紹中很常出現的單字。</p>
+
+                <div class="idp-vocab-grid">
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Aku
+                            <button class="idp-speak" data-speak="Aku">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">我</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Kamu
+                            <button class="idp-speak" data-speak="Kamu">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">你／妳／您</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Nama
+                            <button class="idp-speak" data-speak="Nama">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">名字</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Siapa
+                            <button class="idp-speak" data-speak="Siapa">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">誰</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Kalau
+                            <button class="idp-speak" data-speak="Kalau">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">……呢？</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Orang
+                            <button class="idp-speak" data-speak="Orang">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">人</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Mana
+                            <button class="idp-speak" data-speak="Mana">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">哪裡</div>
+                    </div>
+
+                    <div class="idp-vocab">
+                        <div class="idp-vocab-word">
+                            Juga
+                            <button class="idp-speak" data-speak="Juga">🔊</button>
+                        </div>
+                        <div class="idp-vocab-meaning">也</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 3
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 3</div>
+
+                <h2>👤 「我的、你的、他的」怎麼說？</h2>
+
+                <p>
+                    在印尼語裡，表示「誰的」時，所有格可以放在
+                    <strong>名詞後面</strong>。
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">-ku</div>
+                    <div class="zh">我的。是 aku 的縮短形式。</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">-mu</div>
+                    <div class="zh">你的／妳的。是 kamu 的縮短形式。</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">dia</div>
+                    <div class="zh">他／她／它。</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">-nya</div>
+                    <div class="zh">他的／她的／它的。用來表示 dia 的所有格。</div>
+                </div>
+
+                <h3>例句</h3>
+
+                <div class="idp-example">
+                    <div class="id">Nama-ku Ani.</div>
+                    <div class="zh">我的名字叫 Ani。</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">Nama aku Ani.</div>
+                    <div class="zh">我的名字叫 Ani。</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 「Nama-ku」和「Nama aku」意思基本上一樣，
+                    都可以表示「我的名字」。差別主要在語氣與使用方式。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 4
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-game">
+
+                <div class="idp-number">CAROUSEL 4</div>
+
+                <div class="idp-game-label">🧩 排字練習・所有格</div>
+
+                <div id="game-possessive"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 5
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 5</div>
+
+                <h2>🌏 「我是台灣人」怎麼說？</h2>
+
+                <p>
+                    在印尼語裡，如果要說一個人來自哪個國家或地區，
+                    可以使用：
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">orang + 地區／國家</div>
+                    <div class="zh">表示「某地的人」。</div>
+                </div>
+
+                <h3>例子</h3>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Orang Taiwan
+                        <button class="idp-speak" data-speak="Orang Taiwan">🔊</button>
+                    </div>
+                    <div class="zh">台灣人</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Orang Hualien
+                        <button class="idp-speak" data-speak="Orang Hualien">🔊</button>
+                    </div>
+                    <div class="zh">花蓮人</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 所以「orang」本身就是「人」。
+                    後面加上國家或地區，就可以表示「某地的人」。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 6
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-game">
+
+                <div class="idp-number">CAROUSEL 6</div>
+
+                <div class="idp-game-label">🧩 排字練習・國家與地區</div>
+
+                <div id="game-origin"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 7
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 7</div>
+
+                <h2>＝「是」在印尼語裡怎麼說？</h2>
+
+                <p>
+                    中文的「是」在印尼語裡通常可以對應到
+                    <strong>adalah</strong>。
+                </p>
+
+                <p>
+                    不過在日常生活中，尤其是簡單的自我介紹，
+                    <strong>adalah 經常直接省略</strong>。
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Aku Ahao.
+                        <button class="idp-speak" data-speak="Aku Ahao.">🔊</button>
+                    </div>
+                    <div class="zh">我是阿豪。</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Aku orang Taiwan.
+                        <button class="idp-speak" data-speak="Aku orang Taiwan.">🔊</button>
+                    </div>
+                    <div class="zh">我是台灣人。</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 所以初學自我介紹時，你可以直接說
+                    「Aku + 身分／名字／orang + 地區」，
+                    不需要每一句都加 adalah。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 8
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-game">
+
+                <div class="idp-number">CAROUSEL 8</div>
+
+                <div class="idp-game-label">🧩 排字練習・是</div>
+
+                <div id="game-adalah"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 9
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 9</div>
+
+                <h2>❓ 疑問詞放在哪裡？</h2>
+
+                <p>
+                    印尼語裡，像 <strong>siapa（誰）</strong>、
+                    <strong>mana（哪裡）</strong> 這類疑問詞，
+                    在很多日常問句裡會放在<strong>句子的後面</strong>。
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Nama kamu siapa?
+                        <button class="idp-speak" data-speak="Nama kamu siapa?">🔊</button>
+                    </div>
+                    <div class="zh">你的名字叫什麼？</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kamu orang mana?
+                        <button class="idp-speak" data-speak="Kamu orang mana?">🔊</button>
+                    </div>
+                    <div class="zh">你是哪裡人？</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 注意：印尼語的問句順序和中文不一定一樣，
+                    不要看到「siapa」或「mana」就習慣性地把它放在句首。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 10
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 10</div>
+
+                <h2>🌏 「你是哪裡人？」其實有好幾種說法</h2>
+
+                <p>
+                    日常聊天中，想問一個人「你是哪裡人？」
+                    不一定只有一種說法。
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kamu orang mana?
+                        <button class="idp-speak" data-speak="Kamu orang mana?">🔊</button>
+                    </div>
+                    <div class="zh">你是哪裡人？</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kamu dari mana?
+                        <button class="idp-speak" data-speak="Kamu dari mana?">🔊</button>
+                    </div>
+                    <div class="zh">你從哪裡來？／你是哪裡人？</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kamu asli mana?
+                        <button class="idp-speak" data-speak="Kamu asli mana?">🔊</button>
+                    </div>
+                    <div class="zh">你原本是哪裡人？／你是哪裡人？</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kamu asal mana?
+                        <button class="idp-speak" data-speak="Kamu asal mana?">🔊</button>
+                    </div>
+                    <div class="zh">你來自哪裡？／你的家鄉是哪裡？</div>
+                </div>
+
+                <h3>📚 單字</h3>
+
+                <div class="idp-example">
+                    <div class="id">Dari</div>
+                    <div class="zh">從、來自</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">Asal</div>
+                    <div class="zh">來自、出身、來源</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">Asli</div>
+                    <div class="zh">原本的、真正的、土生的</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 這幾種說法在日常對話中都可能聽到，
+                    不需要死記「一定只能用哪一個」。
+                    實際使用時可以依照聊天情境選擇。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 11
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-game">
+
+                <div class="idp-number">CAROUSEL 11</div>
+
+                <div class="idp-game-label">🧩 排字練習・疑問句</div>
+
+                <div id="game-question"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 12
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 12</div>
+
+                <h2>「Kalau」不一定只是「如果」</h2>
+
+                <p>
+                    <strong>Kalau</strong> 確實可以表示中文的「如果」，
+                    但是在日常聊天裡，
+                    <strong>Kalau + 主詞／名詞</strong>
+                    也常常可以用來表示「……呢？」。
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kalau kamu?
+                        <button class="idp-speak" data-speak="Kalau kamu?">🔊</button>
+                    </div>
+                    <div class="zh">你呢？</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Kalau nama kamu?
+                        <button class="idp-speak" data-speak="Kalau nama kamu?">🔊</button>
+                    </div>
+                    <div class="zh">你的名字呢？</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 所以當你聽到印尼人說
+                    <strong>「Kalau kamu?」</strong>，
+                    不一定是在說「如果你……」。
+                    在聊天情境裡，很可能只是很自然地問「你呢？」。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 13
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-game">
+
+                <div class="idp-number">CAROUSEL 13</div>
+
+                <div class="idp-game-label">🧩 排字練習・Kalau</div>
+
+                <div id="game-kalau"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 14
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 14</div>
+
+                <h2>➕ 「Juga」＝也</h2>
+
+                <p>
+                    印尼語的 <strong>juga</strong> 是「也」的意思。
+                </p>
+
+                <p>
+                    在日常印尼語中，<strong>juga</strong>
+                    可以放在主詞後面，也可以放在句子的後面。
+                </p>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Aku juga orang Taiwan.
+                        <button class="idp-speak" data-speak="Aku juga orang Taiwan.">🔊</button>
+                    </div>
+                    <div class="zh">我也是台灣人。</div>
+                </div>
+
+                <div class="idp-example">
+                    <div class="id">
+                        Salam kenal juga.
+                        <button class="idp-speak" data-speak="Salam kenal juga.">🔊</button>
+                    </div>
+                    <div class="zh">我也很高興認識你。</div>
+                </div>
+
+                <div class="idp-tip">
+                    💡 初學時可以先記住：
+                    <br>
+                    <strong>主詞 + juga</strong> → 「某人也……」
+                    <br>
+                    <strong>句尾 + juga</strong> → 也可以表示「也／同樣」。
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 15
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-game">
+
+                <div class="idp-number">CAROUSEL 15</div>
+
+                <div class="idp-game-label">🧩 排字練習・Juga</div>
+
+                <div id="game-juga"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 16
+        ===================================================== -->
+
+        <section class="idp-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 16</div>
+
+                <h2>🧠 最後小挑戰</h2>
+
+                <p>
+                    現在請你自己用印尼語介紹一下自己！
+                </p>
+
+                <div class="idp-homework">
+
+                    <p><strong>請錄一段 voice note，說：</strong></p>
+
+                    <div class="idp-copy-box">
+                        Halo, nama saya ______, saya orang Taiwan.
+                        Salam kenal. Kalau kamu? Siapa nama kamu?
+                    </div>
+
+                    <p>
+                        請把上面的句子換成你自己的名字，
+                        然後錄成語音訊息傳到我的 DM。
+                    </p>
+
+                    <p>
+                        你也可以直接點下面的按鈕傳訊息給我 😊
+                    </p>
+
+                    <p style="text-align:center;">
+                        <a
+                            class="idp-instagram"
+                            href="https://ig.me/m/nvl0114"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📩 傳 Instagram Voice Message
+                        </a>
+                    </p>
+
+                    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
+
+                    <p>
+                        作為交換，也請你幫我把下面這段話翻成
+                        <strong>中文或台語（台灣台語）</strong>：
+                    </p>
+
+                    <div class="idp-copy-box">
+                        Halo. Nama saya Nadia, saya orang Indonesia.
+                        Salam kenal. Kalau kamu? Siapa nama kamu?
+                    </div>
+
+                    <p>
+                        我也會錄一段 voice note 給你，
+                        請你幫我聽聽看我的發音有沒有問題，也請幫我糾正一下 😊
+                    </p>
+
+                    <p>
+                        我們一起慢慢練習！💪🧋
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         CAROUSEL NAVIGATION
+    ===================================================== -->
+
+    <div class="idp-nav">
+
+        <button
+            type="button"
+            class="idp-nav-btn"
+            id="idp-prev"
+        >
+            ← 上一頁
+        </button>
+
+        <div
+            class="idp-slide-counter"
+            id="idp-counter"
+        >
+            1 / 16
+        </div>
+
+        <button
+            type="button"
+            class="idp-nav-btn"
+            id="idp-next"
+        >
+            下一頁 →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME JAVASCRIPT
+===================================================== -->
+
+<script type="text/plain">
+
+    /* =====================================================
+       INDONESIAN SPEECH
+    ===================================================== */
+
+    function idpSpeak(text, buttonEl) {
+
+        if (!("speechSynthesis" in window)) return;
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        /*
+            印尼語：
+            id-ID = Bahasa Indonesia
+        */
+        utterance.lang = "id-ID";
+        utterance.rate = 0.88;
+
+        const voices = window.speechSynthesis.getVoices();
+
+        const idVoice = voices.find(
+            v => v.lang && v.lang.toLowerCase().startsWith("id")
+        );
+
+        if (idVoice) {
+            utterance.voice = idVoice;
+        }
+
+        if (buttonEl) {
+
+            utterance.onstart = () => {
+                buttonEl.classList.add("playing");
+            };
+
+            utterance.onend = () => {
+                buttonEl.classList.remove("playing");
+            };
+
+            utterance.onerror = () => {
+                buttonEl.classList.remove("playing");
+            };
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
+    }
+
+
+    document.querySelectorAll(".idp-speak").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const text = button.dataset.speak;
+
+            if (text) {
+                idpSpeak(text, button);
+            }
+
+        });
+
+    });
+
+
+    /* =====================================================
+       SHUFFLE
+    ===================================================== */
+
+    function idpShuffle(array) {
+
+        const result = [...array];
+
+        for (let i = result.length - 1; i > 0; i--) {
+
+            const j = Math.floor(Math.random() * (i + 1));
+
+            [result[i], result[j]] = [result[j], result[i]];
+        }
+
+        return result;
+    }
+
+
+    /* =====================================================
+       TOKENIZE
+    ===================================================== */
+
+    function idpTokenize(sentence) {
+
+        return sentence
+            .replace(/[.!?]+$/, "")
+            .split(" ");
+
+    }
+
+
+    /* =====================================================
+       ARRANGE GAMES
+    ===================================================== */
+
+    const idpArrangeGames = {
+
+        possessive: [
+
+            {
+                zh: "我的名字叫 Nadia",
+                en: "Nama-ku Nadia"
+            },
+
+            {
+                zh: "你的名字叫 Cherry",
+                en: "Nama-mu Cherry"
+            },
+
+            {
+                zh: "他的名字叫 Ronnie",
+                en: "Nama-nya Ronnie"
+            },
+
+            {
+                zh: "我的名字叫 Cherry",
+                en: "Nama aku Cherry"
+            },
+
+            {
+                zh: "你的名字叫 Ronnie",
+                en: "Nama kamu Ronnie"
+            },
+
+            {
+                zh: "他的名字叫 Nadia",
+                en: "Nama dia Nadia"
+            }
+
+        ],
+
+        origin: [
+
+            {
+                zh: "台灣人",
+                en: "Orang Taiwan"
+            },
+
+            {
+                zh: "印尼人",
+                en: "Orang Indonesia"
+            },
+
+            {
+                zh: "美國人",
+                en: "Orang Amerika"
+            },
+
+            {
+                zh: "台北人",
+                en: "Orang Taipei"
+            },
+
+            {
+                zh: "花蓮人",
+                en: "Orang Hualien"
+            }
+
+        ],
+
+        adalah: [
+
+            {
+                zh: "我是 Nadia",
+                en: "Aku Nadia"
+            },
+
+            {
+                zh: "你是 Cherry",
+                en: "Kamu Cherry"
+            },
+
+            {
+                zh: "他是 Ronnie",
+                en: "Dia Ronnie"
+            },
+
+            {
+                zh: "我是台灣人",
+                en: "Aku orang Taiwan"
+            },
+
+            {
+                zh: "你是印尼人",
+                en: "Kamu orang Indonesia"
+            },
+
+            {
+                zh: "他是美國人",
+                en: "Dia orang Amerika"
+            }
+
+        ],
+
+        question: [
+
+            {
+                zh: "他是誰",
+                en: "Dia siapa"
+            },
+
+            {
+                zh: "你是誰",
+                en: "Kamu siapa"
+            },
+
+            {
+                zh: "你的名字叫什麼",
+                en: "Nama kamu siapa"
+            },
+
+            {
+                zh: "你是哪裡人",
+                en: "Kamu orang mana"
+            },
+
+            {
+                zh: "他是哪裡人",
+                en: "Dia orang mana"
+            },
+
+            {
+                zh: "他原本是哪裡人",
+                en: "Dia asli mana"
+            },
+
+            {
+                zh: "我來自台灣",
+                en: "Aku asal Taiwan"
+            }
+
+        ],
+
+        kalau: [
+
+            {
+                zh: "你呢",
+                en: "Kalau kamu"
+            },
+
+            {
+                zh: "我呢",
+                en: "Kalau aku"
+            },
+
+            {
+                zh: "他的名字呢",
+                en: "Kalau nama dia"
+            }
+
+        ],
+
+        juga: [
+
+            {
+                zh: "我也是台灣人",
+                en: "Aku orang Taiwan juga"
+            },
+
+            {
+                zh: "他也是印尼人",
+                en: "Dia juga orang Indonesia"
+            },
+
+            {
+                zh: "我也很高興認識你",
+                en: "Salam kenal juga"
+            },
+
+            {
+                zh: "你也是美國人",
+                en: "Kamu juga orang Amerika"
+            }
+
+        ]
+
+    };
+
+
+    function initIdpArrangeGame(gameKey, items) {
+
+        const container = document.getElementById(
+            "game-" + gameKey
+        );
+
+        if (!container) return;
+
+        let index = 0;
+
+        function render() {
+
+            const item = items[index];
+
+            const words = idpTokenize(item.en);
+
+            const shuffledIndexes = idpShuffle(
+                words.map((word, i) => i)
+            );
+
+            container.innerHTML = `
+
+                <div class="idp-prompt">
+                    ${item.zh}
+                </div>
+
+                <div
+                    class="idp-answer"
+                    id="${gameKey}-answer"
+                ></div>
+
+                <div
+                    class="idp-bank"
+                    id="${gameKey}-bank"
+                ></div>
+
+                <div class="idp-actions">
+
+                    <button
+                        type="button"
+                        class="idp-reset"
+                        id="${gameKey}-reset"
+                    >
+                        🔄 重排
+                    </button>
+
+                    <button
+                        type="button"
+                        class="idp-reset"
+                        id="${gameKey}-listen"
+                    >
+                        🔊 聽答案
+                    </button>
+
+                </div>
+
+                <div
+                    class="idp-feedback"
+                    id="${gameKey}-feedback"
+                >
+                    <div
+                        class="idp-feedback-title"
+                        id="${gameKey}-feedback-title"
+                    ></div>
+
+                    <div
+                        class="idp-correct"
+                        id="${gameKey}-correct"
+                    ></div>
+
+                    <div>
+                        ${item.zh}
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="idp-next"
+                    id="${gameKey}-next"
+                >
+                    下一題 →
+                </button>
+
+            `;
+
+
+            const answer = document.getElementById(
+                gameKey + "-answer"
+            );
+
+            const bank = document.getElementById(
+                gameKey + "-bank"
+            );
+
+            const reset = document.getElementById(
+                gameKey + "-reset"
+            );
+
+            const listen = document.getElementById(
+                gameKey + "-listen"
+            );
+
+            const feedback = document.getElementById(
+                gameKey + "-feedback"
+            );
+
+            const feedbackTitle = document.getElementById(
+                gameKey + "-feedback-title"
+            );
+
+            const correct = document.getElementById(
+                gameKey + "-correct"
+            );
+
+            const next = document.getElementById(
+                gameKey + "-next"
+            );
+
+
+            let placed = [];
+
+
+            function renderBank() {
+
+                bank.innerHTML = "";
+
+                shuffledIndexes.forEach(originalIndex => {
+
+                    const button = document.createElement("button");
+
+                    button.type = "button";
+
+                    button.className = "idp-tile";
+
+                    button.textContent =
+                        words[originalIndex];
+
+                    button.dataset.index =
+                        originalIndex;
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            if (button.disabled) return;
+
+                            button.disabled = true;
+
+                            placed.push(originalIndex);
+
+                            idpSpeak(
+                                words[originalIndex],
+                                button
+                            );
+
+                            renderAnswer();
+
+                            if (
+                                placed.length ===
+                                words.length
+                            ) {
+
+                                setTimeout(
+                                    checkAnswer,
+                                    250
+                                );
+
+                            }
+
+                        }
+                    );
+
+                    bank.appendChild(button);
+
+                });
+
+            }
+
+
+            function renderAnswer() {
+
+                answer.innerHTML = "";
+
+                placed.forEach(originalIndex => {
+
+                    const button =
+                        document.createElement("button");
+
+                    button.type = "button";
+
+                    button.className =
+                        "idp-tile placed";
+
+                    button.textContent =
+                        words[originalIndex];
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+                            idpSpeak(
+                                words[originalIndex],
+                                button
+                            );
+                        }
+                    );
+
+                    answer.appendChild(button);
+
+                });
+
+            }
+
+
+            function checkAnswer() {
+
+                const isCorrect =
+                    placed.every(
+                        (value, i) =>
+                            value === i
+                    );
+
+                bank.querySelectorAll(
+                    ".idp-tile"
+                ).forEach(
+                    button =>
+                        button.disabled = true
+                );
+
+                reset.style.display = "none";
+
+                feedback.className =
+                    isCorrect
+                        ? "idp-feedback show correct"
+                        : "idp-feedback show wrong";
+
+                feedbackTitle.textContent =
+                    isCorrect
+                        ? "✓ 正確！"
+                        : "✗ 再看看順序喔～";
+
+                correct.textContent =
+                    item.en;
+
+                setTimeout(
+                    () => idpSpeak(item.en),
+                    300
+                );
+
+                next.classList.add("show");
+
+            }
+
+
+            reset.addEventListener(
+                "click",
+                () => {
+
+                    placed = [];
+
+                    feedback.className =
+                        "idp-feedback";
+
+                    renderAnswer();
+
+                    bank.querySelectorAll(
+                        ".idp-tile"
+                    ).forEach(button => {
+
+                        button.disabled = false;
+
+                    });
+
+                }
+            );
+
+
+            listen.addEventListener(
+                "click",
+                () => idpSpeak(item.en)
+            );
+
+
+            next.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        index >=
+                        items.length - 1
+                    ) {
+
+                        container.innerHTML = `
+                            <div style="
+                                text-align:center;
+                                padding:15px 0;
+                                font-weight:800;
+                                color:var(--light-brown);
+                            ">
+                                🎉 這個練習完成！
+                            </div>
+                        `;
+
+                        return;
+
+                    }
+
+                    index++;
+
+                    render();
+
+                }
+            );
+
+
+            renderBank();
+
+            renderAnswer();
+
+        }
+
+        render();
+
+    }
+
+
+    Object.entries(idpArrangeGames).forEach(
+        ([key, items]) =>
+            initIdpArrangeGame(key, items)
+    );
+
+
+    /* =====================================================
+       MATCH GAME
+       CAROUSEL 15? 
+       User requested match, so create separate matching
+       inside the final matching slide below.
+    ===================================================== */
+
+    const idpMatchPairs = [
+
+        { en: "Aku", zh: "我" },
+        { en: "Kamu", zh: "你" },
+        { en: "Dia", zh: "他／她／它" },
+        { en: "Nama", zh: "名字" },
+        { en: "Siapa", zh: "誰" },
+        { en: "Orang", zh: "人" },
+        { en: "Kalau", zh: "如果／……呢？" },
+        { en: "Mana", zh: "哪裡" },
+        { en: "Juga", zh: "也" },
+        { en: "-ku", zh: "我的" },
+        { en: "-mu", zh: "你的" },
+        { en: "-nya", zh: "他的／她的／它的" },
+        { en: "Dari", zh: "從／來自" },
+        { en: "Asal", zh: "來自／出身" },
+        { en: "Asli", zh: "原本的／真正的" }
+
+    ];
+
+
+    /*
+        Insert a matching game before homework.
+        This is generated dynamically so the page still
+        has the requested 16 learning sections.
+    */
+
+    const slides =
+        document.querySelectorAll(".idp-slide");
+
+    if (slides.length >= 15) {
+
+        const matchSlide =
+            document.createElement("section");
+
+        matchSlide.className = "idp-slide";
+
+        matchSlide.innerHTML = `
+
+            <div class="idp-card">
+
+                <div class="idp-number">
+                    CAROUSEL 16
+                </div>
+
+                <h2>🧩 配對練習・印尼語 ↔ 中文</h2>
+
+                <p>
+                    點左邊的印尼語，再點右邊對應的中文。
+                </p>
+
+                <table class="idp-match-table">
+                    <tbody id="idp-match-body"></tbody>
+                </table>
+
+            </div>
+
+        `;
+
+        /*
+            Put matching game before the homework slide.
+        */
+
+        const homeworkSlide =
+            slides[slides.length - 1];
+
+        homeworkSlide.parentNode.insertBefore(
+            matchSlide,
+            homeworkSlide
+        );
+
+    }
+
+
+    function initIdpMatch() {
+
+        const body =
+            document.getElementById(
+                "idp-match-body"
+            );
+
+        if (!body) return;
+
+        const shuffled =
+            idpShuffle(
+                idpMatchPairs.map(
+                    (_, i) => i
+                )
+            );
+
+        let selected = null;
+        let matched = 0;
+
+        idpMatchPairs.forEach(
+            (pair, index) => {
+
+                const row =
+                    document.createElement("tr");
+
+                const en =
+                    document.createElement("td");
+
+                en.className =
+                    "idp-match-tile en";
+
+                en.textContent =
+                    pair.en;
+
+                const zh =
+                    document.createElement("td");
+
+                zh.className =
+                    "idp-match-tile";
+
+                const zhIndex =
+                    shuffled[index];
+
+                zh.textContent =
+                    idpMatchPairs[zhIndex].zh;
+
+
+                en.addEventListener(
+                    "click",
+                    () => {
+
+                        if (
+                            en.classList.contains(
+                                "matched"
+                            )
+                        ) return;
+
+                        document
+                            .querySelectorAll(
+                                "#idp-match-body .en"
+                            )
+                            .forEach(
+                                el =>
+                                    el.classList.remove(
+                                        "selected"
+                                    )
+                            );
+
+                        en.classList.add(
+                            "selected"
+                        );
+
+                        selected = {
+                            element: en,
+                            index: index
+                        };
+
+                        idpSpeak(
+                            pair.en,
+                            en
+                        );
+
+                    }
+                );
+
+
+                zh.addEventListener(
+                    "click",
+                    () => {
+
+                        if (
+                            !selected ||
+                            zh.classList.contains(
+                                "matched"
+                            )
+                        ) return;
+
+                        if (
+                            selected.index ===
+                            zhIndex
+                        ) {
+
+                            selected.element
+                                .classList
+                                .remove(
+                                    "selected"
+                                );
+
+                            selected.element
+                                .classList
+                                .add(
+                                    "matched"
+                                );
+
+                            zh.classList.add(
+                                "matched"
+                            );
+
+                            matched++;
+
+                            selected = null;
+
+                            if (
+                                matched ===
+                                idpMatchPairs.length
+                            ) {
+
+                                setTimeout(
+                                    () => {
+
+                                        body.innerHTML = `
+                                            <tr>
+                                                <td
+                                                    colspan="2"
+                                                    style="
+                                                        text-align:center;
+                                                        padding:20px;
+                                                        font-weight:800;
+                                                        color:var(--green-dark);
+                                                    "
+                                                >
+                                                    🎉 全部配對完成！
+                                                </td>
+                                            </tr>
+                                        `;
+
+                                    },
+                                    300
+                                );
+
+                            }
+
+                        } else {
+
+                            zh.classList.add(
+                                "wrong"
+                            );
+
+                            setTimeout(
+                                () =>
+                                    zh.classList.remove(
+                                        "wrong"
+                                    ),
+                                400
+                            );
+
+                            selected.element
+                                .classList
+                                .remove(
+                                    "selected"
+                                );
+
+                            selected = null;
+
+                        }
+
+                    }
+                );
+
+
+                row.appendChild(en);
+                row.appendChild(zh);
+
+                body.appendChild(row);
+
+            }
+        );
+
+    }
+
+
+    initIdpMatch();
+
+
+    /* =====================================================
+       CAROUSEL
+    ===================================================== */
+
+    function initIdpCarousel() {
+
+        const allSlides =
+            document.querySelectorAll(
+                ".idp-slide"
+            );
+
+        const prev =
+            document.getElementById(
+                "idp-prev"
+            );
+
+        const next =
+            document.getElementById(
+                "idp-next"
+            );
+
+        const counter =
+            document.getElementById(
+                "idp-counter"
+            );
+
+        let current = 0;
+
+
+        function update() {
+
+            allSlides.forEach(
+                (slide, index) => {
+
+                    slide.classList.toggle(
+                        "active",
+                        index === current
+                    );
+
+                }
+            );
+
+
+            counter.textContent =
+                `${current + 1} / ${allSlides.length}`;
+
+
+            prev.disabled =
+                current === 0;
+
+            next.disabled =
+                current ===
+                allSlides.length - 1;
+
+
+            /*
+                每次切換 carousel 時，
+                回到頁面上方，避免使用者卡在
+                上一張內容的位置。
+            */
+
+            const carousel =
+                document.querySelector(
+                    ".idp-carousel"
+                );
+
+            if (carousel) {
+
+                carousel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }
+
+
+        prev.addEventListener(
+            "click",
+            () => {
+
+                if (current > 0) {
+
+                    current--;
+
+                    update();
+
+                }
+
+            }
+        );
+
+
+        next.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    current <
+                    allSlides.length - 1
+                ) {
+
+                    current++;
+
+                    update();
+
+                }
+
+            }
+        );
+
+
+        update();
+
+    }
+
+
+    initIdpCarousel();
+
+</script>
+
+
+<!-- =====================================================
+     SHARED SCRIPT — SIDEBAR / A.HTML LOADER
+     Jangan dihapus.
+===================================================== -->
+
+<script src="../script.js"></script>
