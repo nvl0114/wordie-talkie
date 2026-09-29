@@ -75,7 +75,8 @@
     }
 
     /* =========================
-       CAROUSEL
+       SECTIONS (dulu carousel,
+       sekarang tampil ke bawah)
     ========================= */
 
     .idp-carousel {
@@ -83,23 +84,7 @@
     }
 
     .idp-slide {
-        display: none;
-        animation: idpSlideIn 0.3s ease;
-    }
-
-    .idp-slide.active {
         display: block;
-    }
-
-    @keyframes idpSlideIn {
-        from {
-            opacity: 0;
-            transform: translateX(8px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
     }
 
     .idp-card {
@@ -133,36 +118,6 @@
         font-size: 13px;
         font-weight: 800;
         margin-bottom: 10px;
-    }
-
-    .idp-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        margin-top: 14px;
-    }
-
-    .idp-nav-btn {
-        border: none;
-        background: var(--brown);
-        color: white;
-        padding: 10px 18px;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 800;
-        cursor: pointer;
-    }
-
-    .idp-nav-btn:disabled {
-        opacity: 0.35;
-        cursor: default;
-    }
-
-    .idp-slide-counter {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--light-brown);
     }
 
     /* =========================
@@ -282,6 +237,7 @@
         background: var(--white);
         border-radius: 22px;
         padding: 24px;
+        margin-bottom: 16px;
         box-shadow: 0 5px 18px rgba(92, 64, 51, 0.07);
     }
 
@@ -553,7 +509,7 @@
              CAROUSEL 1
         ===================================================== -->
 
-        <section class="idp-slide active">
+        <section class="idp-slide">
 
             <div class="idp-card">
 
@@ -1295,38 +1251,6 @@
 
         </section>
 
-
-    </div>
-
-
-    <!-- =====================================================
-         CAROUSEL NAVIGATION
-    ===================================================== -->
-
-    <div class="idp-nav">
-
-        <button
-            type="button"
-            class="idp-nav-btn"
-            id="idp-prev"
-        >
-            ← 上一頁
-        </button>
-
-        <div
-            class="idp-slide-counter"
-            id="idp-counter"
-        >
-            1 / 16
-        </div>
-
-        <button
-            type="button"
-            class="idp-nav-btn"
-            id="idp-next"
-        >
-            下一頁 →
-        </button>
 
     </div>
 
@@ -2235,127 +2159,6 @@
 
 
     initIdpMatch();
-
-
-    /* =====================================================
-       CAROUSEL
-    ===================================================== */
-
-    function initIdpCarousel() {
-
-        const allSlides =
-            document.querySelectorAll(
-                ".idp-slide"
-            );
-
-        const prev =
-            document.getElementById(
-                "idp-prev"
-            );
-
-        const next =
-            document.getElementById(
-                "idp-next"
-            );
-
-        const counter =
-            document.getElementById(
-                "idp-counter"
-            );
-
-        let current = 0;
-
-
-        function update() {
-
-            allSlides.forEach(
-                (slide, index) => {
-
-                    slide.classList.toggle(
-                        "active",
-                        index === current
-                    );
-
-                }
-            );
-
-
-            counter.textContent =
-                `${current + 1} / ${allSlides.length}`;
-
-
-            prev.disabled =
-                current === 0;
-
-            next.disabled =
-                current ===
-                allSlides.length - 1;
-
-
-            /*
-                每次切換 carousel 時，
-                回到頁面上方，避免使用者卡在
-                上一張內容的位置。
-            */
-
-            const carousel =
-                document.querySelector(
-                    ".idp-carousel"
-                );
-
-            if (carousel) {
-
-                carousel.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-
-        }
-
-
-        prev.addEventListener(
-            "click",
-            () => {
-
-                if (current > 0) {
-
-                    current--;
-
-                    update();
-
-                }
-
-            }
-        );
-
-
-        next.addEventListener(
-            "click",
-            () => {
-
-                if (
-                    current <
-                    allSlides.length - 1
-                ) {
-
-                    current++;
-
-                    update();
-
-                }
-
-            }
-        );
-
-
-        update();
-
-    }
-
-
-    initIdpCarousel();
 
 </script>
 
