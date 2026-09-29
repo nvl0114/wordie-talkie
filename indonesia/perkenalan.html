@@ -439,6 +439,25 @@
     }
 
     /* =========================
+       VIDEO
+    ========================= */
+
+    .idp-video-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
+    }
+
+    .idp-video-wrap iframe {
+        width: 100%;
+        max-width: 325px;
+        height: 580px;
+        border: none;
+        border-radius: 16px;
+        background: var(--cream);
+    }
+
+    /* =========================
        HOMEWORK
     ========================= */
 
@@ -1205,14 +1224,55 @@
 
 
         <!-- =====================================================
-             CAROUSEL 16
+             CAROUSEL 17 — VIDEO TIKTOK
+        ===================================================== -->
+
+        <section class="idp-slide" id="idp-video-slide">
+
+            <div class="idp-card">
+
+                <div class="idp-number">CAROUSEL 17</div>
+
+                <h2>🎬 輕鬆一下：聽聽印尼人怎麼說話</h2>
+
+                <p>
+                    學了這麼多，先休息一下吧！這是一支輕鬆好玩的娛樂影片 😆
+                </p>
+
+                <p>
+                    一邊看影片，一邊試著聽聽看印尼人平常是怎麼說話的。
+                </p>
+
+                <div class="idp-tip">
+                    💡 不用每一句都聽懂，先熟悉印尼語的語速、語調和聲音就很棒了。
+                    如果聽到剛剛學過的單字，可以試著抓抓看！
+                </div>
+
+                <div class="idp-video-wrap" id="idp-tiktok-box">
+                    <a
+                        class="idp-instagram"
+                        href="https://vt.tiktok.com/ZSbk8pTS6/"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        ▶️ 在 TikTok 觀看影片
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAROUSEL 18
         ===================================================== -->
 
         <section class="idp-slide">
 
             <div class="idp-card">
 
-                <div class="idp-number">CAROUSEL 16</div>
+                <div class="idp-number">CAROUSEL 18</div>
 
                 <h2>🧠 最後小挑戰</h2>
 
@@ -1982,6 +2042,7 @@
         */
 
         const homeworkSlide =
+            document.getElementById("idp-video-slide") ||
             slides[slides.length - 1];
 
         homeworkSlide.parentNode.insertBefore(
@@ -2184,6 +2245,75 @@
 
 
     initIdpMatch();
+
+
+    /* =====================================================
+       TIKTOK EMBED
+       Ambil video ID dari oEmbed (mendukung link pendek),
+       lalu tampilkan lewat iframe. Kalau gagal, tombol
+       link "在 TikTok 觀看影片" tetap tersedia.
+    ===================================================== */
+
+    function initIdpTiktok() {
+
+        const box =
+            document.getElementById(
+                "idp-tiktok-box"
+            );
+
+        if (!box) return;
+
+        const url =
+            "https://vt.tiktok.com/ZSbk8pTS6/";
+
+        fetch(
+            "https://www.tiktok.com/oembed?url=" +
+            encodeURIComponent(url)
+        )
+            .then(res => res.json())
+            .then(data => {
+
+                let id = data.embed_product_id;
+
+                if (!id && data.html) {
+
+                    const match =
+                        data.html.match(
+                            /data-video-id="(\d+)"/
+                        );
+
+                    if (match) id = match[1];
+
+                }
+
+                if (!id) return;
+
+                const iframe =
+                    document.createElement("iframe");
+
+                iframe.src =
+                    "https://www.tiktok.com/embed/v2/" + id;
+
+                iframe.allow =
+                    "encrypted-media; fullscreen";
+
+                iframe.allowFullscreen = true;
+
+                iframe.loading = "lazy";
+
+                iframe.title = "TikTok";
+
+                box.innerHTML = "";
+
+                box.appendChild(iframe);
+
+            })
+            .catch(() => {});
+
+    }
+
+
+    initIdpTiktok();
 
 </script>
 
