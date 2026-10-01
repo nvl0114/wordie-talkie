@@ -1,0 +1,566 @@
+<!--
+    =====================================================
+    KONTEN: indonesia/lagi.html
+    INDONESIA — LAGI (正在 / 再)
+    Bahasa pengantar: 繁體中文
+    Bahasa target: Bahasa Indonesia
+
+    File ini adalah KONTEN halaman.
+    Sidebar & layout datang dari A.html lewat script.js.
+
+    PENTING:
+    <script src="../script.js"></script>
+    di paling bawah WAJIB ada.
+    =====================================================
+-->
+
+<style>
+    #page-content {
+        --cream:#fff8ef; --brown:#5c4033; --light-brown:#8b6b58; --soft-brown:#f2e3d5;
+        --white:#ffffff; --green:#68a27f; --green-dark:#4f7f63; --red:#c96f6f; --red-dark:#a3504f;
+        --border:#e5d5c7; --yellow:#fff5d8; --yellow-dark:#c59a39;
+    }
+    .lg-container{max-width:850px;margin:0 auto;padding:10px 0 50px;line-height:1.8;color:var(--brown)}
+    .lg-hero,.lg-card,.lg-game{background:var(--white);border-radius:22px;padding:24px;margin-bottom:16px;box-shadow:0 5px 18px rgba(92,64,51,.07)}
+    .lg-hero{padding:28px 24px;margin-bottom:22px;box-shadow:0 5px 18px rgba(92,64,51,.08)}
+    .lg-hero h1{margin:0 0 10px;font-size:28px}
+    .lg-hero p,.lg-card p{margin:9px 0}
+    .lg-card h2{margin:0 0 12px;font-size:21px}
+    .lg-card h3{margin:18px 0 8px;font-size:17px}
+    .lg-badge,.lg-number,.lg-game-label{display:inline-block;background:var(--soft-brown);color:var(--brown);padding:5px 12px;border-radius:999px;font-size:13px;font-weight:800;margin-bottom:10px}
+
+    .lg-example{background:var(--cream);border-left:4px solid var(--light-brown);border-radius:10px;padding:10px 14px;margin:10px 0}
+    .lg-example .id{font-weight:800;font-size:16px}
+    .lg-example .zh{color:var(--light-brown);font-size:14px}
+    .lg-pattern{background:var(--soft-brown);border-radius:12px;padding:10px 14px;margin:12px 0;font-weight:800}
+    .lg-tip{background:var(--yellow);border-left:4px solid var(--yellow-dark);border-radius:10px;padding:11px 14px;margin-top:14px;font-size:14px}
+
+    .lg-speak{border:none;background:var(--soft-brown);color:var(--brown);padding:5px 9px;border-radius:999px;cursor:pointer;font-size:13px;margin-left:5px;vertical-align:middle}
+    .lg-speak.playing{box-shadow:0 0 0 3px rgba(104,162,127,.35)}
+
+    .lg-vocab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
+    .lg-vocab{background:var(--cream);border:1px solid var(--border);border-radius:14px;padding:12px}
+    .lg-vocab-word{font-size:17px;font-weight:800}
+    .lg-vocab-meaning{color:var(--light-brown);font-size:14px;margin-top:3px}
+
+    .lg-prompt{font-size:18px;font-weight:800;margin:8px 0 15px}
+    .lg-answer{display:flex;flex-wrap:wrap;gap:8px;min-height:48px;padding:10px;background:var(--cream);border:2px dashed var(--border);border-radius:14px;margin-bottom:14px}
+    .lg-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+    .lg-tile{border:none;background:var(--soft-brown);color:var(--brown);padding:10px 14px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;transition:transform .15s ease}
+    .lg-tile:hover:not(:disabled){transform:translateY(-2px)}
+    .lg-tile:disabled{opacity:.35;cursor:default}
+    .lg-tile.placed{background:var(--brown);color:#fff}
+    .lg-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .lg-reset{border:1px solid var(--border);background:#fff;color:var(--light-brown);padding:7px 14px;border-radius:999px;font-size:13px;font-weight:800;cursor:pointer}
+    .lg-feedback{display:none;margin-top:15px;border-radius:15px;padding:14px}
+    .lg-feedback.show{display:block}
+    .lg-feedback.correct{background:var(--green);border-left:5px solid var(--green-dark);color:#fff}
+    .lg-feedback.wrong{background:var(--red);border-left:5px solid var(--red-dark);color:#fff}
+    .lg-feedback-title{font-weight:800;font-size:17px;margin-bottom:4px}
+    .lg-correct{font-weight:800;font-size:16px}
+    .lg-next{display:none;border:none;background:var(--brown);color:#fff;padding:10px 18px;border-radius:999px;font-weight:800;cursor:pointer;margin-top:14px}
+    .lg-next.show{display:inline-block}
+
+    @media (max-width:650px){
+        .lg-hero,.lg-card,.lg-game{padding:18px 16px}
+        .lg-hero h1{font-size:23px}
+        .lg-vocab-grid{grid-template-columns:1fr}
+        .lg-tile{padding:8px 11px;font-size:14px}
+    }
+</style>
+
+<div class="lg-container">
+
+    <section class="lg-hero">
+        <div class="lg-badge">INDONESIAN • LAGI</div>
+        <h1>⏳ 印尼語的「lagi」</h1>
+        <p>
+            印尼文的 <strong>lagi</strong> 有幾種常見的意思，可以表示中文的
+            <strong>「正在、在」</strong> 或 <strong>「再」</strong>。
+            具體意思要根據句子的情況來判斷。
+        </p>
+        <p>每個例句都有 🔊 可以聽發音，排字遊戲也可以一邊點單字一邊聽 😊</p>
+    </section>
+
+    <!-- CAROUSEL 1 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 1</div>
+        <h2>▶️ lagi + 動詞</h2>
+        <p>
+            當 <strong>lagi + 動詞</strong> 時，可以表示中文的
+            <strong>「正在」</strong>，用來表示某個動作正在進行。
+        </p>
+        <div class="lg-pattern">句型：S + lagi + Verb + Object</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Aku lagi makan ayam." data-zh="我正在吃雞肉。"></div>
+        <div class="lg-example" data-id="Dia lagi pergi." data-zh="他正在出去。"></div>
+        <div class="lg-tip">
+            💡 <strong>Makan</strong> = 吃<br>
+            <strong>Pergi</strong> = 去／出去／出門
+        </div>
+    </div>
+
+    <!-- CAROUSEL 2 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 2</div>
+        <div class="lg-game-label">🧩 排字練習・lagi + 動詞</div>
+        <div id="game-g1"></div>
+    </div>
+
+    <!-- CAROUSEL 3 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 3</div>
+        <h2>🚫 「lagi」的否定句</h2>
+        <p>
+            「lagi」的否定形式是在後面加上 <strong>gak</strong>，
+            表示中文的 <strong>「不／沒」</strong>。
+        </p>
+        <div class="lg-pattern">句型：S + lagi + gak + Verb + Object</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Aku lagi gak makan." data-zh="我現在沒在吃東西。"></div>
+        <div class="lg-example" data-id="Dia lagi gak pergi." data-zh="他現在沒有要出去。"></div>
+    </div>
+
+    <!-- CAROUSEL 4 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 4</div>
+        <div class="lg-game-label">🧩 排字練習・lagi gak</div>
+        <div id="game-g2"></div>
+    </div>
+
+    <!-- CAROUSEL 5 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 5</div>
+        <h2>❓ 「lagi」的疑問句</h2>
+        <p>
+            在疑問句中，<strong>gak</strong> 放在句子的<strong>最後面</strong>，
+            功能類似中文的 <strong>「嗎」</strong>。
+        </p>
+        <div class="lg-pattern">句型：S + lagi + Verb + Objek + gak？</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Kamu lagi makan gak?" data-zh="你正在吃東西嗎？"></div>
+        <div class="lg-example" data-id="Dia lagi pergi gak?" data-zh="他正在出去嗎？"></div>
+    </div>
+
+    <!-- CAROUSEL 6 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 6</div>
+        <div class="lg-game-label">🧩 排字練習・lagi ... gak?</div>
+        <div id="game-g3"></div>
+    </div>
+
+    <!-- CAROUSEL 7 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 7</div>
+        <h2>📍 lagi di + 地點</h2>
+        <p>
+            如果要表示人現在所在的地方，可以使用 <strong>lagi di + 地點</strong>，
+            相當於中文的 <strong>「在 + 地點」</strong>。
+        </p>
+        <div class="lg-pattern">句型：S + lagi di + 地點</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Aku lagi di office." data-zh="我現在在辦公室。"></div>
+        <div class="lg-example" data-id="Dia lagi di rumah." data-zh="他／她現在在家。"></div>
+    </div>
+
+    <!-- CAROUSEL 8 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 8</div>
+        <div class="lg-game-label">🧩 排字練習・lagi di</div>
+        <div id="game-g4"></div>
+    </div>
+
+    <!-- CAROUSEL 9 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 9</div>
+        <h2>🚫 「lagi gak di + 地點」的否定句</h2>
+        <p>
+            否定句可以把 <strong>lagi di</strong> 改成 <strong>lagi gak di</strong>，
+            表示現在不在某個地點。
+        </p>
+        <div class="lg-pattern">句型：S + lagi gak di + 地點</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Aku lagi gak di office." data-zh="我現在不在辦公室。"></div>
+        <div class="lg-example" data-id="Dia lagi gak di rumah." data-zh="他／她現在不在家。"></div>
+    </div>
+
+    <!-- CAROUSEL 10 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 10</div>
+        <div class="lg-game-label">🧩 排字練習・lagi gak di</div>
+        <div id="game-g5"></div>
+    </div>
+
+    <!-- CAROUSEL 11 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 11</div>
+        <h2>❓ 「lagi di + 地點 + gak」的疑問句</h2>
+        <p>
+            如果要詢問某人現在是不是在某個地點，可以把 <strong>gak</strong>
+            放在句子的最後面，相當於中文的 <strong>「嗎」</strong>。
+        </p>
+        <div class="lg-pattern">句型：S + lagi di + 地點 + gak？</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Kamu lagi di office gak?" data-zh="你現在在辦公室嗎？"></div>
+        <div class="lg-example" data-id="Dia lagi di rumah gak?" data-zh="他／她現在在家嗎？"></div>
+    </div>
+
+    <!-- CAROUSEL 12 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 12</div>
+        <div class="lg-game-label">🧩 排字練習・lagi di ... gak?</div>
+        <div id="game-g6"></div>
+    </div>
+
+    <!-- CAROUSEL 13 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 13</div>
+        <h2>💬 「lagi apa」和「lagi di mana」</h2>
+        <p>如果想問一個人現在正在做什麼，或現在在哪裡，可以使用：</p>
+        <div class="lg-example" data-id="Lagi apa?" data-zh="詢問對方現在正在做什麼。"></div>
+        <div class="lg-example" data-id="Lagi di mana?" data-zh="詢問對方現在在哪裡。"></div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Kamu lagi apa?" data-zh="你現在在做什麼？"></div>
+        <div class="lg-example" data-id="Dia lagi di mana?" data-zh="他／她現在在哪裡？"></div>
+    </div>
+
+    <!-- CAROUSEL 14 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 14</div>
+        <div class="lg-game-label">🧩 排字練習・lagi apa / lagi di mana</div>
+        <div id="game-g7"></div>
+    </div>
+
+    <!-- CAROUSEL 15 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 15</div>
+        <h2>🔁 「lagi」表示「再」</h2>
+        <p>
+            當 <strong>lagi</strong> 表示中文的 <strong>「再」</strong> 時，
+            通常會放在<strong>句子的最後面</strong>。
+        </p>
+        <div class="lg-pattern">句型：S + Verb + Object + lagi</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Dia makan lagi." data-zh="他又吃了。"></div>
+        <div class="lg-example" data-id="Aku pergi lagi." data-zh="我再去一次。"></div>
+        <div class="lg-tip">
+            💡 注意位置：<strong>lagi 在動詞前面</strong> → 「正在」；<br>
+            <strong>lagi 在句尾</strong> → 「再／又」。
+        </div>
+    </div>
+
+    <!-- CAROUSEL 16 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 16</div>
+        <div class="lg-game-label">🧩 排字練習・lagi = 再</div>
+        <div id="game-g8"></div>
+    </div>
+
+    <!-- CAROUSEL 17 -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 17</div>
+        <h2>🧱 lagi + 動詞 + di + 地點</h2>
+        <p>
+            如果要同時表示<strong>正在做什麼</strong>以及<strong>在哪裡做</strong>，
+            可以把 <strong>lagi + 動詞</strong> 和 <strong>di + 地點</strong> 放在同一個句子裡。
+        </p>
+        <div class="lg-pattern">句型：S + lagi + Verb + Objek + di + 地點</div>
+        <h3>例句</h3>
+        <div class="lg-example" data-id="Aku lagi makan ayam di rumah." data-zh="我正在家裡吃雞肉。"></div>
+    </div>
+
+    <!-- CAROUSEL 18 -->
+    <div class="lg-game">
+        <div class="lg-number">CAROUSEL 18</div>
+        <div class="lg-game-label">🧩 排字練習・lagi + 動詞 + di + 地點</div>
+        <div id="game-g9"></div>
+    </div>
+
+    <!-- CAROUSEL 19 — KOSAKATA -->
+    <div class="lg-card">
+        <div class="lg-number">CAROUSEL 19</div>
+        <h2>📚 單字整理</h2>
+        <p>把這一課出現的單字再複習一次，點 🔊 聽發音。</p>
+        <div class="lg-vocab-grid" id="lg-vocab"></div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script type="text/plain">
+
+    /* ===== SPEECH (id-ID) ===== */
+
+    function lgSpeak(text, buttonEl) {
+        if (!("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel();
+
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "id-ID";
+        u.rate = 0.88;
+
+        const v = window.speechSynthesis.getVoices().find(
+            x => x.lang && x.lang.toLowerCase().startsWith("id")
+        );
+        if (v) u.voice = v;
+
+        if (buttonEl) {
+            u.onstart = () => buttonEl.classList.add("playing");
+            u.onend = () => buttonEl.classList.remove("playing");
+            u.onerror = () => buttonEl.classList.remove("playing");
+        }
+        window.speechSynthesis.speak(u);
+    }
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+
+    /* ===== EXAMPLES (setiap contoh ada sound) ===== */
+
+    document.querySelectorAll(".lg-example[data-id]").forEach(el => {
+        const id = el.dataset.id;
+        el.innerHTML =
+            '<div class="id">' + id +
+            ' <button type="button" class="lg-speak">🔊</button></div>' +
+            '<div class="zh">' + el.dataset.zh + '</div>';
+        const btn = el.querySelector(".lg-speak");
+        btn.addEventListener("click", () => lgSpeak(id, btn));
+    });
+
+    /* ===== VOCAB (dengan Mandarin Tradisional) ===== */
+
+    const lgVocab = [
+        ["Lagi", "正在／在（lagi + 動詞）；再／又（放句尾）"],
+        ["Kerja", "工作"],
+        ["Sibuk", "忙"],
+        ["Istirahat", "休息"],
+        ["Meeting", "開會"],
+        ["Di jalan", "在路上"],
+        ["Di pabrik", "在工廠"],
+        ["Di mess", "在宿舍"],
+        ["Gak", "不／沒／嗎"],
+        ["Makan", "吃"],
+        ["Ayam", "雞肉"],
+        ["Pergi", "去／出去／出門"],
+        ["Apa", "什麼"],
+        ["Di mana", "在哪裡"],
+        ["Office", "辦公室"],
+        ["Rumah", "家／房子"]
+    ];
+
+    const vocabBox = document.getElementById("lg-vocab");
+
+    if (vocabBox) {
+        lgVocab.forEach(([word, zh]) => {
+            const d = document.createElement("div");
+            d.className = "lg-vocab";
+            d.innerHTML =
+                '<div class="lg-vocab-word">' + word +
+                ' <button type="button" class="lg-speak">🔊</button></div>' +
+                '<div class="lg-vocab-meaning">' + zh + '</div>';
+            const btn = d.querySelector(".lg-speak");
+            btn.addEventListener("click", () => lgSpeak(word, btn));
+            vocabBox.appendChild(d);
+        });
+    }
+
+    /* ===== SHUFFLE & TOKENIZE ===== */
+
+    function lgShuffle(arr) {
+        const r = [...arr];
+        for (let i = r.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [r[i], r[j]] = [r[j], r[i]];
+        }
+        return r;
+    }
+
+    function lgTokenize(s) {
+        return s.replace(/[.!?]+$/, "").split(" ");
+    }
+
+    /* ===== ARRANGE GAMES (zh di atas, kata Indonesia diacak) ===== */
+
+    const lgGames = {
+        g1: [
+            { zh: "我正在工作。", en: "Aku lagi kerja" },
+            { zh: "他／她正在忙。", en: "Dia lagi sibuk" },
+            { zh: "他們正在休息。", en: "Mereka lagi istirahat" },
+            { zh: "我們正在開會。", en: "Kita lagi meeting" }
+        ],
+        g2: [
+            { zh: "我現在沒有在工作。", en: "Aku lagi gak kerja" },
+            { zh: "他現在沒有在忙。", en: "Dia lagi gak sibuk" },
+            { zh: "他們現在沒有在休息。", en: "Mereka lagi gak istirahat" },
+            { zh: "我們現在沒有在開會。", en: "Kita lagi gak meeting" }
+        ],
+        g3: [
+            { zh: "你現在有在工作嗎？", en: "Kamu lagi kerja gak" },
+            { zh: "他／她現在忙嗎？", en: "Dia lagi sibuk gak" },
+            { zh: "他們現在有在休息嗎？", en: "Mereka lagi istirahat gak" },
+            { zh: "他們現在有在開會嗎？", en: "Mereka lagi meeting gak" }
+        ],
+        g4: [
+            { zh: "我現在在宿舍。", en: "Aku lagi di mess" },
+            { zh: "他／她現在在路上。", en: "Dia lagi di jalan" },
+            { zh: "他們現在在工廠。", en: "Mereka lagi di pabrik" }
+        ],
+        g5: [
+            { zh: "我現在不在宿舍。", en: "Aku lagi gak di mess" },
+            { zh: "他／她現在不在路上。", en: "Dia lagi gak di jalan" },
+            { zh: "他們現在不在工廠。", en: "Mereka lagi gak di pabrik" }
+        ],
+        g6: [
+            { zh: "你現在在宿舍嗎？", en: "Kamu lagi di mess gak" },
+            { zh: "他／她現在在路上嗎？", en: "Dia lagi di jalan gak" },
+            { zh: "他們現在在工廠嗎？", en: "Mereka lagi di pabrik gak" }
+        ],
+        g7: [
+            { zh: "你現在在做什麼？", en: "Kamu lagi apa" },
+            { zh: "他們現在在做什麼？", en: "Mereka lagi apa" },
+            { zh: "他／她現在在哪裡？", en: "Dia lagi di mana" },
+            { zh: "他們現在在哪裡？", en: "Mereka lagi di mana" }
+        ],
+        g8: [
+            { zh: "我又工作了。", en: "Aku kerja lagi" },
+            { zh: "他們又忙了。", en: "Mereka sibuk lagi" },
+            { zh: "我們又開會了。", en: "Kita meeting lagi" }
+        ],
+        g9: [
+            { zh: "我正在工廠工作。", en: "Aku lagi kerja di pabrik" },
+            { zh: "他／她正在辦公室忙。", en: "Dia lagi sibuk di office" },
+            { zh: "我正在宿舍休息。", en: "Aku lagi istirahat di mess" },
+            { zh: "他們正在辦公室開會。", en: "Mereka lagi meeting di office" }
+        ]
+    };
+
+    function initLgGame(key, items) {
+
+        const container = document.getElementById("game-" + key);
+        if (!container) return;
+
+        let index = 0;
+
+        function render() {
+
+            const item = items[index];
+            const words = lgTokenize(item.en);
+            const order = lgShuffle(words.map((w, i) => i));
+
+            container.innerHTML = `
+                <div class="lg-prompt">${item.zh}</div>
+                <div class="lg-answer" id="${key}-answer"></div>
+                <div class="lg-bank" id="${key}-bank"></div>
+                <div class="lg-actions">
+                    <button type="button" class="lg-reset" id="${key}-reset">🔄 重排</button>
+                    <button type="button" class="lg-reset" id="${key}-listen">🔊 聽答案</button>
+                </div>
+                <div class="lg-feedback" id="${key}-feedback">
+                    <div class="lg-feedback-title" id="${key}-ftitle"></div>
+                    <div class="lg-correct" id="${key}-correct"></div>
+                    <div>${item.zh}</div>
+                </div>
+                <button type="button" class="lg-next" id="${key}-next">下一題 →</button>
+            `;
+
+            const answer = document.getElementById(key + "-answer");
+            const bank = document.getElementById(key + "-bank");
+            const reset = document.getElementById(key + "-reset");
+            const listen = document.getElementById(key + "-listen");
+            const feedback = document.getElementById(key + "-feedback");
+            const ftitle = document.getElementById(key + "-ftitle");
+            const correct = document.getElementById(key + "-correct");
+            const next = document.getElementById(key + "-next");
+
+            let placed = [];
+
+            function renderBank() {
+                bank.innerHTML = "";
+                order.forEach(i => {
+                    const b = document.createElement("button");
+                    b.type = "button";
+                    b.className = "lg-tile";
+                    b.textContent = words[i];
+                    b.addEventListener("click", () => {
+                        if (b.disabled) return;
+                        b.disabled = true;
+                        placed.push(i);
+                        lgSpeak(words[i], b);   // sound tiap kata
+                        renderAnswer();
+                        if (placed.length === words.length) setTimeout(check, 250);
+                    });
+                    bank.appendChild(b);
+                });
+            }
+
+            function renderAnswer() {
+                answer.innerHTML = "";
+                placed.forEach(i => {
+                    const b = document.createElement("button");
+                    b.type = "button";
+                    b.className = "lg-tile placed";
+                    b.textContent = words[i];
+                    b.addEventListener("click", () => lgSpeak(words[i], b));
+                    answer.appendChild(b);
+                });
+            }
+
+            function check() {
+                const ok = placed.every((i, pos) => words[i] === words[pos]);
+
+                bank.querySelectorAll(".lg-tile").forEach(b => b.disabled = true);
+                reset.style.display = "none";
+
+                feedback.className = "lg-feedback show " + (ok ? "correct" : "wrong");
+                ftitle.textContent = ok ? "✓ 正確！" : "✗ 再看看順序喔～";
+                correct.textContent = item.en;
+
+                setTimeout(() => lgSpeak(item.en), 300);   // sound jawaban
+                next.classList.add("show");
+            }
+
+            reset.addEventListener("click", () => {
+                placed = [];
+                feedback.className = "lg-feedback";
+                renderAnswer();
+                bank.querySelectorAll(".lg-tile").forEach(b => b.disabled = false);
+            });
+
+            listen.addEventListener("click", () => lgSpeak(item.en));
+
+            next.addEventListener("click", () => {
+                if (index >= items.length - 1) {
+                    container.innerHTML = `
+                        <div style="text-align:center;padding:15px 0;font-weight:800;color:var(--light-brown);">
+                            🎉 這個練習完成！
+                        </div>`;
+                    return;
+                }
+                index++;
+                render();
+            });
+
+            renderBank();
+            renderAnswer();
+        }
+
+        render();
+    }
+
+    Object.entries(lgGames).forEach(([key, items]) => initLgGame(key, items));
+
+</script>
+
+
+<!-- =====================================================
+     SHARED SCRIPT — SIDEBAR / A.HTML LOADER
+     Jangan dihapus.
+===================================================== -->
+
+<script src="../script.js"></script>
