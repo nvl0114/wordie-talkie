@@ -165,7 +165,7 @@
         /* ---------- Set 8 ---------- */
         [
             { hanzi: "被", pinyin: "bèi", meaning: "di- (kalimat pasif)" },
-            { hanzi: "經歷", pinyin: "jīnglì", meaning: "mengalami / pengalaman" },
+            { hanzi: "經理", pinyin: "jīnglǐ", meaning: "manajer" },
             { hanzi: "罵", pinyin: "mà", meaning: "memarahi" },
             { hanzi: "合約", pinyin: "héyuē", meaning: "kontrak" },
             { hanzi: "價錢", pinyin: "jiàqián", meaning: "harga" },
