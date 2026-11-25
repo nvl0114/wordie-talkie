@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap"
         rel="stylesheet"
     >
 
@@ -963,6 +963,611 @@
             }
         }
 
+
+        /* =====================================================
+           SECTION TITLES
+           ===================================================== */
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin: 32px 0 4px;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            scroll-margin-top: 20px;
+        }
+
+        .section-sub {
+            margin: 0 0 16px;
+
+            color: var(--brown-light);
+
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           CARD GRID (websites + flashcards)
+           ===================================================== */
+
+        .card-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 16px;
+        }
+
+        .site-card {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            background: var(--white);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            padding: 22px;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .site-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 5px;
+
+            background: var(--accent, var(--pink));
+        }
+
+        a.site-card:hover {
+            transform: translateY(-4px);
+
+            border-color: var(--accent, var(--pink));
+
+            box-shadow: 0 14px 32px rgba(92, 64, 51, 0.13);
+        }
+
+        .site-icon {
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: var(--tint, var(--pink-light));
+
+            font-size: 24px;
+
+            margin-bottom: 12px;
+        }
+
+        .site-card h3 {
+            margin: 0 0 4px;
+
+            font-size: 17px;
+            font-weight: 800;
+
+            line-height: 1.3;
+        }
+
+        .site-domain {
+            margin: 0 0 10px;
+
+            color: var(--brown-soft);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .site-desc {
+            margin: 0 0 16px;
+
+            color: var(--brown-light);
+
+            font-size: 14px;
+
+            flex: 1;
+        }
+
+        .site-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            align-self: flex-start;
+
+            padding: 7px 14px;
+
+            border-radius: 999px;
+
+            background: var(--tint, var(--pink-light));
+
+            color: var(--brown);
+
+            font-size: 13px;
+            font-weight: 800;
+
+            transition: gap 0.2s ease;
+        }
+
+        a.site-card:hover .site-cta {
+            gap: 10px;
+        }
+
+        .site-card.pink  { --accent: var(--pink);  --tint: var(--pink-light); }
+        .site-card.green { --accent: var(--green); --tint: var(--green-light); }
+        .site-card.sand  { --accent: #e3b778;      --tint: #fbf0dc; }
+        .site-card.sky   { --accent: #8fb8d6;      --tint: #e8f2f9; }
+
+        /* =====================================================
+           FLASHCARD CARD (wide card inside the grid)
+           ===================================================== */
+
+        .flash-wide {
+            grid-column: 1 / -1;
+
+            padding: 24px 24px 26px;
+        }
+
+        .flash-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            margin-bottom: 14px;
+        }
+
+        .flash-head-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .flash-head-left .site-icon {
+            margin-bottom: 0;
+        }
+
+        .flash-head h3 {
+            margin: 0;
+        }
+
+        .flash-head p {
+            margin: 0;
+
+            color: var(--brown-light);
+
+            font-size: 13px;
+        }
+
+        .fc-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .fc-select,
+        .fc-chip {
+            height: 36px;
+
+            padding: 0 12px;
+
+            border-radius: 999px;
+
+            border: 1px solid var(--border);
+
+            background: var(--cream);
+
+            color: var(--brown);
+
+            font-weight: 700;
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .fc-chip.on {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+
+        .fc-progress-text {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 6px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            color: var(--brown-light);
+        }
+
+        .fc-bar {
+            height: 7px;
+
+            border-radius: 999px;
+
+            background: var(--cream-dark);
+
+            overflow: hidden;
+
+            margin-bottom: 22px;
+        }
+
+        .fc-bar-fill {
+            height: 100%;
+            width: 0;
+
+            border-radius: 999px;
+
+            background: linear-gradient(90deg, var(--pink), var(--green));
+
+            transition: width 0.35s ease;
+        }
+
+        .fc-stage {
+            position: relative;
+
+            max-width: 460px;
+
+            margin: 0 auto 24px;
+
+            perspective: 1200px;
+        }
+
+        .fc-stage::before,
+        .fc-stage::after {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            width: 92%;
+            height: 100%;
+
+            border-radius: 26px;
+
+            border: 1px solid var(--border);
+        }
+
+        .fc-stage::before {
+            background: var(--pink-light);
+
+            transform: translateX(-50%) translateY(10px) rotate(-1.5deg);
+        }
+
+        .fc-stage::after {
+            background: var(--green-light);
+
+            transform: translateX(-50%) translateY(10px) rotate(1.8deg);
+
+            z-index: -1;
+        }
+
+        .fc-slider {
+            position: relative;
+
+            z-index: 1;
+        }
+
+        .fc-card {
+            position: relative;
+
+            width: 100%;
+            height: 280px;
+
+            cursor: pointer;
+
+            transform-style: preserve-3d;
+
+            transition: transform 0.6s cubic-bezier(0.34, 1.4, 0.64, 1);
+
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fc-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .fc-card.no-trans {
+            transition: none;
+        }
+
+        .fc-face {
+            position: absolute;
+            inset: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 26px 22px;
+
+            border-radius: 26px;
+
+            border: 2px solid var(--border);
+
+            box-shadow: var(--shadow);
+
+            text-align: center;
+
+            overflow: hidden;
+
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .fc-front {
+            background: var(--white);
+        }
+
+        .fc-back {
+            background: var(--pink-light);
+
+            border-color: #f3cdd5;
+
+            transform: rotateY(180deg);
+        }
+
+        .fc-badge {
+            position: absolute;
+
+            top: 14px;
+            left: 16px;
+
+            padding: 2px 11px;
+
+            border-radius: 999px;
+
+            background: var(--cream-dark);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            color: var(--brown-soft);
+        }
+
+        .fc-back .fc-badge {
+            background: var(--white);
+        }
+
+        .fc-deco {
+            position: absolute;
+
+            font-size: 18px;
+
+            opacity: 0.85;
+
+            pointer-events: none;
+
+            animation: fcFloat 3.5s ease-in-out infinite;
+        }
+
+        .fc-deco.d1 { top: 14px;    right: 18px; }
+        .fc-deco.d2 { bottom: 46px; left: 20px;  font-size: 15px; animation-delay: 1s; }
+        .fc-deco.d3 { bottom: 22px; right: 26px; font-size: 13px; animation-delay: 2s; }
+
+        @keyframes fcFloat {
+
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(8deg);
+            }
+        }
+
+        .fc-hanzi {
+            font-family: "Noto Sans TC", "Nunito", sans-serif;
+            font-weight: 700;
+            font-size: 68px;
+            line-height: 1.2;
+
+            word-break: break-word;
+        }
+
+        .fc-hanzi.md { font-size: 46px; }
+        .fc-hanzi.sm { font-size: 30px; }
+
+        .fc-hint {
+            position: absolute;
+
+            bottom: 14px;
+            left: 0;
+            right: 0;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            color: #b9a898;
+        }
+
+        .fc-pinyin {
+            margin-bottom: 8px;
+
+            font-size: clamp(22px, 5vw, 28px);
+            font-weight: 800;
+        }
+
+        .fc-meaning {
+            max-width: 360px;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            color: var(--brown-light);
+        }
+
+        .fc-note {
+            max-width: 380px;
+
+            margin-top: 14px;
+            padding: 9px 13px;
+
+            border-radius: 14px;
+
+            background: var(--white);
+
+            font-size: 12px;
+
+            color: var(--brown-light);
+
+            text-align: left;
+        }
+
+        .fc-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .fc-btn {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border: 2px solid var(--border);
+
+            background: var(--white);
+
+            color: var(--brown);
+
+            font-size: 20px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.15s ease,
+                background 0.2s ease;
+        }
+
+        .fc-btn:hover {
+            transform: translateY(-3px) scale(1.06);
+
+            background: var(--cream);
+        }
+
+        .fc-btn:active {
+            transform: scale(0.92);
+        }
+
+        .fc-btn:disabled {
+            opacity: 0.35;
+
+            cursor: default;
+
+            transform: none;
+        }
+
+        .fc-btn.flip {
+            width: 66px;
+            height: 66px;
+
+            background: var(--pink);
+
+            border-color: var(--pink);
+
+            color: var(--white);
+
+            font-size: 26px;
+        }
+
+        .fc-btn.flip:hover {
+            background: #e28d9c;
+        }
+
+        .fc-keys {
+            margin: 18px 0 0;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #a89587;
+        }
+
+        .fc-empty {
+            padding: 40px 10px;
+
+            text-align: center;
+
+            color: var(--brown-light);
+        }
+
+        @media (max-width: 800px) {
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .flash-wide {
+                padding: 20px 16px 22px;
+            }
+
+            .fc-card {
+                height: 260px;
+            }
+
+            .fc-hanzi { font-size: 56px; }
+            .fc-hanzi.md { font-size: 40px; }
+            .fc-hanzi.sm { font-size: 26px; }
+
+            .fc-keys {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .fc-deco {
+                animation: none;
+            }
+
+            .fc-card {
+                transition-duration: 0.01s;
+            }
+        }
+
     </style>
 </head>
 
@@ -998,64 +1603,49 @@
             >
 
             <p class="sidebar-tagline">
-                Wordie learned a new word! 🌱
+                Wordie learned a new word!
             </p>
 
         </div>
 
 
+        <!-- NAV -->
+        <!-- Kalau kamu punya halaman lain (Vocabulary, dll), tambahkan <a class="nav-link"> di sini -->
+
         <nav class="sidebar-nav">
 
-            <div class="nav-label">
-                Menu
-            </div>
+            <span class="nav-label">Menu</span>
 
-            <a
-                href="index.html"
-                class="nav-link active"
-            >
+            <a class="nav-link active" href="#top">
                 <span class="nav-icon">🏠</span>
-                <span>Home</span>
+                Home
             </a>
 
-            <a
-                href="vocabulary.html"
-                class="nav-link"
-            >
-
-                <span class="nav-icon">
-                    📚
-                </span>
-
-                <span>
-                    Vocabulary
-                </span>
-
+            <a class="nav-link" href="#resources">
+                <span class="nav-icon">📚</span>
+                Resources
             </a>
 
- 
+            <a class="nav-link" href="#flashcards">
+                <span class="nav-icon">🧋</span>
+                Flashcards
+            </a>
+
         </nav>
 
     </aside>
 
 
     <!-- =====================================================
-         MAIN CONTENT
+         MAIN
          ===================================================== -->
 
-    <main class="main">
+    <main class="main" id="top">
 
         <div class="content">
 
-
-            <!-- TOP LABEL -->
-
             <div class="top-bar">
-
-                <div class="page-label">
-                    🌱 WORDIE TALKIE
-                </div>
-
+                <span class="page-label">🌱 Home</span>
             </div>
 
 
@@ -1063,164 +1653,147 @@
 
             <section class="hero">
 
-                <div class="hero-icon">
-                    🌱
-                </div>
+                <div class="hero-icon">🌱</div>
 
-                <h1>
-                    歡迎來到 Wordie Talkie
-                </h1>
+                <h1>Wordie Talkie</h1>
 
-                <p>
-                    大家好～歡迎來到 <strong>Wordie Talkie</strong>！💬✨
+                <p class="hero-subtitle">
+                    Welcome to my little study corner. This is where I keep everything I pick up
+                    while learning Mandarin: vocabulary, notes, and my favourite tools.
                 </p>
 
                 <p>
-                    這個網站主要是拿來放我平常跟語言交換朋友分享的學習資料。
+                    If I start learning English or another language someday, it will grow right here too.
+                    It's all for my own use, so nothing is perfect and everything keeps changing.
                 </p>
 
-                <p>
-                    如果你想看看之前我們一起學過的內容，
-                    如果你跟我學英文，可以到 <strong>「English」</strong>；
-                    如果你跟我學印尼文，就可以到
-                    <strong>「Indonesian」</strong> 看看喔！
-                </p>
-
-                <p>
-                    老實說，我很開心可以認識一些一起學語言、一起練習的朋友。🥹💗
-                </p>
-
-                <p>
-                    希望跟我一起學習的時候不會覺得太無聊！
-                    我們就慢慢學、慢慢練習，一點一點進步吧～🌱✨
-                </p>
-
-                <p>
-                    謝謝你願意跟我一起學習，也歡迎來到
-                    <strong>Wordie Talkie</strong>！🫶
-                </p>
-
-                <div class="hero-tagline">
-                    Wordie 又學會了一個新單字！🌱🌸
-                </div>
+                <p class="hero-tagline">Sip, study, repeat 🧋</p>
 
             </section>
 
 
-            <!-- =================================================
-                 HOME PLACEHOLDER
-                 ================================================= -->
+            <!-- RESOURCES + FLASHCARDS -->
 
-            <section class="empty-card">
+            <h2 class="section-title" id="resources">📚 Learning Resources</h2>
+            <p class="section-sub">Websites I keep coming back to, and a flashcard deck built from my own vocabulary.</p>
 
-                <div
-                    class="growing-plant"
-                    aria-label="A flower slowly growing"
-                >
+            <div class="card-grid">
 
-                    <div class="plant">
+                <a class="site-card pink"
+                   href="https://taiwancenter.taiwan-world.net/"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="site-icon">🏮</div>
+                    <h3>Taiwan Center for Mandarin Learning</h3>
+                    <p class="site-domain">taiwancenter.taiwan-world.net</p>
+                    <p class="site-desc">Learning materials and information for studying Mandarin in Taiwan.</p>
+                    <span class="site-cta">Open site ↗</span>
+                </a>
 
-                        <div class="stem"></div>
+                <a class="site-card green"
+                   href="https://huayuworld.org/"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="site-icon">🌏</div>
+                    <h3>Huayu World</h3>
+                    <p class="site-domain">huayuworld.org</p>
+                    <p class="site-desc">A hub of Mandarin teaching and learning resources.</p>
+                    <span class="site-cta">Open site ↗</span>
+                </a>
 
-                        <div class="leaf leaf-left"></div>
+                <a class="site-card sand"
+                   href="https://dict.mini.moe.edu.tw/SearchIndex/Stroke"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="site-icon">📖</div>
+                    <h3>MOE Dictionary: Stroke Search</h3>
+                    <p class="site-domain">dict.mini.moe.edu.tw</p>
+                    <p class="site-desc">Look up a character by its strokes in the Ministry of Education dictionary.</p>
+                    <span class="site-cta">Open site ↗</span>
+                </a>
 
-                        <div class="leaf leaf-right"></div>
+                <a class="site-card sky"
+                   href="https://www.senmandarin.com/tools/stroke-order/"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="site-icon">✍️</div>
+                    <h3>Stroke Order Tool</h3>
+                    <p class="site-domain">senmandarin.com</p>
+                    <p class="site-desc">See how each character is written, stroke by stroke.</p>
+                    <span class="site-cta">Open site ↗</span>
+                </a>
 
-                        <div class="flower">
 
-                            <div class="petal petal-1"></div>
+                <!-- FLASHCARD CARD -->
 
-                            <div class="petal petal-2"></div>
+                <div class="site-card pink flash-wide" id="flashcards">
 
-                            <div class="petal petal-3"></div>
+                    <div class="flash-head">
 
-                            <div class="petal petal-4"></div>
+                        <div class="flash-head-left">
+                            <div class="site-icon">🧋</div>
+                            <div>
+                                <h3>Flashcards</h3>
+                                <p>Tap the card to flip it.</p>
+                            </div>
+                        </div>
 
-                            <div class="flower-center"></div>
-
+                        <div class="fc-tools">
+                            <select class="fc-select" id="fcSet" aria-label="Choose vocabulary set"></select>
+                            <button class="fc-chip" id="fcShuffle" type="button">🔀 Shuffle</button>
                         </div>
 
                     </div>
 
-                    <div class="pot">
-
-                        <div class="pot-top"></div>
-
-                        <div class="pot-body"></div>
-
+                    <div class="fc-progress-text">
+                        <span id="fcCounter">0 / 0</span>
+                        <span id="fcMode">in order</span>
                     </div>
+
+                    <div class="fc-bar"><div class="fc-bar-fill" id="fcFill"></div></div>
+
+                    <div class="fc-empty" id="fcEmpty" hidden>
+                        No words found. Make sure vocabulary.js is in the same folder as this page.
+                    </div>
+
+                    <div class="fc-stage" id="fcStage">
+                        <div class="fc-slider" id="fcSlider">
+                            <div class="fc-card" id="fcCard" role="button" tabindex="0" aria-label="Flashcard, press to flip">
+
+                                <div class="fc-face fc-front">
+                                    <span class="fc-badge" id="fcBadgeF"></span>
+                                    <span class="fc-deco d1">✨</span>
+                                    <span class="fc-deco d2">🌸</span>
+                                    <span class="fc-deco d3">🧋</span>
+                                    <div class="fc-hanzi" id="fcHanzi"></div>
+                                    <div class="fc-hint">tap to flip</div>
+                                </div>
+
+                                <div class="fc-face fc-back">
+                                    <span class="fc-badge" id="fcBadgeB"></span>
+                                    <span class="fc-deco d1">💖</span>
+                                    <span class="fc-deco d3">✨</span>
+                                    <div class="fc-pinyin" id="fcPinyin"></div>
+                                    <div class="fc-meaning" id="fcMeaning"></div>
+                                    <div class="fc-note" id="fcNote" hidden></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fc-buttons">
+                        <button class="fc-btn" id="fcPrev" type="button" aria-label="Previous card">◀</button>
+                        <button class="fc-btn flip" id="fcFlip" type="button" aria-label="Flip card">⟲</button>
+                        <button class="fc-btn" id="fcNext" type="button" aria-label="Next card">▶</button>
+                    </div>
+
+                    <p class="fc-keys">Keyboard: ← → to move, Space to flip</p>
 
                 </div>
-
-
-                <h2>
-                    這裡正在慢慢長出一些東西……
-                </h2>
-
-                <p>
-                    Wordie 也還在學習中！
-                    之後會慢慢放上新的單字、課程和語言學習活動，
-                    敬請期待～🌱
-                </p>
-
-            </section>
-
-
-            <!-- =================================================
-                 LANGUAGE CARDS
-                 ================================================= -->
-
-            <div class="language-grid">
-
-                <a
-                    href="demoenglish.html"
-                    class="language-card"
-                >
-
-                    <div class="language-icon">
-                        🇺🇸
-                    </div>
-
-                    <h3>
-                        English
-                    </h3>
-
-                    <p>
-                        這裡放了一些我準備給語言交換朋友的英文學習資料。
-                        歡迎來看看我們平常是怎麼一起學習、一起練習的！💬✨
-                    </p>
-
-                </a>
-
-
-                <a
-                    href="demoindo.html"
-                    class="language-card"
-                >
-
-                    <div class="language-icon">
-                        🇮🇩
-                    </div>
-
-                    <h3>
-                        Indonesian
-                    </h3>
-
-                    <p>
-                        這裡放了一些我在語言交換時準備的印尼文學習資料。
-                        歡迎來看看我們最近一起學了些什麼！💬✨
-                    </p>
-
-                </a>
 
             </div>
 
 
-            <!-- FOOTER -->
-
-            <footer class="footer">
-                🌱 一次學一個單字，慢慢累積自己的小小進步。
-            </footer>
+            <div class="footer">
+                Wordie Talkie · my personal study notes
+            </div>
 
         </div>
 
@@ -1228,123 +1801,281 @@
 
 
     <!-- =====================================================
-         JAVASCRIPT
+         SCRIPTS
          ===================================================== -->
+
+    <script src="vocabulary.js"></script>
 
     <script>
 
-        const menuButton =
-            document.getElementById("menuButton");
+        /* ---------- Mobile menu ---------- */
 
-        const sidebar =
-            document.getElementById("sidebar");
+        (function () {
 
-        const overlay =
-            document.getElementById("overlay");
+            var button = document.getElementById("menuButton");
+            var sidebar = document.getElementById("sidebar");
+            var overlay = document.getElementById("overlay");
 
-
-        function openMenu() {
-
-            sidebar.classList.add("open");
-
-            overlay.classList.add("show");
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                "true"
-            );
-
-            menuButton.innerHTML = "✕";
-        }
-
-
-        function closeMenu() {
-
-            sidebar.classList.remove("open");
-
-            overlay.classList.remove("show");
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            menuButton.innerHTML = "☰";
-        }
-
-
-        menuButton.addEventListener(
-            "click",
-            function () {
-
-                if (
-                    sidebar.classList.contains("open")
-                ) {
-
-                    closeMenu();
-
-                } else {
-
-                    openMenu();
-
-                }
-
+            function setOpen(open) {
+                sidebar.classList.toggle("open", open);
+                overlay.classList.toggle("show", open);
+                button.setAttribute("aria-expanded", open ? "true" : "false");
             }
-        );
 
-
-        overlay.addEventListener(
-            "click",
-            closeMenu
-        );
-
-
-        /*
-         * Close the mobile sidebar after
-         * clicking a navigation link.
-         */
-
-        document
-            .querySelectorAll(".nav-link")
-            .forEach(function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        if (
-                            window.innerWidth <= 800
-                        ) {
-
-                            closeMenu();
-
-                        }
-
-                    }
-                );
-
+            button.addEventListener("click", function () {
+                setOpen(!sidebar.classList.contains("open"));
             });
 
+            overlay.addEventListener("click", function () {
+                setOpen(false);
+            });
 
-        /*
-         * Keep the menu state sensible
-         * when resizing the browser.
-         */
+            sidebar.querySelectorAll(".nav-link").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    setOpen(false);
+                });
+            });
 
-        window.addEventListener(
-            "resize",
-            function () {
+        })();
 
-                if (
-                    window.innerWidth > 800
-                ) {
 
-                    closeMenu();
+        /* ---------- Flashcards ---------- */
 
+        (function () {
+
+            "use strict";
+
+            var all = window.VOCAB || [];
+            var util = window.VOCAB_UTIL || {};
+
+            var deck = [];
+            var index = 0;
+            var busy = false;
+            var shuffled = false;
+            var currentSet = "all";
+
+            function $(id) { return document.getElementById(id); }
+
+            var el = {
+                card: $("fcCard"),
+                slider: $("fcSlider"),
+                stage: $("fcStage"),
+                hanzi: $("fcHanzi"),
+                pinyin: $("fcPinyin"),
+                meaning: $("fcMeaning"),
+                note: $("fcNote"),
+                badgeF: $("fcBadgeF"),
+                badgeB: $("fcBadgeB"),
+                counter: $("fcCounter"),
+                mode: $("fcMode"),
+                fill: $("fcFill"),
+                prev: $("fcPrev"),
+                next: $("fcNext"),
+                flip: $("fcFlip"),
+                shuffle: $("fcShuffle"),
+                select: $("fcSet"),
+                empty: $("fcEmpty")
+            };
+
+            function buildSelect() {
+
+                var total = util.totalSets || 0;
+                var html = '<option value="all">All sets (' + all.length + ' words)</option>';
+
+                for (var s = 1; s <= total; s++) {
+
+                    var count = all.filter(function (w) { return w.set === s; }).length;
+
+                    html += '<option value="' + s + '">Set ' + s + ' (' + count + ')</option>';
                 }
 
+                el.select.innerHTML = html;
             }
-        );
+
+            function buildDeck() {
+
+                var list = currentSet === "all"
+                    ? all.slice()
+                    : all.filter(function (w) { return String(w.set) === String(currentSet); });
+
+                deck = (shuffled && util.shuffle) ? util.shuffle(list) : list;
+                index = 0;
+            }
+
+            function hanziSize(text) {
+
+                var len = Array.from(text).length;
+
+                if (len > 8) return "sm";
+                if (len > 4) return "md";
+
+                return "";
+            }
+
+            function render() {
+
+                el.card.classList.add("no-trans");
+                el.card.classList.remove("flipped");
+                void el.card.offsetWidth;
+                el.card.classList.remove("no-trans");
+
+                if (!deck.length) {
+
+                    el.stage.hidden = true;
+                    el.empty.hidden = false;
+                    el.counter.textContent = "0 / 0";
+                    el.fill.style.width = "0";
+                    el.prev.disabled = el.next.disabled = el.flip.disabled = true;
+
+                    return;
+                }
+
+                el.stage.hidden = false;
+                el.empty.hidden = true;
+                el.prev.disabled = el.next.disabled = el.flip.disabled = false;
+
+                var w = deck[index];
+
+                el.hanzi.textContent = w.hanzi;
+                el.hanzi.className = "fc-hanzi " + hanziSize(w.hanzi);
+                el.pinyin.textContent = w.pinyin;
+                el.meaning.textContent = w.meaning;
+
+                if (w.note) {
+                    el.note.textContent = "💡 " + w.note;
+                    el.note.hidden = false;
+                } else {
+                    el.note.hidden = true;
+                }
+
+                el.badgeF.textContent = el.badgeB.textContent = "Set " + w.set;
+                el.counter.textContent = (index + 1) + " / " + deck.length;
+                el.mode.textContent = shuffled ? "shuffled" : "in order";
+                el.fill.style.width = ((index + 1) / deck.length * 100) + "%";
+            }
+
+            function go(dir) {
+
+                if (busy || !deck.length) return;
+
+                busy = true;
+
+                var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+                function step() {
+                    index = (index + dir + deck.length) % deck.length;
+                    render();
+                }
+
+                if (reduce || !el.slider.animate) {
+                    step();
+                    busy = false;
+                    return;
+                }
+
+                var out = el.slider.animate([
+                    { transform: "translateX(0) rotate(0deg)", opacity: 1 },
+                    { transform: "translateX(" + (-dir * 90) + "px) rotate(" + (-dir * 9) + "deg)", opacity: 0 }
+                ], { duration: 200, easing: "ease-in", fill: "forwards" });
+
+                out.onfinish = function () {
+
+                    step();
+
+                    var inn = el.slider.animate([
+                        { transform: "translateX(" + (dir * 90) + "px) rotate(" + (dir * 9) + "deg)", opacity: 0 },
+                        { transform: "translateX(0) rotate(0deg)", opacity: 1 }
+                    ], { duration: 360, easing: "cubic-bezier(0.34, 1.56, 0.64, 1)", fill: "forwards" });
+
+                    inn.onfinish = function () {
+                        out.cancel();
+                        inn.cancel();
+                        busy = false;
+                    };
+                };
+            }
+
+            function flipCard() {
+
+                if (!deck.length) return;
+
+                el.card.classList.toggle("flipped");
+            }
+
+            el.prev.addEventListener("click", function () { go(-1); });
+            el.next.addEventListener("click", function () { go(1); });
+            el.flip.addEventListener("click", flipCard);
+            el.card.addEventListener("click", flipCard);
+
+            el.shuffle.addEventListener("click", function () {
+
+                shuffled = !shuffled;
+                el.shuffle.classList.toggle("on", shuffled);
+
+                buildDeck();
+                render();
+            });
+
+            el.select.addEventListener("change", function () {
+
+                currentSet = el.select.value;
+
+                buildDeck();
+                render();
+            });
+
+            /* Keyboard works while the flashcard card is on screen
+               and focus is not inside a form field. */
+
+            document.addEventListener("keydown", function (e) {
+
+                var tag = (e.target && e.target.tagName) || "";
+
+                if (tag === "SELECT" || tag === "INPUT" || tag === "TEXTAREA") return;
+
+                var rect = el.stage.getBoundingClientRect();
+                var visible = rect.bottom > 0 && rect.top < window.innerHeight;
+
+                if (!visible) return;
+
+                if (e.key === "ArrowLeft") {
+                    go(-1);
+                } else if (e.key === "ArrowRight") {
+                    go(1);
+                } else if (e.key === " " && (e.target === el.card || e.target === document.body)) {
+                    e.preventDefault();
+                    flipCard();
+                } else if (e.key === "Enter" && e.target === el.card) {
+                    e.preventDefault();
+                    flipCard();
+                }
+            });
+
+            /* Swipe on touch screens */
+
+            var startX = null;
+
+            el.stage.addEventListener("touchstart", function (e) {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+
+            el.stage.addEventListener("touchend", function (e) {
+
+                if (startX === null) return;
+
+                var dx = e.changedTouches[0].clientX - startX;
+
+                startX = null;
+
+                if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+
+            }, { passive: true });
+
+            buildSelect();
+            buildDeck();
+            render();
+
+        })();
 
     </script>
 
