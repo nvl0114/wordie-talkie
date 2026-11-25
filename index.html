@@ -1233,9 +1233,10 @@
         .fc-stage {
             position: relative;
 
-            max-width: 460px;
+            width: 100%;
+            max-width: 600px;
 
-            margin: 0 auto 24px;
+            margin: 0 auto 28px;
 
             perspective: 1200px;
         }
@@ -1280,7 +1281,7 @@
             position: relative;
 
             width: 100%;
-            height: 280px;
+            height: 360px;
 
             cursor: pointer;
 
@@ -1388,14 +1389,14 @@
         .fc-hanzi {
             font-family: "Noto Sans TC", "Nunito", sans-serif;
             font-weight: 700;
-            font-size: 68px;
+            font-size: 96px;
             line-height: 1.2;
 
             word-break: break-word;
         }
 
-        .fc-hanzi.md { font-size: 46px; }
-        .fc-hanzi.sm { font-size: 30px; }
+        .fc-hanzi.md { font-size: 64px; }
+        .fc-hanzi.sm { font-size: 40px; }
 
         .fc-hint {
             position: absolute;
@@ -1413,30 +1414,30 @@
         .fc-pinyin {
             margin-bottom: 8px;
 
-            font-size: clamp(22px, 5vw, 28px);
+            font-size: clamp(26px, 6vw, 34px);
             font-weight: 800;
         }
 
         .fc-meaning {
-            max-width: 360px;
+            max-width: 440px;
 
-            font-size: 18px;
+            font-size: 21px;
             font-weight: 700;
 
             color: var(--brown-light);
         }
 
         .fc-note {
-            max-width: 380px;
+            max-width: 460px;
 
-            margin-top: 14px;
-            padding: 9px 13px;
+            margin-top: 16px;
+            padding: 10px 14px;
 
             border-radius: 14px;
 
             background: var(--white);
 
-            font-size: 12px;
+            font-size: 13px;
 
             color: var(--brown-light);
 
@@ -1451,8 +1452,8 @@
         }
 
         .fc-btn {
-            width: 52px;
-            height: 52px;
+            width: 58px;
+            height: 58px;
 
             display: flex;
             align-items: center;
@@ -1497,8 +1498,8 @@
         }
 
         .fc-btn.flip {
-            width: 66px;
-            height: 66px;
+            width: 74px;
+            height: 74px;
 
             background: var(--pink);
 
@@ -1545,12 +1546,12 @@
             }
 
             .fc-card {
-                height: 260px;
+                height: 330px;
             }
 
-            .fc-hanzi { font-size: 56px; }
-            .fc-hanzi.md { font-size: 40px; }
-            .fc-hanzi.sm { font-size: 26px; }
+            .fc-hanzi { font-size: 72px; }
+            .fc-hanzi.md { font-size: 50px; }
+            .fc-hanzi.sm { font-size: 32px; }
 
             .fc-keys {
                 display: none;
@@ -1610,25 +1611,19 @@
 
 
         <!-- NAV -->
-        <!-- Kalau kamu punya halaman lain (Vocabulary, dll), tambahkan <a class="nav-link"> di sini -->
 
         <nav class="sidebar-nav">
 
             <span class="nav-label">Menu</span>
 
-            <a class="nav-link active" href="#top">
+            <a class="nav-link active" href="index.html">
                 <span class="nav-icon">🏠</span>
                 Home
             </a>
 
-            <a class="nav-link" href="#resources">
-                <span class="nav-icon">📚</span>
-                Resources
-            </a>
-
-            <a class="nav-link" href="#flashcards">
-                <span class="nav-icon">🧋</span>
-                Flashcards
+            <a class="nav-link" href="vocabulary.html">
+                <span class="nav-icon">📖</span>
+                Vocabulary
             </a>
 
         </nav>
