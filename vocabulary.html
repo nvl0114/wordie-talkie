@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kosakata</title>
+
+    <!--
+        =====================================================
+        WORDIE TALKIE — vocabulary.html
+        Daftar kosakata: hanzi - pinyin - arti
+
+        Letakkan di ROOT, sejajar dengan template.html,
+        script.js, dan vocabulary.js.
+
+        Kalau halaman ini ditaruh di dalam folder, ubah:
+          <script src="vocabulary.js">  -> "../vocabulary.js"
+          <script src="script.js">      -> "../script.js"
+
+        Desain (sidebar, warna, font) otomatis diambil dari
+        template.html lewat script.js.
+        =====================================================
+    -->
+
+    <!-- Data kosakata (window.VOCAB) -->
+    <script src="vocabulary.js"></script>
+
+    <!-- Judul tab: "Kosakata · Wordie Talkie" -->
+    <script>
+        window.pageTitle = "Kosakata";
+    </script>
+
+</head>
+<body>
+
+
+<style>
+
+    /* ==================================================
+       VOCABULARY PAGE
+       Pakai variabel warna dari template.html
+       ================================================== */
+
+    .vocab-header {
+
+        margin-bottom: 24px;
+    }
+
+
+    .vocab-header h1 {
+
+        margin: 0 0 6px;
+
+        font-size: 30px;
+
+        font-weight: 800;
+    }
+
+
+    .vocab-header p {
+
+        margin: 0;
+
+        color: var(--brown-light);
+    }
+
+
+    /* ---------- Search + filter ---------- */
+
+    .vocab-tools {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+        margin-bottom: 14px;
+    }
+
+
+    .vocab-search-wrap {
+
+        position: relative;
+
+        flex: 1 1 260px;
+
+        min-width: 0;
+    }
+
+
+    .vocab-search-icon {
+
+        position: absolute;
+
+        top: 50%;
+        left: 16px;
+
+        transform: translateY(-50%);
+
+        font-size: 16px;
+
+        pointer-events: none;
+    }
+
+
+    .vocab-search,
+    .vocab-filter {
+
+        padding: 13px 16px;
+
+        border: 1px solid var(--border);
+
+        border-radius: 14px;
+
+        background: var(--white);
+
+        color: var(--brown);
+
+        font-size: 16px;
+
+        outline: none;
+
+        box-shadow: var(--shadow);
+
+        transition: border-color 0.2s ease;
+    }
+
+
+    .vocab-search {
+
+        width: 100%;
+
+        padding-left: 44px;
+    }
+
+
+    .vocab-filter {
+
+        cursor: pointer;
+    }
+
+
+    .vocab-search:focus,
+    .vocab-filter:focus {
+
+        border-color: var(--pink);
+    }
+
+
+    .vocab-count {
+
+        margin: 0 0 14px 4px;
+
+        color: var(--brown-light);
+
+        font-size: 14px;
+
+        font-weight: 700;
+    }
+
+
+    /* ---------- List ---------- */
+
+    .vocab-columns,
+    .vocab-item {
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(100px, 190px)
+            minmax(100px, 190px)
+            1fr
+            auto;
+
+        align-items: center;
+
+        gap: 6px 18px;
+    }
+
+
+    .vocab-columns {
+
+        padding: 0 20px 8px;
+
+        color: #a89587;
+
+        font-size: 11px;
+
+        font-weight: 800;
+
+        letter-spacing: 1.2px;
+
+        text-transform: uppercase;
+    }
+
+
+    .vocab-list {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .vocab-item {
+
+        padding: 14px 20px;
+
+        border: 1px solid var(--border);
+
+        border-radius: 16px;
+
+        background: var(--white);
+
+        box-shadow: var(--shadow);
+
+        transition:
+            transform 0.2s ease,
+            border-color 0.2s ease;
+    }
+
+
+    .vocab-item:hover {
+
+        transform: translateY(-1px);
+
+        border-color: var(--pink);
+    }
+
+
+    .vocab-hanzi {
+
+        font-size: 24px;
+
+        font-weight: 800;
+
+        line-height: 1.3;
+    }
+
+
+    .vocab-pinyin {
+
+        color: var(--brown-soft);
+
+        font-weight: 700;
+    }
+
+
+    .vocab-meaning {
+
+        color: var(--brown);
+    }
+
+
+    .vocab-note {
+
+        display: block;
+
+        margin-top: 4px;
+
+        color: var(--brown-light);
+
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+
+
+    .vocab-set {
+
+        padding: 3px 10px;
+
+        border-radius: 999px;
+
+        background: var(--pink-light);
+
+        color: var(--brown-light);
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        white-space: nowrap;
+    }
+
+
+    .vocab-empty {
+
+        padding: 36px 10px;
+
+        text-align: center;
+
+        color: var(--brown-light);
+    }
+
+
+    /* ---------- Mobile ---------- */
+
+    @media (max-width: 700px) {
+
+        .vocab-columns {
+
+            display: none;
+        }
+
+        .vocab-item {
+
+            grid-template-columns: 1fr;
+
+            gap: 2px;
+        }
+
+        .vocab-hanzi {
+
+            font-size: 28px;
+        }
+
+        .vocab-set {
+
+            justify-self: start;
+
+            margin-top: 6px;
+        }
+    }
+
+</style>
+
+
+<div class="vocab-header">
+
+    <h1>📚 Kosakata</h1>
+
+    <p>Semua kata yang udah Wordie pelajari.</p>
+
+</div>
+
+
+<div class="vocab-tools">
+
+    <div class="vocab-search-wrap">
+
+        <span class="vocab-search-icon">🔍</span>
+
+        <input
+            type="search"
+            id="vocabSearch"
+            class="vocab-search"
+            placeholder="Cari hanzi, pinyin, atau arti..."
+            autocomplete="off"
+        >
+
+    </div>
+
+    <select
+        id="vocabSet"
+        class="vocab-filter"
+        aria-label="Pilih set"
+    >
+        <option value="all">Semua set</option>
+    </select>
+
+</div>
+
+
+<p class="vocab-count" id="vocabCount"></p>
+
+<div class="vocab-columns">
+    <span>Hanzi</span>
+    <span>Pinyin</span>
+    <span>Arti</span>
+    <span></span>
+</div>
+
+<div class="vocab-list" id="vocabList"></div>
+
+
+<!--
+    type="text/plain" supaya script ini TIDAK jalan saat browser
+    pertama kali membaca halaman (saat itu sidebar & elemen di atas
+    belum dipasang ke template). script.js yang akan menjalankannya
+    ulang setelah template terpasang.
+-->
+
+<script type="text/plain">
+
+    (function () {
+
+        var listEl = document.getElementById("vocabList");
+        var countEl = document.getElementById("vocabCount");
+        var searchEl = document.getElementById("vocabSearch");
+        var setEl = document.getElementById("vocabSet");
+
+
+        function start() {
+
+            var vocab = window.VOCAB || [];
+            var util = window.VOCAB_UTIL;
+
+            for (var s = 1; s <= util.totalSets; s++) {
+
+                var opt = document.createElement("option");
+                opt.value = String(s);
+                opt.textContent = "Set " + s;
+                setEl.appendChild(opt);
+            }
+
+
+            function render() {
+
+                var selectedSet = setEl.value;
+
+                var pool = selectedSet === "all"
+                    ? vocab
+                    : vocab.filter(function (v) {
+                        return String(v.set) === selectedSet;
+                    });
+
+                var results = util.search(searchEl.value, pool);
+
+                listEl.innerHTML = "";
+
+                if (results.length === 0) {
+
+                    var empty = document.createElement("div");
+                    empty.className = "vocab-empty";
+                    empty.textContent = "Wordie belum nemu kata itu 🌱";
+                    listEl.appendChild(empty);
+
+                } else {
+
+                    var frag = document.createDocumentFragment();
+
+                    results.forEach(function (v) {
+
+                        var row = document.createElement("div");
+                        row.className = "vocab-item";
+
+                        var hanzi = document.createElement("div");
+                        hanzi.className = "vocab-hanzi";
+                        hanzi.textContent = v.hanzi;
+
+                        var pinyin = document.createElement("div");
+                        pinyin.className = "vocab-pinyin";
+                        pinyin.textContent = v.pinyin;
+
+                        var meaning = document.createElement("div");
+                        meaning.className = "vocab-meaning";
+                        meaning.textContent = v.meaning;
+
+                        if (v.note) {
+
+                            var note = document.createElement("span");
+                            note.className = "vocab-note";
+                            note.textContent = v.note;
+                            meaning.appendChild(note);
+                        }
+
+                        var setTag = document.createElement("div");
+                        setTag.className = "vocab-set";
+                        setTag.textContent = "Set " + v.set;
+
+                        row.appendChild(hanzi);
+                        row.appendChild(pinyin);
+                        row.appendChild(meaning);
+                        row.appendChild(setTag);
+
+                        frag.appendChild(row);
+                    });
+
+                    listEl.appendChild(frag);
+                }
+
+                countEl.textContent =
+                    results.length + " dari " + vocab.length + " kata";
+            }
+
+
+            searchEl.addEventListener("input", render);
+            setEl.addEventListener("change", render);
+
+            render();
+        }
+
+
+        if (window.VOCAB && window.VOCAB_UTIL) {
+
+            start();
+
+        } else {
+
+            /* Cadangan: kalau vocabulary.js di <head> gagal dimuat,
+               coba muat dari root (dihitung dari link Home di sidebar). */
+
+            var homeLink = document.querySelector(".nav-link");
+
+            var base = homeLink
+                ? new URL(".", homeLink.href).href
+                : "";
+
+            var loader = document.createElement("script");
+
+            loader.src = base + "vocabulary.js";
+            loader.onload = start;
+
+            loader.onerror = function () {
+                countEl.textContent =
+                    "Gagal memuat vocabulary.js — cek lokasi filenya.";
+            };
+
+            document.head.appendChild(loader);
+        }
+
+    })();
+
+</script>
+
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
