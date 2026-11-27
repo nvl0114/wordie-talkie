@@ -340,6 +340,25 @@
             { hanzi: "敬酒", pinyin: "jìngjiǔ", meaning: "bersulang" },
             { hanzi: "表示", pinyin: "biǎoshì", meaning: "menunjukkan / menyatakan" },
             { hanzi: "百年好合，早生貴子", pinyin: "bǎinián hǎohé, zǎoshēng guìzǐ", meaning: "semoga langgeng sampai akhir hayat dan segera dikaruniai anak", note: "Ucapan selamat untuk pengantin baru" }
+        ],
+
+        /* ---------- Set 19 ---------- */
+        [
+            { hanzi: "原住民族", pinyin: "yuánzhùmínzú", meaning: "masyarakat adat / suku asli" },
+            { hanzi: "太平洋", pinyin: "Tàipíngyáng", meaning: "Samudra Pasifik" },
+            { hanzi: "海岸", pinyin: "hǎi'àn", meaning: "pantai / pesisir" },
+            { hanzi: "族群", pinyin: "zúqún", meaning: "suku / kelompok etnis" },
+            { hanzi: "園區", pinyin: "yuánqū", meaning: "kawasan / area (taman)" },
+            { hanzi: "方式", pinyin: "fāngshì", meaning: "cara" },
+            { hanzi: "生活方式", pinyin: "shēnghuó fāngshì", meaning: "gaya hidup (lifestyle)" },
+            { hanzi: "展覽", pinyin: "zhǎnlǎn", meaning: "pameran" },
+            { hanzi: "手工藝", pinyin: "shǒugōngyì", meaning: "kerajinan tangan" },
+            { hanzi: "收穫", pinyin: "shōuhuò", meaning: "hasil / panen / dapat sesuatu (pelajaran)" },
+            { hanzi: "一趟", pinyin: "yí tàng", meaning: "satu perjalanan / sekali jalan" },
+            { hanzi: "環島", pinyin: "huándǎo", meaning: "keliling pulau" },
+            { hanzi: "景點", pinyin: "jǐngdiǎn", meaning: "tempat wisata" },
+            { hanzi: "部落", pinyin: "bùluò", meaning: "komunitas adat", note: "Mirip seperti kampung Baduy" },
+            { hanzi: "祭典", pinyin: "jìdiǎn", meaning: "upacara adat / festival ritual" }
         ]
 
     ];
