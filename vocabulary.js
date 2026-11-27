@@ -359,8 +359,29 @@
             { hanzi: "景點", pinyin: "jǐngdiǎn", meaning: "tempat wisata" },
             { hanzi: "部落", pinyin: "bùluò", meaning: "komunitas adat", note: "Mirip seperti kampung Baduy" },
             { hanzi: "祭典", pinyin: "jìdiǎn", meaning: "upacara adat / festival ritual" }
-        ]
+        ],
 
+        /* ---------- Set 19 ---------- */
+        [
+            { hanzi: "一轉眼", pinyin: "yì zhuǎnyǎn", meaning: "sekejap mata / tahu-tahu (waktu cepat berlalu)" },
+            { hanzi: "感受", pinyin: "gǎnshòu", meaning: "perasaan / merasakan" },
+            { hanzi: "熱情", pinyin: "rèqíng", meaning: "hangat / antusias (ke orang)" },
+            { hanzi: "現代化", pinyin: "xiàndàihuà", meaning: "modernisasi / jadi modern" },
+            { hanzi: "國際化", pinyin: "guójìhuà", meaning: "internasionalisasi / go internasional" },
+            { hanzi: "營業", pinyin: "yíngyè", meaning: "buka (toko) / beroperasi" },
+            { hanzi: "利用", pinyin: "lìyòng", meaning: "memanfaatkan" },
+            { hanzi: "許多", pinyin: "xǔduō", meaning: "banyak" },
+            { hanzi: "得到了", pinyin: "dédào le", meaning: "sudah mendapatkan" },
+            { hanzi: "回憶", pinyin: "huíyì", meaning: "kenangan" },
+            { hanzi: "紀念品", pinyin: "jìniànpǐn", meaning: "suvenir / oleh-oleh" },
+            { hanzi: "道地", pinyin: "dàodì", meaning: "asli / otentik", note: "Versi Taiwan; di Tiongkok daratan lebih sering 地道" },
+            { hanzi: "行李箱", pinyin: "xínglǐxiāng", meaning: "koper" },
+            { hanzi: "恐怕", pinyin: "kǒngpà", meaning: "jangan-jangan / sepertinya (khawatir)", note: "Beda dengan 害怕 (hàipà) = takut beneran. 恐怕 dipakai untuk dugaan yang kurang enak, mis. 恐怕來不及 = kayaknya nggak keburu" },
+            { hanzi: "道理", pinyin: "dàolǐ", meaning: "logika / alasan yang masuk akal" },
+            { hanzi: "一般來說", pinyin: "yìbān lái shuō", meaning: "umumnya / biasanya" },
+            { hanzi: "當初", pinyin: "dāngchū", meaning: "dulu / waktu awalnya" },
+            { hanzi: "意外", pinyin: "yìwài", meaning: "tak terduga / kecelakaan" }
+        ]
     ];
 
 
